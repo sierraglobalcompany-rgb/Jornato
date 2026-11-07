@@ -6,6 +6,10 @@ ANTES de cambios: leer README, docs/PRODUCTO.md, ADR y QA cuando existan en el r
 
 No confundir demo BDM-Menor, capturas o tests históricos con aplicación móvil verificada. Persistencia, cifrado, sensores, permisos, tenancy y billing sólo se declaran cuando existan pruebas reales. No usar mocks para marcar estos gates como PASS.
 
+## Estado y continuidad del proyecto
+
+**Fuente única de continuidad de dirección:** [docs/JORNATO_CONTINUIDAD.md](docs/JORNATO_CONTINUIDAD.md). Consultar antes de otro lote: contratos aprobados, WIP local, resultados B13/B14 con límites, B15-S1 en curso planificado, backlog B15–B22, QA no ejecutada, recuperación para nuevos chats y quién sigue. Actualizar **ese mismo documento** después de aceptar nuevos hitos; no anexar más historiales repetidos aquí ni dar por publicado el WIP. Esta referencia no crea `AGENTS.md` en `main` ni garantiza autoload de Codex.
+
 ## PingPongLaw — seis leyes L1–L6 (canon de versión fija)
 
 **Fuente autorizada para esta integración:** [PingPongLaw, commit `84e961cadf482d234f4c0ee2ca60e8c7e9b388e8`](https://github.com/sierraglobalcompany-rgb/PingPongLaw/tree/84e961cadf482d234f4c0ee2ca60e8c7e9b388e8). Leer realmente [`docs/engineering/LEYES_IMPLEMENTACION_1_A_6.md`](https://github.com/sierraglobalcompany-rgb/PingPongLaw/blob/84e961cadf482d234f4c0ee2ca60e8c7e9b388e8/docs/engineering/LEYES_IMPLEMENTACION_1_A_6.md) antes de afirmar cumplimiento; no consultar `main` móvil como sustituto. Si no hay acceso: `CANON_READ=BLOCKED`, no inferir contenidos ni declarar integración efectiva en la sesión. La lectura en GitHub no demuestra carga automática del agente/Codex.
