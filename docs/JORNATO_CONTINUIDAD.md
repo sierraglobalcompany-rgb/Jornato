@@ -1,8 +1,8 @@
 # JORNATO — CONTINUIDAD CANÓNICA DE DIRECCIÓN (DOCUMENTAL)
 
-**Corte:** 2026-11-07, Colombia. **Tipo:** checkpoint vivo de dirección y trazabilidad, NO código probado ni aprobación comercial.  
+**Corte:** 2026-11-07, posterior a entrega B15-S1, Colombia. **Tipo:** checkpoint vivo de dirección y trazabilidad, NO código probado ni aprobación comercial.  
 **Director / aceptación:** ChatGPT. **Ejecutor local:** Codex Luna, solo con un lote previamente dirigido. **Propietario:** decide autorizaciones de publicación, contratos y UX aprobados.  
-**Siguiente tarea:** `B15-S1 — app empleado / Mi jornada`, prompt director revisado V2; **no ejecutado** a este corte.  
+**Siguiente tarea:** `B15-S2 — vínculo seguro de identidad laboral y Mi jornada personal en QA`; B15-S1 fue parcial funcional (solo tarjeta kiosco PIN).  
 **Política de transferencia:** 1 prompt descargable .md para Codex; 1 ZIP final con código, informe y evidencias. Evitar nuevas vueltas de diagnóstico.
 
 ## 1. Jerarquía y fuentes vigentes
@@ -36,29 +36,30 @@ L1=KISS/Ponytail, L2=antirruido/no eliminación ciega, L3=causa raíz/no parches
 | B13 global | `PARTIAL` | Textos legales no aprobados, SMTP real no probado, registro público NO, S4-07 y S4-10 sin cerrar, L5 runtime pendiente. |
 | B14 C04 nuevo | `PASS_TECNICO_REPORTADO_CON_RESERVAS` | 1000 identidades y recibos reconciliados en paquete V7; hashes local/remote representan objetos distintos. JSON persistido raw de 1000 eventos no verificado independientemente. C04 original con tres `requetId` sigue fallo histórico. C10 visual completado. C07 portable NOT_RUN y no consta puerta obligatoria aprobada de B14. Advertencia de fallback de FlutterSecureStorage requiere atención dirigida si se reproduce. |
 | B14 global | `FINAL_NOT_APPROVED` | QA técnico útil, pero aceptación integral y L5 independiente no ejecutadas. **No repetir 1000 eventos** sin hipótesis nueva. |
-| B15-S1 | `NOT_STARTED` | Próximo vertical: empleado ve su jornada propia; marcación solo si contrato de identidad/política/outbox lo permite; no fingir sensores/hardware. |
+| B15-S1 | `PARTIAL_FUNCTIONAL`, QA host focal reportada | ZIP `JOR-B15-S1-V2-EMPLOYEE-MI-JORNADA-20261107-UNICO.zip`, SHA-256 `56D47D88A3F5DDD65B2E423EB5F5F1A1CFAAAC31F4675227F33B74DC39B94A68`. Tarjeta `Mi jornada local` en kiosco PIN, NO app personal. ZIP CRC, tamaños y 64/64 hashes verificados por ChatGPT; 2 tests widget, 1 scope, 1 actor y Flutter analyze PASS por logs del ejecutor. APK sin build (hook sqlite3 `DartWorker` OS error 22); AVD API24 sin `sys.boot_completed` y cero evidencia nativa. `IDENTITY_GATE=BLOCKED_CONTRACT`: membresía empresa no vincula User a Employee, backend sin ruta personal. Estado de código local sin publish: 163→167 entradas Git status, 11 tracked dirty, 4 nuevas (3 fuentes/test + 1 marcador Kotlin de 0 bytes). L5 runtime NO. No presentar widget kiosk como app del empleado. |
 | B16–B20 | Pendientes de implementación/aceptación | Portal Pro, novedades, reglas laborales informativas, expedientes, reclutamiento. |
 | B21 / B22 | `NOT_STARTED` / `RELEASE_NO` | QA independiente, seguridad, UX, privacidad, revisión jurídica, hardware y GO propietario antes de publicación. |
 
 **No deducir PASS global** de un ZIP intacto, el número de tests, un mensaje de Codex, una matriz de leyes o revisiones del propio implementador. Cambiar el estado solo con prueba nueva y adjudicación del director.
 
-## 4. Próxima operación — B15-S1, sin diagnósticos circulares
+## 4. Próxima operación — B15-S2, vertical personal real sin ping-pong
 
-Objetivo de valor: empleado autenticado y asociado **legítimamente** a su ficha de trabajador, lectura de `Hoy` / hechos propios en la empresa activa, sin exposición de compañeros; acción de marcación **solo si** el contrato y pipeline ya permiten hacerlo sin inventar autorización.
+**Decisión de dirección para candidato QA, no contrato comercial aprobado:** probar primero vínculo explícito tenant-scoped `User ↔ Employee` en Laravel; usuario verificado puede pertenecer a varias empresas, pero una membresía de empresa o un e-mail coincidente NO autoriza lectura laboral. Un empleado debe asociarse a una cuenta mediante acción autenticada de administrador autorizado, con verificación tenant, estado y revocación; sin auto-vinculación. Evitar agregar el vínculo a dispositivos PIN/kiosco ni alterar el ledger. Revisar contratos existentes ANTES de elegir detalle de cardinalidad y esquema; documentar contradicciones y no aplicar migraciones sobre datos reales. La decisión sobre cardinalidad simultánea/histórica se registra como `CONTRACT_CANDIDATE_QA` hasta validación por autoridad de producto.
 
-1. Leer el **AGENTS local** y la versión de esta rama, contrastar sin copiar automáticamente. Confirmar WIP y hashes de los archivos afectados.
-2. Examinar una vez relación `User ↔ Employee ↔ Company/Site`, identidad Sanctum, client Flutter y ledger/outbox. Diferenciar membresía empresarial de sujeto empleado: no equivalen por defecto.
-3. Implementar corte vertical completo máximo **seguro**: sesión personal, contexto empresa válido, `Mi jornada` propia, UX de estados y aislamiento A/B; marcar si reutilización del pipeline de eventos es realmente válida. No abrir endpoint paralelo solo para una demo.
-4. Seguridad: login nunca crea evento; no derivar dueño de datos solo de `employee_id` cliente; aislamiento entre empresas, tokens revocados, logout/cambio de identidad sin fuga de caché, no elevar owner/admin, no mostrar PII de compañeros.
-5. Si no hay vínculo usuario-empleado aprobado, documentar contrato faltante con prueba específica y entregar las piezas independientes sin dar PASS falso. No inventar asociaciones o conceder acceso. Sensores reales, push/email y modo físico mantienen `NOT_RUN` hasta QA compatible.
-6. QA focal sobre MariaDB aislada, Flutter host/widget, y Android AVD oficial solo si está permitido y disponible en D:. Logs de comandos verdaderos y códigos de salida. Un solo ZIP, no reabrir B13/B14.
-7. **NEXT_OWNER=CHATGPT** después del ZIP; ChatGPT hace L5 documental/estática posible y decide el siguiente lote. Evitar sucesivas órdenes de preflight.
+**Objetivo del próximo lote B15-S2:** un único corte vertical QA genuino: vínculo de empleado autorizado → login Sanctum personal (no marca) → `GET Mi jornada` de trabajador activo con backend filtrando sujeto por token + tenant → estados propios + negativos A/B y cross-tenant; reutilizar sincronización/ledger real si existe, sin fake. Un widget de kiosco no satisface esto.
+
+1. Identificar contrato real y tablas `User`, `company_memberships`, `sync_employees`, eventos almacenados y auth; mostrar rutas/consumidores. Escoger **la forma más simple segura** de relación, sin segunda auth. Si falta contrato irreductible de asociación laboral y hay dos alternativas sustantivas, entregar implementación QA mínima aislada con límites explícitos; no publicar ni habilitar datos reales.
+2. Negativos: token A no accede eventos de empleado B/empresa C ni por IDs/cabeceras; cuenta sin vínculo/empleado inactivo/membresía revocada/token revocado no accede; un login/GET/logout no crea eventos. No aceptar `employee_id` cliente como autoridad.
+3. Solo si hay contrato backend consistente y reutilización existente, sumar cliente móvil personal mínimo. No mezclar sesión personal con `KioskEmployeeSession` ni reaprovechar PIN de kiosco. No agregar marcación, GPS/QR/NFC/Wi-Fi/IP o push por este lote: pertenecen a B15 posterior y requieren QA real.
+4. Tests MariaDB QA aislada + HTTP 401/403/404 genuino según contrato + Flutter focal cuando aplique; logs originales con exit. **No repetir APK/AVD ahora**: el hook sqlite3 y boot de API24 son tareas técnicas separadas, salvo evidencia nueva causal que habilite única intervención.
+5. Proteger WIP de D:, no sobrescribir `AGENTS.md` local, sin GitHub escritura desde Codex. Entregar **un único ZIP** con informe, fuentes, hashes, parche reproducible, pruebas, matriz 10×6 y NEXT. **NEXT_OWNER=CHATGPT** tras la entrega.
+6. Actualizar este documento vivo con nuevo resultado adjudicado por ChatGPT; jamás convertir integridad ZIP o tests host en QA Android/server independiente.
 
 ## 5. Plan de primera publicación integral
 
 | Etapa | Entrega | Evidencia/gate de salida |
 |---|---|---|
-| B15-S1 | Mi jornada de empleado seguro | Identidad+tenancy+UI propia+negativos, evento solo si autorizable, QA focal |
+| B15-S2 | Vincular sujeto empleado autorizado y leer jornada propia (candidato QA) | Laravel/MariaDB tenant+Sanctum, 0 hechos al login, A/B/C negativos, sin inventar contrato comercial |
 | B15 resto | Historial, solicitudes, GPS/QR/Wi-Fi/IP/NFC y notificaciones según contratos | No sensor PASS sin dispositivo/hardware y política validada |
 | B16 | Portal web Pro multiempresa/sede, turnos/reportes, roles/plan | Autorización por tenant, reportes reales, no cobros inventados |
 | B17 | Novedades/ausencias/vacaciones, ledger | No falsificar horas observadas, revisión legal |
