@@ -2,7 +2,7 @@
 
 **Corte:** 2026-11-07, posterior a entrega B15-S1, Colombia. **Tipo:** checkpoint vivo de dirección y trazabilidad, NO código probado ni aprobación comercial.  
 **Director / aceptación:** ChatGPT. **Ejecutor local:** Codex Luna, solo con un lote previamente dirigido. **Propietario:** decide autorizaciones de publicación, contratos y UX aprobados.  
-**Siguiente tarea:** `B15-S2 — vínculo seguro de identidad laboral y Mi jornada personal en QA`; B15-S1 fue parcial funcional (solo tarjeta kiosco PIN).  
+**Siguiente tarea:** `B15-S2 V2 — vínculo laboral autorizado y lectura personal verificable (QA)`; B15-S1 fue parcial funcional (solo tarjeta kiosco PIN). V2 sustituye la V1 de la orden, no la historia del proyecto.  
 **Política de transferencia:** 1 prompt descargable .md para Codex; 1 ZIP final con código, informe y evidencias. Evitar nuevas vueltas de diagnóstico.
 
 ## 1. Jerarquía y fuentes vigentes
@@ -54,6 +54,18 @@ L1=KISS/Ponytail, L2=antirruido/no eliminación ciega, L3=causa raíz/no parches
 4. Tests MariaDB QA aislada + HTTP 401/403/404 genuino según contrato + Flutter focal cuando aplique; logs originales con exit. **No repetir APK/AVD ahora**: el hook sqlite3 y boot de API24 son tareas técnicas separadas, salvo evidencia nueva causal que habilite única intervención.
 5. Proteger WIP de D:, no sobrescribir `AGENTS.md` local, sin GitHub escritura desde Codex. Entregar **un único ZIP** con informe, fuentes, hashes, parche reproducible, pruebas, matriz 10×6 y NEXT. **NEXT_OWNER=CHATGPT** tras la entrega.
 6. Actualizar este documento vivo con nuevo resultado adjudicado por ChatGPT; jamás convertir integridad ZIP o tests host en QA Android/server independiente.
+
+
+### Corrección de dirección B15-S2 V2 — auditoría adversarial 2026-11-07
+
+**Estado:** `B15-S2=NOT_EXECUTED`. Se auditó la orden V1 contra el ZIP B15-S1 duplicado, el contrato backend documentado y el canon fijo; se publicó prompt corregido V2 **en la conversación**: `CODEX_LUNA_JORNATO_B15_S2_V2_IDENTIDAD_SEGURA_LECTURA_PROPIA_UN_ZIP_20261107.md`, SHA-256 `54c5ccb46b0f5d07274a12fa871fcc71c9635ad429b0f412271ce75ec8957904`. **Este nombre/hash no indica que los bytes del prompt estén en GitHub**; el checkpoint conserva todo lo necesario para reconstruir dirección, y el usuario puede adjuntar el prompt para ejecución. Auditoría V2: 10 pasadas × L1-L6, 24 decisiones favorables documentales, 20 rectificaciones y 16 límites pendientes; NO 60 tests runtime.
+
+**Tres correcciones que prevalecen a la orden V1:**
+1. **Permiso de vinculación:** no inventar capacidad admin por tener rol owner ni usar coincidencia de correo/PIN/membresía. Si el permiso/contrato de vinculación laboral no existe, implementar enlace **solo como fixture interno sintético QA**, sin ruta administrativa productiva expuesta; aun así probar consulta personal con Sanctum cuando la autorización del usuario sea genuina.
+2. **Cardinalidad:** el máximo de una asociación activa usuario/empleado por empresa es **restricción conservadora temporal de QA**, no política comercial aprobada; simultaneidad, recontratación y revinculación históricas quedan pendientes de contrato. Verificar esquema actual antes de elegir tabla, FKs, tenant y UNIQUE; carreras deben probarse **realmente en MariaDB**, no por dos requests secuenciales.
+3. **Lectura laboral confiable:** demostrar vínculo tenant+empleado+evento; `SERVER_STORED/UNASSESSED` de B14 **no** implica asistencia reconocida. No exponer `sync_events.payload_json` bruto ni usar `requestId` como identidad laboral. Si no existe proyección atribuible, implementar enlace y endpoint seguro sin filas falsas, informar `MY_JOURNEY_DATA_GATE=PARTIAL_NO_TRUSTWORTHY_SOURCE`.
+
+**Entrega Codex próxima:** única ejecución en `D:\codex\Jornato`, Laravel/Sanctum/MariaDB, negativos A/B/C, revocación, login/GET sin marcación, SHA de fuentes finales y evidencia MariaDB/HTTP **si se ejecuta**; Flutter personal solo con sesión aislada real, sin reutilizar PIN. No AVD API24 ni C04 de 1.000 eventos por inercia; no stage/commit/push/merge/deploy de código. Exactamente un ZIP `JOR-B15-S2-V2-IDENTIDAD-LECTURA-PERSONAL-QA-20261107-UNICO.zip`. `NEXT_OWNER=CHATGPT`; después actualizar **este archivo**, no crear otra versión. Continuar B15 restante → B16 portal → B17 novedades → B18 reglas informativas → B19 documentos → B20 contratación → B21 L5 integral y deudas B13/B14 → B22 únicamente GO humano escrito.
 
 ## 5. Plan de primera publicación integral
 
