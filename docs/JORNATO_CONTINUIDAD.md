@@ -1,10 +1,9 @@
 # JORNATO — CONTINUIDAD CANÓNICA DE DIRECCIÓN (DOCUMENTAL)
 
-**Corte:** 2026-11-07, posterior a entrega B15-S1, Colombia. **Tipo:** checkpoint vivo de dirección y trazabilidad, NO código probado ni aprobación comercial.  
-**Director / aceptación:** ChatGPT. **Ejecutor local:** Codex Luna, solo con un lote previamente dirigido. **Propietario:** decide autorizaciones de publicación, contratos y UX aprobados.  
-**Siguiente tarea:** `B15-S4 V2 — macrobloque Flutter personal + «Mi jornada» + aislamiento A→B`; la orden V1 está sustituida, S4 todavía no ejecutado.n personal Flutter y consulta segura sobre API existente (QA sintética)`. S3 ya entregado y aceptado solo en alcance focal reportado.n QA testing-only + flag explícito, sin asistencia reconocida`; B15-S2 entregó GET fail-closed sin datos ni Flutter personal. V2 sustituye V1; todavía NO ejecutada.  
-**Política de transferencia:** 1 prompt descargable .md para Codex; 1 ZIP final con código, informe y evidencias. Evitar nuevas vueltas de diagnóstico.
-
+**Corte:** 2026-11-12. Checkpoint de dirección, NO código probado ni release comercial.
+**Director técnico y aceptación:** ChatGPT. **Ejecución local:** Codex Luna. **Aprobaciones comerciales:** propietario.
+**Siguiente tarea VIGENTE:** B15-S5: ciclo de vida PAT, revocación al Back/dispose, tokens tardíos y HTTP streaming; QA kernel Laravel solo con entorno aislado. Después B16-S1, sin S6 por rutina.
+**Transferencia:** un prompt Markdown, un único ZIP de Codex, evidencia real frente a reportada, código local exclusivamente D:.
 ## 1. Jerarquía y fuentes vigentes
 
 1. Decisiones y autorizaciones expresas del propietario, seguridad, leyes obligatorias, contratos aprobados.
@@ -95,11 +94,24 @@ L1=KISS/Ponytail, L2=antirruido/no eliminación ciega, L3=causa raíz/no parches
 
 **Estados no modificables sin evidencia nueva/autoridad:** `B13_GLOBAL=PARTIAL`; `B14_FINAL=NOT_APPROVED`; `B15_GLOBAL=PARTIAL`; `LINK_ADMIN_RUNTIME=BLOCKED_PERMISSION_CONTRACT`; `L5_INDEPENDENT_RUNTIME=NOT_RUN`; `RELEASE_APPROVED=NO`. S4 sigue `NOT_EXECUTED` a este corte. `NEXT_OWNER=CODEX_LUNA` hasta entrega del ZIP, después `NEXT_OWNER=CHATGPT`. Trabajo local solo D:, preservar WIP; sin stage/commit/push/merge/deploy del código. Avanzar con módulos B15 restante → B16 portal Pro → B17 permisos → B18 cálculos informativos → B19 documentos → B20 reclutamiento → B21 QA integral y puertas pendientes → B22 solo GO escrito.
 
+### Auditoría B15-S4 V2 y dirección B15-S5 — 2026-11-12
+
+**Entrega:** JOR-B15-S4-V2-MACROBLOQUE-PERSONAL-20261110-UNICO.zip, SHA-256 8DC99032ACAB53291B711F0EF3B371853701A1E809046952ADB5D8FF9B3BE292, 70.056 bytes. Verificación independiente de ChatGPT: CRC correcto, 48 miembros, 47/47 hashes y tamaños, sin nombres inseguros ni duplicados. GNU patch dry-run y apply sobre baseline aislado: 8/8 fuentes coinciden normalizando CRLF/LF; 7/8 byte-exacto, lib/main.dart solo normalizado. Los dos baselines pre-edición main.dart y widget_test.dart se reconstruyeron como texto; SHA previos originales NO capturados.
+
+**QA atribuible:** Codex reportó 14 tests Flutter host/widget PASS, analyze sin issues, format PASS, WIP 170→176 (+6), staged=0, branch/HEAD preservados. ChatGPT NO ejecutó Flutter, backend real, Android ni L5 runtime. B15_S4=PARTIAL_WITH_EXPLICIT_GATE; PERSONAL_UI=PASS_HOST_WIDGET_REPORTED; PERSONAL_API_INTEGRATED=HOST_CONTRACT_ONLY; HTTP_REAL=NOT_RUN; ANDROID_NATIVE=NOT_RUN; TOKEN_AT_REST=MEMORY_ONLY; B15_GLOBAL=PARTIAL; RELEASE_APPROVED=NO.
+
+**Tres hallazgos directos de código, NO explotaciones demostradas:** (1) PersonalScreen.dispose → PersonalSessionController.dispose limpia datos locales sin solicitar revocación PAT al servidor cuando se navega atrás; (2) login tardío que devuelve token tras invalidar epoch se descarta sin intentar revocar PAT; (3) lectura HTTP chunked de respuesta via .join acumula hasta el final antes del control de 1 MiB, cuando contentLength está ausente. Separar cierre local de revocación remota confirmada; tratar como concerns técnicos focales. La revisión device.active para PAT personal es estática, no prueba middleware runtime. Sin URL HTTPS QA autorizada, no inventarla ni usar Docker compartido.
+
+**Decisión director:** 10 pasadas verdugo + 10 juez con revisión de seis leyes en cada una (NO 120 tests runtime). Mantener arquitectura KISS/Ponytail: una sesión Flutter y API existentes, sin otra auth/storage/framework. S5 único macrobloque corrige tres concerns con negativos host; Laravel HTTP-kernel/tenant/abilities/logout se prueba una vez solo si hay QA MariaDB aislada ya disponible. Si falta, HTTP_KERNEL=NOT_RUN_ENV y continuar B16 productivo, sin siguiente ronda S6 por inercia. Real HTTP TLS y Android siguen gates separados. Nunca declarar server revoke PASS solo por fake logout ni confundir SERVER_STORED con asistencia reconocida.
+
+**Prompt próximo** (archivo de la conversación; bytes NO publicados en GitHub): CODEX_LUNA_JORNATO_B15_S5_CIERRE_SESION_QA_HTTP_KERNEL_UN_ZIP_20261112.md; SHA-256 79deb295efa50c4c6c948ad81a592927c945b197c2d104cb098bf535500ae06d. **Auditoría**: JORNATO_B15_S4_DICTAMEN_FORENSE_VERDUGO10_JUEZ10_CONTINUIDAD_20261112.md. **Entrega esperada**: JOR-B15-S5-SESSION-LIFECYCLE-KERNEL-20261112-UNICO.zip. NEXT_OWNER=CODEX_LUNA; luego NEXT_OWNER=CHATGPT.
+
+**Gates permanentes:** B13_GLOBAL=PARTIAL, B14_FINAL=NOT_APPROVED, B15_GLOBAL=PARTIAL, LINK_ADMIN_RUNTIME=BLOCKED_PERMISSION_CONTRACT, PUBLIC_SIGNUP=NO, LEGAL_TEXTS_APPROVED=NO, EMAIL_REAL_DELIVERY=NOT_VERIFIED, L5_INDEPENDENT_RUNTIME=NOT_RUN, RELEASE_APPROVED=NO. Trabajo D: y no stage/commit/push/merge/deploy del WIP. PR #2 solo documental Draft; main no representa trabajo local. El enlace de AGENTS no significa autoload de Codex. Incidente histórico de recursos Docker ajenos SIN AUTORÍA; no tocarlos ni limpiar script en C:.
 ## 5. Plan de primera publicación integral
 
 | Etapa | Entrega | Evidencia/gate de salida |
 |---|---|---|
-| B15-S2 | Vincular sujeto empleado autorizado y leer jornada propia (candidato QA) | Laravel/MariaDB tenant+Sanctum, 0 hechos al login, A/B/C negativos, sin inventar contrato comercial |
+| B15-S5 | Corregir ciclo PAT, streaming y QA kernel aislada | Host focal con revocación token tardío, E2E solo si entorno seguro; después B16 |
 | B15 resto | Historial, solicitudes, GPS/QR/Wi-Fi/IP/NFC y notificaciones según contratos | No sensor PASS sin dispositivo/hardware y política validada |
 | B16 | Portal web Pro multiempresa/sede, turnos/reportes, roles/plan | Autorización por tenant, reportes reales, no cobros inventados |
 | B17 | Novedades/ausencias/vacaciones, ledger | No falsificar horas observadas, revisión legal |
