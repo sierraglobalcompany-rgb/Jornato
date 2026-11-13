@@ -1,8 +1,8 @@
 # JORNATO — CONTINUIDAD CANÓNICA DE DIRECCIÓN (DOCUMENTAL)
 
-**Corte:** 2026-11-12. Checkpoint de dirección, NO código probado ni release comercial.
+**Corte:** 2026-11-12, posterior a la entrega B15-S5. Checkpoint de dirección, NO auditoría runtime de Android/Laravel ni release comercial.
 **Director técnico y aceptación:** ChatGPT. **Ejecución local:** Codex Luna. **Aprobaciones comerciales:** propietario.
-**Siguiente tarea VIGENTE:** B15-S5 V2 (única orden) — ciclo de vida de PAT, incluido PAT de sesión parcial/re-login, y streaming por bytes; QA kernel aislada si está disponible. Descargar prompt completo desde `docs/CODEX_LOTE_ACTUAL.md`. Después B16-S1, sin S6 automático.
+**Siguiente tarea VIGENTE:** B16-S1 V1 (única orden) — portal web Pro responsive: Hoy, sedes, turnos, informes y permisos; prompt completo en `docs/CODEX_LOTE_ACTUAL.md`. B15-S5 ya entregado y adjudicado host; NO ejecutar S6 por rutina.
 **Transferencia:** un prompt Markdown, un único ZIP de Codex, evidencia real frente a reportada, código local exclusivamente D:.
 ## 1. Jerarquía y fuentes vigentes
 
@@ -107,11 +107,25 @@ L1=KISS/Ponytail, L2=antirruido/no eliminación ciega, L3=causa raíz/no parches
 **Salida Codex obligatoria:** `JOR-B15-S5-V2-PAT-STREAM-KERNEL-20261112-UNICO.zip`, un solo ZIP con fuentes, baselines reales S5, parches aplicables, logs verdaderos, tests, 10×6 autorrevisiones y manifiesto SHA256. `NEXT_OWNER=CODEX_LUNA` antes de recibir ZIP; después `NEXT_OWNER=CHATGPT`. Sin stage/commit/push/merge/deploy de código local; solo D:; preservación de WIP tracked/untracked, temporales propios en D:, no tocar Docker/Liquidapro. Anomalía histórica de inventario Docker y script histórico C: NO atribuibles ni autoriza reparación.
 
 **Gates permanentes:** B13_GLOBAL=PARTIAL, B14_FINAL=NOT_APPROVED, B15_GLOBAL=PARTIAL, PUBLIC_SIGNUP=NO, LEGAL_TEXTS_APPROVED=NO, EMAIL_REAL_DELIVERY=NOT_VERIFIED, LINK_ADMIN_RUNTIME=BLOCKED_PERMISSION_CONTRACT, L5_INDEPENDENT_RUNTIME=NOT_RUN, RELEASE_APPROVED=NO. B16-S1: portal Pro para administrador autorizado, login/tenant/portada Hoy/sedes de API existente y pruebas 401/403/A-B. B17 novedades; B18 cálculos informativos; B19 documentos; B20 reclutamiento; B21 QA independiente y gates externos; B22 únicamente GO propietario escrito.
+### B15-S5 V2 adjudicado y B16-S1 asignado — 2026-11-12
+
+**Última entrega de código local:** `JOR-B15-S5-V2-PAT-STREAM-KERNEL-20261112-UNICO.zip`, 71.479 bytes, SHA256 `ECCA94F4F1D23310A8A859B918DD117D3BF6907A609D5CB06DEC8208C2AB54AC`. ChatGPT verificó DIRECTAMENTE: 44 miembros, CRC íntegro, 43/43 hashes+tamaños de manifiesto sin rutas duplicadas ni traversal, replay de `PATCH_CANDIDATE.diff` sobre BASELINES en copia aislada y **6/6 fuentes finales idénticas byte por byte**. `personal_screen.dart` tiene baseline recuperado desde ZIP S4 verificado, **no captura contemporánea pre-S5**; el replay es válido contra esa base documentada.
+
+**Resultados que reportó Codex (NO reejecución independiente):** 30 Flutter host/widget PASS, `flutter analyze` PASS, `dart format` PASS y RED formal con once expectativas focales fallidas; primera prueba exploratoria de stream inválida fue descartada y harness corregido. WIP 176→177 entradas, staged 0, rama/HEAD conservados según logs. `server/.env.testing` ausente; `phpunit.xml` usa `127.0.0.1:1` de placeholder; por eso Laravel HTTP-kernel, TLS real, Android, revocación remota PAT y L5 runtime **NO se ejecutaron**. **Clasificación del director**: `B15_S5=PASS_HOST_SCOPED_WITH_SERVER_GATE`, `SERVER_REVOCATION=NOT_RUN_UNCONFIRMED`; `B13_GLOBAL=PARTIAL`, `B14_FINAL=NOT_APPROVED`, `B15_GLOBAL=PARTIAL`, `RELEASE_APPROVED=NO`. No llamar S5 release-ready ni generar B15-S6 por inercia.
+
+**Hallazgo puntual B16 para no inventar contratos:** la `CONTRACT_MATRIX.md` del ZIP describe lectura de identidad en `/api/v1/auth/me` y empresas en `/api/v1/companies`; `PersonalHttpApi` incluido usa `/api/v1/me` y `/api/v1/me/companies`. Se confirma DISCREPANCIA DOCUMENTAL, no fallo HTTP/servidor demostrado porque las rutas backend no vienen en ZIP S5. Codex debe leer `server/routes/api.php` real y pruebas antes de conectar portal.
+
+**Orden vigente B16-S1 V1 (PRODUCTIVO, NOT_EXECUTED):** portal web responsive Pro en Laravel monolito reutilizando frontend, auth, tenant, permisos existentes; si no hay interfaz, preferir Blade liviano sin nueva SPA. Construir **Hoy**, empresa activa, **Sedes**, **Turnos** e **Informes/exportación** con sources reconocidos y roles; no inventar ausencias, asistencia, dinero, derechos Pro ni cobros a partir de `SERVER_STORED/UNASSESSED`. Si no existe guard web aprobado, avanzar en UI/controladores protegidos y QA sintética sin exponer segundo login comercial; gate explícito. Evitar Docker compartido, C: y WIP ajeno. Es un macrobloque, no una cadena de preflights.
+
+**PROMPT COMPLETO PUBLICADO EN GITHUB:** [`docs/CODEX_LOTE_ACTUAL.md`](CODEX_LOTE_ACTUAL.md), copia de `CODEX_LUNA_JORNATO_B16_S1_V1_MACROBLOQUE_PORTAL_PRO_ADMIN_HOY_SEDES_TURNOS_INFORMES_UN_ZIP_20261112.md`, SHA256 UTF-8 `5480c83036390cc55765a31aeed0e71fa12f7ee674bfc11da8c0eb56a6e0c84c` (incluye newline final), blob Git `79522091e4fb6aebcc6f22231d417093c435ea1f`. Informe directivo `JORNATO_B15_S5_DICTAMEN_10_VERDUGO_10_JUEZ_120_LEYES_PLAN_B16_20261112.md`, SHA256 `8fae4f34e3f9cd2b98c07d8c0d28c5468f10fad0a83019b5508adac5586e65c7` (archivo descargable del chat, NO en GitHub). Verdugo 10 + juez 10, L1–L6 cada pasada (120 juicios documentales, no tests nuevos).
+
+**SALIDA ZIP EXCLUSIVA:** `JOR-B16-S1-V1-PORTAL-PRO-VERTICAL-20261112-UNICO.zip`. Archivos/código/patch/tests/logs/manifest/10×6 de Codex todos dentro del ZIP. `NEXT_OWNER=CODEX_LUNA` hasta entrega; después `NEXT_OWNER=CHATGPT` y actualización de este MISMO checkpoint. Cero stage/commit/push/merge/deploy código local, sin backend remoto publicado. PR #2 es DOCUMENTAL DRAFT; `main` sigue rezagado. El checkpoint permite recuperar la orden, no reconstruir el WIP D:.
+
 ## 5. Plan de primera publicación integral
 
 | Etapa | Entrega | Evidencia/gate de salida |
 |---|---|---|
-| B15-S5 | Corregir ciclo PAT, streaming y QA kernel aislada | Host focal con revocación token tardío, E2E solo si entorno seguro; después B16 |
+| B15-S5 | PASÓ QA host focal; kernel/TLS/Android pendientes | 30 tests host reportados, 6/6 patch verificado; revocación real no probada |\n| **B16-S1** | Portal web Pro: Hoy, sedes, turnos, informes y autorización tenant | Un macrobloque UI+backend existente, negativos de acceso y QA según entorno |
 | B15 resto | Historial, solicitudes, GPS/QR/Wi-Fi/IP/NFC y notificaciones según contratos | No sensor PASS sin dispositivo/hardware y política validada |
 | B16 | Portal web Pro multiempresa/sede, turnos/reportes, roles/plan | Autorización por tenant, reportes reales, no cobros inventados |
 | B17 | Novedades/ausencias/vacaciones, ledger | No falsificar horas observadas, revisión legal |
