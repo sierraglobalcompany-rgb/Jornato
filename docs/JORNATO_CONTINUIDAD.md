@@ -1,9 +1,23 @@
 # JORNATO — CONTINUIDAD CANÓNICA DE DIRECCIÓN (DOCUMENTAL)
 
-**Corte:** 2026-11-12, posterior a la entrega B15-S5. Checkpoint de dirección, NO auditoría runtime de Android/Laravel ni release comercial.
+**Corte:** 2026-11-13, entrega B16-S1 V2 auditada; seguimiento documental, NO release comercial ni auditoría DB/navegador.
 **Director técnico y aceptación:** ChatGPT. **Ejecución local:** Codex Luna. **Aprobaciones comerciales:** propietario.
-**Siguiente tarea VIGENTE:** B16-S1 V2 (ÚNICA ORDEN) — portal Pro protegido y responsive con Hoy, sedes, turnos e informes/exportación sobre fuentes y roles reales. Prompt completo vigente: `docs/CODEX_LOTE_ACTUAL.md`. B16 V1 queda supersedida; B15-S5 ya fue adjudicado como QA host, sin S6 por rutina.
+**Siguiente tarea VIGENTE:** `B17-S1 V1` — solicitudes, permisos, citas, incapacidades, vacaciones e historial append-only, con API titular y vistas donde lo permitan los contratos. ÚNICA orden completa en `docs/CODEX_LOTE_ACTUAL.md`. B16-S1 ya adjudicado PARTIAL; no abrir B16-S2 por inercia.
 **Transferencia:** un prompt Markdown, un único ZIP de Codex, evidencia real frente a reportada, código local exclusivamente D:.
+## 0.1 Última adjudicación y orden vigente — 2026-11-13
+
+**B16-S1 V2 RECIBIDO Y AUDITADO:** `JOR-B16-S1-V2-PORTAL-PRO-20261112-UNICO.zip`, 57.818 bytes, SHA-256 `0F31F3CC7D3C2E1300E02A112CB8168F1B4D5C5340C6544FA6FB02D7BF0CB933`. ChatGPT verificó **directamente** ZIP CRC, 75 miembros, 74/74 SHA256+tamaños de manifiesto, seguridad de rutas/nombres, **6/6 php -l**, GNU patch dry-run/apply y **11/11 SOURCES idénticos byte-exactos** tras aplicar sobre los tres baselines y ocho marcadores de ausencia. Logs atribuidos a **Codex**, no reejecutados independientemente contra MariaDB: PHPUnit 12 tests/122 assertions exit 0; CSV focal 1/22 exit 0; `route:list -v` 3 rutas GET con `auth:web` y `account.active`; WIP 177→185 (+8, 0 staged), HEAD/branch preservados según reporte. Las pruebas usan `actingAs` y Mockery para empresas, no DB real.
+
+**Resultado adjudicado:** `B16_S1=PARTIAL_HOST_OR_CONTRACT`; se implementaron shell Blade/CSS local, Hoy con cuatro contadores Indeterminado, sedes paginadas, CSV limitado a 1.000 con neutralización de fórmulas, Plan sin pago falso y Turnos `BLOCKED_NO_SCHEMA`. **No** existe login/logout web comercial; `WEB_LOGIN_REAL=BLOCKED_EXISTING_AUTH_CONTRACT`. MariaDB QA, navegador real, Android, L5 runtime `NOT_RUN`; B13/B14/B15/B16 global y Release permanecen sin aprobación. No se demostró fuga entre tenants, tampoco aislamiento DB real. La discrepancia de rutas API de S5 fue resuelta **por la revisión local que Codex documenta en `CONTRACT_MATRIX.md`**, no por ejecución HTTP real: `/api/v1/me` y `/api/v1/me/companies` son las rutas reportadas; no crear alias.
+
+**AUDITORÍA DIRECTOR:** diez pasadas Verdugo V01–V10 y diez Juez J01–J10 con L1–L6 en cada una (120 juicios documentales; NO 120 tests runtime), documento descargable del chat `JORNATO_B16_S1_DICTAMEN_VERDUGO10_JUEZ10_120_LEYES_B17_PLAN_20261113.md`, SHA-256 `01e646d621abcd81d44646636b4df60d1d1fa428b169c18e98396304579f2027`. Decisión: no crear B16-S2 para reintentar MariaDB/browser; sí continuar nuevo módulo B17.
+
+**ÚNICO PROMPT VIGENTE EN GITHUB:** [`docs/CODEX_LOTE_ACTUAL.md`](CODEX_LOTE_ACTUAL.md), copia completa de `CODEX_LUNA_JORNATO_B17_S1_V1_MACROBLOQUE_SOLICITUDES_NOVEDADES_LEDGER_QA_SOLO_D_UN_ZIP_20261113.md`, SHA-256 UTF-8 `867c5cd3e8b7b969da85581b0af641307f3fa060a48bfe2f7d170fccd3234a2f`, blob Git `7db241886bd1215d4e90734b43736f1922c851a4`. **B17 NO EJECUTADO** a este corte; es una orden de desarrollo, no estado de producto. Construir solicitudes del titular e historial inmutable; revisión solo con permiso existente real, sin deducirlo de owner/admin; sin horas trabajadas inventadas, sin saldo vacaciones arbitrario, sin diagnóstico médico por defecto. QA en Laravel/Flutter host; DB real solo si entorno aislado ya disponible. 36 oráculos falsables; no crear arquitectura paralela ni mutar B14.
+
+**ZIP ÚNICO QUE DEBE DEVOLVER CODEX:** `JOR-B17-S1-V1-REQUESTS-LEDGER-20261113-UNICO.zip`, con fuentes, baselines tracked/untracked, patch reproducible, logs, matriz 36 oráculos, diez auto-revisiones L1–L6, hashes y reportes. `NEXT_OWNER=CODEX_LUNA` hasta recibir paquete, luego `NEXT_OWNER=CHATGPT`. Desarrollo sólo D:, sin stage/commit/push/merge/deploy de WIP. El PR #2 es documental/Draft y `main` NO contiene el código local avanzado. Continuar B18, B19, B20, B21 (QA integral independiente y gates), B22 únicamente GO escrito del propietario.
+
+**Historial:** referencias a «B16 V2 NOT_EXECUTED» en párrafos fechados 2026-11-12 son fotografías históricas, supersedidas por este estado. Actualizar este mismo documento después del próximo ZIP; no generar continuidad paralela.
+
 ## 1. Jerarquía y fuentes vigentes
 
 1. Decisiones y autorizaciones expresas del propietario, seguridad, leyes obligatorias, contratos aprobados.
