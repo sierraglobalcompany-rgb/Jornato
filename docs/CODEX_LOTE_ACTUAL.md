@@ -1,235 +1,166 @@
-# CODEX LUNA — JORNATO B17-S1 V2 · MACROBLOQUE PRODUCTIVO DE SOLICITUDES, ESTADOS E HISTORIAL SEGURO
+# CODEX LUNA — JORNATO B18-S1 V1 · MACROBLOQUE PRODUCTIVO DE REMUNERACIÓN INFORMATIVA Y CIERRE EXPLICABLE
 
-**ORDEN ÚNICA Y DEFINITIVA — SUSTITUYE B17-S1 V1. NO EJECUTAR AMBAS VERSIONES.**  
-**TASK_ID:** `JOR-B17-S1-V2-REQUESTS-SECURE-LEDGER-ONEBATCH-20261113`  
-**DIRECTOR / ARQUITECTO / JUEZ DE ACEPTACIÓN:** ChatGPT. **EJECUTOR:** Codex Luna, realizar acciones indicadas, no improvisar contratos.  
-**PROYECTO LOCAL ÚNICO:** `D:\codex\Jornato`. **TMP, SCRIPT Y REPORTES DEL LOTE:** solo bajo `D:\codex\_REPORTES\Jornato\JOR-B17-S1-V2-REQUESTS-SECURE-LEDGER-20261113\`.  
-**SALIDA EXTERNA ÚNICA:** `D:\codex\_REPORTES\Jornato\JOR-B17-S1-V2-REQUESTS-SECURE-LEDGER-20261113\JOR-B17-S1-V2-REQUESTS-SECURE-LEDGER-20261113-UNICO.zip`.  
-**REPORTE DE RETORNO:** solo ruta del ZIP, SHA-256 y una línea de estados; **TODAS** las fuentes, parches, reportes y logs deben estar **dentro de ese mismo ZIP**. No entregar carpetas o Markdown sueltos.  
-**EJECUTAR UN ÚNICO MACROBLOQUE FUNCIONAL, NO UN PREFLIGHT INTERMEDIO.** Leer contratos una vez, implementar lo seguro, probarlo, empaquetarlo y finalizar. No pedir a ChatGPT que repita otra auditoría por diferencias triviales.
+**TASK_ID:** `JOR-B18-S1-V1-ESTIMADOR-LABORAL-EXPLICABLE-ONEBATCH-20261113`  
+**DIRECTOR/RESPONSABLE DE ACEPTACIÓN:** ChatGPT. **EJECUTOR:** CODEX LUNA. No improvisar requisitos, autorizaciones, arquitectura ni un nuevo lote de auditoría.  
+**RAÍZ ÚNICA:** `D:\codex\Jornato`. Temporales, copias y reportes propios exclusivamente bajo `D:\codex\_REPORTES\Jornato\JOR-B18-S1-V1-ESTIMADOR-LABORAL-20261113\`. No escribir C:.  
+**ZIP ÚNICO FINAL:** `D:\codex\_REPORTES\Jornato\JOR-B18-S1-V1-ESTIMADOR-LABORAL-20261113\JOR-B18-S1-V1-ESTIMADOR-LABORAL-20261113-UNICO.zip`. Entregar SOLO este ZIP, no quince reportes por separado.  
+**PROHIBICIONES:** NO stage, commit, push, merge ni deploy de código; NO `git reset/clean/checkout` destructivos, NO borrar untracked/dirty, NO intervenir otros proyectos/Docker compartido, NO cambiar main, NO publicar datos reales, NO instalar dependencias de pago. No migrar producción. No suponer que PR #2 documental contiene el código local.  
+**ESTADO PREVIO A RESPETAR:** B17-S1 V2 recibido como `PARTIAL_HOST_OR_CONTRACT`. ZIP recibido SHA256 `745B608028B8522C0013789EE939869FF4D946CE4C1199545BB50A346A82D75A`; 63 miembros, manifiesto 62/62, patch 15/15 y lint PHP 9/9 verificados de forma independiente; PHPUnit 7/30 atribuido a Codex, DB_REAL/Flutter/HTTP-kernel/L5 NOT_RUN. B17 no es ausencia justificada aprobada ni tiempo pagable; `REVIEW_PERMISSION_GATE=BLOCKED_CONTRACT`, `PERSONAL_REQUEST_HTTP=BLOCKED_IDENTITY_CONTRACT`, `RELEASE_APPROVED=NO`. B13/B14/B15/B16 siguen pendientes de integración. NO repetir esos lotes por rutina.
 
-## 0. BASE CERTIFICADA Y LÍMITES QUE NO DEBES CAMBIAR
+## 0. REGLAS DE AUTORIDAD, CONTRATOS Y CORTE
 
-### Lo que sabemos y lo que NO está certificado
+0.1 Leer ANTES de modificar `AGENTS.md` que realmente rija el checkout, README, documentación local aprobada y el canon fijo PingPongLaw `sierraglobalcompany-rgb/PingPongLaw@84e961cadf482d234f4c0ee2ca60e8c7e9b388e8`, `docs/engineering/LEYES_IMPLEMENTACION_1_A_6.md`. Contrastar con `docs/JORNATO_CONTINUIDAD.md` de la rama documental **si está disponible**; la orden y el ZIP mandan sobre estados desactualizados de docs. Si falta acceso al canon, registrar `CANON_READ=BLOCKED` y conservar reglas existentes; no inventar cumplimiento. Leyes: L1 KISS/Ponytail, L2 antirruido, L3 antiparches, L4 UX aprobada, L5 QA independiente y estado real, L6 antipingpong.
 
-- **Última entrega de código recibida y auditada por ChatGPT:** `JOR-B16-S1-V2-PORTAL-PRO-20261112-UNICO.zip` SHA-256 `0F31F3CC7D3C2E1300E02A112CB8168F1B4D5C5340C6544FA6FB02D7BF0CB933`; ZIP 75 entradas, 74/74 hashes y tamaños, patch 11/11, lint 6/6 **verificados por ChatGPT**. En logs de Codex, PHPUnit **12 pruebas/122 aserciones PASS**, **no reejecutadas por ChatGPT** contra MariaDB real.
-- **B16 host parcial:** Blade portal Hoy/Sedes/Informes/Plan, CSS; `server/routes/web.php` incluía solo tres GET protegidos por `auth:web`, `account.active`, **sin login/logout web navegable**. `PortalController` usa `company_memberships` y `sites` con scoping. Los turnos no disponen de calendario/instancia confiable; Hoy indica «Indeterminado»; recibos `SERVER_STORED/UNASSESSED` NO son asistencia reconocida. `actingAs` + mocks no certifican tenant DB real.
-- **Identidad personal B15:** existen `employee_identity_links`, GET `/api/v1/companies/{company}/me/attendance` y Flutter personal con token Sanctum. **La vinculación comercial User↔Employee NO está aprobada**. Las rutas reales `/api/v1/me` y `/api/v1/me/companies` se corroboraron en el inventario del ZIP B16; reconfirmar contra el checkout local antes de añadir B17.
-- **Bloqueos abiertos:** `B13_GLOBAL=PARTIAL`, `B14_FINAL=NOT_APPROVED`, `B15_GLOBAL=PARTIAL`, `B16_GLOBAL=PARTIAL`, `B17_GLOBAL=NOT_APPROVED`, `LINK_ADMIN_RUNTIME=BLOCKED_PERMISSION_CONTRACT`, `B16_WEB_LOGIN_REAL=BLOCKED_EXISTING_AUTH_CONTRACT`, `MARIADB_QA=NOT_RUN_ENV` salvo evidencia nueva, `L5_INDEPENDENT_RUNTIME=NOT_RUN`, `RELEASE_APPROVED=NO`.
-- **Fuentes de autoridad:** código local intacto + instrucciones aprobadas; `AGENTS.md` local; canon PingPongLaw L1–L6 en commit fijo `84e961cadf482d234f4c0ee2ca60e8c7e9b388e8` y `docs/JORNATO_CONTINUIDAD.md` del PR documental #2. La SPEC V5 contiene propuestas funcionales **candidatas**, no autoriza por sí misma permisos comerciales, cálculos o tecnologías diferentes. Stack vigente: Laravel/Sanctum/MariaDB/InnoDB y Flutter; **no PostgreSQL**.
-- **Desvíos históricos que NO debes intentar remediar:** inventario Docker de Liquidapro con variaciones de causa no demostrada; script histórico C: de inspección. Sin Docker compartido, sin reparar/borrar contenedores ajenos, sin tocar archivos de C:.
+0.2 **La fuente de producto para esta fase es el contrato B03:** seis magnitudes obligatoriamente distintas: `PROGRAMADO`, `OBSERVADO`, `JUSTIFICADO`, `RECONOCIDO`, `CLASIFICADO`, `ESTIMADO_MONETARIO`. Una marcación recibida por B14 (`SERVER_STORED/UNASSESSED`) **no** acredita `OBSERVADO` validado, `RECONOCIDO` ni `CLASIFICADO`. Una solicitud B17 `PENDING` o `APPROVED` tampoco acredita horas trabajadas. No inventar «8 h trabajadas» al ver 6 h trabajadas + 2 justificadas.
 
-### Reglas de protección absolutas
+0.3 **SPEC V5 B18 es candidata de alcance**, no aprobación de fórmulas jurídicas. Mantener stack efectivo Flutter + Laravel monolítico + Sanctum + MariaDB/InnoDB, no imponer PostgreSQL mencionado en SPEC candidata. Tarifas, recargos, topes diarios/semanales, divisor del valor hora, festivos, país, descanso contractual, deducciones, retención, prima, cesantías, seguridad social, cumplimiento y firma contable **NO están homologados** en el contexto demostrado. CERO números legales por defecto y CERO pretendida «nómina legal Colombia». No afirmar vigencia legal de 42 h ni de otros umbrales sin fuente/regla versionada y aceptación expresa posterior.
 
-1. **L1 KISS/Ponytail:** una vertical request/status/history, sin microservicios, SPA, bus, event-sourcing framework, segunda autenticación, nuevas dependencias, reloj de nómina ni un ledger duplicado de asistencia. Máximo **dos tablas focales nuevas si no existe ninguna compatible**; ningún saldo de vacaciones calculado ni tabla nueva de saldos por esta orden. Una clase pequeña para transiciones solo si comparte código entre endpoints; no arquitectura especulativa.
-2. **L2 antirruido:** no repetir auditorías B13–B16 ni las pruebas históricas de 1000 eventos, no duplicar docs/ADR/AGENTS; no eliminar ficheros por parecido. Capturar decisiones/contratos una sola vez en `CONTRACT_MATRIX.md` dentro del ZIP.
-3. **L3 antiparches:** resolver tenant+identidad+transición+idempotencia en los propietarios de esa lógica; transacción atómica y evento append-only. Prohibido hacer que un test pase deshabilitando middleware, mutando `sync_events`, outbox B14, asistencia, nómina o turnos.
-4. **L4 UX:** no inventar pantallas o reglas aprobadas: implementar estados comprensibles y accesibles con estructura Flutter existente. Etiquetar cualquier UX no aprobada como candidato QA. Nunca mostrar «aprobado legalmente», «EPS validó», «vacaciones descontadas» ni «horas trabajadas» por el solo estado de solicitud.
-5. **L5 prueba real:** `PASS_STATIC`, `PASS_UNIT`, `PASS_HOST_WIDGET`, `PASS_DB_REAL`, `PASS_HTTP_KERNEL`, `PASS_BROWSER`, `BLOCKED_CONTRACT` y `NOT_RUN_ENV` deben ser estados distintos. Codex es el autor de su QA; su autorrevisión NO equivale a L5 independiente. No llamar 36 tests a 36 oráculos si no se ejecutaron.
-6. **L6 antipingpong:** una lectura focal, implementación completa hasta donde hay contrato, RED→GREEN focal, evidencia y ZIP; no crear un B17-S2 automático ni cerrar todo B17 por una infraestructura que no está disponible. Próximo módulo B18 salvo defecto P0/P1 nuevo, localizado y demostrado.
-7. **Custodia:** preservar los archivos WIP tracked **y untracked**, branch y HEAD; cero stage/commit/push/merge/deploy/instalación remota; ninguna escritura en GitHub, Hostinger o producción. No `git reset`, `git clean`, `git restore`, checkout destructivo ni migraciones de datos reales. Temporales y artefactos creados por ti solo en D:. Credenciales y datos ficticios, sin enviar email ni salud reales.
+0.4 No cambiar la UX aprobada ni categorías de B17. No inventar acceso del contador, salario público, precio Pro, cobro/entitlement, política de edición, contrato de empleado ni tablas financieras nuevas solo para satisfacer un test. Si un contrato falta, documentar gate y construir las partes puras/QA seguras.
 
-## 1. META PRODUCTIVA Y CRITERIO DE FIN DE UNA SOLA EJECUCIÓN
+## 1. OBJETIVO DE PRODUCTO Y DEFINICIÓN DE TERMINADO EN ESTE LOTE
 
-Probar el flujo más completo autorizado con **identidades/empresas/empleados ficticios**:
+Desarrollar **un estimador informativo reproducible, que explica de dónde sale cada cifra**, con seis magnitudes separadas; modalidades `hourly`, `daily` y `monthly_fixed` cuando los datos necesarios existen; entrada expresamente tipada y proveniencia autorizada; periodos y vigencias; cálculo exacto en unidades monetarias menores sin `double/float`; resumen por concepto; exportación protegida donde haya ruta/permiso ya aprobados; vista responsive si el portal B16 y sus permisos existentes permiten hacerlo. Construir en UNA entrega un motor y su presentación segura, no solo un README, pero no publicarlo como nómina definitiva.
 
-`token personal autorizado → vínculo activo empresa/empleado verificado EN SERVIDOR → POST solicitud PENDING con idempotencia → 201/folio público opaco → GET lista/detalle propios → CANCEL propia o NEEDS_CLARIFICATION→PENDING con historial de acciones → revisor solo si tiene permiso COMPROBADO → timeline append-only y 409 para transición inválida → vista Flutter «Mis solicitudes» y estados accesibles → ZIP reproducible`.
+**Vertical de éxito sintético QA:** un caso explícito con 6 horas `RECONOCIDO` + 2 horas `JUSTIFICADO` (sin observación de esas 2 h), acuerdo horario, factor candidato QA definido en fixture y fecha/periodo expresos produce separación correcta de magnitudes y desglose monetario SOLO sobre insumos autorizados de ese caso; se puede volver a calcular y obtener exactamente el mismo resultado/huella. Un insumo exclusivamente `SERVER_STORED/UNASSESSED`, B17 PENDING o ausencia de pacto/reconocimiento/rule pack validable debe producir `UNAVAILABLE` con razones, **no $0 ni una nómina de mentira**. Los componentes de UI/export no mostrarán salario personal fuera de un ámbito autorizado.
 
-**Resultado mínimo honesto si falta permiso de revisor:** el solicitante puede crear, consultar, responder aclaración si existe el estado y cancelar en estados permitidos; el **motor de transiciones queda probado internamente con fixture explícito** pero **NO** se publica un endpoint/admin CTA de approve/reject. Declarar `REVIEW_PERMISSION_GATE=BLOCKED_CONTRACT` y `REVIEW_UI=NOT_EXPOSED`. No inventar que owner/admin puede aprobar; no omitir por ello creación+lectura+historial.
+**Estados de salida separados:** `B18_PURE_ENGINE`, `B18_QA_PREVIEW`, `B18_DB_INTEGRATED`, `B18_WEB_REAL`, `B18_LEGAL_HOMOLOGATION`, `B18_L5_RUNTIME`, `B18_GLOBAL`, `RELEASE`. PASS de pruebas unitarias ≠ homologación jurídica.
 
-**Si la identidad personal o autorización de API falta de verdad:** no crear onboarding ni login de reemplazo, no asociar usuario y empleado por correo/PIN, y **no exponer una ruta insegura**. Implementar el núcleo aislado, modelos y tests con fixtures/host, dejar endpoints públicos fail-closed o no registrados según contrato y `PERSONAL_REQUEST_HTTP=BLOCKED_IDENTITY_CONTRACT`; **nunca etiquetar eso PASS del flujo personal completo**.
+## 2. INVENTARIO RÁPIDO, REUTILIZACIÓN Y DECISIÓN DE ARQUITECTURA (SIN PINGPONG)
 
-### Cinco distinciones de datos obligatorias
+2.1 Una única inspección focal **solo lectura**: `git status --porcelain -uall`, HEAD, baseline hashes; `server/app`, `server/routes`, `server/resources/views`, `server/tests`, `lib/src`, `test`; localizar `PayAgreementVersion`, `CountryRulePack`, `PayEstimateSnapshot`, ledger B03/B08, tipos `recognized`, export CSV B16, planes y permissions ya aprobados. Guardar matriz `REUSE_DECISIONS.md` con ruta/hash, dueño y criterio. **No buscar durante horas ni repetir auditorías históricas**. Mantener 185+ rutas WIP; no asumir que el árbol publicado en GitHub tiene el software.
 
-- `requested_interval` (periodo solicitado) ≠ `justification_decision` (decisión administrativa) ≠ `observed_attendance` (fichada) ≠ `recognized_work_time` (validada) ≠ `vacation_balance` (saldo validado).
-- `APPROVED` significa **aprobación operativa de la solicitud bajo autorización vigente**, NO que EPS emitió incapacidad, NO reconoció un salario ni legalizó la ausencia.
-- `SERVER_STORED/UNASSESSED` nunca acredita que se trabajó ni la identidad física de quien fichó.
-- `vacation_balance` sin ledger aprobado se expresa `UNKNOWN / NO_CONTRATO`, **no cero** y jamás se descuenta desde B17.
-- Cita, urgencia o incapacidad son **categorías declaradas por solicitante**; por defecto no solicitar ni guardar diagnóstico, historia clínica ni archivo de soporte.
+2.2 Orden de decisión: (A) si ya existe motor laboral exacto, ampliarlo en su propietario; (B) si existe núcleo de asistencia pero no salarial, crear un solo servicio puro coherente (recomendación: `server/app/Services/B18/InformationalPayEstimator.php` junto a DTO/enum estrictamente necesarios) reutilizando PHP/Laravel; (C) si el motor puro está ya escrito en Dart y es fuente canónica, reutilizarlo y adaptar pruebas sin un segundo motor. **No dos motores PHP/Dart divergentes, no microservicios, no paquete Composer nuevo, no migración de nómina**. Explicar cuál opción eligió y evidencia. Preferir cambios en 4–10 fuentes de producto si el código lo permite; los tests pueden ser más.
 
-## 2. INVENTARIO FOCAL OBLIGATORIO (UNA VEZ, ≤ UNA SECCIÓN EN EL INFORME)
+2.3 Si B16 portal tiene rutas `auth:web` sin login web real, se puede crear vista/componente Blade y tests con `actingAs` sintético, pero **no exponer enlace/CTA comercial** ni nuevo login. Si un permiso finanzas/contador aprobado NO existe, no registrar rutas reales de estimación privada ni PDF/CSV comercial; conservar vista QA aislada o servicio puro sin ruta. Sin política de payroll, **NO convertir owner/admin en contador universal**. QA exclusivamente ambiente `testing` y flag explícito default OFF para cualquier preview que maneje datos sintéticos. No hace falta fabricar tabla de usuarios, nuevo Sanctum guard o proveedor externo.
 
-1. En `D:\codex\Jornato`, anotar `git rev-parse HEAD`, `git branch --show-current`, `git status --porcelain=v1 -uall`, `git diff --name-status`, `git diff --cached --name-status`, inventario archivos tracked/untracked que vas a tocar y los SHA256 **antes** de modificarlos. Comparar después; no afirmar que `git status` prueba hash de archivos untracked si no los calculaste.
-2. Leer `AGENTS.md`, migraciones/restricciones existentes de `company_memberships`, `companies`, `sites`, `sync_employees`, `employee_identity_links`, `personal_access_tokens` (Sanctum), routes/middleware `auth:sanctum`, `account.active`, `device.active`, abilities, `tenant.company`, tests B15 y clases de Flutter personal/Session. Mirar también `server/routes/web.php` y comprobar que B16 sigue sin login web real.
-3. Buscar **una vez** si ya hay modelos/tablas de solicitudes, ausencias, justificaciones, auditoría, idempotency o balance. Si existe contrato compatible, **reutilizarlo**; registrar columnas y nombres reales. Si no, proceder al mínimo de §3. **Nunca inventar FK `site_id`, clave UUID ni índices que choquen con SQL existente**: adaptar solo tras inspeccionar migraciones de base.
-4. Determinar en `ROUTE_CONTRACT.md` qué middleware y ability EXISTENTES permiten alta/GET de titular; si no están aprobadas, gate cerrado. **No renombrar rutas antiguas ni crear alias** para resolver documentos contradictorios.
-5. Comprobar si hay una **base QA MariaDB aislada ya disponible**, sin crear/iniciar contenedores, sin migrar esquema real de otros módulos. Un `phpunit.xml` con placeholder `127.0.0.1:1` o `.env.testing` inexistente significa que NO debes fingir DB PASS. No repetir diagnosis Docker.
-6. Seleccionar patrón visual real Flutter existente para UI; no modificar kiosco, outbox o PortalController salvo enlace de navegación que esté ya protegido y aprobado. Hacer **implementación**, no detenerse tras el inventario.
+2.4 **No crear una tabla adicional** por costumbre. El reporte puede generarse determinísticamente en memoria con un snapshot DTO estructurado y fuentes/hashes. Persistir sólo si existe un modelo aprobado con migración compatible y test DB real. Si el usuario final exige historial durable, registrar `B18_PERSISTENCE_CONTRACT=PENDING` con lugar previsto, no crear staging de datos sensibles. No leer ni modificar datos reales de empleados. No `migrate:fresh` sobre base compartida.
 
-## 3. CONTRATO DE DATOS — MÍNIMO, PROTEGIDO Y REPRODUCIBLE
+## 3. CONTRATOS DE ENTRADA Y PROVENIENCIA — PROHIBIDO INFERIR HECHOS
 
-### 3.1 Esquema (solo si no hay contrato existente compatible)
+3.1 Contrato de entrada tipada (nombres adaptar a la base actual): `company_id`, `employee_id`/ID se derivan del servidor si hay consulta autenticada; `period.start/end`, `timezone_iana`, `currency_iso_4217`, `agreement_version_ref` con `effectiveFrom/effectiveTo`, `modality`, `base_amount_minor`, `frequency`, `basis_policy_ref`, `recognizedSegments` con `startUTC/endUTC/sourceDecisionRef/provenanceStatus`, `justifiedSegments` con `sourceApprovalRef/status` separado, `scheduleSegments` separado, `rulePack` con `country/version/valid_from/to/approval_status/source_refs`, `calculation_context` con versión del motor, política de redondeo y fuentes. Campos no verificables => `UNAVAILABLE` con motivo concreto.
 
-Crear dos migraciones o una migración agrupada con **solo** dos tablas cohesionadas:
+3.2 Tipo de magnitud obligatorio, sin aliases ambiguos: `PROGRAMADO` ≠ `OBSERVADO` ≠ `JUSTIFICADO` ≠ `RECONOCIDO` ≠ `CLASIFICADO` ≠ `ESTIMADO_MONETARIO`. Regla de frontera: **ninguna** entidad `sync_events`, `server_receipts`, `leave_requests` ni hora de dispositivo se promueve automáticamente a `RECONOCIDO` por entrar a la base. El pack de clasificación requiere regla explícita válida para el tiempo y contrato; si no existe, `CLASIFICADO=UNAVAILABLE`, `ESTIMADO_MONETARIO=UNAVAILABLE`. No «remunerar» ausencias sin política de pago por tipo y país aprobada. El ejemplo de 2 h justificadas solo sirve para mostrar dos columnas distintas, no para sumarlas como trabajadas.
 
-**`leave_requests`**: PK con tipo real según el esquema; `public_id` aleatorio no enumerable si no existe UUID externo previo; `company_id` FK del mismo tenant, `site_id` solo si fuente aprobada de sede, `employee_id` ligado al identificador real de `sync_employees` y con compañía/sede verificadas, `created_by_user_id` derivado de sesión server, `category` del enum existente o candidato de QA, `starts_at`, `ends_at`, offset/timezone reproducible, `reason_summary` breve y opcional, `status`, `version` entero para CAS, `idempotency_key` y `payload_fingerprint`, timestamps. No usar cascada que destruya solicitudes/historial en bajas de usuario/empresa. Restricciones FK/composite únicas solo si columnas, longitudes y tipos reales admiten ese índice; si no, defensas en transacción+pruebas y marcar limitación explícita, **sin declarar FK existente**.
+3.3 Mínimo de seguridad: estado origen `VERIFIED_RECOGNITION` debe contener fuente/actor decisor autorizado, tenant, empleada/o, intervalo no solapado y versión de decisión; `SOURCE_UNVERIFIED`, `CLIENT_DECLARED`, `SERVER_STORED/UNASSESSED`, `PENDING`, `NO_MATCH` no elevan el cálculo. No crear un endpoint POST donde el cliente pueda marcar `recognized=true` o enviar IDs autoritativos de empleados. QA fixtures sintéticos **dentro de test**, sin ruta abierta que reciba un salario de cualquier cuenta.
 
-**`leave_request_events`**: PK real, `request_id` FK restrictiva, `company_id` consistente, `sequence` monotónico por solicitud o versión correlacionada, `transition`, `from_status`, `to_status`, `actor_user_id` derivado del middleware (o actor QA interno etiquetado que NUNCA se expone como humano real), `reason` acotado/neutral, `occurred_at` en reloj servidor y timestamps. El historial es **append-only en la aplicación**; no declarar garantía contra ALTER/DELETE de administradores de base de datos. Evitar `update`/`delete` ordinarios sobre eventos, sin hard-delete, backups reales ni cambios retroactivos. Guardar transiciones atómicamente junto al estado actual.
+3.4 Tratar contratos `hourly`, `daily`, `monthly_fixed` por separado: fijo mensual **no** se divide de oficio por 30/240/horas esperadas; acuerdos diarios **no** se convierten por defecto a tarifa horaria; recargos no se suman dos veces a la base incluida en fijo. Si falta divisor, pacto o política de proporción/hora expresos, devolver `UNAVAILABLE` del concepto afectado y no inventar una regla. Permitir resultado parcial **por concepto** explicando lo calculable y lo no calculable; prohibido declarar total completo cuando faltan componentes obligatorios.
 
-**Privacidad:** no añadir campos `diagnosis`, `medical_history`, `clinical_record` ni ruta de adjuntos, cifrado médico ficticio, storage público o log con motivos completos. Usar categoría neutral, motivo opcional 0–300 caracteres; si alguien escribe un diagnóstico en texto libre, informar/validar límites, evitar enviarlo a logs o exportaciones; **no asegurar que un regex detecta toda información médica**. Para `sick_leave`/`appointment*`, preferir descripción corta preestablecida o vacía por defecto. La política de datos médicos queda sin aprobación, **no incluir archivos adjuntos**.
+3.5 Vigencia: dos acuerdos en el mismo periodo obligan a segmentación explícita por fecha sin reescribir salarios históricos. Jornadas que cruzan medianoche, festivo o zona deben mantener intervalos reales y fuente; funciones de calendario **solo** si pack con zona/fecha aprobado. Nunca inferir descanso contractual igual a domingo. Días/meses semanas y cierres de quincena se definen en los contratos, no en constantes globales inventadas.
 
-**Categorías candidatas QA** (no códigos jurídicos aprobados): `permission`, `appointment_eps`, `appointment_private`, `emergency`, `sick_leave`, `vacation`. Si las categorías aprobadas del checkout son diferentes, reutilizar sus códigos con mapping único documentado y sin enum paralelo.
+## 4. MOTOR DE CÁLCULO — REPRODUCIBLE Y EXPLICABLE
 
-**Modelo de tiempo:** instantes ISO8601 con offset para eventos/solicitudes de horas o pareja fecha+zona IANA según contrato existente; permitir intervalos multidiarios y nocturnos conservando los límites originales. Rechazar `ends_at <= starts_at`, fecha imposible, string sin timezone en modo timestamp o duración irrazonable según regla documentada (no imponer máximo jurídico inventado). No sumar estos periodos a asistencia ni a nómina, no confundir DST con cambio de día.
+4.1 Implementar un único `EstimateResult`/DTO con `status=COMPLETE_SYNTHETIC_QA|PARTIAL|UNAVAILABLE`, `blocks[]` para seis magnitudes, `concepts[]` cada uno `{type, quantity_seconds, amount_minor|null, factor_numerator, factor_denominator, component=BASE|ADDITIONAL, applied_rule_ref, source_refs, warning_codes}`, `totals` solo para bloques íntegros, `contract_versions`, `country_rule_version`, `engine_version`, `rounding_policy_ref`, `input_fingerprint`, `calculated_at`, `blocking_reasons[]`, `is_legal_payroll=false`. Cero `approved`, `paid`, `legally_compliant` inventado. Si no hay snapshot seguro de fuente, `source_refs` no contiene PII ni IDs explotables fuera del tenant.
 
-### 3.2 Identidad y alcance
+4.2 Aritmética exacta: minor units de moneda + duración en **segundos enteros**, factor racional de enteros; sin `float`, redondeo determinista declarado (p.ej. al cierre de concepto, definido por fixture, no como ley). Guardar el resto o razonar medio-centavo y no truncar silenciosamente. Prevención de overflow, denominadores cero y cifras negativas donde prohibidas. Si se usa librería decimal **ya instalada**, no agregar otra. Para 1.25× expresar 5/4 y declarar si representa monto total o adicional; prohibido duplicar salario fijo.
 
-- `company_id` de la ruta o query es **selector**, nunca autoridad. Extraer `user_id` de Sanctum autenticado y `employee_id` de **vínculo activo comprobado del mismo tenant**. Comprobar empresa activa, membership activa y condiciones actuales de empleado/sede, sin asumir que `company_memberships` equivale a un empleo.
-- `employee_id` **nunca procede de un POST personal**: responder 422 a ese campo, sin ignorarlo en silencio. `created_by_user_id`, `actor_user_id`, `actor_role`, `status`, `version`, `public_id` y `company_id` no son sobrescribibles por mass-assignment.
-- GET lista/detalle/acciones con `where company_id` + empleado derivado del vínculo; para revisores solo con policy aprobada que compruebe también sede y operación. 404 sin PII para folio ajeno, 403 para permiso denegado conforme contrato actual. Revocación de vínculo, membership o token debe impedir nuevas operaciones; preservación legal de acceso a históricos se decide por contrato, **no suponer borrado u ocultamiento permanente de derechos del titular**.
-- **No crear** ruta comercial de revisión ni botón web de aprobación cuando falta permiso. Un actor QA de test unitario sirve para comprobar transición **pero no sustituye un permiso de HTTP**. Sin login web real no declarar que el revisor navega comercialmente.
+4.3 Clasificación temporal: no crear `CountryRulePack Colombia legal definitivo`. Crear contrato versionado que permita **inyectar exclusivamente en tests** factores/umbrales explícitos de la fixture con estado `QA_UNVERIFIED`. Ninguna fixture se instala como regla de producción; si no existe pack legalmente homologado, la UI productiva muestra «No disponible — requiere reglas verificadas». Si se encuentra un pack de Colombia aprobado previamente con SHA, autoridad y fecha, reutilizarlo sin editar números, y probar vigencias. No copiar tarifas de la memoria del modelo ni de Internet sin aprobación del propietario y revisión profesional.
 
-### 3.3 Idempotencia de altas y concurrencia
+4.4 Validador central: intervalos ISO RFC3339 con offset y timezone IANA del acuerdo/empresa; conversión UTC sin sumar/descontar horas DST al azar. Orden, duración > 0, no solape de segmentos reconocidos, gaps trazables, límites explícitos técnicos; errores `INVALID_*` no se convierten en 0. Dos empresas nunca se mezclan en un estimador. No almacenar payloads médicos ni tokens. Si la fuente cambia, nuevo fingerprint/version; no reescribir un informe previo como si fuera igual.
 
-- Al crear, exigir/validar `Idempotency-Key` UUID/valor opaco acotado (p. ej. 16–128 caracteres), **por usuario+empresa**. Guardar índice UNIQUE **real** para `(company_id, created_by_user_id, idempotency_key)` si las columnas/tipos lo permiten; el fingerprint incluirá **todos los datos normalizados que afectan negocio**, incluyendo el `employee_id` resuelto y la categoría, el rango con offset, la sede y el motivo. Excluir tokens y campos derivados no relevantes.
-- Construir payload canónico ordenando explícitamente sus claves antes de SHA256 para que distinto orden JSON no produzca distintas huellas. Comparar la misma key+misma huella después de validar tenant/identidad y devolver **mismo folio**, sin insertar solicitud ni evento extra (`200`); misma key+huella diferente ⇒ `409` sin mutaciones. El primer alta devuelve `201` y **un único** evento `submitted`.
-- Hacer creación+historial **en UNA transacción**. Con peticiones simultáneas, confiar en UNIQUE real o bloqueo atómico; si una inserción choca, consultar la fila previa scoped dentro de la resolución y comparar fingerprint, **sin duplicar evento**. SQL de error duplicado se captura **solo** para constraint esperado, no silenciar fallos ajenos. Evitar reintentos ilimitados y `sleep` arbitrario.
-- Las transiciones `PENDING → ...` usan transacción `lockForUpdate` o CAS de `version` más append del evento **antes del commit**. Dos decisiones concurrentes ⇒ una gana, la otra 409 sin evento terminal duplicado. La prueba de concurrencia **real** solo es PASS si corren dos conexiones separadas en MariaDB QA. Dos calls seriales son test de estado, no de carrera.
+4.5 Desglose obligatorio de ejemplo QA:
+- Programado: 8 h, fuente de turno sintético; observado: 6 h, fuente sintética fiable; justificado: 2 h (aprobación QA sintética); reconocido: **6 h**; clasificado: 6 h «ordinarias de fixture» (si existe regla QA explícita); monetario: 6 h × valor horario pactado × factor QA explícito; las 2 h justificadas aparecen APARTE sin automatismo de pago.
+- Con solo `SERVER_STORED/UNASSESSED`: reconocido, clasificado y total monetario **UNAVAILABLE** (no 0), con causa `SOURCE_NOT_RECOGNIZED`.
+- Con salario fijo y ausencia de `basis_policy_ref` o pack: no inventar prorrateo/recargos; `PARTIAL/UNAVAILABLE` con motivo.
 
-### 3.4 Estados y máquina pequeña, sin motor paralelo
+## 5. PRESENTACIÓN MÍNIMA DE PRODUCTO — SIN PANTALLA FICTICIA
 
-| Estado actual | Acción | Actor autorizado | Estado siguiente | Efecto permitido |
-|---|---|---|---|---|
-| sin solicitud | `submit` | titular vinculado (QA) | `PENDING` | registro y evento `submitted` |
-| `PENDING` | `request_clarification` | revisor con policy real | `NEEDS_CLARIFICATION` | evento+motivo (sin diagnóstico) |
-| `NEEDS_CLARIFICATION` | `answer_clarification` | titular de la solicitud | `PENDING` | evento de respuesta, sin borrar el anterior |
-| `PENDING` | `approve` | revisor con policy real | `APPROVED` | decisión operativa; NO nómina/saldo/horas |
-| `PENDING` | `reject` | revisor con policy real | `REJECTED` | motivo breve y auditable |
-| `PENDING` o `NEEDS_CLARIFICATION` | `cancel` | titular de la solicitud | `CANCELLED` | evento; no borrado |
-| `APPROVED`, `REJECTED`, `CANCELLED` | cualquier transición | ninguno | `409` | NO mutación |
+5.1 Reutilizar la estructura web B16 y componentes responsive **si son compatibles con UX aprobada**; no añadir otra SPA. Crear panel de solo lectura «Cierre informativo (QA)» con los seis bloques, desglose de conceptos, fuentes, estado y advertencias, dos ejemplos sintéticos de pruebas accesibles SOLO a test/fixtures; no inyectar datos sintéticos en la aplicación productiva. Si `WEB_LOGIN_REAL=BLOCKED_CONTRACT`, NO mostrar CTA público ni afirmar navegación comercial. Si la infraestructura web no compila, continuar servicio de dominio y vista widget/Blade validada con test host, gate explicitado.
 
-**Error material corregido de V1:** el oráculo O18 NO puede pedir respuesta a aclaración estando en `PENDING`. El flujo correcto exige `NEEDS_CLARIFICATION → PENDING` por el titular; estados `from/to` deben coincidir con la fila histórica y el estado final. Si hay otra máquina aprobada en checkout, respetarla y documentar el único mapping, no imponer esta tabla candidata sobre un contrato ya fijado.
+5.2 Si ya existe ruta/permiso **aprobado** de finanzas e informe, integrar lectura a fuente autorizada del tenant y exportar reutilizando CSV B16 con saneamiento anti formula, separación de datos y permisos; si no, NO registrar endpoint de reporte real ni inventar `finance:read`. Una exportación sin permiso comercial solo se testea con fixture sintética y nunca se expone en producción. CSV que exporta `UNAVAILABLE` muestra esa palabra y causa, jamás COP 0. No PDF/firma/descarga salarial pública.
 
-## 4. CONTRATOS HTTP Y FLUTTER — IMPLEMENTAR UN VERTICAL, NO UNA DEMO
+5.3 En tabla por conceptos distinguir «base incluida» de «recargo adicional». Fecha/huso y método de cálculo legibles; advertencia visible permanente **«Estimación informativa; no constituye nómina ni liquidación legal»** para salida QA. Accesibilidad: labels reales, contraste y teclado en interfaz existente, mensajes no ocultos por color, móvil/tablet/web razonable. El input QA no pedirá nombre/identificación real ni diagnósticos B17.
 
-### Backend: rutas personal Sanctum según convención real
+## 6. PLAN DE EJECUCIÓN ÚNICO — CODIFICAR, PROBAR, EMPAQUETAR
 
-**Rutas candidatas** únicamente si no hay equivalentes aprobadas; insertar bajo el mismo grupo `auth:sanctum`, `account.active`, `device.active`, ability adecuada y `tenant.company` que usa el GET personal:
+**G0 / Custodia de 1 pasada:** registrar HEAD/branch, `git status --porcelain -uall`, lista/hashes de todos los archivos WIP (incluidos untracked y `.salive`) y código propietario relevante. NO stage ni tocar untracked ajeno. Detectar cambios paralelos del propietario por SHA; si existe conflicto, no sobrescribir, trabajar en copia aislada y reportar. Un solo inventario y una sola matriz de reutilización.
 
-- `POST /api/v1/companies/{company}/me/requests` → `201` nueva, `200` replay, `409` key conflict, `422` invalid.
-- `GET /api/v1/companies/{company}/me/requests` → paginado acotado, orden estable, sin PII ajena, headers `private, no-store`.
-- `GET /api/v1/companies/{company}/me/requests/{request}` → propia; ID ajeno 404, timeline mínimo para titular.
-- `POST /api/v1/companies/{company}/me/requests/{request}/cancel` → cancelación propia legal del estado o 409.
-- `POST /api/v1/companies/{company}/me/requests/{request}/clarification` → **solo** cuando el estado y contrato admiten la respuesta del titular.
-- `GET /api/v1/companies/{company}/requests`, `POST .../{request}/decision` **SOLO** si existe permiso de revisor con evidencia aprobada y middleware probado; si no existe, NO registrar rutas comerciales de revisión.
+**G1 / Contrato e implementación:** implementar fuente `server/app/Services/B18/*` o propietario equivalente ya existente; motor puro, DTO y validador; contrato de regla inyectable por QA. No añadir API pública, tabla nueva, servicio externo o wrapper genérico solo para obtener `PASS`. Incluir tratamiento de límites y errores.
 
-**Exposición por ambiente:** no abrir enrolamiento ni rutas de demo públicas. Si el acceso laboral está autorizado **únicamente mediante fixtures QA** y no hay contrato productivo de vínculo, impedir activación comercial de **nuevos endpoints de solicitud** fuera del ambiente seguro `testing` mediante gate default-deny **sin desactivar rutas/autoridad preexistentes**. Esto es un estado provisional documentado, NO un permiso comercial. Si un contrato ya aprobado prescribe otro gate, conservarlo y justificarlo con la fuente. `testing` por sí solo NO autoriza usar usuarios/empresas reales.
+**G2 / Presentación:** integrar parcial B16 de forma segura si hay `auth:web`/permission aprobada y renderer existente; de lo contrario vista/presentador testable en host sin ruta accesible comercialmente. Mantener interfaz y mensajes honestos, CSV focal reutilizado únicamente si hay un scope autorizado. No tocar Flutter de B17 salvo que contrato existente ya habilite reporte por trabajador y sea seguro.
 
-**Implementación:** reutilizar FormRequest/validación, Eloquent/query builder y policies/middleware reales. Una clase pequeña focal para transiciones e idempotencia cuando efectivamente la comparten acciones; si la lógica cabe coherentemente en el propietario existente, no crear clase adicional. No añadir almacén paralelo, queue, tabla de outbox, notificaciones reales, migraciones destructivas o rutas públicas. Asegurar no-store en detalles y listados.
+**G3 / Tests focales:** ejecutar unit tests puros y un renderer test en herramientas realmente disponibles; un RED opcional *solo si hay defecto reproducible*; GREEN. En caso de necesitar DB con QA aislada existente, permitir una ejecución kernel focal sintética; si no, `DB_REAL=NOT_RUN_ENV` y no arrancar Docker compartido. No repetir B13-B17 suites masivas; máximo regresiones vecinas por dependencia modificada. No declarar `L5_INDEPENDENT_RUNTIME=PASS` por la autorrevisión de Codex. Si compila aquí, guardar stdout, stderr y código de salida auténticos, no texto inventado.
 
-### Flutter personal: una pantalla útil, no otro login
+**G4 / Seguridad y oráculos:** verificar todos los oráculos abajo con estados `PASS_EXECUTED`, `PASS_STATIC`, `BLOCKED_CONTRACT`, `NOT_RUN_ENV`, `FAIL` y `NOT_APPLICABLE_WITH_REASON`; para cada uno fuente SHA y log/resultado. Solo `PASS_EXECUTED` cuando test realmente se corrió. Ningún PASS de remuneración legal sin aprobación de regla. Versiones de paquetes, país, periodo y contrato explícitas.
 
-- Integrar `Mis solicitudes` en la navegación personal **ya existente** sin tocar PIN del kiosco. Reutilizar `PersonalSessionController`, identidad, bearer token en memoria y transporte HTTP con límite corregido por S5; sin cache personal persistente ni nuevo package.
-- Crear/consultar con estados visuales: vacío, carga, folio `PENDING`, `NEEDS_CLARIFICATION`, decidido, cancelado, 401, 403, 422, 409 y error/red. **Solo mostrar «Enviada» tras 201 o replay 200 válidos del backend**. Un timeout no autoriza asumir fracaso o repetir con **otra key**: conservar key en memoria para reintento de **la misma acción**; si no existe outbox durable, no mostrar «en cola» ni «se enviará cuando haya conexión».
-- Protección A→B: invalidar operación/respuesta de la sesión anterior si cambia token, usuario o empresa; evitar que respuesta tardía, detalles, errores, motivo o folio de A aparezcan en B. Logout limpia datos y no transforma host fake en revocación remota probada.
-- Motivos breves y no obligatorios; para citas/incapacidades pedir solo datos de horario/periodo y categoría, sin diagnóstico. No añadir uploads ni selectors de saldo desconocido. Mantener etiquetas/semántica del proyecto si hay UX aprobado; si no, prototipo QA candidato.
-- Portal B16: sin login web real ni permiso de revisor aprobado, NO añadir enlace que prometa aprobación navegable; no modificar Hoy/Sedes/Turnos/CSV por B17. Si existe guard/policy de revisión aprobados, solo un enlace focal a listados protegidos; si no, `PORTAL_REVIEW_UI=BLOCKED_CONTRACT`.
+**G5 / Parche reproducible y ZIP:** registrar hashes pre/post de fuentes touched, baselines byte exactos y marcadores `ABSENT_PRE_B18` para nuevas fuentes; elaborar un patch 1:1 que pase `git apply --check` / dry-run y replay en **copia aislada**. Empaquetar informes, logs y patch, no duplicar fuentes sin justificación. Validar CRC, manifest SHA256/tamaño de TODOS los miembros salvo propio manifiesto, ruta no absoluta ni `..`, reextracción muestras; no secretos, PII, certificados, `.env` ni datos de empresa. El único ZIP queda en la ruta acordada.
 
-## 5. SECUENCIA DE TRABAJO, EN UN SOLO MACROBLOQUE
+**G6 / FINAL:** informar `TASK_ID`, `HEAD_PRE/POST`, `WIP_BASE/FINAL`, `CHANGED`, `NEW`, `STAGED=0`, gates puros/QA/DB/web/legal/L5, `ZIP_SHA256`, `NEXT_OWNER=CHATGPT`, `RELEASE_APPROVED=NO`. NO prometer entregar luego. No pedir permiso para otro prompt o diagnóstico. Tras B18 el director adjudicará el ZIP e iniciará B19; las reglas legales reales se homologarán en B21/experto jurídico, sin bloquear construcción segura de B18.
 
-**F0 — Custodia y fuente real (una vez).** Capturar estado git/sha y prebytes de **cada archivo** a modificar bajo D:. No modificar nada antes de registrar baselines propios. Registrar `BASELINES/ABSENT_PRE_B17` para nuevos archivos sin fingir un preestado vacío como fuente existente. Comprobar schema real. Un archivo WIP modificado por otro autor no se descarta.
+## 7. MATRIZ DE 40 ORÁCULOS FALSABLES (NO ASUMIR TODOS PASS)
 
-**F1 — Motor y DB.** Extender esquema existente o crear las dos tablas si ninguna compatible; implementar resolver identidad/tenant y estado+historial atómico, idempotency. Si no hay DB real, generar migración/tests unit host y marcar `PASS_DB_REAL=NO`; no llenar DB simulada y llamarla persistencia probada.
+Cada oráculo debe aparecer en `TEST_MATRIX.csv` como una sola fila: ID, esperado, ámbito, comando, exit, evidencia, SHA de fuente, resultado, límite. **Nunca fabricar pruebas.**
 
-**F2 — API protegida.** Exponer solo acciones propias con middleware y gate de entorno según §4. 401/403/404/409/422 reales, respuesta minimal JSON, pagination/orden/no-store. La API no contiene un permiso de revisor inventado.
-
-**F3 — Flutter integrado.** Pantalla de listado/alta, cancelación y respuesta aclaración cuando esté permitida, cliente tipado, fixtures de widget y A→B, sin paquetes ni caché paralela. Si falta contrato de sesión, terminar el componente host con integración gate fail-closed, no sustituir el login por fake.
-
-**F4 — Tests focales RED→GREEN.** Reproducir el defecto real cuando hay código previo (scoping, duplicado o transición); si se trata de funcionalidad nueva, RED=`MISSING_FEATURE_EXPECTED` en vez de etiquetarla regresión. Ejecutar pruebas focales y adyacentes necesarias, guardar salida y exit exactos. Nada de B14 1000, suites globales ni Android/AVD/Docker por rutina.
-
-**F5 — QA condicionada por ambiente.** Si MariaDB QA **aislada** existente permite migraciones sintéticas, usarla para doble conexión y rollback; si no `DB_QA=NOT_RUN_ENV`. PHPUnit host con fakes/mocks se registra como `PASS_HOST_MOCKED`, jamás `PASS_DB_REAL`. Flutter widget PASS host ≠ Android. NO ejecutar experimentos sobre DB de producción/otros proyectos.
-
-**F6 — Custodia final + ZIP.** Verificar branch, HEAD, staged, inventario tracked/untracked+hashes de archivos tocados. Reproducir parche en copia aislada y validar SHA de fuentes reconstruidas. Sanear secretos/PII **antes** del ZIP sin alterar el WIP protegido. Entregar una sola salida, no un diagnóstico parcial.
-
-## 6. 36 ORÁCULOS MANTENIDOS (CORREGIDOS), CADA UNO CON VEREDICTO REAL
-
-Crear `TEST_MATRIX.csv` con O01–O36; columnas `id,esperado,ambiente,command,exit,source_SHA256,evidence,result,limit`. Resultado SOLO `PASS_STATIC`, `PASS_UNIT`, `PASS_HOST_MOCKED`, `PASS_HOST_WIDGET`, `PASS_DB_REAL`, `PASS_HTTP_KERNEL`, `PASS_BROWSER`, `BLOCKED_CONTRACT`, `NOT_RUN_ENV`, `FAIL`, `NOT_APPLICABLE_JUSTIFIED`. Para decir PASS citar log+exit+hash; una inspección no es una prueba de backend.
-
-### O01–O08 — Autorización/tenancy
-
-- **O01** Anónimo GET/POST requests → rechazo conforme contrato (401 JSON), sin PII.
-- **O02** Token Sanctum sin ability necesaria o revocado → rechazo sin payload personal.
-- **O03** Titular A de empresa X crea/lee solo `employee_identity_links` activo y scope X, nunca B.
-- **O04** Payload personal con `employee_id`, `company_id` o `actor_user_id` inyectado → 422; no cambia sujeto.
-- **O05** Revocado vínculo, usuario inactivo o empresa inactiva → bloqueo de nuevas operaciones; lectura histórica según contrato existente, sin asumir borrado de derechos.
-- **O06** Membership simple sin vínculo personal no crea ni lee datos como empleado.
-- **O07** Owner/admin sin permiso HR explícito NO puede aprobar/rechazar (ni usar endpoint comercial).
-- **O08** Cambiar de usuario/empresa A→B no expone lista, timeline, motivo, token, folio ni errores de A.
-
-### O09–O16 — Altas/lectura/idempotencia
-
-- **O09** POST válido → exactamente una solicitud PENDING y un evento submitted, folio opaco, 201; IDs y actor del servidor.
-- **O10** Misma Idempotency-Key + payload semánticamente igual en diferente orden JSON → mismo folio 200, **sin** segundo evento.
-- **O11** Misma key + categoría, rango, empleado resuelto o motivo distintos → 409 sin mutaciones ni fuga de datos.
-- **O12** Fechas invertidas, timezone ambiguo, tipo/longitud inválidos → 422 y 0 escrituras.
-- **O13** Solicitud nocturna/multidía conserva instantes/offset, sin construir horas fichadas.
-- **O14** Categoría no permitida o razón > 300 → 422 sin poner entradas médicas en logs.
-- **O15** GET lista paginada, detalle e historial para titular, no para otro empleado, orden estable.
-- **O16** GET/login/replay de idempotencia no modifica historial, asistencia ni outbox B14.
-
-### O17–O24 — Transiciones, atomicidad y concurrencia
-
-- **O17** Revisor **con policy aprobada o fixture interno NO HTTP**: PENDING→NEEDS_CLARIFICATION con evento+motivo.
-- **O18 CORREGIDO** Titular responde **desde NEEDS_CLARIFICATION hacia PENDING** y agrega evento `clarification_answered`; desde PENDING sin aclaración pendiente → 409.
-- **O19** PENDING→APPROVED solo revisor aprobado o actor QA interno; no sobrescribe `submitted` ni descuenta saldo.
-- **O20** PENDING→REJECTED con motivo breve y actor apropiado; asistencia intacta.
-- **O21** PENDING/NEEDS_CLARIFICATION→CANCELLED por titular; estados terminales bloqueados.
-- **O22** Doble aprobación, cancel después de decisión o reintento de transición terminal → 409 sin evento duplicado.
-- **O23** Carrera 2 conexiones MariaDB (mismo estado esperado) → una sola decisión, otra 409; **NOT_RUN_ENV** sin dos conexiones reales.
-- **O24** Error forzado entre actualización de estado y append histórico → rollback de ambos en transacción real; mocks/SQLite no equivalen a MariaDB.
-
-### O25–O30 — Derechos, privacidad y límites
-
-- **O25** 6 horas observadas + 2 justificadas NO aparecen como 8 fichadas; los objetos permanecen separados.
-- **O26** Sin ledger homologado, saldo vacaciones=UNKNOWN, nunca cero/descuento automático.
-- **O27** Aprobar permiso no muta sueldos, nómina, `sync_events`, attendance, turnos ni calendario.
-- **O28** Diagnóstico/soporte clínico NO requerido; motivos limitados; respuesta y logs ajenos no filtran contenido médico.
-- **O29** No existen rutas de adjuntos públicos o uploads ficticios sin storage privado+permiso probado.
-- **O30** A no extrae de B solicitud/actor/sede/motivo mediante URL, paginado, mensaje o respuesta de error.
-
-### O31–O34 — UI personal y acceso web
-
-- **O31** Flutter personal: vacío, carga, envío confirmado, error, offline, 401/403/409/422 y retry con **misma key** en timeout; sin cola falsa.
-- **O32** A→B y logout descartan respuestas tardías y todo dato de A, sin leaks en widgets.
-- **O33** Portal B16 no muestra CTA de aprobación comercial sin guard web real + policy HR aprobada; no bypass auth:web.
-- **O34** Semántica/teclado/labels/foco/responsive host comprobables; Android/navegador real NOT_RUN si no se ejecutan.
-
-### O35–O36 — Custodia y paquete
-
-- **O35** Branch/HEAD sin cambios, staged=0, WIP tracked/untracked preservado salvo modificaciones B17 autorizadas; temporales propios D:.
-- **O36** Un solo ZIP con manifest SHA+bytes, CRC/extracción, patch + baselines, fuentes exactas, reportes y logs genuinos sin secretos; `NEXT_OWNER=CHATGPT`.
-
-**Regla de aceptación:** `B17=PASS_QA_FUNCTIONAL_SCOPED` requiere creación+lectura propia+historial+operaciones de titular probadas efectivamente en entorno compatible, y ninguna fuga. Si DB real no se ejecuta, clasificar `B17=PARTIAL_HOST_OR_CONTRACT` salvo alcance host claramente definido. La suite del autor no demuestra L5 independiente. Un módulo de vacaciones sin ledger real nunca se declara completo ni jurídicamente homologado.
-
-## 7. REPORTES DENTRO DE ZIP (UN ÚNICO ENTREGABLE)
-
-El ZIP deberá incluir:
-
-- `FINAL_REPORT.md`: cambios por ruta, autoría, estado de cada flujo, gates, errores, próximo bloque B18, `NEXT_OWNER=CHATGPT`.
-- `CONTRACT_MATRIX.md`/`ROUTE_CONTRACT.md`: qué nombres del prompt eran candidatos, cuáles contratos y schema reales usaste; 401/403/404/409/422 por ruta, DTO, política, version/tenancy, UX flags.
-- `SOURCE_CHANGE_MATRIX.csv`: archivo previo, origen tracked/untracked, hash real pre, hash post, razón, oráculos y pruebas.
-- `SOURCES/` con **todos** los archivos nuevos/modificados; `BASELINES/` con bytes pre-reales de los existentes y `ABSENT_PRE_B17/` para nuevos, sin obviar archivos originalmente untracked.
-- `PATCH_CANDIDATE.diff` reproducible con `dry-run` y `apply` en un **checkout/copias aisladas**, 1:1 con `SOURCES`; para nuevas fuentes untracked usar unified diff `- /dev/null`, sin `git add -N`/stage en el WIP.
-- `TEST_MATRIX.csv` O01–O36 y logs originales de RED, GREEN, lint, `route:list` y Flutter focal con comandos y `EXIT_CODE`, o bloqueo exacto.
-- `AUDIT_L1_L6_10_PASSES.md` diez autorrevisiones × seis leyes, con observación, contraejemplo, corrección y límite; NO afirmar revisión independiente de Codex.
-- `ENV_GATES.md`, `GIT_CUSTODY.md`, `SOURCE_HASHES_PRE_POST.csv`, `NEXT_GATE.md`, `MANIFEST_SHA256.txt`, y logs focales mínimos. ZIP sin `.env`, credenciales, tokens, PII, diagnósticos, dumps, claves, reportes de otro proyecto.
-- Cerrar ZIP y comprobar member count, rutas relativas, duplicados, CRC, extracción de muestras, SHA256 **y tamaños 100%**, incluyendo artefacto `PATCH_CANDIDATE.diff`; no inventar auto-hash del manifest ni del ZIP adentro. Reportar hash externo y ruta única.
-
-**No solicitar infraestructura nueva para declarar QA:** si no hay MariaDB disponible, entregar motor y UI probados en host, declarar límites y continuar. Prohibido iniciar Docker compartido. No tocar las 185 entradas del WIP fuera de los archivos estrictamente necesarios (el número actual debe verificarse de nuevo en D:, no asumirlo).
-
-## 8. ALGORITMO DE DECISIÓN Y CIERRE SIN PINGPONG
-
-1. **¿Ya existe contrato de solicitudes?** Sí → adaptar/reutilizar y no migrar duplicado. No → crear máximo las dos tablas conforme schema real.
-2. **¿Existe auth personal con vínculo permitido?** Sí para QA → API y Flutter funcional sintético. No → código de dominio y pantalla host segura, endpoints fail-closed; explicar `BLOCKED_IDENTITY_CONTRACT`, **no alterar B13**.
-3. **¿Existe autorización real para revisor?** Sí → rutas y transición aprobadas con pruebas. No → motor interno testable, sin endpoints/CTA admin, `BLOCKED_REVIEW_PERMISSION_CONTRACT`.
-4. **¿Existe MariaDB QA aislada?** Sí → ejecutar migración+concurrencia+rollback focales con datos ficticios. No → `DB_REAL_NOT_RUN_ENV`, no contenedores nuevos ni renunciar a todo B17.
-5. **¿Existe frontend personal seguro?** Sí → implementar pantalla/UI y host tests. No → cliente/DTO host protegido, no crear un login secundario.
-6. **¿Ha aparecido un P0/P1 reproducible nuevo?** Documentar causa, bloquear solo la operación insegura, no inventar solución, entregar ZIP con código seguro parcial. Si NO → entregar ZIP y pasar la dirección a ChatGPT y luego B18; no autogenerar S2 ni pedir otra auditoría de prompt.
-
-## 9. FORMATO FINAL QUE DEBE RESPONDER CODEX
-
-Una sola línea de estado y **una ruta ZIP** (no reportes desperdigados):
-
-`TASK_ID=JOR-B17-S1-V2-REQUESTS-SECURE-LEDGER-ONEBATCH-20261113 | B17=... | PERSONAL_REQUEST_HTTP=... | REVIEW_PERMISSION_GATE=... | HISTORY_ATOMIC=... | IDEMPOTENCY=... | DB_REAL=... | FLUTTER_HOST=... | L5_INDEPENDENT_RUNTIME=NOT_RUN | WIP_PRESERVED=... | ZIP_SHA256=... | NEXT_OWNER=CHATGPT | RELEASE_APPROVED=NO`
-
-**FIN DE LA ÚNICA ORDEN. EJECUTAR AHORA. NO ENTREGAR PRE-REPORTE SIN CÓDIGO NI CAMBIAR DE TECNOLOGÍA.**
+**Identidad y fuentes (O01–O08)**
+- O01: seis magnitudes tipadas distintas; ningún campo `totalHours` ambiguo.
+- O02: B14 `SERVER_STORED/UNASSESSED` no eleva RECONOCIDO.
+- O03: B17 solicitud PENDING/APROBADA no eleva OBSERVADO ni RECONOCIDO automáticamente.
+- O04: falta fuente `RECONOCIDO` devuelve UNAVAILABLE, no cero.
+- O05: `company_id` y empleado no se aceptan como autoridad de cliente.
+- O06: A/B interempresa no comparten fuentes en memoria, DTO ni CSV.
+- O07: fuente/reconocimiento con versión cambia fingerprint de entrada y resultado.
+- O08: los DTO no contienen salud, PAT, PIN, GPS bruto ni PII no necesaria.
+
+**Matemática y modalidades (O09–O18)**
+- O09: horario por 6 h × factor QA explícito produce unidades menores exactas.
+- O10: 6 h RECONOCIDO + 2 h JUSTIFICADO ≠ 8 h trabajadas.
+- O11: fijo mensual no se prorratea con un divisor implícito.
+- O12: por día no se convierte a por hora sin base contractual explícita.
+- O13: no duplicación BASE y ADDITIONAL en mismo concepto.
+- O14: factor racional con centavos y redondeo documentado reproducible.
+- O15: números negativos/overflow/denominador 0 se rechazan.
+- O16: acuerdo cambia a mitad de periodo: segmentación por vigencias.
+- O17: cálculo repetido con mismas fuentes/versiones produce mismo importe y huella.
+- O18: diferencia explícita entre ingreso parcial y total completo.
+
+**Calendario y normativa (O19–O26)**
+- O19: timezone+offset RFC3339 y UTC válidos preservan duración real.
+- O20: cruce de medianoche no crea horas extra por algoritmo.
+- O21: DST/offset inconsistente es error, no salario silenciosamente distinto.
+- O22: intervalos reconocidos solapados no se cuentan dos veces.
+- O23: pack país/version sin aprobación da LEGAL_HOMOLOGATION=BLOCKED.
+- O24: país sin pack vigente: conceptos afectados UNAVAILABLE.
+- O25: descanso contractual distinto de domingo no se asume.
+- O26: no hay festivos/recargos/umbral semanal hardcoded sin fuente vigente.
+
+**Producto y privacidad (O27–O34)**
+- O27: panel QA separa seis magnitudes y muestra causas de UNAVAILABLE.
+- O28: no hay ruta pública, permisos ficticios ni auth paralela.
+- O29: advertencia «no es nómina» visible en vista de QA.
+- O30: CSV sintético prueba neutralización de fórmulas + UTF-8 (si se habilita).
+- O31: ausencias justificadas no son presencia ni pago por defecto.
+- O32: ingresos/estimación real no accesibles por otro tenant/empleado.
+- O33: HTML/Blade seguro contra escaping de razones/reglas.
+- O34: estado B16 sin login web sigue BLOCKED, no comercial navegable.
+
+**Custodia y QA (O35–O40)**
+- O35: HEAD/branch y WIP original intactos salvo fuentes autorizadas.
+- O36: baselines, marcadores y patch reproducen postestado byte exacto.
+- O37: unit/domain realmente ejecutados (con exit y logs) o NOT_RUN_ENV.
+- O38: DB/navegador/Flutter/L5 estados separados, sin falsos PASS.
+- O39: manifest, CRC, SHA externo y seguridad ZIP PASS reales.
+- O40: solo un ZIP, RELEASE=NO, NEXT_OWNER=CHATGPT y sin stage/commit/push/merge/deploy.
+
+## 8. AUTOAUDITORÍA OBLIGATORIA DE CODEX — 10 PASADAS × 6 LEYES, NO 60 TESTS
+
+En `AUDIT_L1_L6_10_PASSES.md` escribir **diez** pasadas, cada una con L1–L6 y cuatro aspectos por ley: observación, contraejemplo, corrección concreta y límite. No copiar la misma frase 60 veces. Pasadas: (1) fuentes/versiones, (2) reutilización de motor, (3) separación magnitudes, (4) base/recargos, (5) precisión matemática, (6) zonas/periodos, (7) permisos, (8) UX/CSV, (9) QA genuina y WIP, (10) finalización/gates. Si un test no corre, mantener `NOT_RUN`; el propio ejecutor NO satisface L5 independiente.
+
+## 9. CONTENIDO OBLIGATORIO DEL ZIP ÚNICO
+
+- `FINAL_REPORT.md`: resultado, fallos/limitaciones, qué hace el usuario con el bloque B18, próxima dirección B19.
+- `SOURCE_CHANGE_MATRIX.csv`, `SOURCE_HASHES_PRE_POST.csv`: origen, porqué, baseline y SHA de cada fuente.
+- `BASELINES/**`, `ABSENT_PRE_B18/**` y `SOURCES/**` de todos los archivos modificados/creados; no incluir WIP ajeno en ZIP sin necesidad (solo hashes/inventario).
+- `PATCH_CANDIDATE.diff`, `LOGS/patch-replay-final.txt`; `MANIFEST_SHA256.txt` sin auto-hash circular.
+- `CONTRACT_MATRIX.md`: jerarquía B03/B17/B18, 6 magnitudes, modalidades, norma versionada/NO_GO, permisos.
+- `TEST_MATRIX.csv` 40 oráculos, `LOGS/*.txt` reales con comando+exit y versión; `ENV_GATES.md`.
+- `AUDIT_L1_L6_10_PASSES.md` + `NEXT_GATE.md` + `GIT_CUSTODY.md`.
+- Validación externa SHA256 y número de miembros del ZIP; nunca ocultar NOT_RUN.
+
+## 10. PLAN DE LLEGADA A JORNATO COMERCIAL (SIN RESETEAR LOS GATES)
+
+1. **B18 ahora:** cerrar un núcleo informativo técnicamente correcto con QA y fuente de cálculo versionada; sin reglas legales sin homologar.
+2. **B19:** documentos/expedientes/plantillas y entrega privada; firmas reales solo con proveedor y consentimiento aprobados, no SHA= firma.
+3. **B20:** reclutamiento, CV seguros, entrevistas y transición autorizada candidato→empleado.
+4. **B21:** integración sistemática en mismo SHA/build de login/signup/legal B13; outbox y reconocimiento B14; dispositivo/Flutter B15; portal B16; permisos B17; motor B18 con revisor laboral/contable; documentos B19; ATS B20; dispositivos reales, pruebas negativas y seguridad. No completar en un único fake PASS.
+5. **B22:** go/no-go escrito del propietario tras B21, planes/tarifas/políticas/términos aprobados, publicación/rollback/soporte. No lanzar ni cobrar antes.
+
+**FINAL: NEXT_OWNER=CODEX_LUNA HASTA DEVOLVER EL ZIP; DESPUÉS NEXT_OWNER=CHATGPT.** No se permite abrir por rutina B18-S2 ni exigir otro prompt para avanzar. Apliques estas instrucciones y entrega resultados reales, parciales si el entorno lo requiere; nunca pases gates no ejecutados.
