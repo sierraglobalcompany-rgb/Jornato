@@ -1,291 +1,398 @@
-# JORNATO — DICTAMEN FORENSE B17-S1 V2 Y PLAN MACROBLOQUE B18
-**Fecha:** 2026-11-13/14 UTC; referencia operativa Colombia. **Director:** ChatGPT. **Ejecutor siguiente:** Codex Luna. **Tipo:** análisis independiente de contenido/paquete más 20 pasadas documentales; NO QA integral.
+# JORNATO — AUDITORÍA B18-S1: 10 VERDUGO + 10 JUEZ (120 JUICIOS) Y ORDEN V2 FINAL
 
-## 1. Hechos comprobados directamente
+**Fecha:** 2026-11-14 (America/Bogota). **Director:** ChatGPT. **Ejecutor siguiente:** Codex Luna. **Objeto:** SOLO PROMPT B18-S1 y coherencia con contratos de dominio; NO nueva auditoría de B13–B17.
 
-| Control | Evidencia real y resultado |
+**Material comprobado directamente en esta auditoría:**
+- Orden original B18 V1: `CODEX_LUNA_JORNATO_B18_S1_V1_MACROBLOQUE_MOTOR_LABORAL_INFORMATIVO_SIN_NOMINA_ZIP_UNICO_20261113.md`; SHA256 `dccd9eb54b61a145b9b106a5b644fdc85dd9a285c53c0e0d7858bb7906bf8658`, 24970 bytes, 166 líneas. Se leyó su texto completo, incluida matriz O01–O40.
+- Orden B18 V2 corregida: `CODEX_LUNA_JORNATO_B18_S1_V2_MACROBLOQUE_MOTOR_INFORMATIVO_TRES_MODALIDADES_QA_ZIP_UNICO_20261114.md`; SHA256 `5657ea05ab6043423b07ee72d402cbe44689e2ea2fae192307631b3571022061`, 33036 bytes, 199 líneas. Se verifican 40 oráculos O01–O40, F01–F07 y una única salida ZIP. **No se ejecutó todavía B18.**
+- Dictamen anterior de B17: `JORNATO_B17_S1_DICTAMEN_FORENSE_10_VERDUGO_10_JUEZ_120_LEYES_PLAN_B18_20261113.md`; SHA256 `c04289a33de67ca85d4576cbf94e8d327dda137a8c143331a2f3071f3cfb864d`; contiene la auditoría completa de B17 y no se reabre.
+- Anexo B03/H1 (`JORNATO_B03_H1_CONTRATOS_TECNICOS_DOMINIO_V1_2026-10-25.md`): fuente recuperada del Proyecto; dice expresamente **CANDIDATA / PARA REVISIÓN DE NEGOCIO Y QA**, y marca decisiones `[D]`, requisitos `[R]`, propuestas `[P]`, revisión jurídica `[J]`, gate `[G]` y pendientes `[OPEN]`. Preserva las seis magnitudes, **no constituye una aprobación de payroll**.
+- GitHub remoto: rama documental `docs/pingponglaw-l1-l6-canon-84e961c`, PR #2 Draft; canon fijo PingPongLaw `84e961cadf482d234f4c0ee2ca60e8c7e9b388e8`. `main` sigue sin código WIP local. Estos datos son lectura documental, no pruebas runtime de Codex.
+
+**Método:** cada pasada atacó una hipótesis de defecto, la contrastó con una contra-decisión independiente y evaluó **L1 KISS/Ponytail, L2 antirruido, L3 antiparches, L4 UX aprobada, L5 QA verificable y L6 antipingpong**. Los 120 juicios de las tablas son de diseño/evidencia; **no son 120 tests ni se está declarando que B18 funcione**.
+
+## Dictamen corto
+
+**Verdugo:** V1 era una orden razonable pero no imponía tres casos monetarios positivos, uno por modalidad; podía confundir un anexo B03 candidato con autoridad final y no excluía explícitamente `calculated_at` de la huella. También faltaban expectativas exactas para medias unidades menores y discrepancias de moneda/intervalos.
+
+**Juez:** mantener el macrobloque, Laravel + MariaDB/Flutter existentes, una sola implementación de cálculo y los O01–O40 sin renumerar. Agregar únicamente F01–F07 como **datos ejecutables de los mismos oráculos**; sin motores adicionales, DB nueva, login inventado, normas Colombia ficticias, servicios pagos ni auditorías previas repetidas.
+
+**Decisión:** **V2 reemplaza V1. SIGUE CODEX LUNA** y debe entregar `JOR-B18-S1-V2-ESTIMADOR-LABORAL-20261114-UNICO.zip`.
+
+---
+
+## 10 PASADAS COMO VERDUGO — REFUTAR LA ORDEN V1
+
+### V01 — Autoridad de B03 y SPEC candidata
+
+**Lo que examiné:** ¿La orden trata vocabulario documental como homologación jurídica o contrato salarial aprobado?
+
+**Evidencia/resultado:** En B18 V1 §0.2 se lee «contrato B03»; el propio B03/H1 se declara CANDIDATA/PARA REVISIÓN, con [P]/[J]/[OPEN].
+
+**Fallo de verdugo:** Ajuste V2: preservar seis magnitudes como estructura técnica, pero no presentar pactos, permisos ni fórmulas como aprobados.
+
+| Ley | Juicio específico |
 |---|---|
-| ZIP B17 V2 | SHA256 `745B608028B8522C0013789EE939869FF4D946CE4C1199545BB50A346A82D75A` coincide; 147.794 bytes, **63 entradas**, CRC `testzip()=None`, rutas seguras y nombres únicos. |
-| Manifiesto | **62/62** miembros no-manifiesto con SHA256 y tamaños contrastados directamente desde bytes. |
-| Reproducción patch | `patch -p1` sobre copia aislada de `BASELINES/**` con exit 0; **15/15 fuentes SOURCES** iguales byte por byte. |
-| PHP lint | Nueve fuentes PHP B17 verificadas aquí con `php -l`: **9/9 PASS**. |
-| Contrato PHP focal | Invocación directa de `PersonalRequestContract::interval` acepta Bogota -05:00→UTC, rechaza offset +03:00 incongruente; `nextStatus(NEEDS_CLARIFICATION, answer_clarification)=PENDING`. Es prueba directa pequeña, no suite. |
-| PHPUnit atribuido a Codex | `7 tests/30 assertions`, exit 0 según log del ZIP. Primer intento 7/27 una falla por **orden textual de cabeceras**; test corregido; NO se reejecutó PHPUnit desde este análisis con el vendor del checkout. |
-| Rutas | Cinco rutas B17 constan en `route:list` aportado; no se ejecutó HTTP real. Las rutas requieren Sanctum, active account, device.active, membership, QA gate y ability. |
-| MariaDB/HTTP/Flutter/Android | No ejecutados. `phpunit.xml` documentado usa `127.0.0.1:1`; Flutter/Dart ausentes del entorno de Codex. `DB_REAL=NOT_RUN_ENV`, `FLUTTER_HOST=NOT_RUN_ENV`, `L5_INDEPENDENT_RUNTIME=NOT_RUN`. |
-| WIP | `178/185` intactos, 7 modificados y 8 nuevos, staged 0 **según archivo de custodia de Codex**; no inspección directa del checkout Windows. |
+| **L1** | utilizar el vocabulario B03 sin desplegar un nuevo modelo jurídico de nómina. |
+| **L2** | conservar un solo documento de autoridad, evitando una segunda SPEC salarial. |
+| **L3** | corregir la causa de autoridad mal atribuida en §0.2, no parchear la UI con un aviso aislado. |
+| **L4** | mantener nombres y estados definidos para el producto sin prometer pago legal. |
+| **L5** | la lectura de B03 verifica su etiqueta CANDIDATA, no valida una fórmula de Colombia. |
+| **L6** | limitar revisión a B18 y no reexaminar B17, cuyo dictamen ya existe. |
 
-## 2. Dictamen y reservas
+### V02 — Estado real y no repetición de B17
 
-**B17_S1=PARTIAL_HOST_OR_CONTRACT** como etiqueta operativa del lote (en realidad los tests ejecutados fueron PHP unit; no Flutter). Se admite implementación localizada de esquema, funciones, rutas QA y UI escrita. No se acepta envío personal real, permiso de revisor ni atomicidad/concurrencia de MariaDB hasta ejecutar ese runtime. `HISTORY_ATOMIC=IMPLEMENTED_DB_UNRUN`; `IDEMPOTENCY=IMPLEMENTED_UNIT_DB_UNRUN`. Las cinco rutas no son comercializables: solo ambiente testing con flag QA y vínculo laboral sintético. `RELEASE_APPROVED=NO`.
+**Lo que examiné:** ¿El plan pide volver a verificar todo B13–B17 o falsifica un QA nuevo B18?
 
-**Riesgos a arrastrar a B21 sin convertirlos en otro B17-S2:** (i) integridad/foreign keys de las dos tablas por ejecutar en MariaDB; (ii) consultas A/B y revoked link, donde lectura histórica del creador está deliberadamente permitida por contrato O05, sujeto a revisión de privacidad; (iii) dos conexiones concurrentes; (iv) rollback de transición+evento; (v) widget y limpieza A→B; (vi) ausencia de aprobación HR; (vii) texto libre de motivo puede contener datos clínicos voluntarios, aunque la app no pida diagnóstico.
+**Evidencia/resultado:** La V1 heredó 7/30 PHPUnit B17; no hay ZIP B18 ejecutado; GitHub V1 era una orden, no un resultado.
 
-**Criterio de rumbo:** avanzar B18 en una sola orden. No convertir B14 SERVER_STORED/UNASSESSED en tiempo reconocido ni solicitud B17 en presencia o pago. El contrato B03 exige seis magnitudes separadas: PROGRAMADO, OBSERVADO, JUSTIFICADO, RECONOCIDO, CLASIFICADO, ESTIMADO_MONETARIO. B18 solo produce cálculos informativos con fuentes y rule packs explícitos; no homologación legal, nómina fiscal o desembolso.
+**Fallo de verdugo:** Conservar evidencia anterior solo como baseline; B18 permanece NOT_EXECUTED y recibe pruebas nuevas únicamente de su motor.
 
-## 3. Diez pasadas COMO VERDUGO — buscar refutaciones
-
-### V01 — Integridad de entrega
-**Ataque:** ¿Puede un ZIP íntegro disimular software roto?  **Fallo:** Aceptar bytes, no funcionalidad.
-
-| Ley | Juicio sustentado |
+| Ley | Juicio específico |
 |---|---|
-| L1 | 63 miembros y 15 fuentes focales, sin multiplicar entregas. |
-| L2 | 62 entradas del manifiesto sin duplicados ni rutas traversal. |
-| L3 | SHA/CRC no reparan comportamiento; separar evidencia. |
-| L4 | no hay validación visual de la pantalla Flutter. |
-| L5 | comprobación independiente ZIP, CRC y 62/62; no equivale a DB. |
-| L6 | no repetir paquete ni pedir reempaquetado sin defecto material. |
+| **L1** | una inspección focal del propietario de cálculo sustituye otra auditoría general del repo. |
+| **L2** | 7/30 tests de B17 no se vuelven a contar como pruebas B18. |
+| **L3** | sin fallo de B17 reproducido no nace una corrección de B17-S2. |
+| **L4** | no presentar un dashboard B18 como operativo antes del backend correspondiente. |
+| **L5** | delimitar QA de B18 futura frente a lo verificado del ZIP previo. |
+| **L6** | una orden V2 ejecutable, sin preflight separado ni reauditoría de historia. |
 
-### V02 — Reproducción de cambios
-**Ataque:** ¿El parche depende de archivos implícitos que faltan?  **Fallo:** Reproducible en copia aislada.
+### V03 — Proveniencia de jornadas B14/B17
 
-| Ley | Juicio sustentado |
+**Lo que examiné:** ¿Un recibo SERVER_STORED o una licencia aprobada se transforma indebidamente en horas de pago?
+
+**Evidencia/resultado:** V1 §3.2 prohíbe promoción, pero los casos positivos no fijaban todas las fuentes sintéticas y su estatus por modalidad.
+
+**Fallo de verdugo:** V2 exige fuentes ficticias autorizadas explícitas para cada magnitud; sin RECONOCIDO legítimo, UNAVAILABLE.
+
+| Ley | Juicio específico |
 |---|---|
-| L1 | 7 fuentes previas más 8 ausentes => parche focal de 15. |
-| L2 | 15/15 posteriores coinciden byte por byte al reproducir. |
-| L3 | diff aplicó con patch -p1 exit 0 en copia, no checkout real. |
-| L4 | fuentes UI modificadas; no asumir fidelidad visual. |
-| L5 | replay independiente directo, no afirmar WIP de Windows inspeccionado. |
-| L6 | continuar sin duplicar inventario de 185 rutas del ejecutor. |
+| **L1** | un mismo evaluador de procedencia resuelve el origen; no crear conversor de eventos. |
+| **L2** | no mezclar solicitud B17 con asistencia ni duplicar el ledger de B14. |
+| **L3** | negar por defecto inputs UNASSESSED es la solución causal al falso reconocimiento. |
+| **L4** | mostrar JUSTIFICADO y RECONOCIDO en columnas separadas, nunca «8 h trabajadas». |
+| **L5** | F01/F06 contrastan positivo QA y negativo de fuente, sin afirmar integración real. |
+| **L6** | el gate B14/B17 de tiempo validado se reserva a integración B21. |
 
-### V03 — Concurrencia e idempotencia
-**Ataque:** ¿Se duplica una solicitud al enviar dos POST iguales?  **Fallo:** Diseño favorable; NOT_RUN DB.
+### V04 — Fugas de una regla QA a producción
 
-| Ley | Juicio sustentado |
+**Lo que examiné:** ¿Una tarifa o factor de fixture podría quedar disponible a usuarios reales al reutilizar B16?
+
+**Evidencia/resultado:** V1 permite factor QA_UNVERIFIED, vista responsive y CSV; el portal B16 carece de login comercial acreditado.
+
+**Fallo de verdugo:** V2 fija ejemplos positivos solo en tests, no ruta productiva ni entitlement inventado; fuera QA, conceptos legales bloqueados.
+
+| Ley | Juicio específico |
 |---|---|
-| L1 | una tabla UNIQUE company+creator+keyHash, no broker nuevo. |
-| L2 | fingerprint y hash reutilizan un contrato canónico, no dos claves. |
-| L3 | controla error MySQL 1062 y conflicto, pero concurrencia no ejecutada. |
-| L4 | retry con misma key no debe parecer doble envío en UI. |
-| L5 | 7/30 unit PHP no ejercitan UNIQUE ni 2 conexiones reales. |
-| L6 | trasladar prueba de concurrencia al gate B21, no S2 ceremonial. |
+| **L1** | conservar un contrato de regla inyectable, no levantar un servicio tarifario adicional. |
+| **L2** | no copiar el factor de un fixture como valor por defecto de país. |
+| **L3** | cerrar en la capa de acceso QA la exposición, no confiar en esconder el botón. |
+| **L4** | el aviso «estimación informativa» es necesario, pero no sustituye control de acceso. |
+| **L5** | una Blade con actingAs no acredita un login web comercial. |
+| **L6** | entregar motor puro aunque el guard WEB_LOGIN_REAL siga bloqueado. |
 
-### V04 — Identidad y tenancy
-**Ataque:** ¿El selector company o email suplanta un empleado?  **Fallo:** Fail-closed; pendiente prueba DB.
+### V05 — Tres modalidades pueden quedar como stubs
 
-| Ley | Juicio sustentado |
+**Lo que examiné:** ¿El criterio de terminado permite implementar hourly y devolver UNAVAILABLE siempre para daily/monthly?
+
+**Evidencia/resultado:** V1 pedía tres modalidades pero solo definía un caso monetario positivo horario; O11/O12 eran tests de no conversión.
+
+**Fallo de verdugo:** Ajuste material: F01 hourly, F02 daily y F03 monthly_fixed con bases ficticias expresas e importes exactos.
+
+| Ley | Juicio específico |
 |---|---|
-| L1 | usa existing employee_identity_links, no autenticación paralela. |
-| L2 | joins company/site/employee/membership sin coincidencia por email. |
-| L3 | el usuario viene de Sanctum y la ficha de vínculo servidor. |
-| L4 | solicitudes ajenas 404 por owner+tenant en show. |
-| L5 | lectura de código favorable, test HTTP cross-tenant no ejecutado. |
-| L6 | conservar bloqueo de enrolamiento comercial, avanzar núcleo B18. |
+| **L1** | tres funciones pequeñas o un solo selector de modalidad, sin reescribir un payroll engine. |
+| **L2** | F02 no convierte horas en días; F03 no aplica divisor mensual implícito. |
+| **L3** | impedir el falso cumplimiento por stubs mediante oráculos de valor numérico esperado. |
+| **L4** | los usuarios distinguirán tarifas horarias, diarias y fijas sin etiquetas engañosas. |
+| **L5** | cada modalidad exige resultado ejecutado, no `PASS_STATIC` por existir un enum. |
+| **L6** | incluir las tres modalidades en el mismo S1 evita otro S2 de ampliación ceremonial. |
 
-### V05 — Máquina de estados
-**Ataque:** ¿O18 sigue contradictorio?  **Fallo:** Corrección V2 plasmada, runtime parcial.
+### V06 — Aritmética racional y centavos
 
-| Ley | Juicio sustentado |
+**Lo que examiné:** ¿Las expresiones «sin float» y «redondeo determinista» bastan para que Codex no use conversiones implícitas?
+
+**Evidencia/resultado:** V1 §4.2 carecía de fórmula operativa precisa, caso de mitad de centavo y política diferencial.
+
+**Fallo de verdugo:** V2 fija segundos/3600, numerador/denominador y redondeo al concepto; F01 y F04 tienen centavos esperados.
+
+| Ley | Juicio específico |
 |---|---|
-| L1 | mapeo puro único nextStatus, no workflow engine externo. |
-| L2 | NEEDS_CLARIFICATION→PENDING coincide con O18. |
-| L3 | transición y appendEvent en la misma transacción de código. |
-| L4 | no mostrar una aprobación sin permiso RR. HH. |
-| L5 | prueba unit 7/30 reportada y prueba directa PHP focal, DB no ejecutada. |
-| L6 | no rediseñar la máquina de estados por falta de permiso. |
+| **L1** | enteros y fracciones racionales bastan; no añadir biblioteca matemática externa. |
+| **L2** | la BASE integrada en factor TOTAL no se suma dos veces. |
+| **L3** | overflow se previene antes de multiplicar y el denominador cero es error explícito. |
+| **L4** | el desglose muestra regla aplicada y si factor es TOTAL/ADDITIONAL. |
+| **L5** | HALF_UP 50,5→51 y HALF_EVEN 50,5→50 son expectativas falsables. |
+| **L6** | un grupo de fixtures sustituye múltiples rondas de «precisar fórmula». |
 
-### V06 — Atomicidad del historial
-**Ataque:** ¿Se puede aprobar/cancelar sin evento o mutar pasado?  **Fallo:** IMPLEMENTED_DB_UNRUN.
+### V07 — Huella contaminada por timestamp
 
-| Ley | Juicio sustentado |
+**Lo que examiné:** ¿El cálculo repetido con idénticas fuentes obtiene la misma huella cuando cambia la hora actual?
+
+**Evidencia/resultado:** V1 pedía calculated_at y fingerprint y O17 igual, sin excluir de modo normativo el metadato volátil.
+
+**Fallo de verdugo:** V2 excluye hora actual, IDs aleatorios y orden incidental de mapas; F05 prueba repetición estable.
+
+| Ley | Juicio específico |
 |---|---|
-| L1 | dos tablas vinculadas, no Event Sourcing general. |
-| L2 | sequence/version y unique por request, sin duplicar B14. |
-| L3 | update versionado y appendEvent comparten DB::transaction. |
-| L4 | timeline devuelve transiciones mínimas para el titular. |
-| L5 | rollback, lock y migración en MariaDB no ejecutados. |
-| L6 | anotar gate B21, no declarar atomicidad PASS. |
+| **L1** | canonización de entrada antes del hash, sin servicio de snapshots adicional. |
+| **L2** | mismo set de segmentos con orden distinto no genera una copia semántica distinta. |
+| **L3** | eliminar fuentes no deterministas de la huella corrige la causa del falso cambio. |
+| **L4** | la UI puede mostrar fecha del cálculo sin alterar la identidad del estimado. |
+| **L5** | O17/F05 exige dos ejecuciones con mismo SHA de inputs y mismo importe. |
+| **L6** | una prueba determinista ahorra reconstrucciones y auditorías de falsos cambios. |
 
-### V07 — Privacidad clínica
-**Ataque:** ¿El campo motivo se convierte en historia médica?  **Fallo:** Riesgo residual documentado.
+### V08 — Versiones de acuerdos y periodos
 
-| Ley | Juicio sustentado |
+**Lo que examiné:** ¿El cálculo toma un contrato arbitrario si dos versiones se solapan?
+
+**Evidencia/resultado:** V1 exige segmentación pero no fija respuesta para versiones simultáneas ni semántica de límite inclusivo.
+
+**Fallo de verdugo:** V2 usa periodos semiabiertos y fallo AMBIGUOUS_AGREEMENT; no reescribe acuerdos históricos.
+
+| Ley | Juicio específico |
 |---|---|
-| L1 | no hay adjuntos, biometría ni tablas clínicas. |
-| L2 | motivo opcional máximo 300 caracteres, sin duplicar expediente B19. |
-| L3 | texto libre NO garantiza ausencia de diagnóstico por regex. |
-| L4 | interfaz debe evitar inducir el ingreso de información médica sensible. |
-| L5 | escaneo estático y esquema no prueban que el usuario nunca escriba PHI. |
-| L6 | no crear filtro clínico artificial; gate privacidad B19/B21. |
+| **L1** | una partición por frontera temporal es suficiente; no diseñar planificador nuevo. |
+| **L2** | versionar acuerdo evita dos bases contradictorias sobre una misma fecha. |
+| **L3** | una selección arbitraria «más nuevo» ocultaría conflicto en origen. |
+| **L4** | importes parciales muestran periodo y versión del pacto aplicada. |
+| **L5** | O16 cubre cambio temporal; conflicto solapado debe tener caso negativo. |
+| **L6** | los contratos laborales reales siguen pendientes sin bloquear fixture QA. |
 
-### V08 — Seguridad del gate QA
-**Ataque:** ¿Podría activarse accidentalmente en producción?  **Fallo:** Inspección favorece cierre doble.
+### V09 — Zona horaria y escala monetaria
 
-| Ley | Juicio sustentado |
+**Lo que examiné:** ¿La falta de escala de moneda o un offset incoherente termina convertido en número plausible?
+
+**Evidencia/resultado:** V1 menciona timezone y minor units pero sin respuesta obligatoria para moneda sin escala y validación de DST.
+
+**Fallo de verdugo:** V2 define UNAVAILABLE_CURRENCY_SCALE y rechaza offsets inválidos; no generaliza 2 decimales de COP a otras monedas.
+
+| Ley | Juicio específico |
 |---|---|
-| L1 | un middleware QA focal reutiliza auth y device.active. |
-| L2 | testing AND flag true, default false, sin rutas de revisor. |
-| L3 | no bypass de Sanctum ni permiso productivo inventado. |
-| L4 | el trabajador aún no tiene enrolamiento comercial. |
-| L5 | route:list 5 rutas no es ejecución HTTP ni guard activo end-to-end. |
-| L6 | no forzar gate en producción para «probar» el módulo. |
+| **L1** | aprovechar date/time de PHP existente y enteros; no nueva API de festivos. |
+| **L2** | IANA+offset y UTC se guardan como evidencias distintas, sin doble conversión. |
+| **L3** | detectar escala ausente es la causa raíz frente a montos por 100 incorrectos. |
+| **L4** | la vista explica error temporal o monetario, no muestra $0. |
+| **L5** | O19/O21/fixture negativo distinguen conversión válida e inválida. |
+| **L6** | no consultar tasas/leyes actuales para llenar un hueco que requiere aprobación. |
 
-### V09 — Flutter y experiencia
-**Ataque:** ¿Las nuevas pantallas están verdaderamente probadas?  **Fallo:** NOT_RUN_ENV, no PASS.
+### V10 — Ruta web, permisos, QA y ZIP
 
-| Ley | Juicio sustentado |
+**Lo que examiné:** ¿Se puede entregar un estimador privado visible sin login real y con sólo `actingAs`?
+
+**Evidencia/resultado:** B16 tiene rutas protegidas sin contrato de login web operativo; V1 permite vista sintética y CSV condicional.
+
+**Fallo de verdugo:** Mantener servicio + renderer host; ninguna URL pública ni precio/permiso creado; probar el ZIP y WIP sin hacer deploy.
+
+| Ley | Juicio específico |
 |---|---|
-| L1 | reutiliza PersonalScreen, PersonalApi y sesión, sin nueva app. |
-| L2 | cero outbox personal falso o caché de datos médicos. |
-| L3 | manejo de sesiones A→B escrito pero no ejecutado. |
-| L4 | widget/teclado/foco sin render real; UX por verificar. |
-| L5 | Flutter no disponible, ninguna prueba widget ejecutada. |
-| L6 | no bloquear B18 por ausencia SDK; acumular gate B21. |
+| **L1** | mantener Laravel monolítico y Blade existente; cero nueva SPA. |
+| **L2** | reutilizar saneador CSV B16 sin crear un segundo exportador. |
+| **L3** | no remediar un guard ausente saltando auth:web. |
+| **L4** | seis magnitudes legibles y aviso de no nómina, aunque la UI siga QA-only. |
+| **L5** | PHPUnit host≠MariaDB real≠navegador≠auditor independiente. |
+| **L6** | 40 oráculos y un ZIP; sin fase de diagnóstico intermedia ni B18-S2 por costumbre. |
 
-### V10 — Custodia y release
-**Ataque:** ¿Se está confundiendo script verde con sistema terminado?  **Fallo:** NO_GO comercial correcto.
+## 10 PASADAS COMO JUEZ — REFUTAR EXCESOS DEL VERDUGO
 
-| Ley | Juicio sustentado |
+### J01 — ¿Bloquear B18 hasta homologar todo Colombia?
+
+**Lo que examiné:** El verdugo señala falta de autoridad legal; ¿la solución es posponer también el motor matemático puro?
+
+**Evidencia/resultado:** No. El código de cálculo sintético puede verificarse sin afirmar conformidad normativa.
+
+**Fallo de juez:** APROBAR construcción del motor puro QA; MANTENER legal/payroll/comercial en BLOCKED.
+
+| Ley | Juicio específico |
 |---|---|
-| L1 | 7 cambios y 8 altas, sin reemplazar B13–B16. |
-| L2 | hashes de 178/185 WIP son reporte Codex, no observación Windows propia. |
-| L3 | no migración real; no «arreglar» con Docker ajeno. |
-| L4 | usuario real no tiene flujo HR autorizado. |
-| L5 | B17 parcial, 7 unit/30; DB, HTTP, Flutter, L5 NOT_RUN. |
-| L6 | no abrir B17-S2 automático; entregar siguiente vertical B18. |
+| **L1** | separación simple entre matemática pura y policy legal aprobable después. |
+| **L2** | evitar dos implementaciones provisionales por país. |
+| **L3** | la incertidumbre legal se resuelve con gate, no inventando tasas. |
+| **L4** | comunicar «no disponible» fuera QA donde faltan reglas. |
+| **L5** | resultado unitario no acredita homologación con profesional. |
+| **L6** | trabajo B18 sigue sin esperar un informe contable para cada fixture. |
 
-## 4. Diez pasadas COMO JUEZ — contradicción de soluciones
+### J02 — ¿Crear microservicio o PostgreSQL para la exactitud?
 
-### J01 — Aceptar avance parcial
-**Contradicción:** ¿Deberíamos rechazar B17 completo por falta de DB?  **Fallo motivado:** Rechazar rechazo total, mantener límites.
+**Lo que examiné:** ¿Una nueva tecnología resolvería mejor redondeo, transacciones o vigencias?
 
-| Ley | Juicio sustentado |
+**Evidencia/resultado:** El stack de trabajo actual es Laravel/PHP y MariaDB; SPEC V5 menciona Postgres como propuesta antigua.
+
+**Fallo de juez:** RECHAZAR microservicios, nuevos paquetes de pago, otra base y backend paralelo.
+
+| Ley | Juicio específico |
 |---|---|
-| L1 | código de dominio y rutas protegidas sí son avance útil. |
-| L2 | no rehacer controller solo porque el kernel no corrió. |
-| L3 | no se ha demostrado defecto causal de integridad o TENANT. |
-| L4 | usuario aún no puede usar solicitudes comerciales. |
-| L5 | aceptación técnica estática/unit focal, NO aprobación funcional. |
-| L6 | avanzar B18 con lista de gates remanentes. |
+| **L1** | cálculos enteros y racionales caben en servicio puro Laravel. |
+| **L2** | una sola implementación PHP/Dart, reutilizando si ya hay núcleo real. |
+| **L3** | cambiar motor de base no arregla conversiones float ni fuente incompleta. |
+| **L4** | la UI no debe depender de infraestructura no existente. |
+| **L5** | pruebas PHP del motor son un gate diferente de pruebas InnoDB. |
+| **L6** | cambios de plataforma desviarían B18 hacia replanteo total. |
 
-### J02 — No aprobar identidad comercial
-**Contradicción:** ¿Basta el vínculo sintético para activar la API?  **Fallo motivado:** Rechazar activación.
+### J03 — ¿Persistir todo estimado en una nueva tabla?
 
-| Ley | Juicio sustentado |
+**Lo que examiné:** ¿Para cumplir el snapshot del anexo B03 necesitamos una migración extra obligatoria?
+
+**Evidencia/resultado:** El B03 describe PayEstimateSnapshot conceptual, no aprueba SQL definitivo ni storage de salario personal.
+
+**Fallo de juez:** RECHAZAR nueva tabla por defecto; generar DTO/snapshot transitorio y hash reproducible.
+
+| Ley | Juicio específico |
 |---|---|
-| L1 | usar relación existente con QA sin duplicar usuario/empleado. |
-| L2 | no confundir member con employee verificado. |
-| L3 | default OFF responde 404 en no-testing incluso con flag. |
-| L4 | ninguna pantalla «solicitud enviada» comercial real sin auth. |
-| L5 | permisos/link real pendientes por aprobación; no sobrerreportar. |
-| L6 | no delegar «habilitar registro» a Codex en siguiente lote. |
+| **L1** | DTO en memoria evita almacenamiento no requerido por el gate actual. |
+| **L2** | no duplicar un modelo existente si se descubre en inspección focal. |
+| **L3** | persistencia prematura no remedia ausencia de pacto o permiso. |
+| **L4** | la pantalla QA puede renderizar un reporte sin conservar PII. |
+| **L5** | si no hay DB real, no declarar persistencia transaccional. |
+| **L6** | historial durable condicionado se documenta para B21, no microbloque. |
 
-### J03 — No convertir solicitud en reconocimiento
-**Contradicción:** ¿Podemos alimentar B18 con estados B17?  **Fallo motivado:** Rechazar inferencia.
+### J04 — ¿Volver a probar B17 antes de implementar B18?
 
-| Ley | Juicio sustentado |
+**Lo que examiné:** ¿La deuda de idempotencia y solicitudes obliga a repetir sus 7 tests/30 assertions?
+
+**Evidencia/resultado:** La incertidumbre B17 sobre DB/Flutter está documentada y no afecta el algoritmo puro cuando se usan fixtures sintéticos.
+
+**Fallo de juez:** RECHAZAR pruebas masivas B17; sólo negativos B18 de fuente B17/PENDING.
+
+| Ley | Juicio específico |
 |---|---|
-| L1 | conservar seis magnitudes B03 en un mismo dominio. |
-| L2 | B17 PENDING/APPROVED no se transforma en hecho fichado. |
-| L3 | B14 SERVER_STORED no es fuente reconocida de pago. |
-| L4 | mostrar JUSTIFICADO distinto de RECONOCIDO. |
-| L5 | no datos reales con proveniencia aprobada, B18 usar fixture. |
-| L6 | esta decisión evita una futura corrección contable grave. |
+| **L1** | un test focal de entrada B17 basta para proteger la frontera. |
+| **L2** | no reutilizar métricas B17 como resultados nuevos B18. |
+| **L3** | sin defecto nuevo, reejecutar suites no corrige causa de B18. |
+| **L4** | los estados de solicitud no se renombrarán para cuadrar estimación. |
+| **L5** | límites B17 permanecen NOT_RUN_ENV hasta integración real. |
+| **L6** | el responsable ejecuta un macrobloque y no se persigue la cola. |
 
-### J04 — No inventar sueldo ni ley
-**Contradicción:** ¿Podemos fijar tasas de recargo 2026 de memoria?  **Fallo motivado:** Rechazar sin rulepack aprobado.
+### J05 — ¿Aceptar daily/monthly siempre UNAVAILABLE?
 
-| Ley | Juicio sustentado |
+**Lo que examiné:** ¿Es más seguro no calcular nunca modalidades no horarias?
+
+**Evidencia/resultado:** Una salida permanentemente bloqueada incumple la meta de soportar las tres modalidades, aunque sea QA.
+
+**Fallo de juez:** RECHAZAR stubs; exigir F02/F03 positivos con insumo explícito y F07 negativo cuando falta base.
+
+| Ley | Juicio específico |
 |---|---|
-| L1 | un único motor explicable, parámetros versionados. |
-| L2 | no segundo motor ni copiar tablas de internet sin homologación. |
-| L3 | valores por país/fecha deben tener fuente y vigencia. |
-| L4 | mostrar «no disponible», nunca $0 calculado sin base. |
-| L5 | sin contador/revisor jurídico no hay conformidad salarial. |
-| L6 | implementar cálculo QA sin hipotecar release. |
+| **L1** | un pequeño evaluador por contrato diario/fijo es suficiente. |
+| **L2** | no inventar divisores horario/diario del salario mensual. |
+| **L3** | F02/F03 prueban implementación y F07 prueba el guard causal. |
+| **L4** | UI diferencia contrato por día de fijo completo. |
+| **L5** | outputs 108642 y 2345678 menores son criterios calculables. |
+| **L6** | cerrar tres modalidades en S1 impide un S2 innecesario. |
 
-### J05 — No sobrediseñar persistencia B18
-**Contradicción:** ¿Necesitamos tabla nómina nueva ahora?  **Fallo motivado:** Rechazar por falta de fuente fiable.
+### J06 — ¿Construir también un motor en Dart?
 
-| Ley | Juicio sustentado |
+**Lo que examiné:** ¿El Flutter personal requiere replicar todas las fórmulas salariales?
+
+**Evidencia/resultado:** B16 ofrece renderer web; B17 Flutter tiene otros gates y no existe política de salario personal autorizada.
+
+**Fallo de juez:** RECHAZAR motor dual PHP+Dart; mantener fuente única de cálculo existente o PHP.
+
+| Ley | Juicio específico |
 |---|---|
-| L1 | DTO snapshot determinista sin escritura hasta contrato. |
-| L2 | evitar tablas pay_* duplicadas con futuros B18/B21. |
-| L3 | falta origen RECONOCIDO persistente, no parchear con SQL falso. |
-| L4 | información sensible no disponible para usuarios no autorizados. |
-| L5 | QA puro puede probar cálculos sin DB. |
-| L6 | no abrir una etapa de migración innecesaria. |
+| **L1** | evitar duplicar cálculo y pruebas en dos runtimes. |
+| **L2** | una fuente de pack/version y huella evita divergencia. |
+| **L3** | dos motores crearían inconsistencias que no resuelven origen del tiempo. |
+| **L4** | Flutter no publicará salario personal sin permiso demostrado. |
+| **L5** | UI host Laravel no equivale a Android Flutter. |
+| **L6** | mantener B18 dentro de un único propietario. |
 
-### J06 — No exigir UI comercial ficticia
-**Contradicción:** ¿Debe existir un portal financiero con login inventado?  **Fallo motivado:** Rechazar login paralelo, crear componente seguro.
+### J07 — ¿Forzar Docker/MariaDB para conseguir PASS?
 
-| Ley | Juicio sustentado |
+**Lo que examiné:** ¿B18 no puede avanzar si `server/.env.testing` continúa ausente?
+
+**Evidencia/resultado:** B17 y B16 ya informaron falta de entorno QA aislado; Docker compartido afecta otros proyectos.
+
+**Fallo de juez:** RECHAZAR arranque forzado; ejecutar unit/renderer seguros y reportar DB_REAL=NOT_RUN_ENV.
+
+| Ley | Juicio específico |
 |---|---|
-| L1 | reutilizar Blade B16 si hay guard aprobado. |
-| L2 | no SPA nueva ni segunda sesión. |
-| L3 | WEB_LOGIN_REAL sigue BLOQUEADO por contrato. |
-| L4 | panel QA etiquetado informativo con seis magnitudes. |
-| L5 | fixture/render no certifica navegador real. |
-| L6 | aceptar trabajo productivo sin CTA inseguro. |
+| **L1** | servicio puro independiente de DB es prueba de diseño simple. |
+| **L2** | no duplicar setup DB en cada lote sin cambio material. |
+| **L3** | una DB peligrosa no resolvería identidad ni rule packs faltantes. |
+| **L4** | dejar UI deshabilitada comercialmente si no hay permisos. |
+| **L5** | guardar logs auténticos de unit y reservar kernel/L5 externo. |
+| **L6** | los gates pendientes se consolidan en B21 sin crear S2 automático. |
 
-### J07 — Garantizar precisión sin librerías nuevas
-**Contradicción:** ¿Puede usarse float por comodidad?  **Fallo motivado:** Rechazar redondeo ambiguo.
+### J08 — ¿Autorizar valores QA en producción por poner aviso?
 
-| Ley | Juicio sustentado |
+**Lo que examiné:** ¿Basta una etiqueta «no es nómina» para permitir acceso comercial al factor QA?
+
+**Evidencia/resultado:** No; sin login/guard y pack homologado, una cifra sintética visible puede confundirse con un derecho salarial.
+
+**Fallo de juez:** RECHAZAR rutas/CSV comerciales; caso QA solo bajo tests y flag testing.
+
+| Ley | Juicio específico |
 |---|---|
-| L1 | integer minor units + racionales con guardas, o decimal existente. |
-| L2 | cero nuevas dependencias por rutina. |
-| L3 | evita duplicación de base salarial y overflow silencioso. |
-| L4 | desglose con factor total vs adicional visible. |
-| L5 | fixtures de límite/medio centavo repetibles. |
-| L6 | menos QA correctiva por cifras cambiantes. |
+| **L1** | misma vista testable sin inventar un guard o entitlement financiero. |
+| **L2** | no añadir nueva capa de permisos declarados ficticiamente. |
+| **L3** | el control servidor de ambiente y autorización previene fuga, el aviso es secundario. |
+| **L4** | usuarios no recibirán un importe numérico fabricado como pago cierto. |
+| **L5** | unit PASS sobre importe QA no certifica seguridad de browser. |
+| **L6** | el bloqueo comercial no impide construir lógica y vista local. |
 
-### J08 — Probar sin fingir integración
-**Contradicción:** ¿B18 debe esperar una MariaDB aislada?  **Fallo motivado:** Rechazar bloqueo del núcleo puro.
+### J09 — ¿Omitir la UI para acelerar el motor puro?
 
-| Ley | Juicio sustentado |
+**Lo que examiné:** ¿Un servicio PHP sin presentación satisface todo el macrobloque?
+
+**Evidencia/resultado:** V1 solicita presentar seis magnitudes; B16 tiene Blade aunque el login real esté pendiente.
+
+**Fallo de juez:** APROBAR renderer Blade/test host reutilizado y prohibir publicación sin guard, sin segundo frontend.
+
+| Ley | Juicio específico |
 |---|---|
-| L1 | pruebas domain PHP y vista host suficientes para avance focal. |
-| L2 | no repetir 1.000 eventos ni suites B14 históricas. |
-| L3 | si faltan fuentes, estado UNAVAILABLE con razón, no mock comercial. |
-| L4 | no pantalla de salario real en cuentas sintéticas. |
-| L5 | DB_REAL y L5 independiente permanecen NOT_RUN. |
-| L6 | macrobloque B18 funcional acotado, después B19. |
+| **L1** | una vista Blade sencilla reutiliza estilos B16. |
+| **L2** | no crear SPA ni widgets Flutter de nómina por rutina. |
+| **L3** | no compensar fallo de login web con una ruta pública. |
+| **L4** | mostrar estados/fuentes/magnitudes y causa de UNAVAILABLE accesiblemente. |
+| **L5** | capturar test de renderer y distinguir screenshot real NOT_RUN. |
+| **L6** | funcionalidad visible para QA dentro de S1, sin fase cosmética. |
 
-### J09 — Custodia y GitHub
-**Contradicción:** ¿Subimos el WIP a main para evitar pérdida?  **Fallo motivado:** Rechazar sin autorización.
+### J10 — ¿Abrir nueva auditoría del prompt antes de Codex?
 
-| Ley | Juicio sustentado |
+**Lo que examiné:** ¿Los límites de B18 justifican V3 o otra ronda de 20 pasadas?
+
+**Evidencia/resultado:** Los defectos materiales identificados V01–V10 ya están traducidos a una orden V2 coherente con 40 oráculos conservados.
+
+**Fallo de juez:** RECHAZAR otra auditoría por inercia; publicar V2 única, ejecutar un ZIP y seguir B19 salvo fallo P0/P1 demostrado.
+
+| Ley | Juicio específico |
 |---|---|
-| L1 | mantener checkout D: y reports un solo ZIP. |
-| L2 | GitHub PR #2 es documental, no fuente de ejecutable. |
-| L3 | preserve 193 WIP rutas reportadas sin reset/clean. |
-| L4 | datos de nómina no deben publicarse en repositorio. |
-| L5 | hashes/documentación no equivalen a respaldo restaurado. |
-| L6 | actualizar un solo checkpoint y orden, sin nuevas ramas docs. |
+| **L1** | V2 tiene un solo servicio de cálculo y un flujo de QA. |
+| **L2** | 40 oráculos originales conservados; F01–F07 son datos concretos, no 7 gates repetidos. |
+| **L3** | corregir ahora huecos de salida cuantitativa y hash evita remiendos posteriores. |
+| **L4** | la experiencia de QA no expone salarios personales. |
+| **L5** | el próximo ZIP deberá traer tests ejecutados y SHA, no un dictamen de autor. |
+| **L6** | una sola entrega y NEXT_OWNER=CHATGPT, después B19. |
 
-### J10 — Plan de fin y siguiente actor
-**Contradicción:** ¿Abrimos B17-S2 o otra auditoría del prompt?  **Fallo motivado:** Rechazar, B18 productivo.
+---
 
-| Ley | Juicio sustentado |
-|---|---|
-| L1 | completar B18 con núcleo y vista en un lote. |
-| L2 | estados B13–B17 heredados sin prometer PASS global. |
-| L3 | motivos de gates externos se preservan para B21. |
-| L4 | después B19/B20 y QA integral sin recortar alcance. |
-| L5 | B22 únicamente GO escrito del propietario. |
-| L6 | NEXT_OWNER=CODEX_LUNA después de dictamen; ZIP único. |
+## Matriz de rectificaciones V1→V2 (sin otra vuelta)
 
-## 5. Contabilidad de la auditoría
+| Decisión | Defecto material / fuente | Corrección verificable en V2 | Qué NO se reabre |
+|---|---|---|---|
+| C1 · autoridad | B03 se declara candidata; V1 hablaba de «contrato B03» | §0.2 etiqueta CANDIDATO y no homologa salario | No revisar B03 o SPEC entera |
+| C2 · modalidades | V1 O11/O12 negativos podían ocultar stubs daily/monthly | F01 horario = 92588; F02 diario = 108642; F03 fijo mes completo = 2345678 (unidades menores ficticias) | No inventar divisor sueldo fijo |
+| C3 · centavos | V1 exigía exactitud sin fórmula y caso de empate | §4.2 fórmula racional; F04 101×1/2 = 51 HALF_UP / 50 HALF_EVEN | No instalar librería matemática nueva |
+| C4 · huella | calculated_at aparecía junto al fingerprint, sin exclusión específica | §4.4 y F05: mismo hash y monto, sin importar reloj/orden de mapas | No crear tabla snapshot salarial |
+| C5 · fuentes | QA positivo podía confundirse con fuente B14/B17 | F06 `SERVER_STORED/UNASSESSED` => UNAVAILABLE; F07 faltan bases => UNAVAILABLE | No rehacer sync/solicitudes |
+| C6 · moneda/vigencias | escala, superposición de acuerdos insuficientemente operativas | F04, `UNAVAILABLE_CURRENCY_SCALE`, periodos semiabiertos/`AMBIGUOUS_AGREEMENT` | No fijar tarifas legales |
+| C7 · aceptación | Declarar «3 modalidades» por enum/falta de tests | F01–F07 ejecutados y tabla O01–O40 con fuente, exit y log | No duplicar matriz de oráculos |
 
-- **20 pasadas**, cada una con seis juicios diferenciados = **120 juicios documentales**, ninguno equivalente a un nuevo test end-to-end. Los estados PASS provienen de bytes/lint/ejecuciones focales expresamente identificadas.
-- Verdugo: los 10 hallazgos quedaron contextualizados; no se evidencia defecto crítico reproducido que exija rehacer B17 antes de B18.
-- Juez: descarta un B17-S2 inercial, una segunda autenticación, cambios en permisos de RR. HH., cálculos salariales implícitos y despliegue prematuro.
+**Verificación independiente que sí hice:** leí ambos Markdown B18, anexo candidato B03 y dictamen B17; calculé hashes/estructura y comprobé por aritmética entera las expectativas F01 (`12345*6*5/4=92587.5 → 92588`), F02 (`54321*2=108642`), F03 (`2345678`), F04 (`101/2=50.5`). No inspeccioné ni ejecuté el repositorio local Windows, phpunit del motor nuevo, Laravel, DB, Flutter o Android en esta vuelta.
 
-## 6. Plan de ejecución y finalización
+## Plan de terminación y condiciones inequívocas
 
-| Bloque | Producto, no solo pruebas | Gate honesto |
-|---|---|
-| **B18-S1 ahora** | Motor determinista de estimación con seis magnitudes, contrato salarial versionado, precisión decimal y vista QA explicable. | Nunca cifras legales ni salarios reales sin regla/actor/fuente aprobados. |
-| **B19** | Expedientes privados, documentos versionados, trazabilidad, contrato/otrosí y copia al trabajador. | Firma real solo proveedor/consentimiento verificables; hash ≠ firma. |
-| **B20** | Reclutamiento, vacantes, CV, entrevistas y transición candidato→empleado. | Archivos maliciosos, consentimiento y acceso cross-tenant evaluados. |
-| **B21** | QA integral independiente de todas las puertas B13–B20. | MariaDB, Flutter/Android físico, permisos, reportes, cálculos legales contables, privacidad, integración por mismo SHA. |
-| **B22** | Lanzamiento comercial integral. | GO escrito del propietario, planes/términos/precios, build firmado y rollback. |
+**B18 ahora (un macrobloque):** un único motor puro y representación host seguros; F01–F07 con importes/huella falsables, matriz de 40 oráculos, mínimo un renderer QA, logs, baselines y patch. Resultado permitido `PASS_UNIT_SYNTHETIC` solo con tests ejecutados. Todo permiso, fuente real, web/login, DB, homologación y L5 independiente conservan gates.
 
-## 7. Entrega y transferencia
+**B19 siguiente:** expedientes, archivos privados, plantillas, versiones de contratos y firma solo bajo contratos/proveedor real; no confundir hash de integridad con firma electrónica.
 
-- **Único prompt vigente propuesto:** `CODEX_LUNA_JORNATO_B18_S1_V1_MACROBLOQUE_MOTOR_LABORAL_INFORMATIVO_SIN_NOMINA_ZIP_UNICO_20261113.md` (SHA consignado al publicarlo en GitHub).
-- **ZIP exigido a Codex:** `JOR-B18-S1-V1-ESTIMADOR-LABORAL-20261113-UNICO.zip` con fuentes, preestado, patch, matrix de 40 oráculos, logs reales, 10 controles L1–L6, informe y SHA manifest.
-- **Estado final:** `B17_GLOBAL=PARTIAL`, `B18=NOT_EXECUTED`, `B13/B14/B15/B16_GLOBAL=PARTIAL/NOT_APPROVED`, `RELEASE_APPROVED=NO`.
-- **NEXT_OWNER=CODEX_LUNA** hasta entregar ZIP B18; luego `NEXT_OWNER=CHATGPT_DIRECTOR` para adjudicación.
+**B20:** vacantes, CV, entrevistas, decisiones y transición autorizada candidato→empleado, aislada por tenant; nada de acceso público inseguro a adjuntos.
+
+**B21:** integración y QA L5 del mismo SHA/build, MariaDB, HTTP real, Android hardware, identidad B13–B17, reglas B18 homologadas por profesional, permisos/privacidad B19–B20 y recuperación/backups, sin falsos PASS de mocks.
+
+**B22:** solo si B21 y contratos/precios/legalidad aprobados por el propietario, GO escrito, despliegue/rollback. Nunca publicación/cobro automáticos.
+
+**Recuperación por GitHub:** `docs/CODEX_LOTE_ACTUAL.md` es la orden **única** actual; `docs/AUDITORIA_DIRECTIVA_ACTUAL.md` es esta auditoría; `docs/JORNATO_CONTINUIDAD.md` fija cronología/gates; `AGENTS.md` enlaza continuidad. Todos en rama documental PR #2 Draft; WIP local no se ha publicado.
+
+**NEXT_OWNER=CODEX_LUNA** hasta el ZIP, después **NEXT_OWNER=CHATGPT** para adjudicar B18 y dirigir B19. No repetir 10/10 sin evidencia distinta ni generar B18-S2 por inercia.
