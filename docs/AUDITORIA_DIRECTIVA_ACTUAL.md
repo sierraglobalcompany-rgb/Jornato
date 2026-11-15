@@ -1,348 +1,268 @@
-# JORNATO — AUDITORÍA ADVERSARIAL B19-S1 V1 → V2: 10 VERDUGO, 10 JUEZ, 120 JUICIOS L1–L6
-
-**Corte:** 2026-11-14 (America/Bogota). **Director:** ChatGPT. **Alcance:** calidad de la ORDEN B19 todavía no ejecutada, no nueva QA B18 ni certificación comercial. **Próximo ejecutor:** Codex Luna.  
-**Archivo sometido a crítica:** `CODEX_LUNA_JORNATO_B19_S1_V1_MACROBLOQUE_EXPEDIENTES_DOCUMENTOS_PRIVADOS_PLANTILLAS_FIRMAS_QA_ZIP_20261114.md`. **Nueva orden V2:** `CODEX_LUNA_JORNATO_B19_S1_V2_MACROBLOQUE_DOCUMENTOS_PRIVADOS_ATOMICO_IDEMPOTENTE_ZIP_UNICO_20261114.md`.
-
-## 1. Qué se leyó y qué NO se pudo verificar
-
-- **Fuente directa:** el Markdown original B19 V1 completo de 25.383 bytes, §1–§10 y O01–O42. Se verificó que B19 NO tiene entrega de ejecución al presente corte. La V2 conserva **textualmente los 42 oráculos O01–O42** del prompt V1 (sin renumerar, quitar o alterar expectativas).
-- **Fuentes directas documentales:** GitHub `sierraglobalcompany-rgb/Jornato` rama documental `docs/pingponglaw-l1-l6-canon-84e961c`, `docs/JORNATO_CONTINUIDAD.md`, `docs/CODEX_LOTE_ACTUAL.md`, `AGENTS.md` y canon `sierraglobalcompany-rgb/PingPongLaw` fijado SHA `84e961cadf482d234f4c0ee2ca60e8c7e9b388e8`. SPEC V5 MOD-11/UX-20 es fuente **candidata**, no autorización jurídica ni permisos técnicos aprobados.
-- **Herencia de B18:** ZIP `JOR-B18-S1-V2-ESTIMADOR-LABORAL-20261114-UNICO.zip`, SHA `F7FF2C839097566CC8987AA246C02C916A73C68917093EFD485364E07A561944`. La revisión anterior confirmó replay 6/6 fuentes y fixtures PHP 11 checks independientes; B18 sigue `PARTIAL_HOST_OR_CONTRACT`. No se repitieron esas pruebas en esta auditoría B19.
-- **No observado:** checkout vivo de `D:\codex\Jornato`, auth/Storage realmente activos allí, MariaDB QA, permisos HR aprobados, almacenamiento real privado/cifrado, escáner malware, productor PDF, proveedor de firma y build/navegador. **No afirmar B19 PASS, P0 explotado ni L5 runtime**. Las observaciones a continuación son **defectos del prompt/ausencias de instrucciones**, salvo que se indique claramente otro origen.
-
-## 2. Resultado ejecutivo y correcciones materiales de V2
-
-**VEREDICTO:** `B19_V1=REQUIRES_INSTRUCCIONES_CAUSALES`; `B19_V2=PROMPT_AUDITADO_LISTO_PARA_CODEX`; `B19_RUNTIME=NOT_EXECUTED`; `RELEASE_APPROVED=NO`.
-
-**Ajustes que evitarán un B19-S2 correctivo:** clave de idempotencia y huella canónica (201/200/409); transacción DB **corta** que no cubre IO de archivos; manejo de colisiones de versiones y fallos; explicitación de crash y huérfano NO resuelto automáticamente; validación de bytes acotados **antes** de emitir descarga; prueba privada con `Storage::fake` distinguida de privacidad de despliegue; y matriz de 42 oráculos con `evidence_scope` para no fabricar PASS. Se conserva toda funcionalidad esencial B19 (checklist, plantilla QA, PDF condicionado, firma externa no verificada, descarga/documento). No se agregan colas, SaaS, frameworks ni auth.
-
-**Regla judicial:** la corrección de un defecto de **instrucciones** no implica un defecto demostrado de **código**; no existe aún un código B19 ejecutado y compartido. No se declara «vulnerabilidad explotada» por un caso que todavía no se ha implementado.
-
-## 3. Diez pasadas como VERDUGO — refutar la orden original
-
-### V01 — Autoridad y no repetición
-
-**Qué hice:** Inspeccioné §1–§3 de V1, la continuidad documental y el canon L1–L6. B19 sigue NOT_EXECUTED; B18 tiene 11 checks PHP independientes, pero no DB/portal real.
-
-**Contraargumento / riesgo:** Una orden nueva podría repetir auditorías antiguas o tomar los acuerdos de SPEC V5 como permisos jurídicamente aprobados.
-
-**Decisión justificada:** Dejar B13–B18 como evidencia heredada; B19 es el único desarrollo y el estado de contratos sigue bloqueado.
-
-- **L1:** El núcleo documental usa Laravel y disk existentes, no rehace B18.
-- **L2:** No se duplican las seis leyes en otro archivo de código ni una SPEC nueva.
-- **L3:** No se atribuye un error hipotético a B18 para justificar cambios.
-- **L4:** UX-20 es referencia de diseño, no licencia comercial.
-- **L5:** Los 11 checks previos no certifican la nueva persistencia.
-- **L6:** Una sola entrega B19 debe preceder a B20 sin S2 automático.
-
-### V02 — Autorización e IDOR
-
-**Qué hice:** Contrasté V1 §4 autorización, §6 negativos y O02–O10/O24. El gate HR y login web continúan sin contrato acreditado.
-
-**Contraargumento / riesgo:** La frase «actingAs y QA» es insuficiente si Codex registra rutas abiertas o reusa owner/admin como HR.
-
-**Decisión justificada:** V2 exige autorización por operación y tenant, y sin contrato no publica nuevas rutas; tests directos de service con contexto ficticio.
-
-- **L1:** Una policy real existente es suficiente; no se construye otra auth.
-- **L2:** No se copian roles inventados de B16/B17 al módulo documental.
-- **L3:** La causa de acceso indebido es identidad/tenant, no un botón oculto.
-- **L4:** La UI muestra RESTRICTED, no «Subir» operativo por defecto.
-- **L5:** Unit/actingAs no certifican flujo comercial de acceso.
-- **L6:** Gate cerrado permite desarrollar el owner sin otra discusión de login.
-
-### V03 — Idempotencia con carrera
-
-**Qué hice:** Leí V1 §4 «la operación debe ser idempotente» y O22 sin clave ni fingerprint ni UNIQUE definidos.
-
-**Contraargumento / riesgo:** Dos subidas simultáneas podrían crear dos versiones, o una segunda petición distinta con mismo identificador recibir aceptación indebida.
-
-**Decisión justificada:** V2 fija request UUID, fingerprint canónico, UNIQUE compuesto, respuesta 201/200/409 y relectura tras conflicto.
-
-- **L1:** Índice en versión/operación existente antes que una tabla nueva.
-- **L2:** No repetir el ledger de B17 ni usar un cache paralelo.
-- **L3:** La UNIQUE DB y la relectura corrigen la carrera de raíz.
-- **L4:** Una carga reintentada no crea duplicados visibles al empleado.
-- **L5:** Mock secuencial NO equivale a carrera InnoDB PASS.
-- **L6:** Un algoritmo único permite a Codex implementar sin diseñar otro protocolo.
-
-### V04 — Transacción que engloba IO
-
-**Qué hice:** Analicé V1 §4 «validar y reservar en transacción, escribir» y O20–O21. No hay regla sobre duración de locks.
-
-**Contraargumento / riesgo:** Se podría mantener un bloqueo de fila durante una descarga lenta, deadlock o fallo de storage, afectando fiabilidad y rendimiento.
-
-**Decisión justificada:** V2 recibe/valida/escribe key nueva antes, y limita DB::transaction a lock+inserts+evento.
-
-- **L1:** Key privada definitiva evita staging distribuido y rename adicional.
-- **L2:** No instalar colas/jobs/compensadores generales.
-- **L3:** Separar IO y locks ataca latencia y contención real.
-- **L4:** La UI informa ERROR, no documento exitoso antes del commit.
-- **L5:** DB real con fault injection queda NOT_RUN sin entorno aislado.
-- **L6:** No crear una fase «arquitectura de archivos» distinta de B19.
-
-### V05 — Ventana de caída y huérfanos
-
-**Qué hice:** Confronté exigencia V1 de compensación y la realidad de filesystem y DB no atómicos.
-
-**Contraargumento / riesgo:** El proceso puede morir después de escribir bytes y antes de COMMIT: try/catch no garantiza limpiar ese huérfano.
-
-**Decisión justificada:** V2 delimita delete solo de key propia en fallo capturable, y deja reconciliación de crash pendiente sin barridos destructivos.
-
-- **L1:** Una recuperación conservadora es mejor que una infraestructura nueva.
-- **L2:** No crear tarea programada de limpieza ni logs con ruta sensible.
-- **L3:** No prometer transacción distribuida corrige el supuesto falso.
-- **L4:** No mostrar éxito si solo existe el objeto sin evento.
-- **L5:** No hay prueba legítima de cero huérfanos ante kill -9.
-- **L6:** La limitación queda en B21 sin detener el vertical sintético.
-
-### V06 — Versionado monotónico y alias
-
-**Qué hice:** Revisé V1 O17–O19, §5.C y ausencia de lockForUpdate explícito.
-
-**Contraargumento / riesgo:** Una prueba de v1→v2 secuencial no certifica orden ni evita sobrescribir al aumentar concurrencia.
-
-**Decisión justificada:** V2 fija lock sobre Document para asignar `version_no`, UNIQUE(doc_id,version_no), nueva key y no UPDATE de versiones.
-
-- **L1:** Reusar DocumentVersion existente basta; no snapshot ledger extra.
-- **L2:** No copiar binarios para «versionar» una key compartida.
-- **L3:** UNIQUE más bloqueo atiende la causa, no reintentos ciegos.
-- **L4:** Versiones anteriores siguen disponibles solo a lector autorizado.
-- **L5:** Concurrencia 2 conexiones DB requerida para PASS de carrera.
-- **L6:** Un test sintético positivo más DB gate evita B19-S2 por ceremonia.
-
-### V07 — Descarga íntegra y memoria
-
-**Qué hice:** Comparé V1 §5.D «hash antes de entregar» y su ausencia de un límite real al leer.
-
-**Contraargumento / riesgo:** Codex podría usar `Storage::get()` sin tope, producir O25 PASS con archivo pequeño y exponerse a consumo arbitrario ante un objeto alterado.
-
-**Decisión justificada:** V2 fija límite de bytes 2 MiB QA, buffer max+1, hash previo a cualquier emisión y fallo cerrado.
-
-- **L1:** Buffer acotado es razonable en el límite QA; no streamer complejo.
-- **L2:** No crear una segunda capa de caché o CDN para descarga.
-- **L3:** La vulnerabilidad reside en lectura no acotada, no en la cabecera HTTP.
-- **L4:** Archivo corrupto no provoca descarga parcial al usuario.
-- **L5:** Fake Storage prueba bytes, no disponibilidad real ni reposo cifrado.
-- **L6:** Prueba focal del límite sustituye auditoría de todo el servidor.
-
-### V08 — Privacidad, MIME y antimalware
-
-**Qué hice:** Analicé §5.B/O12–O16/O37 y la tentación de tomar magic `%PDF` como seguridad.
-
-**Contraargumento / riesgo:** Un PDF con extensión válida no está escaneado; rechazar TODO Unicode puede romper nombres legítimos, y el filename no debe ser key.
-
-**Decisión justificada:** V2 separa filename de presentación y key privada, exige contenido y tamaño acotado, deja malware/PHI/retención cerrados.
-
-- **L1:** Un fixture estructuralmente válido basta para funcionalidad QA.
-- **L2:** No instalar scanner o PDF vendor solo para decir PASS.
-- **L3:** El problema real es exposición no autorizada, no la presencia de Unicode seguro.
-- **L4:** Display Unicode seguro puede ser legible y escapado.
-- **L5:** MIME/finfo no demuestra malware-free ni cifrado.
-- **L6:** Se avanza con datos ficticios y sin uploads comerciales.
-
-### V09 — Firma, PDF y entrega
-
-**Qué hice:** Revisé V1 §5.E–F y O29–O36 frente a SPEC V5 MOD-11.
-
-**Contraargumento / riesgo:** Un hash/preview o filename signed.pdf puede confundirse con firma verificada, y «solicitar entrega» con acuse.
-
-**Decisión justificada:** V2 mantiene template QA y versiones, PDF sólo si productor existente probado, copy UNVERIFIED y delivery sin ACK.
-
-- **L1:** Reusa render Blade, no construir PKI ni tercero de firma.
-- **L2:** No duplicar plantillas legales ni módulo de mensajería.
-- **L3:** Separar los hechos corrige el falso vínculo entre hash y firma.
-- **L4:** La interfaz muestra BORRADOR/NO VERIFICADO inequívocamente.
-- **L5:** Sin proveedor/firma, firma real siempre NOT_RUN.
-- **L6:** B19 produce evidencia útil y permite seguir B20 sin inventos.
-
-### V10 — Custodia, matriz y falsos PASS
-
-**Qué hice:** Contrasté O01–O42 con estados permitidos y que el ZIP B18 no contiene código local íntegro en GitHub.
-
-**Contraargumento / riesgo:** «42 oráculos» puede confundirse con 42 ejecuciones; reproducir sólo git HEAD perdería untracked. Storage::fake no acredita privacidad del disk real.
-
-**Decisión justificada:** V2 preserva 42 IDs, añade evidence_scope, copia preestados binarios, ZIP único y gate production storage separado.
-
-- **L1:** Una tabla de test y un manifest son suficientes.
-- **L2:** Sin 42 suites duplicadas ni segundo paquete de evidencias.
-- **L3:** La raíz del falso PASS es nivel de evidencia mal expresado.
-- **L4:** Estados UI PASS y BLOCKED se distinguen.
-- **L5:** L5 externo no lo crea el propio Codex con sus logs.
-- **L6:** Permite aceptar B19 acotado y pasar al siguiente módulo.
-
-## 4. Diez pasadas como JUEZ — contradecir soluciones excesivas
-
-### J01 — ¿Suspender B19 hasta login HR real?
-
-**Qué hice:** Contrapuse el riesgo V02 al hecho de que el núcleo documental admite pruebas directas con sujeto sintético sin rutas comerciales.
-
-**Contraargumento / riesgo:** Suspender toda implementación repetiría el bloqueo B16/B17 sin mejorar seguridad.
-
-**Decisión justificada:** Rechazo suspensión; aceptar servicio+tests sin rutas públicas y conservar WEB_REAL=BLOCKED.
-
-- **L1:** Implementar dueño del dato sin segundo login.
-- **L2:** No inventar permiso «document.manage» si no está aprobado.
-- **L3:** El bloqueo es frontera de acceso, no ausencia del servicio.
-- **L4:** La UI bloqueada no promete capacidad que carece.
-- **L5:** Feature tests sintéticos no prueban login real.
-- **L6:** Seguimos con B19 sin crear B16-S2.
-
-### J02 — ¿Añadir microservicio y cola de almacenamiento?
-
-**Qué hice:** Consideré la ventana de inconsistencia V04–V05 y opciones de saga/outbox/jobs.
-
-**Contraargumento / riesgo:** Esas piezas serían infraestructura extra sin contrato/entorno QA y complicarían el WIP.
-
-**Decisión justificada:** Rechazo; key nueva, transacción DB corta, delete compensatorio y reserva de crash.
-
-- **L1:** Transacción+servicio existentes son suficientes.
-- **L2:** No replicar outbox B14 para cargas privadas.
-- **L3:** El crash no se resuelve con una cola no probada.
-- **L4:** Estado UNAVAILABLE es preferible a falso «Guardado».
-- **L5:** No certificar recuperación tras muerte del proceso.
-- **L6:** No posponer B20 para construir infraestructura especulativa.
-
-### J03 — ¿Rechazar cualquier PDF sin antivirus?
-
-**Qué hice:** Opondría «no malware-free» a la exigencia de un recorrido vertical verificable.
-
-**Contraargumento / riesgo:** Bloquear también PDFs sintéticos impediría probar storage, hash y versiones.
-
-**Decisión justificada:** Permitir SOLO fixtures sintéticos aislados; negar producción hasta controles aprobados.
-
-- **L1:** Utilizar PDF fixture pequeño de test sin nuevos servicios.
-- **L2:** No instalar scanner como parche al falso PASS.
-- **L3:** La amenaza surge de aceptar archivos no confiables reales.
-- **L4:** El usuario ve estado no verificado, nunca «clean».
-- **L5:** QA fake no valida antivirus.
-- **L6:** Se entrega el flujo, gate comercial abierto.
-
-### J04 — ¿Usar checksum de descarga en streaming ilimitado?
-
-**Qué hice:** Evalué el trade-off de memoria V07 y necesidad de asegurar bytes antes de primera emisión.
-
-**Contraargumento / riesgo:** Transmitir mientras calcula hash expone bytes parciales si el final es corrupto.
-
-**Decisión justificada:** Para el límite QA fijado, buffer acotado y hash previo; mayores archivos quedan BLOCKED.
-
-- **L1:** No crear sistema multipart ni temp-file complejo.
-- **L2:** No segundo algoritmo hash diferente en API y servicio.
-- **L3:** Se corrige la emisión prematura desde su origen.
-- **L4:** El usuario no recibe un PDF corrupto parcialmente.
-- **L5:** El test de contenido grande necesita medir bytes, no sólo header.
-- **L6:** Permite cierre focal sin expandir a infraestructura masiva.
-
-### J05 — ¿Publicar endpoints bajo APP_ENV testing?
-
-**Qué hice:** Contrapuse facilidad de QA con exposición de rutas en build incorrecto.
-
-**Contraargumento / riesgo:** Un route «temporal» podría sobrevivir a configuración y exponer documentos bajo un flag.
-
-**Decisión justificada:** Rechazo; tests del servicio y Feature aislados, rutas sólo con guard+policy reales.
-
-- **L1:** No nueva auth ni middleware bypass.
-- **L2:** No dispersar cierres test-only por docenas de rutas.
-- **L3:** Evitar ruta insegura corrige exposición en su propietario.
-- **L4:** CTA deshabilitada y explicación visible.
-- **L5:** Browser real no probado con actingAs.
-- **L6:** No exigir deploy ni acceso a red para B19.
-
-### J06 — ¿Instalar librería PDF, firma o cifrado nuevo?
-
-**Qué hice:** Comparé alcance MOD-11 y gates actuales de firma, productor y encriptación.
-
-**Contraargumento / riesgo:** Una biblioteca añadida solo para pasar tests no sustituye verificación legal, clave ni política de acceso.
-
-**Decisión justificada:** Rechazo instalaciones; entregar preview HTML versionada y copia externa unverified si faltan productores.
-
-- **L1:** Reusar sólo proveedor existente y probado.
-- **L2:** No duplicar otras bibliotecas del repositorio.
-- **L3:** La causa del bloqueo es aprobación/integración, no clase faltante.
-- **L4:** Etiqueta BORRADOR evita falsa validez.
-- **L5:** PDF/sello/cifrado real requieren pruebas distintas.
-- **L6:** B19 sigue productivo sin inventar ley ni vendor.
-
-### J07 — ¿Crear una tabla por cada función documental?
-
-**Qué hice:** Revisé entidades de V1 y el riesgo de tablas para checklist, plantilla, delivery, firma, idempotencia, auditoría.
-
-**Contraargumento / riesgo:** Nueve tablas nuevas aumentarían migraciones sin consumidor comercial validado.
-
-**Decisión justificada:** Rechazo; reutilizar Document/Version/Event, mantener catálogos QA ligeros salvo necesidad demostrada.
-
-- **L1:** Máximo número de tablas es el mínimo técnico real, no un número fijo.
-- **L2:** No duplicar datos en otra bitácora de evento.
-- **L3:** Únicamente FK+UNIQUE corrigen duplicados.
-- **L4:** La UI puede leer la proyección sin persistir estados falsos.
-- **L5:** Migraciones DB siguen NOT_RUN si no hay instancia.
-- **L6:** Entregar vertical suficiente sin «modelo perfecto» previo.
-
-### J08 — ¿Convertir los 42 oráculos en 42 tests duplicados?
-
-**Qué hice:** Examiné si cada criterio requiere ejecución independiente o si varias expectativas comparten un test real.
-
-**Contraargumento / riesgo:** Exigir 42 suites aumentaría ruido y daría incentivos a mocks triviales.
-
-**Decisión justificada:** Conservar los 42 criterios y una batería pequeña con evidencias trazables a cada fila.
-
-- **L1:** Una prueba puede cubrir varios oráculos si demuestra sus expectativas.
-- **L2:** No repetir php -l B18 ni pipelines anteriores.
-- **L3:** Un solo test causal por error, no parches para la matriz.
-- **L4:** Los estados no ejecutados son honestos con usuario.
-- **L5:** Cada PASS necesita comando+log+scope; no un texto «OK».
-- **L6:** Entrega de un ZIP, no 42 entregables aislados.
-
-### J09 — ¿Exigir MariaDB/Android/browser para aceptar núcleo B19?
-
-**Qué hice:** Contrasté falta de `.env.testing` y el scope Storage fake/test de código.
-
-**Contraargumento / riesgo:** No hay infraestructura aislada acreditada; Docker compartido está prohibido por custodia.
-
-**Decisión justificada:** Rechazo el falso gate de bloqueo total; PASS host acotado posible, DB/browser/Android siguen pendientes.
-
-- **L1:** Tests PHP/Storage fake aprovechan recursos disponibles.
-- **L2:** No crear MariaDB/docker-compose extra para B19.
-- **L3:** El problema es entorno, no defecto demostrado del algoritmo.
-- **L4:** UI QA puede ser evaluada por render host sin promesa comercial.
-- **L5:** PASS_RUNTIME_REAL exige su entorno exacto y L5 independiente sigue NOT_RUN.
-- **L6:** La ausencia de QA de entorno no desencadena B19-S2 automático.
-
-### J10 — ¿Volver a auditar B19 V2 antes de ejecutarla?
-
-**Qué hice:** Contrapuse cada cambio V2 a V1, conservando O01–O42 sin cambios y el siguiente vertical B20 definido.
-
-**Contraargumento / riesgo:** Otra ronda sin nueva evidencia sería pingpong; pero no debemos llamar V2 PASS de runtime.
-
-**Decisión justificada:** Aprobar la orden V2 documentalmente, pasar a Codex y exigir paquete único.
-
-- **L1:** La solución mínima ya está especificada por owner y algoritmo.
-- **L2:** No generar V3, ADR paralelo ni segunda lista de leyes.
-- **L3:** No existe hallazgo de producto B19 aún porque NO fue ejecutado.
-- **L4:** El resultado comercial sigue bloqueado aunque la UI funcione en host.
-- **L5:** La verificación externa ocurrirá al recibir ZIP y observar evidencia.
-- **L6:** NEXT_OWNER=CODEX_LUNA, después CHATGPT→B20.
-
-## 5. Matriz de trazabilidad V1→V2 y decisiones fijas
-
-| Concern V1 | Cambio V2 | Cómo se prueba o queda pendiente | Estado antes de Codex |
-|---|---|---|---|
-| Idempotencia genérica de ingesta | UNIQUE `(company_id,actor_id,request_id)` + fingerprint canónico y 201/200/409 | Intento repetido mismo hash, cambio de payload, dos transacciones DB aisladas | `SPEC_FIXED`, `DB_RUN=NO` |
-| DB + storage | Key privada nueva antes de transacción corta; borrar únicamente objeto propio en fallo | Fallo storage, fallo DB, inyección crash reconocida como limitación | `SPEC_FIXED`, `ATOMIC_CROSS_STORE=NO` |
-| Concurrencia versión | `lockForUpdate` del documento + UNIQUE(version_no) y retry acotado | Dos conexiones MariaDB QA si existe; si no NOT_RUN | `SPEC_FIXED`, `DB_RUN=NO` |
-| Descarga y checksum | Límite 2 MiB QA, buffer `max+1`, hash antes de salida, headers privados | Bytes reales, corrupto/missing/grande sin emisión parcial | `SPEC_FIXED`, `HOST_RUN=NO` |
-| `Storage::fake` | Nivel de evidencia fake ≠ privacidad/cifrado del disk de producción | Fake Storage host + revisión config, product audit aparte | `SPEC_FIXED`, `PRODUCTION_STORAGE_AUDIT=NO` |
-| PDF/plantilla/firma | Borrador versionado, PDF existente solo si verificado, copia externa UNVERIFIED | Prueba XSS, versiones, guard, no false signed/delivered | `SPEC_FIXED`, `LEGAL/SIGNATURE=BLOCKED` |
-| 42 oráculos | Mismos O01–O42 + scope/command/fixture por criterio | Matriz no infla PASS a partir de mocks | `SPEC_FIXED`, `TESTS_B19=NOT_RUN` |
-| WIP y handoff | Baselines tracked/untracked, patch byte-exacto, un ZIP y continuidad docs-only | Control externo al recibir entrega | `NEXT_OWNER=CODEX_LUNA` |
-
-### 5.1 Límites de aceptación no negociables
-
-No hacer release ni afirmar B19 comercial con `actingAs`, fixture PDF o fake disk. El status `PASS_HOST_FAKE_STORAGE_ONLY` significa que se probaron bytes, hashes y acceso simulado local, **no** que haya cuenta/permiso reales, cifrado at rest, antimalware, firma jurídica, consentimiento o entrega efectiva. Se preservan restricciones B13–B18 y el plan B20 reclutamiento → B21 QA independiente/integración/seguridad → B22 sólo GO del propietario. **No abrir B19-S2 automáticamente** por ausencia de MariaDB, proveedor PDF o login real.
-
-## 6. Contrato de GitHub y de transferencia de chat
-
-El **único prompt** ejecutable es V2, debe guardarse como texto completo en `docs/CODEX_LOTE_ACTUAL.md` del PR #2 documental; esta auditoría completa en `docs/AUDITORIA_DIRECTIVA_ACTUAL.md`; `docs/JORNATO_CONTINUIDAD.md` debe contener los hashes, la versión vigente y los gates. `main` y el WIP D: siguen sin escritura ni despliegue. Si el chat termina, leer primero esas tres rutas y la última entrega ZIP nueva. No volver a leer y reauditar B18 ni regenerar la orden V1 por costumbre.
-
-**ÚNICO ZIP esperado:** `JOR-B19-S1-V2-PRIVATE-DOCUMENT-VERTICAL-20261114-UNICO.zip`. Codex incluirá todos los cambios y pruebas en ese archivo, no reportes dispersos.
-
-**SIGUE CODEX LUNA.**
+# JORNATO — DICTAMEN FORENSE B19-S1 V2 · 10 VERDUGO + 10 JUEZ · DIRECCIÓN B20
+
+**Fecha:** 2026-11-14, America/Bogota. **Autoridad:** ChatGPT director técnico. **Estado B19:** `PARTIAL_HOST_OR_CONTRACT`. **Release:** `NO`.  
+**Fuentes examinadas:** ZIP user `JOR-B19-S1-V2-PRIVATE-DOCUMENT-VERTICAL-20261114-UNICO.zip` (SHA256 `4C906785C63B500B76B7088D5B65261CEB062BF7DB0EF70F4ADEE3357243B44D`), SOURCES PHP/Migration/Tests, logs/matrices, SPEC V5 MOD-12/UX-21/B20 y continuidad GitHub PR #2; PingPongLaw L1–L6 canon commit `84e961cadf482d234f4c0ee2ca60e8c7e9b388e8`. **No se inspeccionó directamente D: ni MariaDB.**
+
+## 1. Evidencia atribuida correctamente
+
+- **Verificación ejecutada por director sobre ZIP recibido:** 136.437 bytes, SHA exacto, 70 entradas sin duplicados/traversal y CRC PASS; manifest CSV de 69 filas verifica SHA256+bytes 69/69; patch `--dry-run` y `apply` GNU desde baselines en copia aislada reconstruyen 17/17 SOURCES byte exactas; PHP 8.4 `php -l` independiente 17/17 PASS. No se reejecutó Laravel PHPUnit de Codex (ausencia de repo completo y entorno QA).
+- **Evidencia aportada por Codex:** `phpunit --filter EmployeeDocumentVaultTest` 16 tests/96 assertions PASS, Laravel Storage::fake más repo en memoria. TEST_MATRIX tiene 42 filas: 35 `PASS_EXECUTED` (varias `STATIC_ONLY`), 3 `BLOCKED_CONTRACT`, 3 `NOT_APPLICABLE_EXPLAINED`, 1 `NOT_RUN_ENV`. Eso NO es 42 pruebas independientes y no certifica SQL ni IAM.
+- **Modelo/servicio revisados:** 16 fuentes nuevas + AppServiceProvider modificado, autorizador productivo DENY-ALL, cero rutas B19, versión append-only por aplicación, request-fingerprint unique schema, private files de 2 MiB y checksum antes de download. Migración real y concurrencia sin probar.
+- **Custodia WIP:** Codex reporta 199 rutas previas, 198 byte idénticas y AppServiceProvider cambiada, 16 nuevas, staged 0. Cache PHPUnit ignorado no tiene hash pre, sin afirmar preservación exacta. Main remoto no representa WIP.
+- **Riesgos B19 abiertos sin P0/P1 demostrado:** `DB_ATOMICITY=IMPLEMENTED_DB_UNRUN`, `MALWARE_SCAN=NO_VERIFICADO`, `SIGNATURE_VERIFIED=NO`, `HR_PERMISSION=BLOCKED_CONTRACT`, `PRIVATE_STORAGE_PRODUCTION=NOT_VERIFIED`, `WEB_REAL=BLOCKED_CONTRACT`, `L5_INDEPENDENT_RUNTIME=NOT_RUN`. Ninguno se convierte en permiso automático para ATS.
+
+## 2. 10 pasadas VERDUGO y 10 JUEZ con SEIS juicios distintos por pasada
+
+**Método:** cada pasada declara hipótesis, evidencia, resolución y justificación adversarial. Los 120 juicios L1–L6 son **revisión documental**, NO tests runtime. La primera mitad busca falsar la decisión de avanzar; la segunda cuestiona las soluciones excesivas. Los hallazgos aplicables a B20 ya se convirtieron en la orden completa.
+
+### V01 — Trazabilidad ZIP vs runtime
+**Hipótesis adversarial:** PASS de integridad permite aceptar artefacto; no server real.
+**Evidencia:** 70 entradas CRC, 69/69 manifest y 17/17 patch se reprodujeron; PHPUnit no se reejecutó.
+**Fallo/directiva:** Delimitar éxito a paquete/host. **Motivo:** El ZIP fue recibido y verificado; no implica release.
+
+- **L1 KISS+Ponytail:** 17 rutas de código, no rediseño.
+- **L2 Antirruido:** No duplicar auditorías B18.
+- **L3 Causa raíz:** Ningún parche al core B19 requerido.
+- **L4 UX humana:** Reporte distingue estados reales.
+- **L5 Evidencia independiente:** PHP lint independiente no es PHPUnit.
+- **L6 Antipingpong:** Mover a B20 sin B19-S2 ritual.
+
+### V02 — Versionado / WIP
+**Hipótesis adversarial:** La custodia es atribuida a Codex; los archivos locales no son visibles.
+**Evidencia:** 199 rutas previas, 198 intactas + AppServiceProvider + 16 nuevas, staging 0 según log.
+**Fallo/directiva:** Hacer inventario nuevo solo antes de B20. **Motivo:** No inferir cambios locales a partir de GitHub.
+
+- **L1 KISS+Ponytail:** Comparar hashes existentes.
+- **L2 Antirruido:** Respetar archivos untracked.
+- **L3 Causa raíz:** No usar main como baseline.
+- **L4 UX humana:** Documentar ruptura visible.
+- **L5 Evidencia independiente:** Git local no auditado aquí.
+- **L6 Antipingpong:** Una captura pre/post.
+
+### V03 — Authorization fail closed
+**Hipótesis adversarial:** Un core privado sin rutas comerciales no está terminado, pero no fuga.
+**Evidencia:** Binding AppServiceProvider a DenyAllDocumentAccessAuthorizer; rutas B19 sin cambios.
+**Fallo/directiva:** Preservar DENY_ALL y construir B20 con su propia policy cerrada. **Motivo:** Sin contrato HR, crear public endpoint sería peor.
+
+- **L1 KISS+Ponytail:** Una policy ATS.
+- **L2 Antirruido:** No copiar permissions de owner.
+- **L3 Causa raíz:** No crear rutas sin guard.
+- **L4 UX humana:** UI restringida honesta.
+- **L5 Evidencia independiente:** Lectura estática de binding sí.
+- **L6 Antipingpong:** No abrir subfase B19.
+
+### V04 — MariaDB/atomicidad
+**Hipótesis adversarial:** UNIQUE y transacciones existen pero no han corrido en DB.
+**Evidencia:** Migración InnoDB, FK, locks, unique y DB 127.0.0.1:1 placeholder.
+**Fallo/directiva:** DB gate B21; core B20 con QA host. **Motivo:** Forzar Docker compartido no demuestra integridad del entorno esperado.
+
+- **L1 KISS+Ponytail:** FK focal, 4 tablas máximo.
+- **L2 Antirruido:** No tocar schema B19.
+- **L3 Causa raíz:** Unique y locks B20.
+- **L4 UX humana:** No mostrar DB PASS.
+- **L5 Evidencia independiente:** DB B19 NOT_RUN confirmado.
+- **L6 Antipingpong:** No volver a montar la suite B19.
+
+### V05 — Reproducción patch
+**Hipótesis adversarial:** Se reconstruyeron fuentes B19, no WIP completo.
+**Evidencia:** 17/17 byte exact tras aplicar diff a baseline aislado.
+**Fallo/directiva:** Exigir mismo patrón B20; no sobreafirmar. **Motivo:** El parche reproducible demuestra trazabilidad del lote, no integridad remota.
+
+- **L1 KISS+Ponytail:** Patch aislado simple.
+- **L2 Antirruido:** No copiar el repo entero.
+- **L3 Causa raíz:** Conservar preimagen AppServiceProvider.
+- **L4 UX humana:** Logs legibles.
+- **L5 Evidencia independiente:** Patch local sí ejecutado.
+- **L6 Antipingpong:** Una sola reproducción B20.
+
+### V06 — CV y malware
+**Hipótesis adversarial:** PDF sintético B19 no autoriza CV de candidatos reales.
+**Evidencia:** Storage::fake y NO_VERIFICADO; antivirus productivo ausente.
+**Fallo/directiva:** CV solo sintético QA, sin endpoint/descarga comercial. **Motivo:** Finfo/estructura PDF no reemplazan escáner.
+
+- **L1 KISS+Ponytail:** Reusar private-files.
+- **L2 Antirruido:** No forzar B19 DocumentVault.
+- **L3 Causa raíz:** Adaptador B20 con prefijo propio.
+- **L4 UX humana:** Mostrar NO_VERIFICADO.
+- **L5 Evidencia independiente:** Storage fake separado de producción.
+- **L6 Antipingpong:** Sin reparación B19.
+
+### V07 — Consentimiento de candidatos
+**Hipótesis adversarial:** El plan original B20 presupone público, aviso, retención y derechos.
+**Evidencia:** SPEC V5 candidata MOD-12, sin política aprovada/canal público.
+**Fallo/directiva:** Bloquear publicación pública hasta contrato/antibot; construir dominio QA. **Motivo:** Una URL revocable sin privacidad no equivale a consentimiento.
+
+- **L1 KISS+Ponytail:** Token hash en vacancy.
+- **L2 Antirruido:** No tabla adicional de tokens.
+- **L3 Causa raíz:** Token random/expiry/revoke.
+- **L4 UX humana:** Estados PUBLIC_BLOCKED explícitos.
+- **L5 Evidencia independiente:** No hay pruebas rate limit público.
+- **L6 Antipingpong:** Se testea token internamente.
+
+### V08 — Identidad/tenancy
+**Hipótesis adversarial:** No equiparar login de trabajador o owner con recruiter.
+**Evidencia:** B19 HR permission bloqueado y B16 login web incompleto.
+**Fallo/directiva:** Default deny ATS; actor/tenant derivado server/fixture. **Motivo:** Nombres de roles no son grants.
+
+- **L1 KISS+Ponytail:** Una interfaz authorizer.
+- **L2 Antirruido:** No crear login ATS.
+- **L3 Causa raíz:** Company y actor validados.
+- **L4 UX humana:** Vista restricted.
+- **L5 Evidencia independiente:** No DB A/B real.
+- **L6 Antipingpong:** No pedir permiso nuevo en este lote.
+
+### V09 — Historial y entrevistas
+**Hipótesis adversarial:** Una agenda sin control de solapes puede aceptar doble reserva.
+**Evidencia:** No hay motor de entrevistas en B19; MOD-12 requiere entrevistas.
+**Fallo/directiva:** Lock/intervalos UTC e historial en B20; DB concurrency gate pendiente. **Motivo:** Tests secuenciales no demuestran race real.
+
+- **L1 KISS+Ponytail:** Una tabla interviews.
+- **L2 Antirruido:** No integrar calendario pago.
+- **L3 Causa raíz:** Lock para conflicto.
+- **L4 UX humana:** Reprogramar con historial.
+- **L5 Evidencia independiente:** Dos conexiones DB solo si disponibles.
+- **L6 Antipingpong:** Un solo ATS vertical.
+
+### V10 — Conversión a empleado
+**Hipótesis adversarial:** Shortlisted puede simular empleado creado y producir datos sensibles.
+**Evidencia:** B20 depende de B19 y contratos identidad/consentimiento no aprobados.
+**Fallo/directiva:** Handoff explícito bloqueado, ninguna inserción en sync_employees/users. **Motivo:** No hay permiso para promover candidato por status.
+
+- **L1 KISS+Ponytail:** Handoff sin tabla extra.
+- **L2 Antirruido:** No modificar B14/B19.
+- **L3 Causa raíz:** Núcleo segregado.
+- **L4 UX humana:** Etiqueta bloqueo comprensible.
+- **L5 Evidencia independiente:** Test negativo de conversión.
+- **L6 Antipingpong:** B21 integrará con contratos.
+
+### J01 — ¿Detener B20 por no haber login web?
+**Hipótesis adversarial:** No: el core puede avanzar cerrado.
+**Evidencia:** B19 ya demostró QA host sin rutas comerciales.
+**Fallo/directiva:** Implementar servicio y Blade QA, mantener deny-all. **Motivo:** El freno total impediría progreso sin aumentar seguridad.
+
+- **L1 KISS+Ponytail:** Una vertical sin público.
+- **L2 Antirruido:** Reutilizar Laravel actual.
+- **L3 Causa raíz:** No inventar Auth web.
+- **L4 UX humana:** No CTA pública.
+- **L5 Evidencia independiente:** Gates explícitos.
+- **L6 Antipingpong:** Paso directo B20.
+
+### J02 — ¿Reusar B19 documento de empleado para CV?
+**Hipótesis adversarial:** No: los scopes y su key no son del candidato.
+**Evidencia:** B19 permite solo `documents/UUID/UUID.pdf` y HR deny-all.
+**Fallo/directiva:** Reusar storage config; pequeño adaptador específico ATS QA. **Motivo:** Cambiar B19 para pasar tests debilita su frontera.
+
+- **L1 KISS+Ponytail:** No duplicar disco config.
+- **L2 Antirruido:** No romper B19.
+- **L3 Causa raíz:** Scope recruitment específico.
+- **L4 UX humana:** CV con estado NO_VERIFICADO.
+- **L5 Evidencia independiente:** QA storage fake.
+- **L6 Antipingpong:** No B19 regression total.
+
+### J03 — ¿Construir SPA y ATS externo?
+**Hipótesis adversarial:** No; Laravel/Blade ya operan.
+**Evidencia:** WIP contiene portal Blade B16.
+**Fallo/directiva:** Servicio+modelos+vistas focales. **Motivo:** Framework/servicio nuevo no está justificado.
+
+- **L1 KISS+Ponytail:** Monolito KISS.
+- **L2 Antirruido:** Sin deps nuevas.
+- **L3 Causa raíz:** No microservicio.
+- **L4 UX humana:** Vistas mobile claras.
+- **L5 Evidencia independiente:** PHP unit + render.
+- **L6 Antipingpong:** Una entrega.
+
+### J04 — ¿Crear enlace público como demo?
+**Hipótesis adversarial:** No; falta privacidad, antiabuso y policy.
+**Evidencia:** SPEC MOD-12 exige aviso/limit/rate/cv seguro.
+**Fallo/directiva:** Token QA interno sin route pública. **Motivo:** Un endpoint demo público sería un vector de fuga.
+
+- **L1 KISS+Ponytail:** Token en vacancy.
+- **L2 Antirruido:** No route temporal.
+- **L3 Causa raíz:** Validación revocación.
+- **L4 UX humana:** Mensaje PUBLIC_BLOCKED.
+- **L5 Evidencia independiente:** No HTTP real si no existe.
+- **L6 Antipingpong:** B21 gate de publicación.
+
+### J05 — ¿Eliminar CV del alcance para no tocar almacenamiento?
+**Hipótesis adversarial:** No; se puede probar lectura de PDF sintético aislada.
+**Evidencia:** B19 private-files con Storage::fake ya disponible.
+**Fallo/directiva:** Adaptador mínimo B20, no carga comercial. **Motivo:** Permite progreso sin tratar datos reales.
+
+- **L1 KISS+Ponytail:** 2 MiB límite.
+- **L2 Antirruido:** Reusar disk.
+- **L3 Causa raíz:** Cierre MIME+hash.
+- **L4 UX humana:** Estados honestos.
+- **L5 Evidencia independiente:** Storage fake verificable.
+- **L6 Antipingpong:** Sin parser nuevo.
+
+### J06 — ¿Una tabla por cada fase de selección?
+**Hipótesis adversarial:** No; cuatro tablas máximas bastan.
+**Evidencia:** Vacante/aplicación/entrevista/evento son granos distintos.
+**Fallo/directiva:** No añadir tablas para tokens, email, scoring. **Motivo:** Reduce migraciones y riesgo.
+
+- **L1 KISS+Ponytail:** Cuatro granos claros.
+- **L2 Antirruido:** No tablas de catálogo.
+- **L3 Causa raíz:** Evento append-only.
+- **L4 UX humana:** UI simple por etapa.
+- **L5 Evidencia independiente:** Schema solo lint sin DB.
+- **L6 Antipingpong:** No refactor B13.
+
+### J07 — ¿Tratar entrevista agendada como confirmada por correo?
+**Hipótesis adversarial:** No; calendario/mail no instalado/permitido.
+**Evidencia:** No hay conector email ATS aprobado.
+**Fallo/directiva:** Guardar fecha/estado, NOT_CONFIGURED entrega. **Motivo:** Persistencia de agenda ≠ recepción del candidato.
+
+- **L1 KISS+Ponytail:** Una sola agenda.
+- **L2 Antirruido:** Sin proveedor externo.
+- **L3 Causa raíz:** No emails sintéticos reales.
+- **L4 UX humana:** Estado pendiente explícito.
+- **L5 Evidencia independiente:** Test no envío.
+- **L6 Antipingpong:** B21 prueba proveedor si aprobado.
+
+### J08 — ¿Deducir consentimiento por solicitar empleo?
+**Hipótesis adversarial:** No; hay que versionar aviso y decisión expresos.
+**Evidencia:** No existe texto aprobado ni retención para ATS.
+**Fallo/directiva:** QA sintético y flag BLOCKED_CONSENT. **Motivo:** Un checkbox falso no es base legal.
+
+- **L1 KISS+Ponytail:** No PII en evidencia.
+- **L2 Antirruido:** No retención inventada.
+- **L3 Causa raíz:** Solicitud derechos sin borrar.
+- **L4 UX humana:** Aviso de bloqueo.
+- **L5 Evidencia independiente:** No consent real probado.
+- **L6 Antipingpong:** Decisión propietario/legal futura.
+
+### J09 — ¿Exigir MariaDB y browser real para etiquetar cada componente PASS?
+**Hipótesis adversarial:** No; diferenciar host/DB/browser con precisión.
+**Evidencia:** PHPUnit B19 usó memory + Storage::fake sin DB.
+**Fallo/directiva:** PASS_HOST_SCOPED, DB_REAL_NOT_RUN; nunca comercial. **Motivo:** Permite avance sin confundir prueba y producto.
+
+- **L1 KISS+Ponytail:** Tests focales.
+- **L2 Antirruido:** No rerun B13–B19.
+- **L3 Causa raíz:** No esconder env.
+- **L4 UX humana:** Reportes claros.
+- **L5 Evidencia independiente:** No L5 runtime.
+- **L6 Antipingpong:** B21 integra.
+
+### J10 — ¿Hacer diez auditorías adicionales antes de ejecutar Codex?
+**Hipótesis adversarial:** No; esta ronda documental cierra la dirección.
+**Evidencia:** L1–L6 se evaluaron 20 veces en director; falta B20 runtime.
+**Fallo/directiva:** Un prompt, ZIP y NEXT=CHATGPT; no B20-S2 ritual. **Motivo:** Más rondas sin hechos nuevos sería pingpong.
+
+- **L1 KISS+Ponytail:** Contrato preciso.
+- **L2 Antirruido:** Sin duplicar doc.
+- **L3 Causa raíz:** Causa raíz definida.
+- **L4 UX humana:** Flujo observable.
+- **L5 Evidencia independiente:** QA focal.
+- **L6 Antipingpong:** Ir a implementación.
+
+## 3. Decisión del juez y alcance exacto del siguiente lote
+
+**B19 queda aceptado solo en alcance host sintético**, no como servicio comercial ni DB validada. No se abre B19-S2 por falta de entorno. El siguiente bloque productivo es B20-S1 V1; ninguna prueba B13–B19 será reejecutada por ceremonia. El flujo ATS QA tendrá vacante, invitación token interno, postulación sintética, decisión, agenda y expediente temporal sin conversión a empleado. Los contratos de publicación pública, privacidad, RRHH, malware, revisión legal y consentimiento permanecen bloqueados. No asociar B20 al empleado ni al kiosco.
+
+**Riesgo conocido de B20:** un núcleo que funciona mediante `AllowSyntheticRecruitmentAccess` y `Storage::fake` es un avance técnico, no un ATS comercial operativo. Debe mostrar `PARTIAL_HOST_OR_CONTRACT`, no un falso PASS global. El portón B21 es una integración deliberada para completar B13–B20: auth web real, permisos, privacidad, MariaDB, pruebas navegador y seguridad pública, Android cuando aplique, asesoría jurídica y UX sin guía; B22 publicará solo después de GO escrito.
+
+## 4. Handoff de continuidad / ZIP
+
+**Siguiente actor:** CODEX LUNA. **Orden:** `CODEX_LUNA_JORNATO_B20_S1_V1_MACROBLOQUE_ATS_VACANTES_POSTULACIONES_ENTREVISTAS_SEGURAS_ZIP_UNICO_20261114.md` (texto íntegro en `docs/CODEX_LOTE_ACTUAL.md` del PR #2). **Salida exigida:** `JOR-B20-S1-V1-ATS-SECURE-QA-20261114-UNICO.zip` con fuentes, baselines, patch, logs, 40 oráculos, custody y manifest. **NEXT_OWNER al terminar:** CHATGPT. No stage, commit, push, merge o deploy del WIP; trabaja solo D:.
+
+**Control antirruido:** recordar que el último código verificable es el ZIP B19 adjunto, no el commit de documentos de GitHub. Los docs siguientes sustituyen V1 B19 como orden vigente, pero conservan el resultado histórico y sus gates sin borrar evidencia. No crear PR de producto ni fusionar documentación sin autorización.
