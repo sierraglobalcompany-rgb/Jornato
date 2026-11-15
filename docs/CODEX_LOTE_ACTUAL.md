@@ -1,140 +1,75 @@
-# CODEX LUNA — JORNATO B21-DB-DOCKER-QA S1 V2 · MACROBLOQUE ÚNICO DE INTEGRACIÓN REAL AISLADA
+# CODEX LUNA — JORNATO · B21-IPAM-RECOVERY S1 V1 · MACROBLOQUE ÚNICO DE DESBLOQUEO SEGURO Y PRUEBAS REALES
 
-**TASK_ID:** `JOR-B21-DB-DOCKER-QA-S1-V2-20261115`  
-**Fecha de orden:** 2026-11-15 (America/Bogota)  
-**Director y aceptación independiente:** ChatGPT. **Ejecutor local Windows:** Codex Luna.  
-**Autorización del propietario en esta conversación:** Docker Desktop **ya está instalado y otros proyectos Codex lo utilizan**. Se permite aprovecharlo **solo creando recursos nuevos y exclusivos de Jornato**, sin interferir ni modificar contenedores, imágenes en uso, volúmenes, redes, ajustes, puertos ni procesos ajenos. Esta autorización **NO** habilita permisos comerciales, cambio de otros proyectos, administración global Docker, datos laborales reales ni release.  
-**ÚNICA ORDEN VIGENTE. V2 sustituye V1 PRE-EJECUCIÓN, no se ha recibido ejecución Docker V1.** La entrega `B21-S1 V2` ya ocurrió (ZIP SHA256 `68CBA9DBBF91D0CE93B1618F15239A928EAA2AC8D66A6AD7F5EF83573C26F98B`) y terminó `PARTIAL` con 0 pruebas DB; **no repetirla**. Este lote modifica UNA precondición: proporciona MariaDB real de QA en un proyecto Docker Compose NUEVO de Jornato, y ejecuta pruebas focales pendientes. No pedir otra autorización si puedes cumplir exactamente los límites establecidos; si no, detener la parte insegura y devolver un bloqueo fundamentado, sin eludir políticas.
+**TASK_ID:** `JOR-B21-IPAM-RECOVERY-REAL-DB-QA-20261115`  
+**ESTA ES LA ÚNICA ORDEN EJECUTABLE ACTUAL.** No es B21-S2, no es otro informe de 24 oráculos ni una repetición de la auditoría de B21 Docker V2. Resuelve exclusivamente el bloqueo IPAM observado y, **si se supera con seguridad**, ejecuta en el mismo lote las pruebas reales pendientes.  
+**Director:** ChatGPT. **Ejecutor:** Codex Luna. **Propietario:** ya autorizó el Docker Desktop instalado **si y solo si no se interfiere con otros proyectos Codex**.  
+**Resultado de producto anterior:** `B21_GLOBAL=NOT_APPROVED`, `RELEASE_APPROVED=NO`; NO hay autorización para producción, RR. HH., ATS público, CV reales, nómina comercial, merge o deploy.  
+**Entrega:** exclusivamente `D:\codex\_REPORTES\Jornato\JOR-B21-IPAM-RECOVERY-20261115\delivery\JOR-B21-IPAM-RECOVERY-20261115-UNICO.zip` y una respuesta terminal de una línea con ruta, SHA256, resultado y `NEXT_OWNER=CHATGPT_DIRECTOR`.
 
-## 0. Resultado obligatorio y regla de trabajo
+## 0. Punto de partida VERIFICADO y prohibición de reauditar
 
-**El resultado principal NO es otro informe:** ejecutar MariaDB real de Jornato en Docker y obtener evidencia de migraciones + pruebas de concurrencia **DE LOS SERVICIOS B17/B19/B20**, no solo colisiones SQL artificiales, y fronteras tenant/PAT que el entorno permita. **Prioridad inequívoca:** (1) no interferencia, (2) DB aislada healthy, (3) migraciones reales, (4) tres carreras de servicios, (5) negativos tenant/PAT, (6) único ZIP. Si falla una puerta, ejecutar las posteriores SOLO si son independientes y seguras; no repetir preflight ni otros lotes. Entregar **un único ZIP** con todos los logs y resultados reales, y un resumen directo. Si aparece un defecto P0/P1 reproducible en el producto, corregir su **causa raíz focal** en la misma tanda si es seguro, sin parches cosméticos; si requiere contrato del propietario, no implementarlo ni crear permisos temporales.
+El ZIP real `JOR-B21-DB-DOCKER-QA-S1-V2-20261115-UNICO.zip` fue revisado por el director: 34.596 bytes, SHA256 `50FC5D2BA7660742D8892C633DD82780ED39B7D042C1C237BEA0F5BDA99EA739`; 26 entradas, CRC correcto y 25/25 archivos de manifiesto válidos. La ejecución Codex dejó: Engine **29.9.2**, `desktop-linux`, Compose **5.6.1**; imagen oficial `mariadb:11.8.9` **ya descargada** con RepoDigest `mariadb@sha256:d36f18d65a0459510b8b0f643b226a6d299e3206486e2b64ff20754a6d291707`; Compose válido; **un solo** `up -d --no-deps --no-build db` falló antes de crear red o contenedor con `all predefined address pools have been fully subnetted`. El datadir QA está vacío; secretos previamente generados existen en D: y NO se incluirán en ZIP. Había **105 contenedores registrados, 3 en ejecución**, todos los activos con IDs, estado y puertos estables. Las 237 rutas de WIP reportadas conservaron bytes/hashes pre-post; rama `codex/jor-b08-h4-domain-20261025`, HEAD `faf5fe283191f8b5a2724b397009512a2caec1b6`, staged=0. Estas son referencias preexistentes; volver a capturarlas de forma focal, no presumir que siguen iguales.
 
-**Rutas innegociables:**
+- No repetir las auditorías B13–B21 ni los 10×VERDUGO/10×JUEZ de B21 Docker V2. Reusar las matrices ya admitidas y reclasificar DO01–DO12 según evidencia real NUEVA.
+- No volver a descargar la imagen ni reinstalar Docker; verificar **localmente** que sigue el digest indicado. `pull_policy: never` obligatorio. Si no coincide o no existe, **STOP sin pull adicional** y registrar.
+- La causa raíz es **capacidad del asignador automático de subredes**. La solución permitida es **una única subred privada IPv4 explícita, sin solapes comprobados**, dentro de **la red NUEVA y PROPIA** de Compose Jornato. Docker Compose soporta `networks.<nombre>.ipam.config[].subnet` (documentación oficial: https://docs.docker.com/reference/compose-file/networks/).
+- **No usar** `docker network prune`, `docker system prune`, `docker volume prune`, `docker network rm` ajeno, `docker rm` ajeno, `docker compose down` ajeno, cambios de `daemon.json` / `default-address-pools`, reinicios Docker Desktop/Engine/WSL, `docker network connect` sobre proyectos ajenos, redes `external`, redes `host` o `bridge` por defecto compartidas, `network_mode: host`, firewall/VPN global, Docker context nuevo o instalación de utilidades pagas.
+- No pedir de nuevo autorización para Docker: el propietario la dio explícitamente condicionada al aislamiento. Si no puedes demostrarlo, detente sin cambios compartidos.
 
-- Proyecto y producto WIP: `D:\codex\Jornato` — conservar su HEAD/rama/staging y archivos tracked, untracked e ignorados previamente inventariados; NO sobrescribir ni limpiar.
-- Laboratorio propio **nuevo**: `D:\codex\_RUNTIME\Jornato\B21_DOCKER_QA\` (subcarpetas `compose`, `data`, `secrets`, `logs`, `harness`). **Solo aquí** crear Compose, datadir de QA, credenciales sintéticas y herramientas del experimento.
-- Evidencias: `D:\codex\_REPORTES\Jornato\JOR-B21-DB-DOCKER-QA-S1-V2-20261115\`.
-- Carpeta `delivery` con **solo** `JOR-B21-DB-DOCKER-QA-S1-V2-20261115-UNICO.zip`. No otro ZIP, no informes dispersos para entregar.
-- Proyecto Compose **único e invariable** `jornato_b21_qa_20261115`; servicio `db`. Pasar `-p jornato_b21_qa_20261115` y `-f` con ruta absoluta DEL COMPOSE NUEVO en **cada** comando `docker compose`. No confiar en el directorio actual, proyecto `default`, configuración Compose ajena ni `COMPOSE_PROJECT_NAME` externo.
+## 1. Reglas innegociables L1–L6 y límites
 
-**Nunca ejecutar:** `docker system prune`, `docker volume prune`, `docker image prune`, `docker network prune`, `docker container prune`, `docker compose down` sin revisar su alcance, `docker stop/restart/rm` sobre un ID ajeno, `docker compose up` desde carpeta de otro proyecto, Docker Desktop restart, WSL shutdown, cambios en daemon/contexts/configuración global, firewall, `netsh`, UAC, `C:`, producción o GitHub de producto. No hacer `git add/commit/push/merge/rebase/reset/clean/stash/checkout` ni deploy. No levantar nuevos servicios Windows ni instalar MariaDB MSI/ZIP fuera de Docker.
+L1 KISS/Ponytail: una MariaDB y una red propia, sin nueva arquitectura, sin microservicios ni persistencia de recursos fuera de D. L2 antirruido: una inspección focal de redes y rutas, **no** retest de módulos cerrados. L3 causa raíz: declarar CIDR verificado en Compose; no cambiar una red ajena ni ocultar el fallo. L4 UX: conservar flujos protegidos, no crear pantallas falsas para simular éxito. L5: separar `PASS_REAL`, `PASS_HOST`, `PASS_STATIC`, `BLOCKED_*`, `NOT_RUN_ENV` y L5 independiente del director; sin log de ejecución => NO PASS. L6 antipingpong: UN intento validado con el CIDR escogido; resolver y continuar en el mismo macrobloque; entregar un solo ZIP y devolver al director.
 
-**Si un comando o política corporativa bloquea Docker:** STOP de esa acción y `BLOCKED_POLICY`; no cambiar a otro daemon/contexto, no eludir y no volver a probar variantes para forzarlo. No se permite usar contenedores existentes de otros proyectos como sustituto. No tocar otras bases, aunque sus nombres incluyan `mysql` o `mariadb`.
+Prohibido stage/commit/push/merge/rebase/reset/stash/clean/checkout/deploy del repositorio `D:\codex\Jornato`. No borrar/modificar archivos ajenos, credenciales, cachés, AVD ni Docker global. Solo cambios justificados por un defecto NUEVO reproducido contra DB QA, con patch focal y replay de bytes; no corregir migraciones preventivamente. Mantener `B19/B20 DENY-ALL` y el puerto fail-closed de `server/phpunit.xml`; ningún producto comercial se habilita para test.
 
-## 1. Fase A — Preflight solo lectura y política de no interferencia (máximo una pasada)
+## 2. Trabajo A — Preflight SOLO lectura y selección de CIDR comprobablemente libre
 
-1. Abrir SOLO `D:\codex\Jornato`, el dictamen B21 y el checkpoint: `docs/JORNATO_CONTINUIDAD.md` de la rama documental (`sierraglobalcompany-rgb/Jornato`, PR #2 DRAFT); no descargar/clonar el repo remoto encima del WIP. Validar **estado real** del checkout local, `git rev-parse HEAD`, rama, `git status --porcelain=v1`, staged, WIP previos tracked/untracked/ignored cuando sea seguro. Capturar SHA+bytes de archivos existentes sujetos a cambios, sin copiar datos personales. No rehacer auditorías B13–B20 ni sus baterías host sin relación con esta integración.
-2. Ejecutar **solo lectura** `docker version`, `docker compose version`, `docker info` (redactar datos sensibles), `docker context show`, `docker ps -a` con nombres/ID corto/estado/proyecto/puertos, `docker compose ls`, `docker image ls` de MariaDB, uso de disco y RAM del equipo y del motor. **No asumir que Docker instalado implica Engine sano**: exigir Docker Engine tipo `linux`, contexto existente de la sesión y Compose moderno compatible; NO cambiar Docker a Linux containers ni contexto si están en modo Windows/otro contexto. **Seguridad loopback crítica:** Engine >= `28.0.0` o `BLOCKED_LOOPBACK_ENGINE_VERSION`; no modificar firewall/daemon para compensar. Versiones antiguas de Docker Engine podían exponer un puerto ligado a localhost a otros equipos de la misma LAN. No imprimir variables/secrets de contenedores de otros proyectos; **no** inspeccionar sus montajes, credenciales ni logs. Anotar `Docker_Engine_Context`, versión, contenedores ajenos antes, sus estados y puertos **sin datos privados**.
-3. Comprobar que el proyecto `jornato_b21_qa_20261115` y su espacio `D:\codex\_RUNTIME\Jornato\B21_DOCKER_QA` no pertenecen a otro actor/ejecución ni contienen datadir desconocido. Si existe, solo reutilizarlo si hay prueba verificable de propiedad de **esta misma** orden e integridad; si no, `BLOCKED_OWNERSHIP`, no `down`, no rename/destruir ni reutilizar nombres.
-4. Verificar recursos disponibles con umbrales conservadores y medibles: RAM libre real del host **>= 1.5 GiB** antes de arrancar, contenedor **máximo 768 MiB**, CPU máximo **1 vCPU**, **al menos 2 GiB libres en D:** para DB ficticia/logs y **al menos 1 GiB libre en Docker image/data root** antes de un pull nuevo; si no puede medir el margen de un recurso compartido, `BLOCKED_CAPACITY_NOT_VERIFIED`, no ejecutar pull ni `up`; comprobar el Docker data root / almacenamiento de imágenes, que podría residir en C:. **No mover Docker data root ni cambiar WSL** porque afectaría otros proyectos. Si una única imagen nueva pone en riesgo el disco compartido o la RAM, parar antes del pull y reportar `BLOCKED_CAPACITY`. El datadir **propio** debe quedar físicamente en D: mediante bind mount; no prometer que todas las capas internas de Docker estén en D:.
-5. La imagen a utilizar es **solo la oficial** `docker.io/library/mariadb:11.8.9` (LTS, versión concreta). Si ya existe localmente y su procedencia es confiable, inspeccionar su digest/ID. Si no existe, permitir **un único** `docker pull mariadb:11.8.9` del Docker Hub oficial, solo tras preflight de recursos y procedencia; no usar `latest`, imágenes privadas, espejo desconocido, imagen de otro proyecto por su etiqueta ni forzar descarga si red/política rechaza. Anotar digest real para repetir la prueba. No usar upgrade ni alterar otras imágenes; Compose debe impedir pulls adicionales con `pull_policy: never`.
-6. **Pre y post**: otros contenedores deben conservar sus IDs, estado operativo (incluido `healthy/unhealthy` que `docker ps` publique) y puertos (registrar cambios naturales concurrentes sin atribuir causalidad). Capturar además solo `docker stats --no-stream` con ID corto, CPU y RAM de contenedores previamente activos, sin inspect/logs/volúmenes secretos ajenos; comprobar durante el laboratorio si hay presión anormal, pero no atribuir automáticamente una variación normal a Jornato. Si la memoria/CPU de otro servicio empieza a deteriorarse tras iniciar Jornato, detener **solo** el contenedor QA propio e informar la observación; no reiniciar el ajeno. Aislamiento de redes/volúmenes/nombres evita colisiones, pero todos comparten **un motor Docker y recursos físicos**: no afirmar aislamiento físico absoluto.
+### A1. Confirmar identidad de Docker y del WIP
 
-**Gate A:** `DOCKER_ISOLATION_PRECHECK=PASS` solo si todo lo anterior se documenta con salidas reales, incluyendo `ENGINE_VERSION`, `OSTYPE=linux`, margen RAM/disco, contexto, proyecto libre, otros contenedores activos y ninguna reserva de nombre/puerto. Si falla, no crear contenedor y devolver el ZIP de bloqueo, sin reintentos especulativos.
+1. Desde PowerShell, invocar la CLI Docker **en el contexto ya existente**. Comprobar exactamente `docker context show`, Engine OSType `linux` y versión **>=28.0.0**, Compose, arquitectura, RAM y capacidad de disco, sin tocar configuración global. Si el contexto, daemon o Docker Engine no son los del lote anterior, detenerse y documentar el cambio sin cambiar de contexto automáticamente.
+2. Snapshot **solo metadatos** de todos los contenedores (ID, running/health, puertos, etiquetas de proyecto) y métricas CPU/mem de los activos; snapshot total de redes existentes (ID, driver, subredes IPAM). No abrir logs, `env`, mounts, files ni secretos ajenos. Hay 105 contenedores y 3 activos en el corte anterior, pero no utilizar esa cifra como verdad actual: comparar con la lectura nueva.
+3. Confirmar que la carpeta `D:\codex\_RUNTIME\Jornato\B21_DOCKER_QA` y la propiedad del Compose, `data`, `secrets` pertenecen solo a Jornato; **NO reescribir los secretos**. Si el `data` ya no está vacío o aparece un contenedor/red con el nombre `jornato_b21_qa_20261115`, examinar **solo propiedad y estado**; no destruir ni reemplazar ningún recurso. Si ya hay instancia propia válida, reutilizarla únicamente tras verificar ID/imagen/red/puerto y propiedad; no lanzar otra.
+4. Confirmar `mariadb:11.8.9` local con digest esperado; `pull_policy: never`. Confirmar memoria suficiente (>=1.5 GiB margen), espacio de disco Docker y D: (>2 GiB cada uno después del preflight) y ausencia de degradación de salud de proyectos ajenos.
+5. Capturar `git status --porcelain=v1`, branch, HEAD, staged y hashes de tracked+untracked en D:, evitando lectura de contenidos privados en informes; comparar post. Ignored sin baseline **no se declaran idénticos**.
 
-## 2. Fase B — Crear exclusivamente MariaDB QA (sin otros contenedores)
+### A2. Descubrir UNA subred IPv4 libre (no inventar IP)
 
-### B1. Configuración de un solo servicio y red propia
+1. En lectura, `docker network ls --no-trunc --quiet` y, para cada ID, consultar SOLO `IPAM.Config` y `Driver` con `docker network inspect --format ...`; recolectar todos los prefijos IPv4 existentes, sin exponer nombres ni endpoints de otros proyectos. Incluir bridge integrado y redes no usadas. Si hay un prefijo no interpretable o no se puede recuperar inventario completo, clasificar `BLOCKED_IPAM_INVENTORY`, NO seguir.
+2. En Windows ejecutar **solo en lectura** `Get-NetRoute -AddressFamily IPv4`, `Get-NetIPAddress -AddressFamily IPv4`, y/o `route print -4`. Considerar rutas activas de LAN, Wi-Fi, VPN, WSL, Hyper-V y Docker Desktop. No tratar la ruta universal `0.0.0.0/0` como exclusión de todos los CIDR, pero sí todas las rutas privadas específicas y redes de interfaces. Si es accesible sin privilegiar/modificar, inspeccionar también tablas de rutas de la VM Docker/WSL en lectura; si hay indicio de conflicto sin posibilidad de descartarlo, detenerse.
+3. Seleccionar determinísticamente **una** subred `/28` (16 IPv4) privada RFC1918, preferentemente dentro de un bloque verificado libre, comparando intersección de prefijos con TODOS los CIDR Docker y de host/WSL/VPN. Una dirección individual libre NO basta. No hardcodear `172.28.0.0/16`, `172.31.0.0/16`, `192.168.0.0/24` u otra subred sin inspección. No usar direcciones públicas, CGNAT `100.64/10`, loopback, multicast ni link-local. No usar un segmento que pertenezca a otra red aunque no haya contenedor conectado.
+4. Para el reporte: **CIDR candidato**, número de redes Docker revisadas, número de rutas host/WSL comprobadas, algoritmo de comparación y hashes/resumen sanitizado de los inventarios; no revelar IPs privadas de otros proyectos que no sean necesarias. Una única prueba de no solapamiento, no exploración activa, no ping a otras redes ni cambios de firewall.
+5. Antes de `up`, repetir una **sola** lectura de `docker network ls/inspect` para detectar cambio de inventario desde la selección. Si hay cambio que invalide el CIDR, **STOP**; no probar otros subnets. Si no se obtiene CIDR con pruebas suficientes, entregar `IPAM=BLOCKED_NO_PROVABLY_FREE_SUBNET` con ZIP y preservar a todos.
 
-Crear **solo** `D:\codex\_RUNTIME\Jornato\B21_DOCKER_QA\compose\compose.yaml` (sin `container_name` ni redes externas), un directorio `data` nuevo y `secrets` nuevo. Usar **Compose de un solo servicio**, con esta estructura de referencia. Codex debe validar el YAML con `docker compose ... config` **antes** de arrancar; si la sintaxis de su versión difiere, ajustar **solo la sintaxis** sin cambiar los límites de seguridad.
+**Idea técnica:** `networks: qa_internal: driver: bridge; ipam: config: [{subnet: <CIDR_UNICO_VERIFICADO>}]` en YAML, solo para el proyecto `jornato_b21_qa_20261115`. **La subred es un VALOR DESCUBIERTO en tiempo de ejecución**, nunca una constante inventada en este documento. No modificar `default-address-pools` del daemon. Una red propia con IPAM explícito evita pedirle otra subred al asignador automático. La creación sigue sujeta a validación del daemon; no prometer éxito antes de `up`.
 
-```yaml
-services:
-  db:
-    image: mariadb:11.8.9
-    pull_policy: never
-    restart: "no"
-    mem_limit: 768m
-    cpus: 1.0
-    pids_limit: 128
-    environment:
-      MARIADB_DATABASE: jornato_b21_qa
-      MARIADB_USER: jornato_qa
-      MARIADB_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
-      MARIADB_PASSWORD_FILE: /run/secrets/db_app_password
-    secrets:
-      - db_root_password
-      - db_app_password
-    ports:
-      - target: 3306
-        host_ip: 127.0.0.1
-        protocol: tcp
-    volumes:
-      - type: bind
-        source: ../data
-        target: /var/lib/mysql
-    networks:
-      - qa_internal
-    healthcheck:
-      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
-      interval: 5s
-      timeout: 3s
-      retries: 24
-      start_period: 20s
-networks:
-  qa_internal:
-    driver: bridge
-secrets:
-  db_root_password:
-    file: ../secrets/db_root_password.txt
-  db_app_password:
-    file: ../secrets/db_app_password.txt
-```
+## 3. Trabajo B — Corrección focal del Compose propio y UNA ejecución
 
-**Notas de interpretación y cierre:**
+1. Guardar copia byte-exacta del Compose original en el directorio propio de reportes D:, sin secretos ni cambios de código. Modificar **únicamente** el `ipam.config.subnet` de `networks.qa_internal` dentro del mismo Compose de Jornato. Mantener: `services.db` único, `image:mariadb:11.8.9`, `pull_policy: never`, `restart: "no"`, memoria <=768 MiB, CPU<=1, pids<=128, bind `D:/codex/_RUNTIME/Jornato/B21_DOCKER_QA/data` a `/var/lib/mysql`, dos `secrets` existentes, conexión exclusivamente al bridge propio, exposición `127.0.0.1` con puerto TCP libre/efímero, sin `container_name`, sin `external`, sin `host network`.
+2. Usar siempre `docker compose -p jornato_b21_qa_20261115 -f D:\codex\_RUNTIME\Jornato\B21_DOCKER_QA\compose\compose.yaml ...` (ruta absoluta y nombre exacto). Primero `config --quiet` y `config --format json`, validar que **solo existe un servicio db y una red bridge con un solo CIDR explícito**; que no hay interpolaciones/secretos incrustados; que el source real del bind es D:, que solo se refiere a los propios secrets y localhost. Guardar salida REDACTADA y prueba de validación, no passwords.
+3. Si todo coincide, ejecutar **UNA VEZ** `docker compose ... up -d --no-deps --no-build db`, respetando `pull_policy: never`; no hacer `--force-recreate`, `--remove-orphans`, `--build`, `down` ni otro intento con subnet diferente. Si falla, preservar evidencia completa de error sin secretos, inspeccionar **solo recursos propios** y STOP; no intentes un segundo CIDR, ningún prune, daemon change o workaround.
+4. Si `up` sale 0: registrar los IDs reales de red y contenedor propios, labels `com.docker.compose.project`, red/IPAM CIDR y bindings; verificar que no hay otras redes conectadas al `db`, ni gateway/puerto público; puerto `127.0.0.1:<asignado>`. Ejecutar healthcheck real y `SELECT VERSION(), @@version_comment, @@hostname, @@port, @@transaction_isolation` según versión de MariaDB; comprobar que tabla/DB son de QA. En ausencia de health/SQL NO declarar contenedor PASS.
+5. Al terminar QA o ante error posterior, `docker compose ... stop db` **solo** dentro del proyecto Jornato y comprobar `exited`; mantener su data dir y secretos, no borrar contenedor/red/volumen/imagen ni otros servicios. Si el `up` falló sin crear contenedor, `stop` no procede. Registrar post snapshot y comparar los activos ajenos; no atribuir cambios naturales de CPU/RAM mínimos a interferencia si identidades/health/puertos se mantienen.
 
-- Este YAML es un **modelo**, no evidencia de compatibilidad del Docker del usuario. Tras crear los secretos, `docker compose ... config --quiet` y también `docker compose ... config --format json` deben demostrar: **solo un servicio `db`**, imagen/digest previsto, `host_ip=127.0.0.1`, ningún binding fuera de `B21_DOCKER_QA`, 2 secretos de archivo y red NO externa. No pegar el JSON sin revisar ni imprimir secretos; abortar si el modelo normalizado pierde cualquiera de estas propiedades. **Si la versión Compose no reconoce `pull_policy`, límites, secrets o host_ip, STOP por incompatibilidad**; no eliminarlos para hacer arrancar.
+## 4. Trabajo C — MariaDB REAL y fronteras focales B13–B20 (mismo lote, si B pasó)
 
-- `host_ip: 127.0.0.1` es **obligatorio**. `published` omitido solicita puerto **efímero** para evitar choques; verificar en salida real que se asigna **solo** `127.0.0.1:<PUERTO> -> 3306`. Si su versión de Compose no admite puerto automático con `host_ip`, escoger **un puerto exclusivo libre** con comprobación de colisión, configurar explícitamente `127.0.0.1:<PUERTO>:3306` y validar de nuevo. **Jamás** sustituir por publicación en `0.0.0.0` o 3306 compartido.
-- La carpeta `data` debe ser real y vacía en D: antes de `up`. Resolver `../data` según el directorio del archivo Compose; verificar con `docker inspect` **solo del contenedor propio** que `/var/lib/mysql` es bind del directorio correcto de D:. Si Docker Desktop no puede montar D:, detener sin cambiar configuración global ni usar volúmenes desconocidos.
-- Generar **dos secretos aleatorios independientes** con API criptográfica Windows/.NET (mínimo 32 bytes aleatorios cada uno) en archivos de `secrets`, restringidos al usuario actual. Nunca escribir contraseñas dentro de `compose.yaml`, scripts de evidencia, línea de comando, `docker inspect` de entorno, tests, Git, ZIP o logs. **No incluir** `secrets/` ni `data/` en evidencias. En la distribución Compose Linux, secrets se montan `/run/secrets/...`; documentar solo nombres y permisos, no valores.
-- No usar puertos expuestos públicamente, bind del repositorio, rutas de otros proyectos, `privileged`, Docker socket mount, modo `host`, `external: true`, `network_mode: host`, `volumes_from` ni compartir secretos. Solo nueva red del proyecto, una base 100% ficticia. **Secretos:** producir cadenas ASCII sin saltos de línea con RNG criptográfico Windows, no bytes arbitrarios que puedan convertirse en nueva línea/espacios; mantener archivos con ACL limitadas al usuario y System cuando corresponda; nunca mostrarlos en pantalla. Compose secrets en Windows requieren contenedores **Linux**, no Windows. La contraseña de usuario de QA se transmite exclusivamente a procesos efímeros y no debe aparecer en reportes de procesos ni argv.
-- No usar `docker-compose` V1 obsoleto ni `docker compose` sin `-p` y `-f` absolutos. Comandos `ps`, `port`, `logs`, `up`, `stop` siempre delimitados al proyecto propio; validar que labels de contenedor/red tienen `com.docker.compose.project=jornato_b21_qa_20261115`.
+### C1. Conectar Laravel de forma segura
 
-### B2. Arranque y comprobación, UNA sola vía
+1. **Sin modificar** `D:\codex\Jornato\server\phpunit.xml` (puerto 1 fail-closed), `.env`, app live ni config comercial. Usar un **harness temporal de QA aislado** en D:, con variables específicas de proceso: `APP_ENV=testing`, conexión MariaDB realmente soportada por la app (`mysql`/`mariadb` según config comprobada), `DB_HOST=127.0.0.1`, `DB_PORT=<puerto publicado por Compose>`, `DB_DATABASE=jornato_b21_qa`, `DB_USERNAME=jornato_qa`, password desde archivos secretos D: sin mostrar su valor. Probar `PDO_MYSQL`, `SELECT DATABASE(), CURRENT_USER(), CONNECTION_ID(), @@version`; registrar ID/host/puerto redaccionados, comparar con contenedor propio. Si la config PHPUnit/Laravel fuerza DB_PORT=1, no engañar al sistema: modificar **solo la invocación/harness temporal** o declarar `BLOCKED_RUNNER_CONFIG`, sin modificar el fail-closed del producto.
+2. Ejecutar exclusivamente migraciones del proyecto contra la **base QA vacía identificada**. Antes de cada operación escritora, comprobar fingerprint de DB propia y que no hay coincidencia con otras DB de Docker. Guardar lista migraciones, resultados/exit codes, DDL real `SHOW CREATE TABLE`, FKs, unique y motores. No suponer FKs compuestas ni añadir índices sin error probado. Si surge bug real y focal, corregir causa raíz en copia controlada del código del producto respetando WIP, preservar baseline y patch; reejecutar SOLO prueba afectada. Si requiere cambios amplios o migración destructiva, stop y reportar `BLOCKED_SCOPE` sin alteraciones.
 
-1. Crear directorios nuevos/secretos. Ejecutar `docker compose -p jornato_b21_qa_20261115 -f <ABS_COMPOSE> config --quiet` y comprobar su **configuración normalizada** de forma segura, y **no iniciar** si hay cualquier recurso ajeno, Dockerfile extra, mounts fuera del laboratorio, imágenes desconocidas o port sin host_ip local. Capturar configuración **redactada** (nunca valores de secretos).
-2. Si pasa, `docker compose -p jornato_b21_qa_20261115 -f <ABS_COMPOSE> up -d --no-deps --no-build db` (con `pull_policy: never` validado). No arrancar backend web ni otras bases; no hacer `down` ni reconfigurar proyecto ajeno. Verificar `docker compose ... ps`, `docker compose ... port db 3306`, `docker inspect` SOLO del ID propio y `healthcheck` con plazo acotado. Registrar digest de imagen, versión SQL `SELECT VERSION()`, `@@hostname`, `@@port`, engine InnoDB, `CONNECTION_ID()` y ruta del datadir del contenedor; **no** imprimir contraseñas.
-3. Confirmar desde Windows `127.0.0.1:<PUERTO_ASIGNADO>` que se conecta mediante usuario `jornato_qa` a base `jornato_b21_qa`. **Comprobar también que la publicación efectiva NO tiene binding `0.0.0.0`, `::` ni un puerto distinto del anunciado; el `docker port` debe coincidir con inspección del contenedor propio.** El puerto debe ser el realmente publicado, **no 3306 asumido**. No conectarse a ningún puerto ajeno. Usar sólo un procedimiento de inicialización; si falla por política, montaje o recursos, detener SOLO recursos propios si se crearon y reportar causa, sin forzar el host.
-4. Registrar únicamente en logs internos el puerto efectivo, ID propio y health, nunca secretos ni IPs de otras redes. El proceso Docker Desktop queda como estaba; **no** reiniciar servicio Docker global.
+### C2. Cobertura real priorizada
 
-**Gate B:** `DB_CONTAINER_REAL=PASS` requiere contenedor propio saludable, digest/proyecto/loopback/mount D verificables y conexión SQL real. El contenedor saludable **no** equivale a migraciones o tests del producto PASS.
+- **B13/B14/B15/B16:** empresa A y B con empleados/cuentas sintéticas, rechazo lectura/escritura cross-tenant, PAT activo/revocado/expirado si contrato/código permiten correrlo. No inventar login ni vinculación persona-cuenta, registrar `BLOCKED_CONTRACT` si corresponde. Una invocación HTTP kernel es distinta de SQL; informar por capa.
+- **B17:** iniciar dos workers PHP independientes **simultáneamente** con la MISMA clave/idempotency/payload y empresa sintéticos, ejecutando el método real existente `PersonalRequestController::store` con un harness de QA que respete autenticación permitida; usar una barrera controlada que haga solapar transacciones. Probar una sola solicitud y un único evento inicial, respuesta reintentada según contrato; misma key con payload distinto => conflicto sin mutación. Registrar `CONNECTION_ID()` de cada worker y resultado de filas/eventos. Si no hay contrato auth aprobado, no exponer route temporal y marcar el escenario controlador `BLOCKED_CONTRACT`; hacer solo pruebas reales posibles sin saltar permisos.
+- **B19:** dos workers contra `EmployeeDocumentVault::create/addVersion`, repositorio MariaDB REAL con Storage::fake estrictamente para archivos QA (clasificar `DB_REAL + STORAGE_FAKE`, **NO** producción). Reusar authorizer en QA solo si el proyecto prevé inyección de test legítima; autorizador productivo `DENY-ALL` intacto. Comprobar una versión/evento, unique, retry 200/201/409 cuando aplique, ningún duplicado, hash/datos exactos.
+- **B20:** dos workers contra `RecruitmentService::scheduleInterview` de dos vacantes de empresa QA con un mismo entrevistador y tiempo solapado; comprobar bloqueo del contrato contra la misma fila de empresa, un solo resultado activo, otro conflicto o resultado conforme contrato. Nunca abrir ATS público ni CV real.
+- **Dos sesiones de DB no son por sí solas test de carrera de aplicación.** Se exige PID/worker, inicio coordinado, barrera, `CONNECTION_ID` distintos, método invocado, respuestas/errores y lectura SQL final. Si no puedes demostrar solape verdadero, `NOT_RUN_CONCURRENCY`, no inventes PASS. No hay que ejecutar otra vez 110+ test históricos ni Flutter/Android para cerrar este lote DB focal.
 
-## 3. Fase C — Ejecutar las pruebas REALES que estaban bloqueadas
+### C3. Resultado y límites
 
-### C1. Aislar el runner del producto (sin aflojar phpunit.xml de producción)
+Reportar `PASS_REAL_DB_SCOPED` solo con SQL/exit codes/DDL reales, `PASS_REAL_CONCURRENCY` solo con ejecución de workers y resultado final reproducible; `PASS_HOST_FAKE`, `PASS_STATIC`, `NOT_RUN_ENV`, `BLOCKED_CONTRACT` por separado. Cualquier prueba de seguridad con fixtures sintéticos es alcance QA, no release. `B21_GLOBAL=NOT_APPROVED`, `RELEASE_APPROVED=NO` incluso si DO01–DO12 son PASS: H9 completo exige hardware, UX, accesibilidad, seguridad, revisión independiente y decisiones propietario OD01–OD08 todavía no aprobadas.
 
-- Leer primero `D:\codex\Jornato\server\phpunit.xml` y la configuración DB efectiva; el B21 previo detectó **DB_PORT=1 intencional** y ausencia de `.env.testing`. **Nunca** apuntar tests a otro proyecto, a producción, a un hostname externo o al puerto 1 como si fuera QA real.
-- Preparar variables de entorno **temporales solo para un proceso/harness** de QA (`APP_ENV=testing`, `DB_CONNECTION=mysql` o conexión MariaDB que realmente existe, `DB_HOST=127.0.0.1`, `DB_PORT=<PUERTO_PUBLICADO>`, `DB_DATABASE=jornato_b21_qa`, `DB_USERNAME=jornato_qa`, contraseña desde secreto). No modificar `.env` existente ni `phpunit.xml` del producto para simular éxito. Si XML sobrescribe las variables, preparar **un archivo PHPUnit temporal derivado fuera del repo** con overrides mínimos y paths validados; probar la configuración realmente leída por Laravel antes de migrar. Si no hay runner PHP/composer/driver disponible, documentar `BLOCKED_RUNNER` sin instalar herramientas globales.
-- Antes de `artisan migrate`, demostrar **simultáneamente** hostname/puerto/schema/user esperado desde el proceso EXACTO que migrará, resolver la configuración Laravel efectiva con `config:cached` comprobado, sin exponer claves ni ejecutar `config:clear/cache` sobre el WIP. Confirmar que `phpunit.xml` no sigue forzando `DB_PORT=1`: una prueba directa SQL desde el mismo runner y un identificador de la instancia propia son necesarios. Si los overrides se ignoran o Laravel usa conexión/caché de otro proyecto: ABORT de la migración, no alterar `phpunit.xml` ni cachés compartidas. Usar usuario app QA para migrar y pruebas; **nunca root**. No pasar contraseña como argumento CLI ni guardar un XML de test con credenciales. Rechazar cualquier conexión que no coincida con el ID/puerto del contenedor propio. No usar `migrate:fresh` sobre bases no verificadas, ni `db:wipe`, ni seeders con datos personales.
-
-### C2. Migraciones limpias, integridad y aislamiento entre empresas
-
-- Aplicar solo migraciones existentes B13–B20 en la **base nueva y vacía** `jornato_b21_qa` creada por el contenedor propio; registrar cada migración real con log/exit code y `SHOW CREATE TABLE`, engines, indexes, UNIQUE y FK relevantes. Inspeccionar DDL antes de corregir tipos o índices. No modificar esquema por anticipado; si una migración falla, reproducir y corregir **una causa raíz focal** (archivo/s) únicamente si el arreglo es seguro y compatible con WIP, e incluir BASELINES/PATCH/SOURCES. No hacer múltiples intentos a ciegas ni inventar el estado de migraciones.
-- Poblar fixtures **sintéticos únicamente**: empresa A, empresa B, membresía A, usuario con PAT de QA, empleados fake y dos recruiters solo en capa QA/test; B19 y B20 deben continuar DENY-ALL productivo. Intentar FK/UNIQUE cruzando tenant, baja/revocación y rollback donde el servicio permita la acción bajo test. **No habilitar rutas reales HR ni ATS** para ejecutar test.
-- Prueba de tenant A→B y guard/PAT: HTTP/kernel real si está disponible y existe contrato; `actingAs`/mocks se etiquetan `HOST_TEST_ONLY`. No llamar `PASS_HTTP_REAL` a una invocación de método, ni `PASS_TENANT_REAL` si el ambiente no ejecutó SQL real.
-
-### C3. Carreras de verdad: B17, B19 y B20
-
-**Por cada carrera:** ejecutar dos trabajadores independientes del **servicio real del producto** (dos procesos PHP/test workers sobre `D:\codex\Jornato\server` o mecanismo equivalente existente), con dos conexiones MariaDB distintas abiertas, `SELECT CONNECTION_ID()` distinto, barrera START común **antes de llamar el servicio**, resultados simultáneos y timestamps monotónicos/UTC. No se acepta que dos scripts ejecuten SOLO SQL de `INSERT` para acreditar el servicio: ese test demuestra como mucho un índice o una FK (`DB_CONSTRAINT_ONLY`). Para PASS de concurrencia de producto, ambos workers deben invocar el **mismo método de aplicación** B17/B19/B20 que se declara protegido. Evitar sleeps arbitrarios como prueba de sincronización; usar señal/barrier explícita y duración acotada. Si el row-lock serializa la segunda transacción, eso es el comportamiento esperado, no un defecto de simultaneidad: conservar timestamps del intento concurrente y evidencia de la espera/bloqueo. Si no es posible coordinar dos sesiones reales, **`NOT_RUN_CONCURRENCY`**, nunca PASS por dos llamadas consecutivas o por SQLite/in-memory.
-
-- **B17:** dos workers contra el MISMO método de solicitud, key de idempotencia/payload sintético/empresa. Verificar una fila de solicitud y un solo evento inicial, respuesta de retry conforme contrato y ausencia de estado duplicado; repetir con payload diferente y misma key para conflicto sin modificar lo primero. Probar rollback si la prueba puede causarlo con inyección controlada en harness, no alterar código productivo si no está previsto.
-- **B19:** dos workers contra el MISMO servicio documental sobre el MISMO documento/versión o misma key según contrato; una sola versión por `(company_id,document_id,version)`, bytes/hash de archivo privado inmutables, no doble evento y compensación de key propia cuando falla transacción. Fake storage puede servir para semántica de servicio pero **no** como prueba del disk privado productivo; si se usa, etiquetar `DB_REAL_STORAGE_FAKE`.
-- **B20:** dos workers contra el servicio de entrevistas con el MISMO entrevistador (y candidato si aplica) en vacantes distintas, ventanas superpuestas. Verificar como máximo una entrevista activa/aceptada; `company` row lock real y estados/eventos consistentes. Sin permitir que dos intentos secuenciales con POST equivalgan a una carrera simultánea.
-- Cada caso debe incluir: SQL/recuento final, conexiones, barrera, inicio/fin de cada worker, método de aplicación invocado, resultados exactos, `BEGIN/COMMIT/ROLLBACK` solo cuando realmente observados, status de negocio, log y árbol SHA; si la lógica productiva sigue cerrada por contrato, probar mediante test interno permitido sin abrir ruta comercial y marcar **capa exacta**.
-
-**Gate C:** `DB_MIGRATIONS_REAL`, `DB_TENANT_REAL`, `DB_CONSTRAINT_ONLY` y `B17/B19/B20_CONCURRENCY_REAL_SERVICE` se evalúan **separadamente**. Si solo hay harness SQL, nunca elevarlo a PASS de negocio. No todo-or-nada ni falsa equivalencia entre SQL y HTTP.
-
-## 4. Fase D — Cierre focal, comparación con otros Docker y entrega
-
-1. Releer la matriz B21 previa **sin reejecutar** todos los oráculos/40/110 tests anteriores. Actualizar solo I03–I10, I13 y controles afectados de I01–I24, indicando `LAYER=DB_REAL/HTTP_KERNEL_REAL/HOST/STATIC/BLOCKED` con comando exacto, cwd, exit code, timestamps y hash de árbol. Las otras puertas siguen como estaban salvo evidencia nueva. **No** generar otro estudio 10×10 documental ni abrir B21 S2/S3 por inercia.
-2. Comparar `docker ps -a`, `compose ls` y métricas solo lectura `docker stats --no-stream` antes/después sobre **IDs, estados/health, puertos y presión CPU/RAM** de otros proyectos. Registrar solo metadata mínima y posibles diferencias, sin leer sus archivos/logs. Si detectas interferencia plausible, reportar `NON_INTERFERENCE=NOT_VERIFIED/FAIL`, detener **solo** Jornato y conservar evidencia. No reparar otros proyectos en esta orden ni culpar cambios naturales sin causa comprobada.
-3. **Al terminar, detener únicamente el contenedor propio**: `docker compose -p jornato_b21_qa_20261115 -f <ABS_COMPOSE> stop db`, verificar que queda parado y los ajenos siguen funcionando. Preservar datos QA y Compose en D: para una futura prueba, **no** ejecutar `down -v`, `rm`, `prune` ni borrar datadir. Si error/timeout, reportar y actuar solo sobre ID propio con evidencia, sin matar motor Docker.
-4. Preservar HEAD/rama/staging/WIP existentes. Si no hay defecto nuevo reproducido, **0 archivos de producto modificados es correcto**. Si sí hay cambios autorizados, incluir comparación bytes/hashes de tracked/untracked, `PATCH_CANDIDATE.diff`, `BASELINES/`, `SOURCES/`, replay seguro 1:1. Nunca tocar archivos ignorados ajenos sin hash previo ni fabricar preestado.
-5. `B21_GLOBAL=NOT_APPROVED`, `RELEASE_APPROVED=NO`, `L5_INDEPENDENT_RUNTIME=NOT_RUN` hasta dictamen posterior de ChatGPT y posterior QA integral H9 (accesibilidad, hardware, UX con dueño, amenazas, performance, 110+ inventario). No habilitar en producción B16 login, B17 reviewers, B19 documents, B20 ATS, B18 nómina, ni B22. OD01–OD08 continúan sin respuesta atribuida al propietario, salvo la **autorización técnica acotada para Docker QA** concedida en esta conversación.
-
-### Criterios operativos del laboratorio (DO01–DO12)
+## 5. Matriz DO01–DO12: criterios CONGELADOS, no renumerar ni ablandar
 
 | ID | Qué debe quedar falsable | PASS únicamente si |
 |---|---|---|
@@ -151,41 +86,33 @@ secrets:
 | DO11 | No interferencia y parada | Otros proyectos preservados, se detuvo solo propio, QA data preservada |
 | DO12 | Evidencia reproducible | Un ZIP íntegro, manifiesto+CRC+logs y WIP inalterado salvo defectos focales |
 
-Estados admisibles por DOxx: `PASS_REAL_SCOPED`, `PASS_HOST_SCOPED`, `BLOCKED_POLICY`, `BLOCKED_CAPACITY`, `BLOCKED_RUNNER`, `BLOCKED_CONTRACT`, `NOT_RUN_ENV`, `FAIL_REPRODUCED`, `PARTIAL`. Ningún `DO01–DO12` aprobado por simple documentación. No exigir todos PASS si algunos dependen de contratos ajenos al Docker: **maximizar PASS real seguro y explicar cada impedimento una vez**.
+Además, un **único control de causa raíz** `IPAM01` exige: inventario Docker completo + rutas host, CIDR `/28` confirmado no solapado, `ipam.config.subnet` del proyecto Jornato, zero cambios a las redes ajenas, estado red después. NO agregar docenas de nuevos tests inventados.
 
-## 5. ZIP único obligatorio y auditoría de custodia
+## 6. Salida única: un ZIP reproducible, no archivos dispersos
 
-Generar **un solo archivo**:
+**Carpeta única de informes:** `D:\codex\_REPORTES\Jornato\JOR-B21-IPAM-RECOVERY-20261115\`. El directorio `delivery` contiene SOLO `JOR-B21-IPAM-RECOVERY-20261115-UNICO.zip`. Dentro incluir como mínimo:
 
-`D:\codex\_REPORTES\Jornato\JOR-B21-DB-DOCKER-QA-S1-V2-20261115\delivery\JOR-B21-DB-DOCKER-QA-S1-V2-20261115-UNICO.zip`.
+- `FINAL_REPORT.md`: causa original/fix/resultado, imagen/digest, Engine/context, CIDR + evidencia de no solape, salud DB/SQL, estado actual de cada gate, si hubo un único `up`, residuos propios, `NEXT_OWNER=CHATGPT_DIRECTOR`.
+- `IPAM_INVENTORY_SANITIZED.csv`, `IPAM_SELECTION.md`, `COMPOSE_DIFF_REDACTED.diff`, `COMPOSE_RESOLVED_REDACTED.yaml`, `OWN_RESOURCE_IDS.md`, `DOCKER_ISOLATION_PRE_POST.csv` y `LOGS/` con comandos, exit codes y stdout/stderr **saneados de secretos y nombres ajenos innecesarios**.
+- `DB_MIGRATIONS_LOG.txt`, `DB_DDL_INDEX_FK.md`, `TENANT_PAT_RESULTS.csv`, `CONCURRENCY_B17_B19_B20.csv`, `DO01_DO12_MATRIX.csv`, `I01_I24_DELTA.csv` (solo cambios en estado por evidencia nueva), `OWNER_DECISIONS.md` con OD01–OD08 SIN inventar aprobaciones, `RELEASE_GATES.csv`.
+- `GIT_CUSTODY.md`, `SOURCE_HASHES_PRE_POST.csv`, `SOURCE_CHANGE_MATRIX.csv`, `PATCH_CANDIDATE.diff` y `SOURCES/` **solo si realmente se cambió código**; si no hay cambios, patch 0 bytes explícito. No sustituir WIP ni afirmar identidad de archivos ignored sin hashes de base.
+- `MANIFEST_SHA256.csv` de todos los demás archivos con bytes+SHA256, CRC verificado de cada entrada y protección contra `../`, symlinks y nombres duplicados. Confirmar ZIP SHA256/tamaño después de serializar; presentar el checksum en respuesta, no confiar solo en log interno.
 
-**Contenido mínimo:**
+**Fuera del ZIP:** secretos/passwords/keys/tokens, datadir MariaDB, `.env`, rutas de otros proyectos, dump de tablas reales, contenedores ajenos y datos personales. No subir ZIP ni WIP a GitHub. No pedir más autorizaciones si el alcance Docker sigue exactamente dentro de lo ya autorizado. Si no hay CIDR libre verificable, informar `IPAM_BLOCKED` y detener sin hacer otra auditoría o probar variantes.
 
-- `FINAL_REPORT.md` (hecho/resultado/decisión y bloqueos concretos, dos párrafos ejecutivos al principio).
-- `DOCKER_ISOLATION_PRE_POST.csv` (proyectos ajenos SOLO IDs cortos, nombre, status y port pre/post sin secretos), `DOCKER_PROJECT_CONFIG_REDACTED.yaml`, `DOCKER_OWN_RESOURCE_ID.md` (image ID/digest, proyecto, contenedor, red, puerto local, bind a D, límites, contenedor detenido), `ENV_GATES.md`.
-- `DB_MIGRATIONS_LOG.txt`, `DB_DDL_INDEX_FK.md`, `TENANT_PAT_RESULTS.csv`, `CONCURRENCY_B17_B19_B20.csv` con `CONNECTION_ID`/barrera y hashes/exitcode originales cuando se ejecutaron, `LOGS/` de pruebas focales sin secrets ni PII.
-- `DO01_DO12_MATRIX.csv`, `I01_I24_UPDATED.csv`, `RELEASE_GATES.csv`, `OWNER_DECISIONS.md` sin aprobaciones inventadas, `SOURCE_CHANGE_MATRIX.csv`, `SOURCE_HASHES_PRE_POST.csv`, `GIT_CUSTODY.md`.
-- Si hubo cambios de producto: `PATCH_CANDIDATE.diff`, `BASELINES/`, `SOURCES/`, replay 1:1. Si no hubo: marcador `NO_PRODUCT_CODE_CHANGE.md` y patch vacío legítimo, **sin copiar las 237 fuentes del WIP para inflar el ZIP**.
-- `MANIFEST_SHA256.csv` SHA256 y bytes de todos los archivos distintos del manifiesto, CRC ZIP verificado, sin duplicados ni rutas de extracción inseguras; versión/sistema/fecha/árbol QA rastreable. **NO incluir** `secrets/`, `.env*`, passwords, tokens, `/var/lib/mysql`, volúmenes, bases reales, imágenes o binarios Docker, ni material de otros proyectos. Redactar logs sin borrar prueba de error/exitcode.
+## 7. Criterio de cierre y siguiente responsable
 
-**Autorrevisión Codex L1–L6 solo focal:** 1 KISS/una DB, 2 no ruido/ni ajenos, 3 causa raíz, 4 UX no tocada, 5 separar real/host/estático y L5 independiente pendiente, 6 un lote sin pingpong. No generar 20 pasadas de auditoría si no hay nuevo código; el director evaluará el ZIP una sola vez.
+- `PASS_SCOPED_REAL_DB` exige red propia creada sin solapes, MariaDB healthy + SQL, migración real y QA verificable por logs; sin ello resultado `PARTIAL` con causa exacta.
+- `PASS_SCOPED_CONCURRENCY` se otorga **por caso**, no de forma global, solo con dos workers simultáneos reales. 3/3 no se presume.
+- `NON_INTERFERENCE` requiere IDs/health/puertos ajenos pre/post iguales en la ventana documentada, **sin afirmar aislamiento físico absoluto**.
+- Ningún resultado autoriza B22. Dejar explícito qué falta para H9 global y propietario.
+- Respuesta final de Codex: `TASK_ID=... | IPAM=... | DB_REAL=... | B17/B19/B20_CONCURRENCY=... | OTHER_CONTAINERS=... | PRODUCT_WIP=... | RELEASE_APPROVED=NO | ZIP=... | ZIP_SHA256=... | NEXT_OWNER=CHATGPT_DIRECTOR`.
 
-**Puerta extra de integridad de entrega:** verificar que los logs no contengan secretos/paths de otras empresas y que el contenido del ZIP respalde cada PASS de matriz mediante referencia a archivo+comando+exitcode, sin crear un test nuevo para demostrar la prueba de la prueba.
+## Fuentes públicas verificadas por el director
 
-**Línea final exigida:**
+- Docker Compose red IPAM con subnet explícita: https://docs.docker.com/reference/compose-file/networks/
+- Docker Compose networking y redes de proyecto: https://docs.docker.com/compose/how-tos/networking/
+- Inventario de IPAM: https://docs.docker.com/reference/cli/docker/network/inspect/
+- Docker Engine bridge y aislamiento: https://docs.docker.com/engine/network/drivers/bridge/
 
-`TASK_ID=JOR-B21-DB-DOCKER-QA-S1-V2-20261115 | DOCKER_ISOLATION=... | NON_INTERFERENCE=... | DB_CONTAINER_REAL=... | DB_MIGRATIONS_REAL=... | B17_CONCURRENCY=... | B19_CONCURRENCY=... | B20_CONCURRENCY=... | TENANT_PAT=... | B21_S1=PARTIAL/PASS_SCOPED | B21_GLOBAL=NOT_APPROVED | RELEASE_APPROVED=NO | WIP=... | OWN_CONTAINER_STOPPED=... | ZIP_SHA256=... | NEXT_OWNER=CHATGPT_DIRECTOR`
-
-**Siguiente actor tras esta orden: CODEX LUNA.** Después del ZIP, **CHATGPT DIRECTOR** acepta/rechaza solo la evidencia nueva y define las decisiones OD02/OD04/OD03 necesarias para H9. No declarar lanzamiento ni ejecutar B22 automáticamente.
-
-## Fuentes oficiales del método (informativas, no permisos)
-
-- Docker Compose, proyecto aislado y prioridad de `-p`: https://docs.docker.com/compose/how-tos/project-name/
-- Compose especificación de puertos `host_ip` y publicación efímera: https://compose-spec.github.io/compose-spec/workload_spec.html
-- Docker Compose secrets por archivo: https://docs.docker.com/compose/how-tos/use-secrets
-- Imágenes MariaDB y credenciales `_FILE`: https://mariadb.com/docs/server/server-management/automated-mariadb-deployment-and-administration/docker-and-mariadb/mariadb-server-docker-official-image-environment-variables
-- MariaDB 11.8 LTS: https://mariadb.org/about/
-
-- Docker Engine loopback exposure warning (pre-28.0.0): https://docs.docker.com/engine/network/port-publishing/
-- Docker official MariaDB 11.8.9 tag: https://hub.docker.com/_/mariadb/tags/?name=11.8.9
-- Docker Docker Desktop Compose services and ports spec: https://docs.docker.com/reference/compose-file/services/
+**NO enviar un prompt de solo auditoría. EJECUTAR LA RECUPERACIÓN IPAM Y LAS PRUEBAS REALES EN UN MACROBLOQUE, RESPETANDO TODOS LOS CORTAFUEGOS.**
