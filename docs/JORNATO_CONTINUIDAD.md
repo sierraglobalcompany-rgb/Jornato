@@ -1,6 +1,16 @@
 # JORNATO — CONTINUIDAD CANÓNICA DE DIRECCIÓN (DOCUMENTAL)
+## ESTADO MÁS RECIENTE — B21F-S2 V2 ÚNICA ORDEN, PREPARADA (2026-11-15/16)
 
-## ESTADO VIGENTE POST-B21F — S2 ORDEN PREPARADA, AÚN SIN EJECUCIÓN REPORTADA (2026-11-15, Colombia)
+**PREVALECE SOBRE ESTADOS HISTÓRICOS INFERIORES.** El ZIP físico `JOR-B21F-SECURITY-20261115-UNICO.zip` fue verificado (SHA-256 `EABF0AFB32385BA111D96E6A161721EDBCF665C026A3AC76111B4E663EC97F56`, 15 miembros, 14/14 manifest, CRC PASS). Su ejecución B21F V3 fue `PARTIAL`, sin edición ni tests nuevos: PHPunit histórico `153/156, 3 FAIL`, 200 vs 404 B17 con causa **NO DETERMINADA**; 2 headers por orden literal; A↔B y PAT NO_RUN. Staging 0 y 235 WIP entradas son reportados, no inspección de D:. La tarea Docker ajena se observó SOLO en la ventana previa; su estado actual NO ESTÁ VERIFICADO.
+
+**ÚNICA ORDEN CODEX VIGENTE:** [`docs/CODEX_LOTE_ACTUAL.md`](CODEX_LOTE_ACTUAL.md), versión `CODEX_LUNA_JORNATO_B21F_S2_V2_MACROBLOQUE_CIERRE_FOCAL_20261115.md`, misma tarea `JOR-B21F-S2-CIERRE-20261115`. **La S2 anterior fue reemplazada; NO ejecutar S2 V1 ni B21F V3, no abrir S3 sin evidencia posterior.** Auditoría adversarial de DECISIONES NUEVAS, 10 Verdugo + 10 Juez por pedido expreso del propietario: [`docs/JORNATO_B21F_S2_V2_VERDUGO10_JUEZ10.md`](JORNATO_B21F_S2_V2_VERDUGO10_JUEZ10.md). La orden exige corregir test/headers solo si causa verificable, no declarar `ROOT_B17` por lint, y probar HTTP A↔B/PAT exclusivamente con esquema QA temporal confinado y runner completo verificado (otras conexiones, colas, archivos y efectos externos incluidos). Si no hay entorno seguro, código focal con estado PARTIAL honesto; un único ZIP.
+
+**ESTADO DE DIRECCIÓN:** `B21F_S2_V2_DOC_PUBLISHED=YES; CODEX_EXECUTED=NOT_VERIFIED; NEXT_OWNER=CODEX_LUNA_AL_RECIBIR_V2; AFTER_ZIP=CHATGPT_DIRECTOR; ROOT_B17=UNKNOWN; HEADERS=PARTIAL_REPORTED; A_B=NOT_RUN; PAT=NOT_RUN; SUITE_FINAL=NOT_RUN; H9=NO_GO; B22=NOT_AUTHORIZED; RELEASE=NO`. PR #2 se mantiene **DOCUMENTAL DRAFT**; `main` y el WIP Windows D: NO fueron alterados por esta escritura. OD01–OD08 aún sin aprobación. Al volver Codex, evaluar **solo el delta S2**, avanzar a aceptación funcional/Android/web/H9 y decidir negocio antes del GO, no reauditar otra vez estos documentos.
+
+---
+
+
+## HISTÓRICO POST-B21F — S2 V1 PREPARADA (SUPERSEDIDA POR S2 V2)
 
 **Prioridad: esta cabecera prevalece sobre estados históricos inferiores.** El usuario entregó el ZIP real `JOR-B21F-SECURITY-20261115-UNICO.zip`, SHA-256 verificado **`EABF0AFB32385BA111D96E6A161721EDBCF665C026A3AC76111B4E663EC97F56`**. ChatGPT comprobó 15 miembros, CRC PASS, nombres seguros, cero duplicados y **14/14** manifiesto (tamaños y SHA). B21F V3 fue ejecutada y entregada **PARTIAL**: **cero ediciones**, 235 entradas WIP, staging 0 y huellas status/index iguales PRE/POST según CSV; no se corrió PHPUnit/SQL, ni se arrancó Docker. Contenedor MariaDB propio detenido; en esa ventana Codex reportó una tarea Docker concurrente ajena (PIDs con presencia a las 23:07–23:13), SIN investigar/interferir recursos ajenos. **No asumir que sigue activa después**.
 
