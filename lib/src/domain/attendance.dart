@@ -75,6 +75,9 @@ class AttendanceLedger {
   final String workspaceId;
   final String subjectId;
   final List<MarkEvent> _events = <MarkEvent>[];
+  // Índice para detectar reintentos en tiempo promedio O(1), sin alterar
+  // el orden inmutable del ledger ni las reglas de autorización futuras.
+  final Map<String, MarkEvent> _eventsById = <String, MarkEvent>{};
 
   List<MarkEvent> get events => List<MarkEvent>.unmodifiable(_events);
 
@@ -95,11 +98,10 @@ class AttendanceLedger {
       throw StateError('Evento de otro espacio o sujeto');
     }
 
-    for (final previous in _events) {
-      if (previous.eventId == event.eventId) {
-        if (previous.identicalPayload(event)) return previous;
-        throw StateError('Conflicto de identificador de evento');
-      }
+    final previous = _eventsById[event.eventId];
+    if (previous != null) {
+      if (previous.identicalPayload(event)) return previous;
+      throw StateError('Conflicto de identificador de evento');
     }
 
     if (_events.isNotEmpty &&
@@ -116,7 +118,10 @@ class AttendanceLedger {
     };
     if (!valid) throw StateError('Transición de jornada inválida');
 
+    // Actualizar el índice sólo DESPUÉS de validar cronología y transición;
+    // un intento rechazado no debe reservar ni contaminar su identificador.
     _events.add(event);
+    _eventsById[event.eventId] = event;
     return event;
   }
 

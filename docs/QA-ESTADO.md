@@ -15,6 +15,44 @@ Fecha: 2026-10-24. Fuente de referencia v4: 196 pruebas reportadas por la transf
 - [ ] Aplicar canon PingPongLaw L1–L6 desde fuente completa validada; sólo se conoce su hash de referencia.
 - [ ] Validación legal de privacidad y tiendas/monetización antes de publicación.
 
+## Tercer bloque remoto: motor indexado + smoke local sin CI (2026-11-18)
+
+**Alcance:** sobre el PR #3 F0 remoto, no el WIP de Windows.
+
+- `AttendanceLedger.record` conserva exactamente las reglas de
+  idempotencia, autor/espacio/sujeto, secuencia y cronología, pero reemplaza
+  la búsqueda lineal de `eventId` por un índice privado `Map` para
+  búsqueda en tiempo promedio O(1). Se actualiza sólo tras una validación
+  exitosa; ningún evento rechazado reserva un ID. La lista sigue siendo la
+  fuente cronológica; ninguna nueva capa de persistencia.
+- **6 tests nuevos de código fuente, NOT_RUN**, incluidos 2.000 eventos,
+  reintento de ID antiguo, conflicto antiguo, intento inválido sin
+  contaminar índice y recuperación desde archivo.
+- **Smoke Dart puro** `tool/smoke_attendance.dart` con 20 comprobaciones
+  (jornadas, pausas, días civiles de Bogotá, archivo, idempotencia,
+  reconciliación y un historial de 1.000 eventos). **ESCRITO, NOT_RUN**:
+  no se dispone de Dart en este entorno.
+- **QA local sin Codex/Actions:** `scripts/qa_local_f0.ps1` exige un
+  clon **separado y limpio** del PR #3, ejecuta smoke, `flutter pub get
+  --offline`, `flutter analyze`, `flutter test`; opcional `-ApkDebug`
+  sólo con andamiaje Android preexistente. Si el SDK o caché local faltan,
+  conserva estado FAIL/BLOCKED en logs fuera del repositorio. **Nunca**
+  ejecuta `flutter create`, CI, Docker, servidor, merge, push, reset ni
+  cambios en el WIP del producto.
+- **Conteo acumulado en PR #3:** 8 casos base + 31 bloque 1 + 27 bloque 2
+  + **6 bloque 3 = 72 tests Flutter escritos; 0 ejecutados aquí**.
+  El smoke suma **20 chequeos escritos, NO ejecutados**: no contarlos
+  como tests `flutter_test`.
+- Este bloque mejora escala y verificabilidad del motor F0, **no**
+  resuelve SQLCipher, Android real, arranque Laravel, contratos OD ni
+  sincronización Pro. No hay PASS nuevo de producto ni aprobación H9.
+  `RELEASE=NO_GO`.
+- La validación local, si se consigue, sólo certifica el SHA del PR #3
+  y su clon limpio, **no** los tests PHP del árbol WIP ni la aplicación
+  comercial. Reconciliación manual previa a toda integración.
+
+---
+
 ## Delta incremental directo sin Codex ni Actions (2026-11-18)
 
 **Alcance añadido al MISMO PR #3 Draft**, aún apilado sobre el PR #1.

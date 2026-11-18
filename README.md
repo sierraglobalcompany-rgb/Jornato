@@ -11,11 +11,24 @@
 | Contrato de producto y roadmap | Documentado |
 | Motor de entradas, pausas, continuaciones y salidas | Código inicial no ejecutado en SDK |
 | UI personal | En memoria; muestra turnos, acumulados y resúmenes diarios |
-| Pruebas Dart | 66 casos escritos (8 originales + 58 nuevos), sin ejecutar |
+| Pruebas Dart | 72 casos escritos (8 originales + 64 nuevos), sin ejecutar |
 | Android APK / QA físico | Pendiente |
 | Archivo determinista JSON (sin cifrar) | Restaurar y conciliar por prefijo append-only; NO respaldo ni sincronización |\n| Persistencia cifrada / backups | Pendiente |
 | Empresa, kiosco, QR, GPS, selfie | Pendiente |
 | Cloud, entitlements, iOS | Fuera del lote inicial |
+
+## Bloque de desarrollo y QA sin Codex ni Actions (18-nov-2026)
+
+El PR #3 también incluye un índice privado por ID de evento que evita recorrer
+cada marca al detectar reintentos, y seis pruebas nuevas de integridad/escala.
+**Total actual: 72 tests de Flutter escritos, no ejecutados**. Se agregó un
+smoke Dart puro con 20 verificaciones (igualmente **NO ejecutadas aquí**) y
+un script PowerShell de QA para un **clon separado y limpio de este PR**.
+No probar el script directamente sobre `D:\\codex\\Jornato`, cuyo WIP
+avanzado todavía no se ha reconciliado.
+
+Los tests escritos y el smoke no prueban cifrado, persistencia, Android,
+servicios Pro ni lanzamiento. No hacer merge del PR #3 a ciegas.
 
 ## Documentos
 
@@ -23,6 +36,7 @@
 - [Decisión de arquitectura](docs/ADR-0001-ARQUITECTURA.md)
 - [Estado de QA y bloqueos](docs/QA-ESTADO.md)
 - [Cómo preparar Flutter](docs/COMO-EJECUTAR.md)
+- [QA manual local sin Codex/CI](scripts/qa_local_f0.ps1) · [smoke Dart sin Flutter](tool/smoke_attendance.dart)
 - [Siguiente encargo para Codex](docs/NEXT-CODEX.md)
 - [Reglas de seguridad para agentes](AGENTS.md)
 
