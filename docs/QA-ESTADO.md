@@ -15,6 +15,45 @@ Fecha: 2026-10-24. Fuente de referencia v4: 196 pruebas reportadas por la transf
 - [ ] Aplicar canon PingPongLaw L1–L6 desde fuente completa validada; sólo se conoce su hash de referencia.
 - [ ] Validación legal de privacidad y tiendas/monetización antes de publicación.
 
+## Cuarto bloque remoto: regla GPS geométrica F2 (2026-11-18)
+
+**Alcance:** Dart puro de negocio, reutilizable en el futuro Android
+avanzado; no integra sensores, identidad, almacenamiento ni backend.
+
+- `lib/src/domain/location_rule.dart`: `LocationRule.optional()` y
+  `LocationRule.requiredSite(siteLatitude, siteLongitude, radiusMeters)`
+  con radio permitido >0 y <=100 m, GPS horizontal con precisión >0 y
+  <=25 m, edad de lectura [0,30] segundos, rechazo de fecha futura,
+  coordenadas inválidas, NaN/infinito y de `distancia+precisión>radio`.
+  La distancia es Haversine aprox. con control numérico de polos y
+  antimeridiano. Ausencia/anomalía genera **reviewRequired**, nunca
+  permiso automático; GPS opcional => **notRequired** sin evaluar fix.
+- `test/location_rule_test.dart`: **25 escenarios fuente nuevos**,
+  no ejecutados; incluyen límites, meridiano 180, polos y políticas de
+  sede más estrictas. Cero paquetes añadidos.
+- `tool/smoke_attendance.dart`: siete aserciones sintéticas de GPS
+  añadidas; **27 checks escritos acumulados**, todos NOT_RUN.
+- **Acumulado PR #3** = 8 originales +31 primer bloque +27 segundo
+  +6 tercero +25 actuales = **97 tests Flutter escritos, cero tests
+  Flutter ejecutados por esta sesión**. El smoke Dart es otro artefacto;
+  no se suma a los 97. `flutter analyze`, `flutter test`, `dart`
+  y `flutter build apk` **NOT_RUN**: no hay SDK disponible en este
+  runtime y no hubo GitHub Actions ni Codex.
+- **Límites de seguridad:** `meetsLocalRule` significa exclusivamente
+  resultado numérico sobre una lectura que entrega un adaptador confiable.
+  NO certifica GPS físico, protección antifraude, origen/timestamp
+  auténtico, empleado/empresa, consentimiento, privacidad, aprobación
+  de marcación, ni uso conforme a OD01–OD08. El resultado no almacena
+  coordenadas; NO conectar todavía al botón de marcación F0.
+- **Siguiente integración real** exige inspección del código avanzado
+  `D:\\codex\\Jornato`, identificar las políticas ya existentes,
+  respetar las aprobaciones de geolocalización y probar GPS físico,
+  permisos, precisión/edad, revocación, offline y casos negativos.
+  **Ningún merge/push al WIP, cambio de permiso ni publicación
+  comercial está autorizado**. H9 / B22 / release: NO_GO.
+
+---
+
 ## Tercer bloque remoto: motor indexado + smoke local sin CI (2026-11-18)
 
 **Alcance:** sobre el PR #3 F0 remoto, no el WIP de Windows.

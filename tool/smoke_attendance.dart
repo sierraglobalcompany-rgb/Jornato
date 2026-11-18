@@ -1,6 +1,7 @@
 import '../lib/src/domain/attendance.dart';
 import '../lib/src/domain/attendance_archive.dart';
 import '../lib/src/domain/attendance_report.dart';
+import '../lib/src/domain/location_rule.dart';
 
 /// Smoke de Dart puro: NO usa Flutter SDK, servicios, datos reales ni disco.
 /// Ejecutar en la raíz del PR #3: dart tool/smoke_attendance.dart
@@ -101,6 +102,81 @@ void main() {
   verify(longBook.shifts(
     at: base.add(const Duration(minutes: 999)),
   ).length == 500, '500 turnos sin pérdida');
+
+  // GPS sintético: solo se evalúa geometría, sin sensor ni permiso Android.
+  final gpsNow = DateTime.utc(2026, 11, 18, 12);
+  final site = LocationRule.requiredSite(
+    siteLatitude: 0,
+    siteLongitude: 0,
+  );
+  final centered = LocationFix(
+    latitude: 0,
+    longitude: 0,
+    accuracyMeters: 5,
+    capturedAt: gpsNow,
+  );
+  verify(
+    const LocationRule.optional().evaluate(now: gpsNow).outcome ==
+        LocationOutcome.notRequired,
+    'GPS opcional no exige lectura',
+  );
+  verify(
+    site.evaluate(now: gpsNow).reason == LocationReason.missingFix,
+    'GPS obligatorio ausente requiere revisión',
+  );
+  verify(
+    site.evaluate(now: gpsNow, fix: centered).outcome ==
+        LocationOutcome.meetsLocalRule,
+    'GPS sintético dentro de margen',
+  );
+  verify(
+    site.evaluate(
+      now: gpsNow,
+      fix: LocationFix(
+        latitude: 0,
+        longitude: 0,
+        accuracyMeters: 26,
+        capturedAt: gpsNow,
+      ),
+    ).reason == LocationReason.insufficientAccuracy,
+    'GPS sin precisión suficiente requiere revisión',
+  );
+  verify(
+    site.evaluate(
+      now: gpsNow,
+      fix: LocationFix(
+        latitude: 0,
+        longitude: 0,
+        accuracyMeters: 5,
+        capturedAt: gpsNow.subtract(const Duration(seconds: 31)),
+      ),
+    ).reason == LocationReason.staleFix,
+    'GPS antiguo requiere revisión',
+  );
+  verify(
+    site.evaluate(
+      now: gpsNow,
+      fix: LocationFix(
+        latitude: 0,
+        longitude: 0.001,
+        accuracyMeters: 5,
+        capturedAt: gpsNow,
+      ),
+    ).reason == LocationReason.beyondRadius,
+    'distancia más precisión fuera del radio requiere revisión',
+  );
+  verify(
+    site.evaluate(
+      now: gpsNow,
+      fix: LocationFix(
+        latitude: 0,
+        longitude: 0,
+        accuracyMeters: 5,
+        capturedAt: gpsNow.add(const Duration(milliseconds: 1)),
+      ),
+    ).reason == LocationReason.futureFix,
+    'GPS futuro requiere revisión',
+  );
 
   print('SMOKE_ATTENDANCE=PASS CHECKS=$verified EVENTS=1000');
   print('NOT_CERTIFIED=ANDROID|SQLCIPHER|BACKEND|H9|RELEASE');
