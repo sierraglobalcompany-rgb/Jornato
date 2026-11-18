@@ -91,6 +91,58 @@ class TestBridge(unittest.TestCase):
         report = json.loads((folders[0] / "MATRIZ.json").read_text(encoding="utf-8"))
         self.assertEqual(report["modules"][0]["decision"], "SAME_BYTES")
 
+    def test_unreadable_known_file_does_not_look_absent(self):
+        real_stat = Path.stat
+
+        def deny_known_file(path, *args, **kwargs):
+            if path == self.sample:
+                raise PermissionError("permission denied for source")
+            return real_stat(path, *args, **kwargs)
+
+        with patch.object(Path, "stat", deny_known_file):
+            report = b.compare(self.wip, self.ref)
+        self.assertEqual(report["modules"][0]["decision"], "READ_BLOCKED")
+        self.assertFalse(report["inventory_complete"])
+        self.assertGreater(report["unreadable_entries"], 0)
+
+    def test_unreadable_directory_does_not_look_absent(self):
+        def deny_walk(*_args, **kwargs):
+            kwargs["onerror"](PermissionError("permission denied for directory"))
+            return iter(())
+
+        with patch.object(b.os, "walk", deny_walk):
+            report = b.compare(self.wip, self.ref)
+        self.assertEqual(report["directory_read_errors"], 1)
+        self.assertEqual(report["modules"][0]["decision"], "SCAN_INCOMPLETE")
+        self.assertFalse(report["inventory_complete"])
+
+    def test_incomplete_scan_exits_nonzero_but_keeps_report(self):
+        def incomplete_inventory(*_args, **_kwargs):
+            return ({"attendance.dart": []}, {}, 0, 0, 1)
+
+        with patch.object(b, "inventory", incomplete_inventory):
+            with contextlib.redirect_stdout(io.StringIO()) as output:
+                code = b.main(["--wip", str(self.wip), "--out", str(self.out)])
+        self.assertEqual(code, 3)
+        self.assertIn("RESULT=REPORT_PARTIAL_SCAN_INCOMPLETE", output.getvalue())
+        result_files = list(self.out.glob("*/*"))
+        self.assertEqual(len(result_files), 2)
+        matrix = json.loads(next(self.out.glob("*/MATRIZ.json")).read_text(encoding="utf-8"))
+        self.assertEqual(matrix["modules"][0]["decision"], "SCAN_INCOMPLETE")
+
+    def test_symlink_named_like_target_is_not_read(self):
+        target = self.parent / "outside.dart"
+        target.write_text("outside source secret", encoding="utf-8")
+        self.sample.unlink()
+        try:
+            self.sample.symlink_to(target)
+        except (OSError, NotImplementedError):
+            self.skipTest("Symlinks unsupported")
+        report = b.compare(self.wip, self.ref)
+        self.assertEqual(report["modules"][0]["decision"], "READ_BLOCKED")
+        self.assertFalse(report["inventory_complete"])
+        self.assertNotIn("outside source secret", json.dumps(report))
+
     def test_does_not_copy_sources_into_report(self):
         with patch.object(b, "REFERENCE", self.ref):
             with contextlib.redirect_stdout(io.StringIO()):
