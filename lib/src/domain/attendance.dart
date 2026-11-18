@@ -41,6 +41,24 @@ class AttendanceSnapshot {
   final Duration paused;
 }
 
+/// Un turno inicia en entry y termina en exit. Incluso si atraviesa medianoche,
+/// la fecha de referencia es startedAt (no se reparte en días calendario).
+class AttendanceShift {
+  const AttendanceShift({
+    required this.startedAt,
+    required this.finishedAt,
+    required this.status,
+    required this.worked,
+    required this.paused,
+  });
+
+  final DateTime startedAt;
+  final DateTime? finishedAt;
+  final DayStatus status;
+  final Duration worked;
+  final Duration paused;
+}
+
 /// Sólo para un sujeto dentro de un espacio explícito.
 /// Eventos inmutables; correcciones, autorización y sincronización vendrán
 /// en fases posteriores como modelos separados.
@@ -94,8 +112,7 @@ class AttendanceLedger {
         status == DayStatus.idle || status == DayStatus.finished,
       MarkType.pause => status == DayStatus.working,
       MarkType.resume => status == DayStatus.paused,
-      MarkType.exit =>
-        status == DayStatus.working || status == DayStatus.paused,
+      MarkType.exit => status == DayStatus.working || status == DayStatus.paused,
     };
     if (!valid) throw StateError('Transición de jornada inválida');
 
@@ -103,49 +120,85 @@ class AttendanceLedger {
     return event;
   }
 
-  AttendanceSnapshot snapshot({DateTime? at}) {
+  /// Proyección inmutable de cada turno hasta [at], usando intervalos reales.
+  /// No suma espacios entre turnos, pausas previstas ni tiempo futuro.
+  /// Comparte una única lógica de intervalos con snapshot() para no divergir.
+  List<AttendanceShift> shifts({DateTime? at}) {
     final cutoff = (at ?? DateTime.now()).toUtc();
-    var worked = Duration.zero;
-    var paused = Duration.zero;
+    final result = <AttendanceShift>[];
+    DateTime? startedAt;
     DateTime? activeFrom;
     DateTime? pauseFrom;
-    DayStatus projectedStatus = DayStatus.idle;
+    var worked = Duration.zero;
+    var paused = Duration.zero;
 
     for (final event in _events) {
       if (event.occurredAt.isAfter(cutoff)) break;
-      final t = event.occurredAt;
+      final time = event.occurredAt;
       switch (event.type) {
         case MarkType.entry:
-          activeFrom = t;
+          startedAt = time;
+          activeFrom = time;
           pauseFrom = null;
-          projectedStatus = DayStatus.working;
+          worked = Duration.zero;
+          paused = Duration.zero;
         case MarkType.pause:
-          if (activeFrom != null) worked += t.difference(activeFrom);
+          if (activeFrom != null) worked += time.difference(activeFrom);
           activeFrom = null;
-          pauseFrom = t;
-          projectedStatus = DayStatus.paused;
+          pauseFrom = time;
         case MarkType.resume:
-          if (pauseFrom != null) paused += t.difference(pauseFrom);
+          if (pauseFrom != null) paused += time.difference(pauseFrom);
           pauseFrom = null;
-          activeFrom = t;
-          projectedStatus = DayStatus.working;
+          activeFrom = time;
         case MarkType.exit:
-          if (activeFrom != null) worked += t.difference(activeFrom);
-          if (pauseFrom != null) paused += t.difference(pauseFrom);
+          if (activeFrom != null) worked += time.difference(activeFrom);
+          if (pauseFrom != null) paused += time.difference(pauseFrom);
+          result.add(
+            AttendanceShift(
+              startedAt: startedAt!,
+              finishedAt: time,
+              status: DayStatus.finished,
+              worked: worked,
+              paused: paused,
+            ),
+          );
+          startedAt = null;
           activeFrom = null;
           pauseFrom = null;
-          projectedStatus = DayStatus.finished;
+          worked = Duration.zero;
+          paused = Duration.zero;
       }
     }
 
-    if (activeFrom != null && !cutoff.isBefore(activeFrom)) {
-      worked += cutoff.difference(activeFrom);
+    if (startedAt != null) {
+      if (activeFrom != null) worked += cutoff.difference(activeFrom);
+      if (pauseFrom != null) paused += cutoff.difference(pauseFrom);
+      result.add(
+        AttendanceShift(
+          startedAt: startedAt,
+          finishedAt: null,
+          status: pauseFrom == null ? DayStatus.working : DayStatus.paused,
+          worked: worked,
+          paused: paused,
+        ),
+      );
     }
-    if (pauseFrom != null && !cutoff.isBefore(pauseFrom)) {
-      paused += cutoff.difference(pauseFrom);
+
+    return List<AttendanceShift>.unmodifiable(result);
+  }
+
+  /// Resumen acumulado de los turnos proyectados al instante [at].
+  /// El estado corresponde al último turno, no a una suma de estados.
+  AttendanceSnapshot snapshot({DateTime? at}) {
+    final all = shifts(at: at);
+    var worked = Duration.zero;
+    var paused = Duration.zero;
+    for (final shift in all) {
+      worked += shift.worked;
+      paused += shift.paused;
     }
     return AttendanceSnapshot(
-      status: projectedStatus,
+      status: all.isEmpty ? DayStatus.idle : all.last.status,
       worked: worked,
       paused: paused,
     );

@@ -10,10 +10,10 @@
 |---|---|
 | Contrato de producto y roadmap | Documentado |
 | Motor de entradas, pausas, continuaciones y salidas | Código inicial no ejecutado en SDK |
-| UI personal | Código inicial en memoria |
-| Pruebas Dart | 8 casos escritos, sin ejecutar |
+| UI personal | En memoria; ahora muestra turnos y acumulados, sin persistencia |
+| Pruebas Dart | 39 casos escritos (8 originales + 31 nuevos), sin ejecutar |
 | Android APK / QA físico | Pendiente |
-| Persistencia cifrada / backups | Pendiente |
+| Archivo determinista JSON (sin cifrar) | Código para validar/restaurar eventos, sin almacenamiento; NO respaldo |\n| Persistencia cifrada / backups | Pendiente |
 | Empresa, kiosco, QR, GPS, selfie | Pendiente |
 | Cloud, entitlements, iOS | Fuera del lote inicial |
 
@@ -33,3 +33,10 @@ Es un producto nuevo y separado de ERP-BDM, basado en la **transferencia BDM-Men
 **No subir** datos de empleados, claves, selfies, historias médicas ni otra información sensible a este repositorio público.
 
 La rama de F0 está bajo PR borrador y requiere validación antes de fusionar.
+
+**Delta remoto para trabajo sin Codex/Actions (17-nov-2026):** se añadieron
+proyecciones de turnos, un archivo JSON determinista para reconstruir eventos
+y pruebas fuente. **No es almacenamiento offline cifrado ni sincronización**;
+el uso comercial y Android siguen bloqueados. El trabajo avanzado y no
+publicado de `D:\\codex\\Jornato` debe compararse antes de integrar
+este PR remoto. Estado de pruebas y límites en [QA](docs/QA-ESTADO.md).

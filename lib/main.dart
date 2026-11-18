@@ -71,7 +71,9 @@ class _PersonalDayScreenState extends State<PersonalDayScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final state = _ledger.snapshot();
+    final now = DateTime.now().toUtc();
+    final shifts = _ledger.shifts(at: now);
+    final state = _ledger.snapshot(at: now);
     final status = _ledger.status;
     final canStart = status == DayStatus.idle || status == DayStatus.finished;
     final canPause = status == DayStatus.working;
@@ -109,8 +111,8 @@ class _PersonalDayScreenState extends State<PersonalDayScreen> {
             const SizedBox(height: 20),
             Text('Estado: ' + _status(status)),
             const SizedBox(height: 12),
-            Text('Trabajo real: ' + _duration(state.worked)),
-            Text('Pausas reales: ' + _duration(state.paused)),
+            Text('Trabajo acumulado: ' + _duration(state.worked)),
+            Text('Pausas acumuladas: ' + _duration(state.paused)),
             const SizedBox(height: 20),
             FilledButton(
               onPressed: canStart ? () => _mark(MarkType.entry) : null,
@@ -135,6 +137,22 @@ class _PersonalDayScreenState extends State<PersonalDayScreen> {
             ),
             if (_message != null) Text(_message!),
             const SizedBox(height: 24),
+            const Text(
+              'Turnos de esta sesión',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            for (final shift in shifts)
+              ListTile(
+                title: Text('Inicio: ' + shift.startedAt.toLocal().toString()),
+                subtitle: Text(
+                  'Trabajo: ' + _duration(shift.worked) +
+                  ' · Pausas: ' + _duration(shift.paused) +
+                  (shift.finishedAt == null
+                      ? ' · En curso'
+                      : ' · Terminado'),
+                ),
+              ),
+            const SizedBox(height: 16),
             const Text(
               'Marcaciones de esta sesión',
               style: TextStyle(fontWeight: FontWeight.bold),
