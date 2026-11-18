@@ -11,12 +11,32 @@
 | Contrato de producto y roadmap | Documentado |
 | Motor de entradas, pausas, continuaciones y salidas | Código inicial no ejecutado en SDK |
 | UI personal | En memoria; muestra turnos, acumulados y resúmenes diarios |
-| Pruebas Dart | 97 casos escritos (8 originales + 89 nuevos), sin ejecutar |
+| Pruebas Dart | 111 casos escritos (8 originales + 103 nuevos), sin ejecutar |
 | GPS: validación geométrica local | Código puro con 25 pruebas fuente; sin sensor, permisos ni evidencias reales | 
 | Android APK / QA físico | Pendiente |
 | Archivo determinista JSON (sin cifrar) | Restaurar y conciliar por prefijo append-only; NO respaldo ni sincronización |\n| Persistencia cifrada / backups | Pendiente |
 | Empresa, kiosco, QR, GPS, selfie | Pendiente |
 | Cloud, entitlements, iOS | Fuera del lote inicial |
+
+## Informes diarios CSV sin dependencias — 18 nov 2026
+
+El PR #3 incorpora `AttendanceCsvReport.fromLedger`, un exportador
+**puro y sólo en memoria** de los totales diarios calculados por
+`AttendanceReport.days`. Genera CSV estable con fecha civil de inicio,
+número de turnos, turnos finalizados/abiertos y duraciones enteras en
+**microsegundos** para evitar pérdidas por redondeo. Rechaza fechas fuera
+del rango civil CSV y no intercala identificadores, nombres, ubicación,
+credenciales ni datos textuales del usuario en sus celdas.
+
+**No genera archivos, correos, descargas ni sincronización**, y el CSV
+sigue conteniendo información de horas trabajadas que requiere permiso,
+cifrado y reglas de privacidad antes de usarse con personal real.
+No es nómina ni un informe de cumplimiento legal.
+
+Se añadieron **14 tests Flutter de fuente** y 4 verificaciones al smoke.
+El PR #3 contiene **111 tests fuente escritos y no ejecutados**; smoke
+Dart acumulado **31 checks escritos y no ejecutados**. No hay SDK local
+ni Actions. Android/H9/release siguen `NO_GO`.
 
 ## Regla de ubicación opcional para marcaciones — 18 nov 2026
 

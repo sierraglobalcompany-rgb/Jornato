@@ -1,6 +1,7 @@
 import '../lib/src/domain/attendance.dart';
 import '../lib/src/domain/attendance_archive.dart';
 import '../lib/src/domain/attendance_report.dart';
+import '../lib/src/domain/attendance_csv_report.dart';
 import '../lib/src/domain/location_rule.dart';
 
 /// Smoke de Dart puro: NO usa Flutter SDK, servicios, datos reales ni disco.
@@ -85,6 +86,23 @@ void main() {
   verify(civil.last.date == '2026-11-18', 'fecha civil siguiente');
   verify(civil.fold<int>(0, (a, day) => a + day.worked.inMinutes) == 150,
       'reconciliación de totales');
+
+  // CSV seguro de resúmenes, sólo en memoria: no se exportan identidades.
+  final csv = AttendanceCsvReport.fromLedger(
+    longer,
+    at: at,
+    localTime: (utc) => utc.toUtc().subtract(const Duration(hours: 5)),
+  );
+  verify(csv.startsWith(AttendanceCsvReport.header),
+      'CSV usa cabecera estable');
+  verify(csv.split('\r\n').where((line) => line.isNotEmpty).length == 3,
+      'CSV tiene exactamente dos días más cabecera');
+  verify(csv.contains('2026-11-17,1,1,0,7200000000,1200000000'),
+      'CSV conserva trabajo y pausa en microsegundos');
+  verify(!csv.contains('qa-local') &&
+      !csv.contains('persona-ficticia') &&
+      !csv.contains('entry-1'),
+      'CSV no publica identificadores');
 
   // El primer evento se mantiene distinguible aun después de muchas marcas.
   final longBook = AttendanceLedger(

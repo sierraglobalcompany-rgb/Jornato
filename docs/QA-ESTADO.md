@@ -15,6 +15,36 @@ Fecha: 2026-10-24. Fuente de referencia v4: 196 pruebas reportadas por la transf
 - [ ] Aplicar canon PingPongLaw L1–L6 desde fuente completa validada; sólo se conoce su hash de referencia.
 - [ ] Validación legal de privacidad y tiendas/monetización antes de publicación.
 
+## Quinto bloque remoto: exportación diaria CSV en memoria (2026-11-18)
+
+- **Código real:** `lib/src/domain/attendance_csv_report.dart` agrega
+  a partir de `AttendanceReport.days` una salida CSV determinista
+  con CRLF: `fecha,turnos,finalizados,abiertos,trabajo_microsegundos,
+  pausa_microsegundos`. Mantiene fracciones de segundo, fecha civil
+  de entrada y turnos abiertos, sin dividir jornadas nocturnas.
+- **Privacidad mínima de formato:** únicamente fechas y enteros
+  calculados; no incorpora workspace/sujeto/actor/IDs/GPS, ni permite
+  columnas arbitrarias procedentes del usuario. Una fecha civil no
+  canónica se rechaza para no inyectar texto interpretado como fórmula.
+  Aun así, HORAS DE TRABAJO pueden ser datos personales: el código
+  **no almacena, transmite, descarga ni habilita exportación por UI**.
+  Autorización, controles de retención, cifrado y consentimiento se
+  verifican en la integración real, no en esta función.
+- **QA declarada, no ejecutada:** 14 tests fuente nuevos sobre rangos,
+  cortes, turnos nocturnos, segundos fraccionarios, privacidad y
+  no-mutación. `tool/smoke_attendance.dart` agrega 4 comprobaciones:
+  de 27 a 31. Acumulado del PR #3: **111 tests Flutter escritos**
+  (8 originales +31+27+6+25+14), **0 tests ejecutados aquí**;
+  smoke con **31 checks escritos, NOT_RUN**.
+- Sin nuevos paquetes, bases, APIs, permisos ni cambios de backend.
+  El SDK Dart/Flutter sigue ausente; `flutter analyze/test/build`,
+  APK física, H9 integral, SQLCipher y release: **NOT_RUN/NO_GO**.
+  No mergear PR #3 al WIP Windows avanzado sin comparación.
+- Es un avance F0/F3 de código reutilizable, **no certifica**
+  módulo de informes productivo ni derechos laborales.
+
+---
+
 ## Cuarto bloque remoto: regla GPS geométrica F2 (2026-11-18)
 
 **Alcance:** Dart puro de negocio, reutilizable en el futuro Android
