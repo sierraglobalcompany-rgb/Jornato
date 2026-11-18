@@ -98,12 +98,22 @@ try {
     if ($transcribing) { Stop-Transcript | Out-Null }
     $afterHead = (& $gitCmd -C $repo rev-parse HEAD).Trim()
     $afterStage = @(& $gitCmd -C $repo diff --cached --name-only)
+    $trackedChanged = @(& $gitCmd -C $repo diff --name-only)
+    $untracked = @(& $gitCmd -C $repo ls-files --others --exclude-standard)
+    if ($afterHead -ne $head -or
+        $afterStage.Count -gt 0 -or
+        $trackedChanged.Count -gt 0) {
+        $result = 'FAIL'
+        $reason = 'El clon cambió HEAD, índice o archivos tracked durante QA; revisar antes de confiar.'
+    }
     $final = @(
         "TASK=JOR-F0-LOCAL-QA"
         "STATUS=$result"
         "SOURCE_HEAD=$head"
         "HEAD_UNCHANGED=$([string]($afterHead -eq $head))"
         "INDEX_STAGED_ENTRIES=$($afterStage.Count)"
+        "TRACKED_WORKTREE_EDITS=$($trackedChanged.Count)"
+        "UNTRACKED_AFTER_QA=$($untracked.Count)"
         "APK_REQUESTED=$([string]([bool]$ApkDebug))"
         "REASON=$reason"
         "LOG=$log"

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import '../lib/src/domain/attendance.dart';
 import '../lib/src/domain/attendance_archive.dart';
 import '../lib/src/domain/attendance_report.dart';
@@ -196,6 +198,6 @@ void main() {
     'GPS futuro requiere revisión',
   );
 
-  print('SMOKE_ATTENDANCE=PASS CHECKS=$verified EVENTS=1000');
-  print('NOT_CERTIFIED=ANDROID|SQLCIPHER|BACKEND|H9|RELEASE');
+  stdout.writeln('SMOKE_ATTENDANCE=PASS CHECKS=$verified EVENTS=1000');
+  stdout.writeln('NOT_CERTIFIED=ANDROID|SQLCIPHER|BACKEND|H9|RELEASE');
 }

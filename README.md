@@ -18,6 +18,16 @@
 | Empresa, kiosco, QR, GPS, selfie | Pendiente |
 | Cloud, entitlements, iOS | Fuera del lote inicial |
 
+## Corrección focal del QA sin CI — 18 nov 2026
+
+La validación estructural sobre el HEAD anterior detectó **37 imports
+Dart (0 rutas locales rotas)** y confirmó las **111 declaraciones de
+pruebas**. Se corrigió el uso de `print()` en el smoke, ya que la
+configuración `avoid_print` lo desaprueba. El QA PowerShell reporta
+y rechaza cambios a HEAD, stage y archivos tracked durante su ejecución.
+**Dart/Flutter no han sido ejecutados**; los 111 tests y 31 checks
+siguen `NOT_RUN`. No hay autorización de merge ni release.
+
 ## Informes diarios CSV sin dependencias — 18 nov 2026
 
 El PR #3 incorpora `AttendanceCsvReport.fromLedger`, un exportador

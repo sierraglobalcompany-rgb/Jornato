@@ -15,6 +15,32 @@ Fecha: 2026-10-24. Fuente de referencia v4: 196 pruebas reportadas por la transf
 - [ ] Aplicar canon PingPongLaw L1–L6 desde fuente completa validada; sólo se conoce su hash de referencia.
 - [ ] Validación legal de privacidad y tiendas/monetización antes de publicación.
 
+## Gate estructural enfocado — sin Codex ni Actions (2026-11-18)
+
+**Análisis realizado sobre el árbol GitHub del PR #3 antes de este
+cambio, HEAD `e80413bc5a8a30f25254292b5f212cea1bea337a`:**
+26 archivos fuente/configuración, 15 archivos Dart, 37 imports
+inspeccionados y **0 imports locales sin resolver**. Coinciden **111
+declaraciones de test** en los archivos de `test/`. Se encontraron
+**2 llamadas a `print()`** en el smoke que contradicen
+`analysis_options.yaml` (`avoid_print`); se reemplazaron por
+`stdout.writeln` (Dart puro, sin dependencias) sin modificar los
+**31 checks** del smoke. El runner PowerShell fue reforzado para
+declarar FAIL si QA modifica HEAD, stage o código tracked; reporta
+archivos untracked generados sin confundirlos con el WIP real.
+
+**ALCANCE DEL GATE: revisión estructural de fuentes, NO compilación.**
+Ni el runner Windows ni `flutter test`, `flutter analyze`,
+`dart tool/smoke_attendance.dart`, Android, SQLCipher o H9 fueron
+ejecutados en este entorno, pues Dart/Flutter/pwsh no están instalados
+y no hay salida a repositorios externos para descargarlos.
+La revisión de imports no detecta todos los errores de sintaxis, tipos
+o contratos. No convertir la ausencia de imports rotos en PASS de
+aplicación. Acumulado conserva **111 tests escritos, NOT_RUN** y
+smoke **31 checks escritos, NOT_RUN**.
+
+---
+
 ## Quinto bloque remoto: exportación diaria CSV en memoria (2026-11-18)
 
 - **Código real:** `lib/src/domain/attendance_csv_report.dart` agrega
