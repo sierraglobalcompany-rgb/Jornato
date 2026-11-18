@@ -110,6 +110,42 @@ abstract final class AttendanceArchive {
     return ledger;
   }
 
+  /// Reconcilia dos capturas del MISMO libro en modo append-only.
+  ///
+  /// El historial más corto debe ser un prefijo byte-semántico del otro:
+  /// mismo ID, actor, tipo, espacio, sujeto e instante UTC en cada posición.
+  /// No ordena, borra, fusiona ramas divergentes ni modifica [current].
+  ///
+  /// Sólo para datos locales previamente confiables: no autentica el archivo
+  /// ni valida firmas, permisos remotos, SQLCipher o recibos de sincronización.
+  /// El resultado debe guardarse atómicamente por la capa cifrada aprobada.
+  static AttendanceLedger reconcile(
+    AttendanceLedger current,
+    String candidateArchive,
+  ) {
+    final incoming = decode(candidateArchive);
+    if (incoming.workspaceId != current.workspaceId ||
+        incoming.subjectId != current.subjectId) {
+      throw StateError('Historial de otro espacio o sujeto');
+    }
+
+    final existing = current.events;
+    final candidate = incoming.events;
+    final sharedLength = existing.length < candidate.length
+        ? existing.length
+        : candidate.length;
+
+    for (var i = 0; i < sharedLength; i++) {
+      if (!existing[i].identicalPayload(candidate[i])) {
+        throw StateError('Historial divergente en evento $i');
+      }
+    }
+
+    // Ninguna mutación parcial: ambos historiales se verifican completos
+    // antes de elegir el que contiene el prefijo más largo.
+    return candidate.length > existing.length ? incoming : current;
+  }
+
   static String _requiredText(Map<String, dynamic> map, String key) {
     final Object? value = map[key];
     if (value is! String || value.trim().isEmpty) {

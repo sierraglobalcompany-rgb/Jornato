@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'src/domain/attendance.dart';
+import 'src/domain/attendance_report.dart';
 
 void main() => runApp(const JornatoApp());
 
@@ -73,6 +74,11 @@ class _PersonalDayScreenState extends State<PersonalDayScreen> {
   Widget build(BuildContext context) {
     final now = DateTime.now().toUtc();
     final shifts = _ledger.shifts(at: now);
+    final days = AttendanceReport.days(
+      _ledger,
+      at: now,
+      localTime: (instant) => instant.toLocal(),
+    );
     final state = _ledger.snapshot(at: now);
     final status = _ledger.status;
     final canStart = status == DayStatus.idle || status == DayStatus.finished;
@@ -137,6 +143,21 @@ class _PersonalDayScreenState extends State<PersonalDayScreen> {
             ),
             if (_message != null) Text(_message!),
             const SizedBox(height: 24),
+            const Text(
+              'Resumen por día',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            for (final day in days)
+              ListTile(
+                title: Text(day.date),
+                subtitle: Text(
+                  '${day.shifts} turnos · '
+                  '${day.finishedShifts} finalizados · '
+                  'Pausas: ' + _duration(day.paused),
+                ),
+                trailing: Text(_duration(day.worked)),
+              ),
+            const SizedBox(height: 16),
             const Text(
               'Turnos de esta sesión',
               style: TextStyle(fontWeight: FontWeight.bold),
