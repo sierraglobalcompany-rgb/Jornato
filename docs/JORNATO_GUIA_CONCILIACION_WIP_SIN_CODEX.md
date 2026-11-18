@@ -21,9 +21,11 @@ py -3 .\JORNATO_CONCILIAR_WIP_GITHUB_SIN_CODEX.py --wip 'D:\codex\Jornato' --out
 
 Si clonas el PR documental #2 y quieres comprobar el propio puente sin tocar el WIP, ejecuta `py -3 -m unittest discover -s tests -p test_jornato_wip_bridge.py -v` desde la raíz del clon.
 
-El script nunca escribe dentro de `--wip`; crea **solo** `RESUMEN.md` y `MATRIZ.json` en una subcarpeta nueva de `--out`. No ejecuta Git, no instala dependencias, no consulta internet, no ejecuta pruebas Dart ni modifica el índice/stage.
+El script nunca escribe dentro de `--wip`; crea **solo** `RESUMEN.md` y `MATRIZ.json` en una subcarpeta nueva de `--out`.
+**Puerta fail-closed:** si algún directorio es inaccesible o hay archivos fuente ilegibles, el reporte se conserva, marca `inventory_complete=false`, y el proceso sale con **código 3** (`REPORT_PARTIAL_SCAN_INCOMPLETE`). Nunca interpretar una búsqueda incompleta como ausencia o como autorización para copiar módulos. Requiere Python 3.10+ y no sigue junctions ni symlinks.
+ No ejecuta Git, no instala dependencias, no consulta internet, no ejecuta pruebas Dart ni modifica el índice/stage.
 
-**No usar el reporte como orden de merge.** `SAME_BYTES` confirma mismos bytes; `REVIEW_DIFFERENT` exige estudiar código, `REVIEW_AMBIGUOUS` exige seleccionar ubicación, y `NOT_FOUND_BY_BASENAME` **no significa** que falte la funcionalidad (puede tener otro nombre). Revisar manualmente rutas, metadatos y secretos antes de compartir informes. Nunca compartir `.env`, llaves, datos de empleados, bases de datos ni fotos.
+**No usar el reporte como orden de merge.** `SAME_BYTES` confirma mismos bytes; `REVIEW_DIFFERENT` exige estudiar código, `REVIEW_AMBIGUOUS` exige seleccionar ubicación, `READ_BLOCKED` indica un candidato inaccesible y `SCAN_INCOMPLETE` significa que no se pudo revisar todo el árbol. `NOT_FOUND_BY_BASENAME` **no significa** que falte la funcionalidad (puede tener otro nombre). Revisar manualmente rutas, metadatos y secretos antes de compartir informes. Nunca compartir `.env`, llaves, datos de empleados, bases de datos ni fotos.
 
 Si Python 3 no está disponible, conservar el WIP intacto y utilizar el flujo PowerShell ya existente para crear un ZIP de fuentes **previa revisión manual**. No es necesario instalar software de pago ni gastar tokens Codex.
 
@@ -31,6 +33,6 @@ Si Python 3 no está disponible, conservar el WIP intacto y utilizar el flujo Po
 
 - Archivo: `tools/JORNATO_CONCILIAR_WIP_GITHUB_SIN_CODEX.py`.
 - QA sintética independiente: `tests/test_jornato_wip_bridge.py` ejecutada con **Python 3.13.5**.
-- **10 tests PASS**: IDs Git correctos, archivo idéntico, divergencia, múltiples candidatos, ausencia, exclusión de carpetas peligrosas, symlink no seguido, rechazo de output dentro del WIP, dos reportes de salida, ninguna fuente copiada.
+- **14 tests PASS** (versión focal nueva, ejecutados en Python 3.13): los 10 originales más archivo inaccesible, directorio no legible, salida parcial con código 3 y enlace simbólico de un candidato. Una ejecución local de fuente real aún es `NOT_RUN`.
 - **NO_RUN**: script en el WIP Windows real, Dart/Flutter, Android, SQLCipher, integración con Laravel, H9 y lanzamiento.
 - **NEXT_OWNER:** CHATGPT DIRECTOR, tras disponer de los reportes y un snapshot de fuentes sanitizado y autorizado para estudiar diferencias reales. Nada de merge automático.
