@@ -6,6 +6,10 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
+import sys
+
+# In GitHub this test lives in tests/, while the module is in tools/.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
 import JORNATO_CONCILIAR_WIP_GITHUB_SIN_CODEX as b
 
 
