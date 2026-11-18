@@ -1,3 +1,13 @@
+# JORNATO — NO HAY ORDEN ACTIVA PARA CODEX (2026-11-18)
+
+**ESTADO VIGENTE: NEXT_OWNER=CHATGPT_DIRECTOR. CODEX_TOKENS=AGOTADOS (reportado por usuario), GITHUB_ACTIONS=NO_DISPONIBLES.** El bloque H9-M1 incluido debajo es **HISTÓRICO/NO EJECUTADO**: NO volver a ordenarlo sin autorización y sin reconciliar el WIP avanzado. No es un PASS ni una petición de trabajo en curso.
+
+**Ahora:** [continuidad y gates](JORNATO_CONTINUIDAD.md); [herramienta local de fuente para revisión manual](../tools/JORNATO_PREPARAR_WIP_PARA_REVISION_SIN_CODEX.ps1); [PR #3 Dart F0 no integrado con WIP](https://github.com/sierraglobalcompany-rgb/Jornato/pull/3). El objetivo siguiente es inspeccionar el código avanzado en `D:\codex\Jornato` mediante snapshot sanitizado y compararlo, **no** lanzar otra auditoría ni ejecutar Codex/Actions. El PR #3 tiene 111 tests escritos y no ejecutados; `main` no contiene WIP; no merge ni release.
+
+---
+
+## ARCHIVO HISTÓRICO — H9-M1 NO EJECUTADO
+
 # CODEX LUNA — JORNATO H9-M1 · VERTICAL ANDROID OFFLINE → SINCRONIZACIÓN PRO Y BOOT NORMAL · MACROBLOQUE ÚNICO
 
 **TAREA NUEVA:** `JOR-H9-M1-ANDROID-OFFLINE-SYNC-20261116`. **ESTA ES LA ÚNICA ORDEN SIGUIENTE**, ejecutable después de la entrega de B21F-S3 V2. **Responsable ahora: CODEX LUNA. Después del ZIP: CHATGPT DIRECTOR.** Trabaja únicamente en `D:\codex\Jornato`; evidencias sólo en `D:\codex\_REPORTES\Jornato\JOR-H9-M1-ANDROID-OFFLINE-SYNC-20261116`. **No hagas otra auditoría o plan para decidir si actuar: inspecciona el código vigente y ejecuta lo autorizado en un solo macrobloque.**
