@@ -65,24 +65,38 @@ def is_outside(root: Path, target: Path) -> bool:
         return True
 
 
-def inventory(root: Path, module_basenames: set[str]) -> tuple[dict[str, list[str]], dict[str, int], int, int]:
+def inventory(root: Path, module_basenames: set[str]) -> tuple[dict[str, list[str]], dict[str, int], int, int, int]:
     """Inventory only source counts plus paths matching the five PR3 names."""
     candidates: dict[str, list[str]] = {n: [] for n in module_basenames}
     counts: Counter[str] = Counter()
     ignored_symlinks = 0
     unreadable = 0
-    for directory, subdirs, filenames in os.walk(root, topdown=True, followlinks=False):
+    walk_errors = 0
+
+    def on_walk_error(_error: OSError) -> None:
+        nonlocal walk_errors
+        walk_errors += 1
+
+    # os.walk silently ignores unreadable directories unless onerror is set.
+    # Such a scan MUST NOT report an expected module as confidently absent.
+    for directory, subdirs, filenames in os.walk(
+        root, topdown=True, followlinks=False, onerror=on_walk_error
+    ):
         current = Path(directory)
         keep = []
         for d in subdirs:
             p = current / d
-            if p.is_symlink():
+            if p.is_symlink() or (hasattr(p, "is_junction") and p.is_junction()):
                 ignored_symlinks += 1
             elif d.casefold() not in SKIP_DIRS:
                 keep.append(d)
         subdirs[:] = keep
         for name in filenames:
             p = current / name
+            # Remember a known basename BEFORE checking readable metadata.
+            # Failure to stat() a match is READ_BLOCKED, not NOT_FOUND.
+            if name.casefold() in module_basenames:
+                candidates[name.casefold()].append(p.relative_to(root).as_posix())
             try:
                 if p.is_symlink() or not p.is_file():
                     ignored_symlinks += 1
@@ -93,11 +107,9 @@ def inventory(root: Path, module_basenames: set[str]) -> tuple[dict[str, list[st
                 if p.stat().st_size > MAX_MATCH_BYTES:
                     continue
                 counts[ext] += 1
-                if name.casefold() in module_basenames:
-                    candidates[name.casefold()].append(p.relative_to(root).as_posix())
             except (OSError, PermissionError):
                 unreadable += 1
-    return candidates, dict(sorted(counts.items())), ignored_symlinks, unreadable
+    return candidates, dict(sorted(counts.items())), ignored_symlinks, unreadable, walk_errors
 
 
 def compare(root: Path, reference: tuple[tuple[str, str], ...] | None = None) -> dict:
@@ -107,7 +119,7 @@ def compare(root: Path, reference: tuple[tuple[str, str], ...] | None = None) ->
     if not root.is_dir():
         raise ValueError("WIP root must be a directory")
     names = {p.rsplit("/", 1)[-1].casefold() for p, _ in reference}
-    found, extensions, symlinks, unreadable = inventory(root, names)
+    found, extensions, symlinks, unreadable, walk_errors = inventory(root, names)
     results = []
     for expected_path, expected_id in reference:
         basename = expected_path.rsplit("/", 1)[-1].casefold()
@@ -122,7 +134,7 @@ def compare(root: Path, reference: tuple[tuple[str, str], ...] | None = None) ->
                 matches.append({"relative_path": rel, "git_blob_sha1": None, "same_bytes": None})
                 unreadable += 1
         if not matches:
-            state = "NOT_FOUND_BY_BASENAME"
+            state = "SCAN_INCOMPLETE" if walk_errors or unreadable else "NOT_FOUND_BY_BASENAME"
         elif len(matches) > 1:
             state = "REVIEW_AMBIGUOUS"
         elif matches[0]["same_bytes"] is None:
@@ -138,6 +150,8 @@ def compare(root: Path, reference: tuple[tuple[str, str], ...] | None = None) ->
         "source_inventory_counts_by_extension": extensions,
         "symlinks_skipped": symlinks,
         "unreadable_entries": unreadable,
+        "directory_read_errors": walk_errors,
+        "inventory_complete": walk_errors == 0 and unreadable == 0,
         "modules": results,
         "global_gate": "REVIEW_ONLY_NO_MERGE_NO_RELEASE",
         "claims": "Exact blob comparison only; not semantic equivalence, QA, source sanitization, or merge approval",
@@ -159,9 +173,10 @@ def render_md(outcome: dict) -> str:
         "El informe compara **solo cinco nombres de módulos Dart**: no certifica que una función exista o falte en el WIP con otro nombre.",
         "", *module_rows, "", f"Inventario agregado por extensión (sin contenido): {counts}.",
         f"Enlaces simbólicos omitidos: {outcome['symlinks_skipped']}; errores de lectura: {outcome['unreadable_entries']}.",
+        f"Directorios inaccesibles: {outcome['directory_read_errors']}; inventario completo: {'SÍ' if outcome['inventory_complete'] else 'NO'}.",
         "", "**Decisión:** `SAME_BYTES` = ya idéntico; `REVIEW_DIFFERENT` = NO copiar sin revisar; ",
         "`REVIEW_AMBIGUOUS` = múltiples ubicaciones; `NOT_FOUND_BY_BASENAME` = buscar equivalencia por comportamiento; ",
-        "`READ_BLOCKED` = no hay comparación válida.",
+        "`READ_BLOCKED` = candidato sin lectura válida; `SCAN_INCOMPLETE` = no puede descartarse el módulo.",
         "", "El JSON complementario aporta **solo rutas/hashes de candidatos**, no código ni datos. Revisar también esas rutas antes de compartir.",
         "Esta herramienta NO detecta secretos ni anonimiza el WIP; no autoriza merge, H9 ni lanzamiento.",
         "", "**QUIÉN SIGUE: CHATGPT DIRECTOR** tras recibir un paquete de fuentes sanitizado y aprobado manualmente.",
@@ -189,14 +204,16 @@ def main(argv: list[str] | None = None) -> int:
         result_dir.mkdir()
         (result_dir / "RESUMEN.md").write_text(render_md(report), encoding="utf-8")
         (result_dir / "MATRIZ.json").write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-        print("RESULT=REPORT_READY_REVIEW_ONLY")
+        print("RESULT=" + ("REPORT_READY_REVIEW_ONLY" if report["inventory_complete"]
+                           else "REPORT_PARTIAL_SCAN_INCOMPLETE"))
         print("SOURCE_CHANGES=NONE")
         print("FILES_EXPORTED=0")
         print("REPORT_DIR=" + str(result_dir))
         for item in report["modules"]:
             print(item["pr3_path"].rsplit("/", 1)[-1] + "=" + item["decision"])
         print("NEXT_OWNER=CHATGPT_DIRECTOR")
-        return 0
+        # A partial scan may still be useful but must never exit with success.
+        return 0 if report["inventory_complete"] else 3
     except (OSError, ValueError) as exc:
         print("RESULT=BLOCKED; " + str(exc), file=sys.stderr)
         return 2
