@@ -19,6 +19,8 @@ py -3 --version
 py -3 .\JORNATO_CONCILIAR_WIP_GITHUB_SIN_CODEX.py --wip 'D:\codex\Jornato' --out 'D:\codex\_REPORTES\Jornato\COMPARACIONES'
 ```
 
+Si clonas el PR documental #2 y quieres comprobar el propio puente sin tocar el WIP, ejecuta `py -3 -m unittest discover -s tests -p test_jornato_wip_bridge.py -v` desde la raíz del clon.
+
 El script nunca escribe dentro de `--wip`; crea **solo** `RESUMEN.md` y `MATRIZ.json` en una subcarpeta nueva de `--out`. No ejecuta Git, no instala dependencias, no consulta internet, no ejecuta pruebas Dart ni modifica el índice/stage.
 
 **No usar el reporte como orden de merge.** `SAME_BYTES` confirma mismos bytes; `REVIEW_DIFFERENT` exige estudiar código, `REVIEW_AMBIGUOUS` exige seleccionar ubicación, y `NOT_FOUND_BY_BASENAME` **no significa** que falte la funcionalidad (puede tener otro nombre). Revisar manualmente rutas, metadatos y secretos antes de compartir informes. Nunca compartir `.env`, llaves, datos de empleados, bases de datos ni fotos.
