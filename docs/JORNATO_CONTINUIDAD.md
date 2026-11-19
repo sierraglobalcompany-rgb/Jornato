@@ -1,4 +1,12 @@
 # JORNATO — CONTINUIDAD CANÓNICA DE DIRECCIÓN (DOCUMENTAL)
+## PUENTE V3 — CORRECCIÓN FOCAL DE AUSENCIA DEPENDIENTE DEL ORDEN (2026-11-18)
+
+**ESTADO MÁS RECIENTE.** Sin Codex ni Actions, ChatGPT ejecutó nuevamente sobre fuentes sintéticas el puente de conciliación. Encontró un defecto material no cubierto: un módulo con nombre ausente podía clasificarse `NOT_FOUND_BY_BASENAME` antes de detectar la lectura fallida de otro candidato posterior. Se corrigió `tools/JORNATO_CONCILIAR_WIP_GITHUB_SIN_CODEX.py` con una segunda verificación global de `walk_errors/unreadable` que reclasifica las ausencias como `SCAN_INCOMPLETE`. Se añadió UN test focal de regresión sin duplicar los anteriores en `tests/test_jornato_wip_bridge.py`; guía actualizada. **QA local real: `15/15 unittest PASS`, `py_compile PASS`, CLI sintética PASS y reportes externos verificados.** Pruebas hechas con Python 3.13.5 en entornos temporales; **NO contra `D:\codex\Jornato` real**. No se cambió ningún componente móvil, WIP, CI, Actions ni servidor.
+
+**NEXT_OWNER=CHATGPT_DIRECTOR; PUENTE_TESTED=PASS_15_OF_15_SYNTHETIC; WIP_WINDOWS=NOT_RUN; PR3_FLUTTER=NOT_RUN_111; SMOKE=NOT_RUN_31; BACKEND_S3=PASS_SCOPED_HISTORIC; H9=NO_GO; B22=NOT_AUTHORIZED; RELEASE=NO.** Para resolver la barrera real, ejecutar el puente sobre el WIP en Windows y compartir solo metadatos revisados; para programar Android/SQLCipher, fuente avanzada sanitizada y consentida. No volver a auditar/sobrescribir PR3 F0 de forma repetitiva.
+
+---
+
 ## PUENTE V2 — INVENTARIO INCOMPLETO BLOQUEA FALSOS AUSENTES (2026-11-18)
 
 **MÁS RECIENTE, PREVALECE SOBRE CAPAS HISTÓRICAS INFERIORES.** El propietario sigue sin tokens Codex ni Actions. ChatGPT corrigió en el **MISMO PR #2 OPEN/DRAFT DOCUMENTAL** la herramienta `tools/JORNATO_CONCILIAR_WIP_GITHUB_SIN_CODEX.py` y `tests/test_jornato_wip_bridge.py`, más la guía `docs/JORNATO_GUIA_CONCILIACION_WIP_SIN_CODEX.md`. **Problema real corregido:** `os.walk` omitía silenciosamente errores de acceso y podía declarar `NOT_FOUND_BY_BASENAME` pese a lectura parcial; archivos candidatos inaccesibles también podían desaparecer antes de evaluarse. El escaneo reporta `directory_read_errors`, `inventory_complete=false`, `READ_BLOCKED` y `SCAN_INCOMPLETE`; conserva reportes pero devuelve exit **3** (`REPORT_PARTIAL_SCAN_INCOMPLETE`). Ignora además junctions en Python moderno sin entrar en ellas. Sin copia, merge ni lectura de contenido para publicar; no toca WIP/índice.

@@ -145,6 +145,12 @@ def compare(root: Path, reference: tuple[tuple[str, str], ...] | None = None) ->
             state = "REVIEW_DIFFERENT"
         results.append({"pr3_path": expected_path, "pr3_git_blob_sha1": expected_id,
                         "decision": state, "wip_candidates": matches})
+    # A later unreadable candidate invalidates any earlier "missing" decision.
+    # The completeness gate applies to the ENTIRE tree, not per-module order.
+    if walk_errors or unreadable:
+        for item in results:
+            if item["decision"] == "NOT_FOUND_BY_BASENAME":
+                item["decision"] = "SCAN_INCOMPLETE"
     return {
         "reference": {"repo": REFERENCE_REPO, "pr": REFERENCE_PR, "head": REFERENCE_HEAD},
         "source_inventory_counts_by_extension": extensions,

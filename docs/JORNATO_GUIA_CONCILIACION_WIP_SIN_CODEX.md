@@ -36,3 +36,9 @@ Si Python 3 no está disponible, conservar el WIP intacto y utilizar el flujo Po
 - **14 tests PASS** (versión focal nueva, ejecutados en Python 3.13): los 10 originales más archivo inaccesible, directorio no legible, salida parcial con código 3 y enlace simbólico de un candidato. Una ejecución local de fuente real aún es `NOT_RUN`.
 - **NO_RUN**: script en el WIP Windows real, Dart/Flutter, Android, SQLCipher, integración con Laravel, H9 y lanzamiento.
 - **NEXT_OWNER:** CHATGPT DIRECTOR, tras disponer de los reportes y un snapshot de fuentes sanitizado y autorizado para estudiar diferencias reales. Nada de merge automático.
+
+## Corrección focal posterior: decisiones globales de inventario (18-nov-2026)
+
+La clasificación de **ausente** se revisa al finalizar la lectura de todos los candidatos: si algún archivo del árbol resultó inaccesible, una ausencia previamente calculada cambia a `SCAN_INCOMPLETE`. Esto evita un resultado dependiente del orden de los módulos. La herramienta mantiene código de salida **3** para cualquier inventario parcial; se conserva el reporte sin modificar el WIP.
+
+**QA ejecutada en Python 3.13.5:** **15/15 unittest PASS**, `py_compile` PASS y ejecución CLI PASS en árbol sintético con salida externa; **WIP de Windows NO INSPECCIONADO**. No atribuir esos PASS a Android/Flutter, Laravel o release.

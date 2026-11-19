@@ -143,6 +143,19 @@ class TestBridge(unittest.TestCase):
         self.assertFalse(report["inventory_complete"])
         self.assertNotIn("outside source secret", json.dumps(report))
 
+    def test_late_unreadable_candidate_reclassifies_earlier_missing(self):
+        """Missing must be decided after all candidate reads, not in iteration order."""
+        reference = (
+            ("lib/src/domain/aaa_missing.dart", "0" * 40),
+            ("lib/src/domain/attendance.dart", "0" * 40),
+        )
+        with patch.object(b, "git_blob_id", side_effect=PermissionError("denied")):
+            report = b.compare(self.wip, reference)
+        self.assertEqual(report["modules"][0]["decision"], "SCAN_INCOMPLETE")
+        self.assertEqual(report["modules"][1]["decision"], "READ_BLOCKED")
+        self.assertFalse(report["inventory_complete"])
+        self.assertGreater(report["unreadable_entries"], 0)
+
     def test_does_not_copy_sources_into_report(self):
         with patch.object(b, "REFERENCE", self.ref):
             with contextlib.redirect_stdout(io.StringIO()):
