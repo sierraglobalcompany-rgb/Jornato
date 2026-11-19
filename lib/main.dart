@@ -92,10 +92,17 @@ class _PersonalDayScreenState extends State<PersonalDayScreen> {
     final state = _ledger.snapshot(at: now);
     // El estado de botones y el tiempo mostrado deben compartir el corte.
     final status = state.status;
-    final canStart = status == DayStatus.idle || status == DayStatus.finished;
-    final canPause = status == DayStatus.working;
-    final canResume = status == DayStatus.paused;
-    final canExit = status == DayStatus.working || status == DayStatus.paused;
+    // El registro es cronológico: una marca futura se muestra en el
+    // historial, pero impide agregar marcas nuevas antes de ella.
+    // No borrar/corregir automáticamente evidencia temporal conflictiva.
+    final hasFutureMark = _ledger.events.isNotEmpty &&
+        _ledger.events.last.occurredAt.isAfter(now);
+    final canStart = !hasFutureMark &&
+        (status == DayStatus.idle || status == DayStatus.finished);
+    final canPause = !hasFutureMark && status == DayStatus.working;
+    final canResume = !hasFutureMark && status == DayStatus.paused;
+    final canExit = !hasFutureMark &&
+        (status == DayStatus.working || status == DayStatus.paused);
 
     return Scaffold(
       appBar: AppBar(
@@ -130,6 +137,16 @@ class _PersonalDayScreenState extends State<PersonalDayScreen> {
             const SizedBox(height: 12),
             Text('Trabajo acumulado: ' + _duration(state.worked)),
             Text('Pausas acumuladas: ' + _duration(state.paused)),
+            if (hasFutureMark)
+              const Padding(
+                padding: EdgeInsets.only(top: 12),
+                child: Text(
+                  'Marcación con hora futura detectada. '
+                  'No se permiten nuevas marcaciones hasta revisar el reloj '
+                  'o el registro. No se borrarán datos automáticamente.',
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
             const SizedBox(height: 20),
             FilledButton(
               onPressed: canStart ? () => _mark(MarkType.entry) : null,

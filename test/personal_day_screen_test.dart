@@ -163,17 +163,38 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    // La pantalla consulta el mismo corte de snapshot para estado y botones.
-    // Antes del fix leía ledger.status = working por el último evento futuro.
+    // Estado y horas usan el mismo corte, pero NO se permite registrar
+    // antes de una marca futura: el motor la rechazaría por cronología.
     expect(demo.status, DayStatus.working);
     expect(find.text('Estado: Sin iniciar'), findsOneWidget);
     expect(find.text('Trabajo acumulado: 0 h 00 min'), findsOneWidget);
+    expect(find.textContaining('Marcación con hora futura detectada'),
+        findsOneWidget);
     expect(
       tester.widget<FilledButton>(
         find.widgetWithText(FilledButton, 'Iniciar jornada'),
       ).onPressed,
-      isNotNull,
+      isNull,
     );
+    expect(
+      tester.widget<FilledButton>(
+        find.widgetWithText(FilledButton, 'Iniciar pausa'),
+      ).onPressed,
+      isNull,
+    );
+    expect(
+      tester.widget<FilledButton>(
+        find.widgetWithText(FilledButton, 'Continuar'),
+      ).onPressed,
+      isNull,
+    );
+    expect(
+      tester.widget<OutlinedButton>(
+        find.widgetWithText(OutlinedButton, 'Finalizar jornada'),
+      ).onPressed,
+      isNull,
+    );
+    expect(demo.events, hasLength(1));
   });
 
   testWidgets('conserva el esquema blanco de Material 3', (tester) async {

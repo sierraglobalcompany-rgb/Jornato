@@ -15,6 +15,29 @@ Fecha: 2026-10-24. Fuente de referencia v4: 196 pruebas reportadas por la transf
 - [ ] Aplicar canon PingPongLaw L1–L6 desde fuente completa validada; sólo se conoce su hash de referencia.
 - [ ] Validación legal de privacidad y tiendas/monetización antes de publicación.
 
+## Séptimo bloque focal — marcación futura fail-closed en UI F0 (2026-11-19)
+
+- Defecto real: el `snapshot.status` evaluado a `now` puede indicar
+  `idle` mientras el último evento crudo es posterior a `now`.
+  Habilitar `Iniciar jornada` en ese caso induce un intento que
+  `AttendanceLedger.record` rechazará por retroceso temporal.
+- Corrección mínima en el propietario de UI `lib/main.dart`:
+  `hasFutureMark` compara último instante contra el mismo `now`;
+  bloquea **los cuatro botones** y muestra alerta visible, sin borrar,
+  reordenar, copiar ni corregir eventos automáticamente. El botón de
+  recalcular sigue disponible para revaluar el reloj.
+- Se **actualizó una prueba widget existente** (marca futura) para
+  exigir aviso, bloqueo y `events.length` intacto. **Cero tests nuevos**.
+  Total PR3: **119 tests fuente Flutter ESCRITOS, NO EJECUTADOS**,
+  31 checks smoke Dart NOT_RUN. Sin Flutter/Dart instalado aquí,
+  no afirmar PASS de compilación. QA posterior debe verificar
+  tanto timestamps futuros como retrocesos del reloj en dispositivo.
+- Sin paquetes nuevos, autenticación, GPS, almacenamiento ni cambios de
+  arquitectura. NO es control antifraude de producción ni certificación
+  de asistencia; `H9=NO_GO; RELEASE=NO_GO`.
+
+---
+
 ## Sexto bloque remoto — coherencia temporal de UI y prueba widget (2026-11-19)
 
 - **Defecto de consistencia**: `lib/main.dart` leía

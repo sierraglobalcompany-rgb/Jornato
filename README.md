@@ -18,6 +18,22 @@
 | Empresa, kiosco, QR, GPS, selfie | Pendiente |
 | Cloud, entitlements, iOS | Fuera del lote inicial |
 
+## Protección temporal de marcación F0 — 19 nov 2026
+
+**Corrección focal:** cuando el último evento registrado está en el
+futuro respecto a la hora usada para calcular la pantalla, se bloquean
+temporalmente los cuatro botones de marcación y aparece una advertencia
+visible. Antes el resumen podía indicar «Sin iniciar» mientras el
+botón **Iniciar jornada** seguía activo, aunque el motor rechazaba la
+marca por cronología. No se eliminan ni corrigen automáticamente eventos.
+
+Se ajustó **la regresión ya existente** de evento futuro para comprobar
+botones deshabilitados, advertencia e integridad del historial.
+**Conteo sin cambios: 119 pruebas fuente Flutter, NOT_RUN**. El árbol
+avanzado de Windows no se toca; la solución es sólo del prototipo
+remoto. No confundir bloqueo de UI con integridad de reloj/antifraude
+aprobada para producción.
+
 ## Bloque UI F0 — un solo estado y 7 tests de interacción (19 nov 2026)
 
 Se corrigió `PersonalDayScreen` para utilizar **`snapshot.status` al
