@@ -1,4 +1,10 @@
 # JORNATO — CONTINUIDAD CANÓNICA DE DIRECCIÓN (DOCUMENTAL)
+## ESTADO VIGENTE — PR #3 CON QA BLOQUEADO EXPLÍCITO, 2026-11-19
+
+**HEAD PR #3** `029125df92b1403e804bb90c7d413d717d892231` (Draft, basado en PR #1); 5 archivos de QA/documentación modificados, **cero módulos de negocio y cero dependencias nuevas**. `scripts/qa_local_f0.ps1` registra `STATUS=BLOCKED` si faltan Flutter/Dart, con log externo al repo; README y guía ahora muestran exclusivamente **119 Flutter tests escritos NOT_RUN y 31 checks Dart escritos NOT_RUN**. `docs/NEXT-CODEX.md` se marcó HISTÓRICO/SUSPENDIDO. **PowerShell no ejecutado en Windows**, SDK Dart/Flutter no disponible aquí, Android/SQLCipher/Pro sin certificar. No alterar main ni WIP. `NEXT_OWNER=CHATGPT_DIRECTOR; H9=NO_GO; B22=NOT_AUTHORIZED; RELEASE=NO_GO`.
+
+---
+
 ## F0 UI — CORTE ÚNICO Y BLOQUEO TEMPORAL DE MARCAS FUTURAS, PR #3 (2026-11-19)
 
 **ESTADO VIGENTE:** PR #3 Draft HEAD `f355cb8523494d1f55f2b123e99554c47e243df2`, padre `51456f4749a956b5c4d6a18f5af84445ee55fb7f`, cambio focal en cuatro archivos. Se mantiene `snapshot.status` al mismo `now` de horas y botones; se corrigió un defecto de UX adicional: si el último evento crudo está en el futuro respecto al corte, `hasFutureMark` **bloquea los cuatro botones de marcación**, avisa al usuario y conserva el evento sin mutarlo. Se endureció **la regresión widget existente**, sin añadir tests: PR #3 conserva **119 tests Flutter escritos, NOT_RUN** y smoke Dart **31 checks escritos, NOT_RUN**. Control estructural del gate para ocho escenarios de estado/futuro verificado; **NO ejecuta Dart ni Flutter**, no certifica reloj seguro, Android o H9. Flutter `ColorScheme.fromSeed(surface: ...)` era correcto, no se cambió. Cero dependencias, servicios, modificaciones de WIP local, merge o despliegue. `main` y PR #1 protegidos.
