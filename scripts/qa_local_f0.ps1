@@ -33,12 +33,6 @@ if ($LASTEXITCODE -ne 0 -or $dirty.Count -gt 0) {
     throw 'El clon no está limpio; el QA no debe alterar un WIP existente.'
 }
 
-$flutterCmd = (Get-Command flutter -ErrorAction Stop).Source
-$flutterBin = Split-Path -Path $flutterCmd -Parent
-$dartPath = Join-Path $flutterBin 'cache\dart-sdk\bin\dart.exe'
-if (-not (Test-Path -LiteralPath $dartPath)) {
-    $dartPath = (Get-Command dart -ErrorAction Stop).Source
-}
 if (-not (Test-Path -LiteralPath $ReportDir -PathType Container)) {
     New-Item -ItemType Directory -Path $ReportDir -Force | Out-Null
 }
@@ -77,6 +71,24 @@ try {
     $transcribing = $true
     Write-Host "JORNATO F0 QA · HEAD $head · BRANCH $branch"
     Write-Host "Solo clon limpio. No GitHub Actions, Docker, Codex ni datos reales."
+
+    # Identificar SDK DENTRO del bloque protegido: incluso sin Flutter se
+    # entrega un STATUS=BLOCKED y un log fuera del repositorio.
+    $flutter = Get-Command flutter -ErrorAction SilentlyContinue
+    if ($null -eq $flutter) {
+        throw 'BLOCKED_FLUTTER_SDK_NOT_FOUND'
+    }
+    $flutterCmd = $flutter.Source
+    $flutterBin = Split-Path -Path $flutterCmd -Parent
+    $dartPath = Join-Path $flutterBin 'cache\dart-sdk\bin\dart.exe'
+    if (-not (Test-Path -LiteralPath $dartPath)) {
+        $dart = Get-Command dart -ErrorAction SilentlyContinue
+        if ($null -eq $dart) {
+            throw 'BLOCKED_DART_SDK_NOT_FOUND'
+        }
+        $dartPath = $dart.Source
+    }
+
     Run-Step -Label 'Versión de Flutter' -Executable $flutterCmd -Arguments @('--version')
     Run-Step -Label 'Versión de Dart' -Executable $dartPath -Arguments @('--version')
     Run-Step -Label 'Smoke de dominio Dart puro' -Executable $dartPath -Arguments @('tool/smoke_attendance.dart')
@@ -92,6 +104,9 @@ try {
     $result = 'PASS'
 } catch {
     $reason = $_.Exception.Message
+    if ($reason.StartsWith('BLOCKED_')) {
+        $result = 'BLOCKED'
+    }
     Write-Host "QA FALLÓ O BLOQUEADO: $reason" -ForegroundColor Red
 } finally {
     Pop-Location

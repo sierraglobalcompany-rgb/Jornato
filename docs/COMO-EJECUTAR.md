@@ -1,55 +1,39 @@
-# Preparación local — sin declarar compilación verificada
+# QA local F0 de Jornato — sin Codex, GitHub Actions ni servicios pagos
 
-Requiere Flutter SDK estable y entorno Android configurados. Consultar documentación oficial https://docs.flutter.dev/reference/create-new-app
+**Documento vigente: 19 de noviembre de 2026.** Esta guía valida únicamente el código Flutter F0 del [PR #3](https://github.com/sierraglobalcompany-rgb/Jornato/pull/3). **NO** valida el producto avanzado que está en **D:\codex\Jornato**. Nunca ejecutar estas instrucciones en ese WIP.
 
-1. Clonar repo y seleccionar rama del PR.
-2. Verificar flutter doctor.
-3. Generar los archivos de plataforma Android **sólo después de comprobar status limpio**, usando:
+## Requisitos
 
-~~~bash
-flutter create --platforms=android --org com.sierraglobalcompany --project-name jornato .
-flutter pub get
-flutter analyze
-flutter test
-flutter run
+Git, Windows PowerShell 5.1 o PowerShell 7 y **Flutter SDK instalado manualmente**. La ejecución puede ser offline si las dependencias ya existen en la caché local. No se instala nada, no se ejecuta CI y no se modifica configuración del PC.
+
+## Una sola ejecución en clon limpio
+
+~~~powershell
+git clone --branch feat/jornato-f0-archive-shifts-no-ci-20261117 https://github.com/sierraglobalcompany-rgb/Jornato.git D:\codex\Jornato-F0-QA-CLON
+Set-Location D:\codex\Jornato-F0-QA-CLON
+powershell.exe -NoProfile -File .\scripts\qa_local_f0.ps1
 ~~~
 
-4. Revisar el diff generado y excluir cualquier secreto local; no sobrescribir lib/main.dart ni archivos fuente.
-5. Guardar versiones SDK/Gradle y evidencia Android real para dar PASS. Si hay errores, documentarlos, no falsear estado.
+La herramienta rechaza otra rama y un árbol Git sucio **antes** de hacer QA. Guarda log/transcript e informe TXT fuera del repo, en la carpeta temporal del usuario; puede usarse **-ReportDir** para indicar otra carpeta externa. Valida que HEAD, archivos staged y archivos tracked no cambien durante el proceso. No hace push, reset, clean, merge ni despliegue.
 
-La UI es personal y temporal, sin persistencia. No utilizar para asistencia de empleados. La ilustración de marca aportada por el propietario aún no fue incorporada al proyecto: conservarla como referencia canónica para el siguiente lote visual.
+Ejecuta, en orden: versiones Flutter/Dart, smoke Dart puro, **flutter pub get --offline**, análisis Flutter y pruebas Flutter. Si Flutter o Dart faltan, el informe queda con **STATUS=BLOCKED** y motivo explícito, sin falso PASS. Si hay otro error, queda **FAIL**; solo muestra **PASS** cuando todos los comandos solicitados terminan correctamente.
 
+**Conteo a fecha de este documento:** **119 tests Flutter escritos y NO_RUN** por el autor de estos cambios; **31 checks smoke Dart escritos y NO_RUN**. El script no puede afirmar su PASS hasta que se ejecute contra un SHA identificado y genere log real. Las 15 pruebas Python PASS del puente WIP del PR #2 son **distintas** y no certifican esta app.
 
-## QA gratuita, manual y protegida del PR #3 (sin Codex ni Actions)
+## APK opcional — bloqueado en el árbol actual
 
-El código avanzado local de `D:\\codex\\Jornato` **NO** está en PR #3.
-No ejecutar estos pasos sobre esa carpeta con WIP.
+Solo cuando el clon limpio **ya contenga** una carpeta Android válida, se podrá invocar:
 
-1. Preparar un **clon NUEVO separado**, nunca reutilizar el worktree de
-   producción ni el WIP local. En PowerShell, con Git y Flutter SDK instalados:
+~~~powershell
+powershell.exe -NoProfile -File .\scripts\qa_local_f0.ps1 -ApkDebug
+~~~
 
-   ```powershell
-   git clone --branch feat/jornato-f0-archive-shifts-no-ci-20261117 https://github.com/sierraglobalcompany-rgb/Jornato.git D:\\codex\\Jornato-F0-QA-CLON
-   Set-Location D:\\codex\\Jornato-F0-QA-CLON
-   powershell.exe -NoProfile -File .\\scripts\\qa_local_f0.ps1
-   ```
+El PR #3 aún no trae carpeta Android. Por eso la opción informa un bloqueo si se usa ahora; no llama a **flutter create**. Para iniciar un proyecto Android en el futuro, estudiar el [contrato de producto](PRODUCTO.md), preservar el WIP y las decisiones de cifrado antes de introducir plantillas de plataforma.
 
-2. El script **rechaza cambios de Git preexistentes y otras ramas**, se
-   detiene con código distinto de cero al detectar fallos, y escribe
-   los reportes bajo la carpeta temporal de Windows (fuera del repo).
-   Ejecuta `dart tool/smoke_attendance.dart`, `flutter pub get --offline`,
-   `flutter analyze --no-pub` y `flutter test --no-pub`.
-   El primer uso puede requerir preparar manualmente la caché Flutter;
-   el script nunca descarga dependencias por sí solo.
-3. El botón opcional `-ApkDebug` **NO genera plataforma Android**. Se
-   bloquea expresamente si no existe `android/`. El PR #3, igual que
-   su base F0, todavía no contiene andamiaje Android; no presentarlo como
-   APK generable/verificado ni ejecutar `flutter create` en el WIP.
-4. Revisar el log y reportar el SHA probado, resultados individuales y
-   cualquier fallo, SIN inventar PASS y SIN subir logs confidenciales.
-   Ejecutar Flutter localmente no certifica SQLCipher, teléfono real,
-   biometría, servidor, datos de empresa, H9 integral ni release.
+Un APK debug compilado no equivale a un PASS de teléfono real ni a autorización de publicación. Faltan prueba offline/reinicio, SQLCipher/Keystore, permisos, identidad, sincronización Pro y privacidad.
 
-**Estado al publicar este documento:** 72 tests `flutter_test` escritos y
-20 verificaciones smoke Dart escritas; **todos NOT_RUN** en el entorno que
-publicó los cambios. No hay Actions, Codex ni pruebas Android nuevas.
+## Continuidad
+
+El código real avanzado debe compararse primero con el repositorio, mediante la [herramienta WIP del PR #2](https://github.com/sierraglobalcompany-rgb/Jornato/blob/docs/pingponglaw-l1-l6-canon-84e961c/tools/JORNATO_CONCILIAR_WIP_GITHUB_SIN_CODEX.py). El resultado del puente sigue **NOT_RUN en Windows real**. Revisar manualmente reportes y archivos para excluir datos personales y secretos antes de compartir.
+
+**H9=NO_GO · B22=NOT_AUTHORIZED · RELEASE=NO_GO.**

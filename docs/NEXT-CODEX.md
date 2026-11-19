@@ -1,3 +1,15 @@
+# H9-M1 / CODEX — ORDEN HISTÓRICA Y SUSPENDIDA (2026-11-19)
+
+El usuario informó que **no dispone de tokens de Codex ni de GitHub Actions**.
+**NO HAY NUEVO ENCARGO PARA CODEX.** La orden F0 que sigue debajo es
+histórica y no ejecutada: no usarla como tarea activa, no repetir tests ni
+modificar el WIP hasta conciliarlo. Continuidad canónica:
+[PR #2](https://github.com/sierraglobalcompany-rgb/Jornato/pull/2)
+y [PR #3](https://github.com/sierraglobalcompany-rgb/Jornato/pull/3).
+**NEXT_OWNER=CHATGPT_DIRECTOR; H9=NO_GO; RELEASE=NO_GO.**
+
+---
+
 # Jornato · NEXT autorizado de preparación (F0)
 
 Repos: https://github.com/sierraglobalcompany-rgb/Jornato

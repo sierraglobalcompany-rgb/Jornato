@@ -1,5 +1,27 @@
 # QA / límites verificables
 
+## ESTADO VIGENTE — 19 NOVIEMBRE 2026 (PREVALECE SOBRE LOS LOTES HISTÓRICOS)
+
+| Gate | Resultado |
+|---|---|
+| PR #3 F0 fuente | Código Draft, sin merge |
+| Casos Flutter declarados | **119 escritos, NOT_RUN** |
+| Smoke Dart | **31 checks escritos, NOT_RUN** |
+| Runner PowerShell Windows | Código modificado para reportar BLOCKED sin SDK; **NOT_RUN en Windows** |
+| Puente WIP PR #2 | 15/15 Python PASS sintético histórico; WIP real NOT_RUN |
+| SDK Flutter / análisis / tests / build Android en esta sesión | **NO DISPONIBLE / NOT_RUN** |
+| WIP avanzado real | Solo en equipo Windows; NO inspeccionado aquí |
+| H9 / B22 / release | **NO_GO / NOT_AUTHORIZED / NO_GO** |
+
+**El resto de esta página es el historial de lotes, no la certificación actual.**
+No sumar cifras parciales como si fueran ejecuciones, no declarar producción
+y no ejecutar otra ronda completa sin cambios pertinentes. NEXT=CHATGPT_DIRECTOR.
+Solo una copia separada y limpia del PR #3 puede pasar por el QA manual descrito
+en [COMO-EJECUTAR.md](COMO-EJECUTAR.md); nunca el WIP con cambios ajenos.
+
+---
+
+
 Fecha: 2026-10-24. Fuente de referencia v4: 196 pruebas reportadas por la transferencia; **no son pruebas de Jornato**.
 
 ## Entrega de este lote

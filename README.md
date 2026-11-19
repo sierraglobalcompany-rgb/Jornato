@@ -1,143 +1,52 @@
 # Jornato
 
-**Jornato** — control inteligente de jornadas, horarios y asistencia para uso personal y pequeños negocios.
+Control de jornadas y asistencia para uso personal y pequeñas empresas, **Android primero**. Proyecto independiente de ERP-BDM.
 
-**Estado:** Fase 0 PARCIAL. Este repositorio contiene un prototipo de código Flutter/Dart, **NO** una app de producción ni un APK probado.
+**Estado al 19 de noviembre de 2026: prototipo remoto F0, NO apto para empleados ni producción.** El desarrollo avanzado de Laravel/Android/SQLCipher que permanece en **D:\codex\Jornato** no está en este árbol GitHub. No fusionar ni aplicar cambios sobre ese WIP sin comparar fuentes.
 
-## Estado de componentes
+## Situación real
 
-| Componente | Estado |
+| Componente | Estado verificable |
 |---|---|
-| Contrato de producto y roadmap | Documentado |
-| Motor de entradas, pausas, continuaciones y salidas | Código inicial no ejecutado en SDK |
-| UI personal | En memoria; muestra turnos, acumulados y resúmenes diarios |
-| Pruebas Flutter/Dart | 119 casos escritos (111 previos + 8 pruebas UI nuevas), sin ejecutar |
-| GPS: validación geométrica local | Código puro con 25 pruebas fuente; sin sensor, permisos ni evidencias reales | 
-| Android APK / QA físico | Pendiente |
-| Archivo determinista JSON (sin cifrar) | Restaurar y conciliar por prefijo append-only; NO respaldo ni sincronización |\n| Persistencia cifrada / backups | Pendiente |
-| Empresa, kiosco, QR, GPS, selfie | Pendiente |
-| Cloud, entitlements, iOS | Fuera del lote inicial |
+| Motor Dart (entrada, pausa, continuación, salida) | Código escrito; aún no ejecutado con SDK |
+| Turnos, archivo JSON, reconciliación y CSV | Código puro en memoria; JSON sin cifrar ni persistencia |
+| Regla GPS por precisión/edad/radio | Solo geometría local; no obtiene datos del teléfono ni certifica identidad |
+| Pantalla personal | Demo volátil; bloquea nuevas marcas ante un evento con hora futura |
+| **Pruebas Flutter** | **119 casos fuente escritos, NOT_RUN** |
+| **Smoke Dart** | **31 comprobaciones escritas, NOT_RUN** |
+| Puente Python WIP, en PR #2 | **15/15 pruebas PASS con datos sintéticos**; Windows real NOT_RUN |
+| APK/Android, SQLCipher/Keystore, backend integrado, Pro | **NO_GO / no verificadas aquí** |
+| Lanzamiento o merge | **NO AUTORIZADO** |
 
-## Protección temporal de marcación F0 — 19 nov 2026
+Los tests Python del puente no son pruebas del producto móvil. El backend local ha tenido un resultado histórico PASS_SCOPED de 158 tests en B21F-S3, **no en este repositorio remoto**.
 
-**Corrección focal:** cuando el último evento registrado está en el
-futuro respecto a la hora usada para calcular la pantalla, se bloquean
-temporalmente los cuatro botones de marcación y aparece una advertencia
-visible. Antes el resumen podía indicar «Sin iniciar» mientras el
-botón **Iniciar jornada** seguía activo, aunque el motor rechazaba la
-marca por cronología. No se eliminan ni corrigen automáticamente eventos.
+## Ramas y responsabilidades
 
-Se ajustó **la regresión ya existente** de evento futuro para comprobar
-botones deshabilitados, advertencia e integridad del historial.
-**Conteo sin cambios: 119 pruebas fuente Flutter, NOT_RUN**. El árbol
-avanzado de Windows no se toca; la solución es sólo del prototipo
-remoto. No confundir bloqueo de UI con integridad de reloj/antifraude
-aprobada para producción.
+- [PR #1](https://github.com/sierraglobalcompany-rgb/Jornato/pull/1): base Flutter F0, Draft.
+- [PR #2](https://github.com/sierraglobalcompany-rgb/Jornato/pull/2): continuidad y herramientas de recuperación del WIP, Draft.
+- [PR #3](https://github.com/sierraglobalcompany-rgb/Jornato/pull/3): módulos Dart y QA F0, **Draft y basado en PR #1**.
+- **main**: sin código avanzado integrado. No alterar sin autorización.
 
-## Bloque UI F0 — un solo estado y 7 tests de interacción (19 nov 2026)
+## QA sin Codex ni GitHub Actions
 
-Se corrigió `PersonalDayScreen` para utilizar **`snapshot.status` al
-mismo instante** con que calcula horas y pausas, en vez de leer
-independientemente el estado del último evento del libro. Eso evita
-que los botones muestren un estado incompatible con el resumen cuando
-el reloj o el corte temporal difieren.
+**Solo para un clon separado y limpio del PR #3. Nunca ejecutar en D:\codex\Jornato.** Con Git y Flutter instalados en Windows:
 
-`test/personal_day_screen_test.dart` contiene **8 pruebas Flutter
-nuevas**: aviso de memoria volátil, botones iniciales, inicio, pausa/
-continuación/salida, salida desde pausa, varios turnos, recálculo sin
-nueva marcación corte futuro coherente y esquema de color Material 3. Total: **119 tests
-fuente escritos, NOT_RUN**. El smoke Dart separado conserva 31
-comprobaciones `NOT_RUN`; no se añadió plugin ni persistencia.
+~~~powershell
+git clone --branch feat/jornato-f0-archive-shifts-no-ci-20261117 https://github.com/sierraglobalcompany-rgb/Jornato.git D:\codex\Jornato-F0-QA-CLON
+Set-Location D:\codex\Jornato-F0-QA-CLON
+powershell.exe -NoProfile -File .\scripts\qa_local_f0.ps1
+~~~
 
-La API oficial confirma que `surface:` dentro de
-`ColorScheme.fromSeed(...)` **es válida**, y por eso **no se modificó
-la paleta**. No declarar defecto de compilación allí. Sin SDK Flutter
-en este entorno, `flutter analyze/test/build`, Android real, H9
-y release siguen bloqueados; la UI es una demostración en memoria.
+El runner usa solo caché de dependencias (flutter pub get --offline), ejecuta smoke Dart, análisis y tests Flutter; genera informe fuera del repositorio. Si el SDK no existe, informa **BLOCKED**, no PASS. No crea Android ni ejecuta Actions. [Instrucciones completas](docs/COMO-EJECUTAR.md).
 
-## Corrección focal del QA sin CI — 18 nov 2026
+## Para continuar el producto real
 
-La validación estructural sobre el HEAD anterior detectó **37 imports
-Dart (0 rutas locales rotas)** y confirmó las **111 declaraciones de
-pruebas**. Se corrigió el uso de `print()` en el smoke, ya que la
-configuración `avoid_print` lo desaprueba. El QA PowerShell reporta
-y rechaza cambios a HEAD, stage y archivos tracked durante su ejecución.
-**Dart/Flutter no han sido ejecutados**; los 111 tests y 31 checks
-siguen `NOT_RUN`. No hay autorización de merge ni release.
+Comparar primero el WIP de Windows con el F0 remoto usando la [herramienta de conciliación en PR #2](https://github.com/sierraglobalcompany-rgb/Jornato/blob/docs/pingponglaw-l1-l6-canon-84e961c/tools/JORNATO_CONCILIAR_WIP_GITHUB_SIN_CODEX.py). La herramienta **no modifica** el WIP y todavía no se ha probado contra él. Compartir solo informes y fuentes revisadas para excluir secretos, bases de datos y datos personales. Después cerrar los pendientes reales de Android offline, cifrado, sincronización y QA físico.
 
-## Informes diarios CSV sin dependencias — 18 nov 2026
+**Gates vigentes:** H9 = NO_GO; B22 = NOT_AUTHORIZED; release = NO_GO. **Sigue ChatGPT Director**, no Codex hasta que el propietario disponga de tokens y lo autorice.
 
-El PR #3 incorpora `AttendanceCsvReport.fromLedger`, un exportador
-**puro y sólo en memoria** de los totales diarios calculados por
-`AttendanceReport.days`. Genera CSV estable con fecha civil de inicio,
-número de turnos, turnos finalizados/abiertos y duraciones enteras en
-**microsegundos** para evitar pérdidas por redondeo. Rechaza fechas fuera
-del rango civil CSV y no intercala identificadores, nombres, ubicación,
-credenciales ni datos textuales del usuario en sus celdas.
+## Fuentes de verdad
 
-**No genera archivos, correos, descargas ni sincronización**, y el CSV
-sigue conteniendo información de horas trabajadas que requiere permiso,
-cifrado y reglas de privacidad antes de usarse con personal real.
-No es nómina ni un informe de cumplimiento legal.
+[Contrato de producto](docs/PRODUCTO.md) · [ADR provisional](docs/ADR-0001-ARQUITECTURA.md) · [QA e historial detallado](docs/QA-ESTADO.md) · [Guía local](docs/COMO-EJECUTAR.md) · [Continuidad canónica del PR #2](https://github.com/sierraglobalcompany-rgb/Jornato/blob/docs/pingponglaw-l1-l6-canon-84e961c/docs/JORNATO_CONTINUIDAD.md).
 
-Se añadieron **14 tests Flutter de fuente** y 4 verificaciones al smoke.
-El PR #3 contiene **111 tests fuente escritos y no ejecutados**; smoke
-Dart acumulado **31 checks escritos y no ejecutados**. No hay SDK local
-ni Actions. Android/H9/release siguen `NO_GO`.
-
-## Regla de ubicación opcional para marcaciones — 18 nov 2026
-
-El PR #3 también incorpora `lib/src/domain/location_rule.dart`: una
-evaluación **puramente local** de la política GPS ya documentada (precisión
-positiva y hasta 25 m; antigüedad de 0 a 30 segundos; distancia esférica
-hasta la sede MÁS incertidumbre del sensor dentro de un radio máximo de
-100 m). Las lecturas ausentes, futuras, vencidas, imposibles, imprecisas
-o fuera del radio **exigen revisión**. La política opcional no solicita GPS.
-
-No se añadió ningún paquete. El cálculo **NO es una prueba de identidad,
-presencia física, fuente GPS auténtica, consentimiento, asistencia aprobada
-ni registro de producción**. No solicita permisos, capta fotos, almacena
-coordenadas ni envía datos. La integración Android y las autorizaciones
-están pendientes del WIP avanzado y de las decisiones del propietario.
-
-Este delta añade 25 tests de fuente, para un total de **97 tests Flutter
-escritos, 0 ejecutados aquí**. El smoke Dart puro se amplía a 27 checks
-escritos, también NO ejecutados. No usar estos números como H9 PASS.
-
-## Bloque de desarrollo y QA sin Codex ni Actions (18-nov-2026)
-
-El PR #3 también incluye un índice privado por ID de evento que evita recorrer
-cada marca al detectar reintentos, y seis pruebas nuevas de integridad/escala.
-**Total actual: 72 tests de Flutter escritos, no ejecutados**. Se agregó un
-smoke Dart puro con 20 verificaciones (igualmente **NO ejecutadas aquí**) y
-un script PowerShell de QA para un **clon separado y limpio de este PR**.
-No probar el script directamente sobre `D:\\codex\\Jornato`, cuyo WIP
-avanzado todavía no se ha reconciliado.
-
-Los tests escritos y el smoke no prueban cifrado, persistencia, Android,
-servicios Pro ni lanzamiento. No hacer merge del PR #3 a ciegas.
-
-## Documentos
-
-- [Producto y reglas](docs/PRODUCTO.md)
-- [Decisión de arquitectura](docs/ADR-0001-ARQUITECTURA.md)
-- [Estado de QA y bloqueos](docs/QA-ESTADO.md)
-- [Cómo preparar Flutter](docs/COMO-EJECUTAR.md)
-- [QA manual local sin Codex/CI](scripts/qa_local_f0.ps1) · [smoke Dart sin Flutter](tool/smoke_attendance.dart)
-- [Siguiente encargo para Codex](docs/NEXT-CODEX.md)
-- [Reglas de seguridad para agentes](AGENTS.md)
-
-## Origen / marca
-
-Es un producto nuevo y separado de ERP-BDM, basado en la **transferencia BDM-Menor v4 del 2026-10-24**. La imagen de Jornato suministrada por el propietario es la **referencia de identidad**; falta integrarla como asset verificable y crear iconos de tiendas.
-
-**No subir** datos de empleados, claves, selfies, historias médicas ni otra información sensible a este repositorio público.
-
-La rama de F0 está bajo PR borrador y requiere validación antes de fusionar.
-
-**Delta remoto para trabajo sin Codex/Actions (17–18 nov 2026):** se añadieron
-proyecciones de turnos, un archivo JSON determinista para reconstruir eventos,
-conciliación append-only, resúmenes diarios y pruebas fuente. **No es almacenamiento offline cifrado ni sincronización**;
-el uso comercial y Android siguen bloqueados. El trabajo avanzado y no
-publicado de `D:\\codex\\Jornato` debe compararse antes de integrar
-este PR remoto. Estado de pruebas y límites en [QA](docs/QA-ESTADO.md).
+No publicar identidades de empleados, fotografías, credenciales, bases de datos ni otros datos sensibles.
