@@ -4,7 +4,7 @@
 
 | Gate | Resultado |
 |---|---|
-| PR #3 F0 fuente | Código Draft, sin merge |
+| PR #3 F0 fuente | Código Draft, sin merge; timer UI de 30 s solo durante jornada/pausa o conflicto futuro, suspendido en segundo plano; NOT_RUN |
 | Casos Flutter declarados | **119 escritos, NOT_RUN** |
 | Smoke Dart | **31 checks escritos, NOT_RUN** |
 | Runner PowerShell Windows | Código modificado para reportar BLOCKED sin SDK; **NOT_RUN en Windows** |
@@ -12,6 +12,8 @@
 | SDK Flutter / análisis / tests / build Android en esta sesión | **NO DISPONIBLE / NOT_RUN** |
 | WIP avanzado real | Solo en equipo Windows; NO inspeccionado aquí |
 | H9 / B22 / release | **NO_GO / NOT_AUTHORIZED / NO_GO** |
+
+**Asignación: toda prueba local de Flutter/Dart/Android queda para Codex cuando vuelva a estar disponible; no pedirla al propietario.** El cambio del temporizador es fuente escrita, NO probada, y no añade tests.
 
 **El resto de esta página es el historial de lotes, no la certificación actual.**
 No sumar cifras parciales como si fueran ejecuciones, no declarar producción

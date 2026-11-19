@@ -10,6 +10,22 @@ y [PR #3](https://github.com/sierraglobalcompany-rgb/Jornato/pull/3).
 
 ---
 
+## QA focal DIFERIDA a Codex, sin ejecución hasta nueva autorización
+
+**Propietario sin entorno local de QA. No enviarle tareas de Flutter,
+PowerShell, instalación, emulador ni teléfono.** Al reactivarse Codex,
+en una copia separada y limpia del PR #3, validar una sola vez SHA,
+`flutter analyze`, `flutter test`, smoke Dart, reloj y ciclo de vida
+de la pantalla (temporizador solo durante trabajo/pausa/conflicto futuro,
+cancelación al salir/segundo plano y actualización al reanudar).
+Investigar fallos demostrados y devolver logs + dictamen; no reejecutar
+tests PHP/Android antiguos ni modificar el WIP avanzado sin reconciliarlo.
+
+**Estado ahora: PRUEBAS DIFERIDAS / NOT_RUN.** No se activa ningún encargo
+de Codex en este chat y no hay Actions. Esto no autoriza merge/release.
+
+---
+
 # Jornato · NEXT autorizado de preparación (F0)
 
 Repos: https://github.com/sierraglobalcompany-rgb/Jornato

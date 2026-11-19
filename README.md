@@ -11,7 +11,7 @@ Control de jornadas y asistencia para uso personal y pequeñas empresas, **Andro
 | Motor Dart (entrada, pausa, continuación, salida) | Código escrito; aún no ejecutado con SDK |
 | Turnos, archivo JSON, reconciliación y CSV | Código puro en memoria; JSON sin cifrar ni persistencia |
 | Regla GPS por precisión/edad/radio | Solo geometría local; no obtiene datos del teléfono ni certifica identidad |
-| Pantalla personal | Demo volátil; bloquea nuevas marcas ante un evento con hora futura |
+| Pantalla personal | Demo volátil; marca futura bloqueada; actualización de minutos automática en jornada/pausa, sin temporizador en reposo |
 | **Pruebas Flutter** | **119 casos fuente escritos, NOT_RUN** |
 | **Smoke Dart** | **31 comprobaciones escritas, NOT_RUN** |
 | Puente Python WIP, en PR #2 | **15/15 pruebas PASS con datos sintéticos**; Windows real NOT_RUN |
@@ -27,17 +27,18 @@ Los tests Python del puente no son pruebas del producto móvil. El backend local
 - [PR #3](https://github.com/sierraglobalcompany-rgb/Jornato/pull/3): módulos Dart y QA F0, **Draft y basado en PR #1**.
 - **main**: sin código avanzado integrado. No alterar sin autorización.
 
-## QA sin Codex ni GitHub Actions
+## QA pendiente — reservada para Codex
 
-**Solo para un clon separado y limpio del PR #3. Nunca ejecutar en D:\codex\Jornato.** Con Git y Flutter instalados en Windows:
+**El propietario no dispone de entorno para pruebas locales. No solicitarle
+ejecutar PowerShell, Flutter ni instalar SDK.** Cuando vuelva Codex y sea
+autorizado, hará **una sola validación focal** del SHA exacto en un clon
+separado, nunca en el WIP de Windows. La [guía y el runner ya existentes](docs/COMO-EJECUTAR.md)
+conservan los comandos para Codex; no son tareas del propietario.
 
-~~~powershell
-git clone --branch feat/jornato-f0-archive-shifts-no-ci-20261117 https://github.com/sierraglobalcompany-rgb/Jornato.git D:\codex\Jornato-F0-QA-CLON
-Set-Location D:\codex\Jornato-F0-QA-CLON
-powershell.exe -NoProfile -File .\scripts\qa_local_f0.ps1
-~~~
-
-El runner usa solo caché de dependencias (flutter pub get --offline), ejecuta smoke Dart, análisis y tests Flutter; genera informe fuera del repositorio. Si el SDK no existe, informa **BLOCKED**, no PASS. No crea Android ni ejecuta Actions. [Instrucciones completas](docs/COMO-EJECUTAR.md).
+**119 tests Flutter escritos, 31 checks Dart escritos: todos NOT_RUN.**
+La nueva actualización automática de pantalla también requiere que Codex
+compruebe avance del tiempo, pausa, reanudación, segundo plano y cierre del
+temporizador. No sumar tests ni declarar PASS antes de ejecutarlos.
 
 ## Para continuar el producto real
 

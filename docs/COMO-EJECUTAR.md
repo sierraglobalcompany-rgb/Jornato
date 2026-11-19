@@ -1,4 +1,12 @@
-# QA local F0 de Jornato — sin Codex, GitHub Actions ni servicios pagos
+# QA F0 reservada para Codex — sin GitHub Actions ni servicios pagos
+
+**EJECUCIÓN SUSPENDIDA. El propietario NO puede hacer pruebas locales y
+NO debe recibir tareas de instalación/terminal.** Esta guía queda lista
+exclusivamente para Codex cuando vuelva a estar autorizado; no se ha
+ejecutado Flutter/PowerShell para este commit. La validación focal de la
+pantalla debe cubrir actualización automática del reloj, pausa, regreso
+a primer plano, cancelación al finalizar jornada y bloqueo de marcas
+futuras. No se crean nuevos tests hasta ejecutar la suite existente.
 
 **Documento vigente: 19 de noviembre de 2026.** Esta guía valida únicamente el código Flutter F0 del [PR #3](https://github.com/sierraglobalcompany-rgb/Jornato/pull/3). **NO** valida el producto avanzado que está en **D:\codex\Jornato**. Nunca ejecutar estas instrucciones en ese WIP.
 

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'src/domain/attendance.dart';
 import 'src/domain/attendance_report.dart';
@@ -35,7 +37,9 @@ class PersonalDayScreen extends StatefulWidget {
   State<PersonalDayScreen> createState() => _PersonalDayScreenState();
 }
 
-class _PersonalDayScreenState extends State<PersonalDayScreen> {
+class _PersonalDayScreenState extends State<PersonalDayScreen>
+    with WidgetsBindingObserver {
+  Timer? _clockRefresh;
   late final AttendanceLedger _ledger;
 
   @override
@@ -45,6 +49,50 @@ class _PersonalDayScreenState extends State<PersonalDayScreen> {
       workspaceId: 'personal-local-demo',
       subjectId: 'personal-local-demo',
     );
+    WidgetsBinding.instance.addObserver(this);
+    _syncClockRefresh();
+  }
+
+  // No despertar la pantalla cuando no hay horas/pausas que actualizar.
+  // Nunca acumular tiempo a partir de ticks: usar el reloj actual al dibujar.
+  void _syncClockRefresh() {
+    final last = _ledger.events.isEmpty ? null : _ledger.events.last;
+    final active = _ledger.status == DayStatus.working ||
+        _ledger.status == DayStatus.paused;
+    final future = last != null &&
+        last.occurredAt.isAfter(DateTime.now().toUtc());
+    if (!active && !future) {
+      _clockRefresh?.cancel();
+      _clockRefresh = null;
+      return;
+    }
+    _clockRefresh ??= Timer.periodic(
+      const Duration(seconds: 30),
+      (_) {
+        if (!mounted) return;
+        _syncClockRefresh();
+        setState(() {});
+      },
+    );
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      _syncClockRefresh();
+      if (mounted) setState(() {});
+    } else {
+      // Evitar trabajo periódico con la app suspendida o en segundo plano.
+      _clockRefresh?.cancel();
+      _clockRefresh = null;
+    }
+  }
+
+  @override
+  void dispose() {
+    _clockRefresh?.cancel();
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 
   String? _message;
@@ -63,6 +111,7 @@ class _PersonalDayScreenState extends State<PersonalDayScreen> {
           occurredAt: instant,
         ),
       );
+      _syncClockRefresh();
       setState(() => _message = 'Marcación temporal registrada');
     } on StateError catch (error) {
       setState(() => _message = error.message.toString());
