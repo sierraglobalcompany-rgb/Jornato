@@ -1,119 +1,90 @@
-# CODEX LUNA — JORNATO · MACROBLOQUE ÚNICO H9-M1, V2 AUDITADA (10 VERDUGO + 10 JUEZ)
+# CODEX LUNA — JORNATO H9-M1/F1 · CIERRE FOCAL DEL FAIL VISUAL Y GATE NATIVO
 
-**ORDEN ÚNICA ACTIVA Y AUDITADA — 19 de noviembre de 2026. Sustituye la versión previa del mismo H9-M1; no abrir una tarea paralela ni repetir auditorías.** El propietario confirmó que **ya tiene Codex**. Ejecuta ahora este trabajo **de principio a fin en una sola intervención**, sin pedirle al propietario que haga pruebas, instale herramientas, elija entre alternativas técnicas o repita instrucciones. **Codex ejecuta, ChatGPT dirige y certifica el alcance después de recibir evidencias.**
+**ORDEN ÚNICA SIGUIENTE, 19 de noviembre de 2026.** Esta orden **SUSTITUYE** el encargo anterior H9-M1 V2 para la próxima ejecución. **No vuelvas a ejecutar H9-M1 completo**, ni sus auditorías 10 verdugo + 10 juez, ni las suites que ya pasaron. Tu trabajo es corregir el único FAIL reproducido, cerrar lo que pueda demostrarse de almacenamiento nativo Android y producir una entrega útil sin tocar trabajo previo.
 
-`TASK=JOR-H9-M1-REACTIVADO-ANDROID-OFFLINE-PRO-BOOT-20261119`  
-`OWNER_ACTUAL=CODEX_LUNA`  
-`OWNER_DESPUES=CHATGPT_DIRECTOR`  
-`WIP_ORIGEN=D:\codex\Jornato`  
-`EVIDENCIAS=D:\codex\_REPORTES\Jornato\JOR-H9-M1-REACTIVADO-20261119`  
-`GITHUB_ACTIONS=NO_DISPONIBLES`  
-`RELEASE=NO_GO`  
-`QA_OWNER=CODEX_LUNA`  
-`GITHUB_REFS=READ_ONLY; SIN MERGE/PUSH/CI`
+- `TASK=JOR-H9-M1-F1-VISUAL-NATIVE-SCOPE-20261119`
+- `OWNER_ACTUAL=CODEX_LUNA; OWNER_DESPUES_DEL_ZIP=CHATGPT_DIRECTOR`
+- `WIP=D:\codex\Jornato` — **checkout avanzado sucio, NO prototipo remoto**.
+- `SALIDA=D:\codex\_REPORTES\Jornato\JOR-H9-M1-F1-VISUAL-NATIVE-20261119`
+- `ACCIONES_GITHUB=NO; MERGE=NO; DEPLOY=NO; DATOS_REALES=NO`
+- `H9_GLOBAL=NO_GO; B22=NOT_AUTHORIZED; RELEASE=NO_GO` hasta una autorización y pruebas adicionales explícitas.
 
-## 1. Contexto congelado: no rehacer trabajo ni seguir un F0 paralelo
+## A. Estado comprobado y límites: NO reabrir historia
 
-**Fuentes de verdad, en orden:** código y contratos aprobados que existan hoy en el WIP avanzado local; `AGENTS.md` local y contrato de producto; fuente canónica PingPongLaw L1–L6 cuando esté accesible; resultados QA verificables por SHA; documentación de los PR remotos como referencia, **no** como sustituto del WIP.
+**Fuente entregada y revisada por ChatGPT:** `JOR-H9-M1-REACTIVADO-20261119-UNICO.zip`, SHA-256 `571F0B288F8B582797AF4043417A2A1B44935B60D649F592172751F402D9A0B6` (16 miembros, CRC correcto, **15/15** hashes y tamaños de manifiesto correctos). El ZIP demuestra **existencia y consistencia de los logs**, pero **NO** trae todos los archivos fuente del WIP, la base SQLCipher ni los bytes del APK: jamás presentarlo como certificación independiente de esas piezas.
 
-- Repositorio: `sierraglobalcompany-rgb/Jornato`. En la última comprobación de ChatGPT: `main=1ee6aae821f8cf177cc64149081ad8847f7fec2e` (sin WIP avanzado); PR #1 Draft `faf5fe283191f8b5a2724b397009512a2caec1b6`; PR #2 Draft/documental **orden vigente en `docs/CODEX_LOTE_ACTUAL.md` (HEAD variable al publicar esta revisión)**; PR #3 Draft **apilado sobre PR #1** `104469b119752f395cf9881e732d582feab9db4e`. **Verifica el HEAD real antes de usar referencias; no presupongas que siguen iguales.**
-- PR #3 contiene un prototipo Flutter F0 temporal en memoria, motor Dart, turnos, JSON de intercambio sin cifrar, informe CSV, evaluación GPS geométrica y pantalla con recálculo cada 30 segundos cuando hay jornada activa, pausa o marca futura; cancela en segundo plano/fin y recalcula al reanudar. **NO** es Android avanzado ni SQLCipher/Keystore productivo. **119 tests Flutter escritos, NOT_RUN**, más **31 checks Dart escritos, NOT_RUN** en esa rama.
-- PR #2 contiene el puente de comparación WIP por huellas; en su alcance sintético tuvo **15/15 pruebas Python PASS**, pero **no se ejecutó sobre el WIP real**. El puente solo compara cinco nombres de módulos Dart con base antigua; si el PR #3 ha avanzado, sus blobs aún corresponden a la referencia registrada. **No confundir igualdad de bytes con igualdad funcional.**
-- Backend histórico B21F-S3: **158 tests/2.450 assertions PASS_SCOPED**, con runner QA aislado que aportaba configuración de vistas. **No certificó bootstrap NORMAL ni producción.** No repetir esa suite ni abrir otra auditoría B13–B21 salvo que un cambio nuevo lo justifique. Mantener esquemas/containers de otras tareas intactos. Docker/IPAM tuvo bloqueos históricos; evitar imágenes/redes/reintentos exploratorios.
-- WIP histórico en Windows: cientos de entradas modificadas/no rastreadas y sin stage según reportes pasados; **ese conteo y SHA ya son históricos**, nunca exigir que coincidan hoy. Puede contener funciones avanzadas ya terminadas: **reutilízalas**.
-- Decisiones humanas **OD01–OD08 siguen NO APROBADAS** salvo evidencia de aprobación posterior en el WIP. No inventar consentimiento/retención, asociación empleado-cuenta, permisos RR. HH., acceso web, ATS/CV, firma, homologación salarial ni planes/cobros.
-- Las **L1–L6** son KISS/Ponytail, antirruido, causa raíz, diseño humano, evidencia atribuible y anti-ping-pong. Fuente fija: `sierraglobalcompany-rgb/PingPongLaw@84e961cadf482d234f4c0ee2ca60e8c7e9b388e8`, `docs/engineering/LEYES_IMPLEMENTACION_1_A_6.md`. **Léela UNA VEZ por su commit fijo**, no por `main`, sin instalar skills/hook alguno ni repetir una auditoría de las leyes; el Director ya verificó la existencia del documento en GitHub. Si Codex no accede: `CANON_READ=BLOCKED`, aplicar instrucciones locales existentes sin fingir lectura; seguir tareas técnicas seguras.
+| Gate anterior | Estado firme / decisión para este lote |
+|---|---|
+| `flutter analyze --no-pub` | **PASS reportado con log**, después de un paréntesis corregido. No revalidar si no cambias Dart. |
+| 75 tests host en cinco archivos de motor/repositorio/outbox/backup/sesión | **75/75 PASS reportado con log**; **NO volver a ejecutar la suite** por rutina. |
+| Laravel bootstrap normal y `portal.error` sin overlay S3 | **PASS reportado**, sin DB; no repetir. |
+| APK `productDebug`, SHA `59522127E0E2D10E3F484950AAD656F4A188B52F6575E7C96574913FB5233C3D` | **BUILD PASS** reportado; debug auto-firmado, `minSdk=24`, **no instalado**, APK no incluido en ZIP. No recompilar sin cambio que lo requiera. |
+| Test `test/widget_test.dart`, caso `personal session exposes request submission and its server folio` | **FAIL real reportado, exit=1**; línea 153 intenta `tap(ExpansionTile)` a `Offset(400,647)` fuera de viewport `800×600`; línea 155 no encuentra `Folio …`. **PRIMER OBJETIVO**. |
+| SQLCipher/Keystore nativo y reinicio físico | **NOT_RUN / NOT_VERIFIED**; tests host de SQLite no lo sustituyen. **SEGUNDO OBJETIVO**, solo aislado/autorizado. |
+| Pro HTTP/DB QA real | **BLOCKED_CONTRACT**, sin credencial sintética autorizada ni backend QA disponible. **NO** inventar identidades ni permisos. |
+| B21F-S3 | Histórico **158 tests/2450 assertions PASS_SCOPED**. No repetir. |
+| PR #3 GitHub | F0 remoto distinto: **119 Flutter tests escritos NOT_RUN** y **31 checks Dart escritos NOT_RUN**. No importar ni ejecutar F0 por reflejo. |
 
-## 2. Reglas duras de ejecución
+**WIP reportado al cierre anterior:** `codex/jor-b08-h4-domain-20261025`, HEAD `faf5fe283191f8b5a2724b397009512a2caec1b6`, **235 entradas Git**, staged 0, índice sin cambios. Son datos del cierre anterior: constátalos sin exigirlos si hubo trabajo legítimo posterior. `lib/src/personal/personal_models.dart` es **untracked** y ya recibió exactamente un `)` adicional; SHA POST esperado en ese cierre: `41CA02182E39D6EC17A3050E49EA48BEDB6FAA02C04331BE70CA1A09DC40F63E`. `test/widget_test.dart` untracked conservó SHA `B3A1990B7D56BAC9484BA510DF308C937FD3B554452428C83D03DD49F99E2671`. **NO** volver a aplicar el parche del paréntesis.
 
-1. Trabajar **solo dentro de `D:\codex\Jornato`** y usar la carpeta externa indicada para informes. **No tocar otros proyectos**. Si la ruta no existe, identificar ubicación real sin crear otra aplicación; si no se identifica, cerrar `BLOCKED_WIP_NOT_FOUND` con evidencia útil.
-2. **WIP preexistente protegido; solo editar archivos de producto seleccionados después del preflight y sin pisar cambios ajenos.** No ejecutar `git reset`, `clean`, `stash`, `checkout`, `switch`, `pull`, `merge`, `rebase`, `cherry-pick`, `add`, `commit`, `push` ni usar `force`. No pisar untracked, staged, cambios ajenos o worktrees. No sobrescribir historias con copias GitHub. Capturar `git status --porcelain=v1 -uall`, HEAD, rama e índice **antes y después**. Si otro agente toca el mismo archivo, no competir: continuar en otras piezas seguras. **Una ruta con cambios previos NO se puede tratar como archivo limpio**: registrar hash/estado PRE, conservar bytes ajenos y producir delta propio separado. En caso de conflicto de líneas o propietario desconocido, `BLOCKED_WIP_CONFLICT` para esa ruta (no sobrescribirla). No hacer backup masivo ni editar fuera de las rutas autorizadas.
-3. **No Actions, servicios de pago, nuevos repositorios, hooks, skills, upgrades de SDK por rutina, alteraciones del sistema, datos reales ni secretos en logs**. No desplegar, publicar APK, firmar release ni convertir pruebas host en PASS físico.
-4. Arquitectura **KISS/Ponytail**: una sola lógica de marcación, un almacenamiento aprobado, una outbox/sync existente, un contrato de tenant/actor. No crear backend paralelo, nueva tabla/canal/manager/provider sin necesidad demostrada. No añadir nuevos permisos, GPS real obligatorio, selfie, biometría ni facturación para saltar las OD.
-5. Los problemas ya probados se dejan cerrados; **solo tests pertinentes al delta real**. No producir diez nuevas auditorías, veinte prompts, otra reescritura de contrato o planes sucesivos. Después de implementar y corregir, una ronda focal de QA y un único ZIP final. **Las veinte pasadas del Director revisaron ESTA orden, no piden a Codex 20 revisiones del código.**
-6. Donde falte SDK, dispositivo, DB QA segura o decisión humana, marcar `NOT_RUN` o `BLOCKED_CONTRACT` **en ese tramo**; avanzar lo independiente. Nunca degradar seguridad ni inventar PASS.
+## B. Reglas de ejecución que no admiten interpretaciones
 
-## 3. Ejecución ordenada — actuar, no enviar plan para aprobación
+1. **No pedir al propietario que ejecute nada**; Codex hace pruebas, logs y entrega. No iniciar un segundo agente ni consultar dirección entre pasos recuperables.
+2. **Preflight una sola vez:** comprobar ruta, HEAD, rama, `git status --porcelain=v1 -uall`, índice y huellas de **solo archivos objetivo**. Registrar PRE. Leer `AGENTS.md`/contratos locales **una vez** y respetar la jerarquía L1–L6 ya auditada; no descargar/installar skills, no ejecutar 20 pasadas de nuevo.
+3. **No** usar `git add/commit/push/pull/merge/rebase/reset/clean/stash/checkout`, no cambiar otras ramas, worktrees ni otro proyecto, no crear tags/hooks/CI. **Editar en sitio solo el mínimo delta propio**, incluso si el archivo es untracked; proteger todos sus bytes previos. No borrar ni recrear DB, APK instalado, keystore ni contenido previo. No tocar Docker ajeno, Hostinger ni producción.
+4. Solo datos sintéticos y rutas/almacenamiento **aislados** para QA. No adjuntar credenciales, `.env`, DB real, claves, tokens, IDs, fotos, CV, información de empleados ni APK debug de otro entorno. Nunca certificar Android físico sin instalación/ejecución realmente observadas.
+5. **Causa raíz**, no atajos: prohibido `warnIfMissed:false`, `skip`, borrar aserción de folio, cambiar texto esperado para encajar, agrandar viewport como máscara, aceptar un widget no visible como PASS o parchear código de producto si el único error está en el desplazamiento del test.
 
-### P0 — Custodia + correspondencia REAL (breve y suficiente)
+## C. Ejecución de punta a punta: prioridad estricta
 
-- Identifica los módulos Flutter/Android y Laravel existentes, el motor de eventos, servicio de almacenamiento local, SQLCipher/Keystore, migraciones ya aplicadas, outbox/receipt y endpoints de sincronización, además de los tests focales. Verifica rutas y contratos por código, no por nombre supuesto. Lee los README/AGENTS/ADR del **WIP actual**. No catalogar los cientos de archivos uno por uno.
-- Guardar en carpeta de informes la instantánea **sin secretos** de `HEAD`, rama, `git status` y lista staged; registrar hashes PRE únicamente de archivos candidatos al cambio. **Sin crear backups de todo el repo ni copiar bases.** **Para cada archivo tocado:** PRE path/estado/tracked-vs-untracked/SHA256, POST SHA256, diferencias atribuibles a este lote; un patch de `git diff HEAD` NO prueba autoría si el archivo ya estaba sucio. Si no se puede separar el delta propio, NO incluir un parche ambiguo ni sobrescribir contenido; anotar `PATCH_BLOCKED_PREEXISTING_WIP` y proporcionar instrucciones de aplicación no destructiva.
-- Contrastar las capacidades reales del WIP con los cinco módulos F0 de PR #3 solo cuando haya posibilidad de duplicación; revisar diferencias **semánticas**, no importarlas de manera masiva. Si ya existe una función mejor integrada, **no editarla por parecer distinta**. El puente Python del PR #2 es opcional y solo para acotar dudas de coincidencia; no condición de bloqueo, no reauditar sus 15 tests.
-- Determinar en **una tabla compacta de máximo 7 renglones**, con rutas reales, prueba/contrato existente y decisión `EXISTE/YA_VALIDADO`, `FALTA/DEFECTO_DEMOSTRADO`, `BLOQUEADO_CONTRATO`. **Regla ejecutable:** si existe y tiene evidencia atribuible, NO reescribir; si existe pero falla, corregir causa raíz; si falta dentro de contrato aprobado, implementar SOLO la pieza mínima; si exige OD/credencial/persona/producción, marcar bloqueo concreto y avanzar lo independiente. No regresar al Director entre pasos.
+### C1 — Cerrar `PERSONAL_WIDGET_FLOW=FAIL` primero
 
-### P1 — Arranque NORMAL de Laravel, foco quirúrgico (comprobación corta, no nuevo lote backend)
+1. Abrir **solo** `test/widget_test.dart` alrededor de las líneas 125–160 y el widget consumidor que crea la `ExpansionTile` del folio (`lib/src/ui/personal_screen.dart` u otro propietario real). Confirmar si el envío se completó y la tarjeta existe; **el log por sí solo no prueba éxito de negocio**.
+2. Reproducir **una vez** el caso **con su nombre exacto**: `flutter test --no-pub test/widget_test.dart --plain-name 'personal session exposes request submission and its server folio'` (usar sintaxis PowerShell apropiada). Conservar warning de hit test y fallo de aserción PRE. Si ya no falla, guardar evidencia SHA y no editar.
+3. **Corrección elegida si confirma que solo falta desplazar la tarjeta:** sobre el finder **específico** por clave/id o ancestro correspondiente: `await tester.ensureVisible(target); await tester.pumpAndSettle(); await tester.tap(target); await tester.pumpAndSettle();` antes de esperar el folio. Si el elemento no está construido en el árbol por una lista perezosa, usar `scrollUntilVisible` **sobre el `Scrollable` real y con límite**. No usar `find.byType(ExpansionTile).first` si puede pulsar otra tarjeta. La aserción original `Folio <id>` debe permanecer íntegra y el test debe comprobar que el tap sí alcanzó el destino.
+4. Si el elemento sigue sin abrirse **después de desplazamiento válido**, investigar de forma focal identidad del estado/folio y condiciones de render. Corregir la **causa real** en el propietario mínimo y añadir una sola regresión pertinente cuando cambie código de producto. No rediseño ni nueva máquina de estados.
+5. Ejecutar el caso focal **después del cambio** y, solo si editaste producción u otro consumidor, las pruebas vecinas impactadas y `flutter analyze --no-pub` **una vez**. No repetir los 75 host PASS ni B21F-S3. Registrar `WIDGET_FLOW=PASS_FOCAL|FAIL|BLOCKED` con nombre, salida, SHA y si cambió solamente test o también producto.
 
-- Verificar **una sola vez** el arranque/configuración normal del servidor y un render/flujo de vistas que el producto realmente use, **sin overlay de QA B21F-S3**. Usar entorno sintético local, sin credenciales ni producción, y sin migraciones destructivas. No iniciar Docker ni MariaDB solo para comprobar vistas. **Si bootstrap normal requiere DB/secretos no disponibles, registrar `BOOT_NORMAL=BLOCKED` con el punto exacto, no conectar DB ajena.**
-- Si falla por configuración de vistas, corregir la causa en la configuración Laravel existente y ejecutar el smoke focal. **No crear `config/view.php` por reflejo** si no lo necesita el producto. Si no hay ruta de vistas aplicable, registrar `NOT_APPLICABLE`, no inventar UI ni PASS.
-- Reutilizar el PASS_SCOPED anterior de 158/2450: **no repetir toda la suite backend**. Si corriges auth/tenant/arranque, solo las pruebas directamente afectadas y una regresión contigua.
+### C2 — Resolver hasta donde pueda **verificarse** el gate nativo de SQLCipher/Keystore
 
-### P2 — Vertical Android OFFLINE duradera, primero el producto (PRIORIDAD DE CÓDIGO)
+6. Localizar adaptadores y tests existentes: `lib/src/persistence/local_encrypted_store.dart`, esquema/migraciones propios y `integration_test/` pertinente, **sin abrir un segundo proveedor de cifrado**. Aislar la capa nativa Android de SQLite host; distinguir explícitamente la base SQLite de test de una base SQLCipher del teléfono/emulador.
+7. **Priorizar emulador de prueba aislado preexistente** si puede iniciarse sin intervenir otros dispositivos/procesos/instalaciones y sin instalar toolchains gigantes. **No instalar, desinstalar, iniciar o manipular el dispositivo físico conectado**, aunque ADB diga `AUTHORIZED=1`; falta autorización específica H9 para ello. No usar perfiles ni datos existentes.
+8. Si existe un emulador de prueba utilizable, ejecutar **solo pruebas nativas focales con datos sintéticos**: apertura con clave Android Keystore efectiva, confirmación de versión cipher por API nativa (`PRAGMA cipher_version` o equivalente validado), escritura de evento + outbox, cierre y relanzamiento, lectura idéntica, reintento sin duplicado, rechazo de clave errónea, aislamiento tenant/actor y fallo cerrado ante corrupción. No registrar contenido secreto ni destruir base fuera del sandbox. Un reinicio de proceso no equivale automáticamente a recuperación tras reinstalar aplicación. Marcar `PASS_EMULATOR` solamente para las subpruebas observadas y con build/aplicación identificados.
+9. Si **no** hay emulador propio, no reintentar sobre el teléfono físico: comprobar de manera focal si ya existen tests instrumentados que permitan esa verificación; añadir/completar **solo el test faltante del adaptador existente** si el código permite hacerlo sin inventar dependencias, documentar `NATIVE_CIPHER=NOT_RUN` y `ANDROID_OFFLINE=PASS_HOST_ONLY`. No atribuir PASS nativo por análisis estático, logs antiguos ni un APK compilado.
+10. No activar migraciones destructivas ni restauraciones reales. Si encuentras un defecto de seguridad/cifrado, corregir la **causa mínima autorizada** y su regresión; si necesita política OD/consentimiento o permiso externo, dejar `BLOCKED_CONTRACT` **solo** para ese subgate y seguir el resto.
 
-**Orden dentro de P2 (no crear otro plan):** confirmar si ya existe persistencia cifrada integrada → cerrar secuencia y guardado duradero → validar reinicio/aislamiento → arreglar solo la UI del flujo afectado. Si SQLCipher requiere autorización/SDK faltante, continuar lógica y pruebas host independientes, pero la vertical queda `PARTIAL`/`BLOCKED`, NUNCA `PASS_REAL_DEVICE`.
+### C3 — Sincronización Pro: conservar el contrato y el bloqueo correcto
 
-- Con código real del WIP y usuario ficticio: **entrada → inicio pausa → continuación → salida**. Estado/hora/intervalos correctos, sin pausa prevista ficticia; guardado duradero **antes de confirmar en UI**; cierre, reinicio de proceso/app y lectura idéntica del historial. Jornada nocturna local correctamente atribuida según contrato aprobado. Doble tap y reintento no crean otro evento. **Oráculo mínimo:** mismo `eventId`/payload repetido = un registro; mismo ID con payload distinto = conflicto explícito; nunca confirmar UI antes de persistir atómicamente el evento correspondiente. Un evento con hora futura o reloj retrasado **no se normaliza ni reescribe silenciosamente**.
-- Usar el cifrado/aislamiento **ya existentes** (SQLCipher y Keystore cuando apliquen). Verificar por separado escritura, lectura, crash/reinicio, migraciones existentes, corrupción simulada y aislamiento espacio-sujeto. Si falta implementación y las decisiones técnicas ya están aprobadas, completar el menor tramo integrado posible con dependencias gratuitas/permitidas. Si depende de consentimiento, claves o SDK inaccesible, **NO** sustituirlo por JSON o SQLite en claro; dejar `SQLCIPHER=NOT_VERIFIED/BLOCKED` y continuar lo seguro. **Una prueba host con almacenamiento simulado jamás justifica `SQLCIPHER=PASS_VERIFIED`; se exige evidencia del adaptador nativo, almacén real y recuperación, sin incluir claves.**
-- UI mínima coherente: estado vigente, horas reales, pausa, offline/pendiente/sincronizado, error recuperable. Comprobar accesibilidad del flujo afectado. El temporizador de PR #3 es **referencia**: solo integrarlo si mejora una UI que no lo tiene; no sobreescribir una pantalla avanzada ni crear otra. Kiosco: eliminar identidad temporal tras comprobante antes del siguiente usuario **si ya corresponde al flujo aprobado**, sin crear nueva autorización OD.
+11. **NO repetir** los tests host de serialización canónica `requestId`, outbox y receipt ya aprobados. Con credencial **sintética preexistente y autorizada** + backend **QA aislado preexistente**, si realmente están accesibles sin tocar producción, ejecutar **solo** un evento offline → envío → receipt/readback → reenvío de igual `requestId` sin duplicación y, si viable, ACK perdido. Inspeccionar el campo exacto persistido; nunca aceptar `requetId` mediante traducción silenciosa. Si no existe la autorización/entorno, **mantener `PRO_HTTP_DB=BLOCKED_CONTRACT`**, no crear cuentas/roles/tokens/schemas/Docker nuevos.
+12. `BOOT_NORMAL=PASS_HOST` y `HOST_FOCAL_75=PASS_HOST_HISTORICAL` se **heredan como evidencia H9-M1** sin ejecutarlos. No confundir sincronización HTTP del servidor real con transportes falsos o mocks de host.
 
-### P3 — Sincronización Pro existente, sin romper Gratis local
+### C4 — Custodia, documentación útil y UNA entrega
 
-**Condición de entrada:** solo iniciar P3 después de identificar motor de marcas y outbox reales, y sin inventar asociación empleado/cuenta. Si P2 no ha persistido correctamente, limitar P3 a inspección de contrato y serialización ya existente: no aprobar envío de eventos que se perderían al reiniciar.
+13. Comparar PRE/POST del **mismo archivo**: branch, HEAD, listado Git, índice, SHA y líneas cambiadas; para archivos untracked usar diff de PRE/POST conservado fuera del repo. No alterar ni «limpiar» las 235 rutas por costumbre. Un `status --porcelain` igual antes/después **no demuestra** que el contenido untracked sea igual: mostrar hashes propios. No incluir archivos WIP anteriores ajenos en el parche.
+14. Reportes **breves** (no otra auditoría): `FINAL_REPORT.md` de 1–2 páginas, `RESULTS.csv` con estados por gate, `CHANGES.patch` solo de delta del lote, `WIP_PRE_POST.csv`, logs focales, `BLOCKERS.md` si corresponde y `MANIFEST_SHA256.csv` (**excluyendo al propio manifiesto**). ZIP único `JOR-H9-M1-F1-VISUAL-NATIVE-20261119-UNICO.zip`; comprobar CRC, tamaños y SHA de cada miembro. Los reportes no contienen datos personales ni secretos. **Si una columna SHA se refiere al log, su hash debe coincidir con el log**; separar `log_sha256` de `source_sha256`/`apk_sha256` para evitar la ambigüedad del `RESULTS.csv` anterior. No cambiar retroactivamente el ZIP H9-M1.
+15. En el informe, atribuir correctamente qué pasó en **este** lote y qué se **reutilizó** de H9-M1/B21F-S3. Si ninguna parte nativa estuvo permitida, entregar el cierre focal del test visual y resultado `NATIVE_CIPHER=NOT_RUN` sin otra auditoría de arquitectura. **No presentar H9 o release como GO**.
 
-- Revisar de verdad los tipos/campos HTTP y Laravel para `requestId` (ojo con error histórico `requetId`), idempotencia, receipt/ACK, cursor, tenant/actor. **No aceptar fallbacks silenciosos** ni inventar endpoints, tokens, acceso web o asociación empleado-cuenta sin aprobación. **Revisar el `requestId` persistido y enviado en bytes/JSON sanitizados: rechazar explícitamente `requetId` sin reescribir los resultados históricos B14.**
-- Probar una secuencia ficticia: eventos creados sin red → outbox duradera → reconexión permitida → envío al backend QA **solo si el entorno aislado es seguro** → ACK/receipt → readback autorizado → reenvío idéntico sin duplicados; **ACK perdido + reenvío** no deben duplicar evento/receipt; errores 401/403/404 y otro tenant no deben filtrar datos. **Si no existe credencial sintética autorizada, probar solo serialización/outbox local y marcar `BLOCKED_CONTRACT` para HTTP; no crear usuarios ni tokens nuevos.** Si no es posible el servidor QA seguro, verificar el contrato/transporte local y declarar `PASS_LOCAL_ONLY` o `BLOCKED_CONTRACT`, nunca `PASS_REAL_HTTP_DB_QA`.
-- El modo **Gratis local** no debe depender de login/nube ni bloquearse por Pro. Si una etapa depende de OD01/OD02/OD04/OD08, completar las partes sin decisión pendiente y especificar exactamente el punto bloqueado; no inventar permisos.
-
-### P4 — QA proporcional que ejecuta CODEX (el propietario NO hace pruebas)
-
-- **Todas las pruebas son responsabilidad de Codex.** Codex ejecuta lo disponible **en el equipo local**, nunca solicita al propietario comandos, instalación manual o pruebas de teléfono. Comprobar SDK Flutter/Dart, Android/ADB y backend solo para conocer disponibilidad; no instalar herramientas o manipular dispositivos ajenos automáticamente.
-- Ejecutar **una vez después del delta**: análisis del alcance cambiado, unit/widget sobre jornada, cifrado/rehidratación y outbox; smoke focal de arranque normal; integrar en emulador o teléfono **solo si ya disponible y autorizado**. Si hubo cambios efectivos en el motor/pruebas F0, se puede ejecutar la suite Flutter correspondiente en **clon separado de PR #3**, no sobre WIP; sus **119 tests fuente y 31 checks** siguen `NOT_RUN` hasta ejecución real. No distraerse revalidando esos 119 si el WIP avanzado usa otro árbol y el delta no los afecta.
-- Si hay Android SDK funcional, APK **debug local** y hash del artefacto, sin firmar, instalar para personas reales ni publicar. **No instalar ni controlar un dispositivo ajeno; si no hay emulador/teléfono ya autorizado, separar `PASS_HOST_ONLY` de `PASS_EMULATOR`/`PASS_REAL_DEVICE`.** Verificar solamente el flujo objeto del lote; señalar plataforma, dispositivo, build y SHA específicos. No afirmar `PASS_REAL_DEVICE` por pruebas host o emulador.
-- Al encontrar un fallo, reproducir, corregir **causa raíz** en código propietario y volver a ejecutar el test afectado y vecinos pertinentes **una sola vez**. No usar `skip/xfail`, mocks para falsificar cifrado/red real ni cambiar expected para esconder error.
-- Matriz final corta: flujo/offline/reinicio, idempotencia, cifrado, aislamiento, sync, UI y lifecycle, backend normal. Cada fila: `PASS_REAL_DEVICE`, `PASS_EMULATOR`, `PASS_HOST`, `PASS_HTTP_DB_QA`, `PARTIAL`, `NOT_RUN`, `BLOCKED`, o `FAIL` con evidencia; no certificar H9 global por este lote.
-
-## 4. Entrega única obligatoria — sin ping-pong
-
-Crear **un solo ZIP** en `D:\codex\_REPORTES\Jornato\JOR-H9-M1-REACTIVADO-20261119\delivery\JOR-H9-M1-REACTIVADO-20261119-UNICO.zip` con:
-
-1. `FINAL_REPORT.md` (máximo 2 páginas, componentes **realmente** completados/pendientes, raíz de defectos, justificación de nuevas dependencias si las hubo, estado REAL/DEMO/BLOCKED).
-2. `RESULTS.csv` (gate, alcance, tipo de prueba, comando, exit, SHA y referencia a log, distinguiendo `PASS_SCOPED` de `NOT_RUN`).
-3. `CHANGES.patch` o archivos completos **solo de los archivos que Codex cambió**; incluir rutas untracked propias necesarias, instrucciones de aplicación **no destructiva** y hashes PRE/POST, sin arrastrar el WIP ajeno. **Si un archivo ya estaba modificado, separar delta preexistente de delta nuevo; no entregar `git diff HEAD` entero como si fuera de este lote.**
-4. `WIP_PRE_POST.csv` de estado Git/índice/hash de archivos tocados; `BLOCKERS.md` solo si hay bloqueos materiales.
-5. Logs de QA focal y metadatos de APK debug (si realmente se generó); `MANIFEST_SHA256.csv` para cada miembro, con bytes y SHA256. Comprobar integridad CRC y manifiesto, calcular SHA256 del ZIP e informarlo.
-
-**NUNCA incluir:** `.env`, passwords, tokens, Keystore/SQLCipher keys, bases, credenciales, fotos/biometría, nómina/CV/PII de empleados, dumps, datos de otras empresas, artefactos de otros proyectos. No adjuntar el WIP completo. Si no hay código cambiado porque todo existe, entregar evidencia real del bloqueo/foco, no fingir una implementación. **Antes de empaquetar, revisar por nombre y contenido los cambios, logs y nombres de archivo contra secretos/PII; si no es seguro, omitir la pieza sensible y explicar el bloqueo.** El manifiesto debe enumerar cada miembro distinto del propio manifiesto (sin autorreferencia) y el SHA256 del ZIP se informa FUERA de él.
-
-**No staged, no commit, no push, no merge, no deploy**. No editar el checkpoint remoto ni generar segundo prompt. Si hay impedimento material, entregar el ZIP con lo avanzado independiente y una sola causa bloqueante priorizada. El siguiente turno es ChatGPT Director; no delegar automáticamente otro lote.
-
-### Respuesta final obligatoria de Codex
+## D. Contrato de salida obligatorio (una sola respuesta de Codex)
 
 ~~~text
-TASK=JOR-H9-M1-REACTIVADO-ANDROID-OFFLINE-PRO-BOOT-20261119
+TASK=JOR-H9-M1-F1-VISUAL-NATIVE-SCOPE-20261119
 RESULT=PASS_SCOPED|PARTIAL|BLOCKED
-SOURCE_WIP_HEAD_PRE=<HEAD real previo>
-SOURCE_WIP_HEAD_POST=<HEAD real posterior>
-SOURCE_WIP_BRANCH=<rama local real>
+SOURCE_HEAD=<HEAD exacto; conservar salvo cambios ajenos preexistentes>
 WIP_PRESERVED=YES|NO
-PREEXISTING_STAGED_UNCHANGED=YES|NO
-FILES_CHANGED=<cantidad y rutas exactas, o NONE>
-BOOT_NORMAL=PASS|FAIL|NOT_APPLICABLE|BLOCKED
-ANDROID_OFFLINE=PASS_REAL_DEVICE|PASS_EMULATOR|PASS_HOST_ONLY|PARTIAL|BLOCKED
-SQLCIPHER=PASS_VERIFIED|PARTIAL|NOT_VERIFIED|BLOCKED
-PRO_SYNC=PASS_HTTP_DB_QA|PASS_LOCAL_ONLY|BLOCKED_CONTRACT|NOT_RUN
-PR3_FLUTTER_119=PASS|FAIL|NOT_RUN
-PR3_SMOKE_31=PASS|FAIL|NOT_RUN
-BACKEND_B21F_S3_158_REUSED=YES|NO
+CHANGED_FILES=<rutas exactas, solo nuevo delta>
+WIDGET_FLOW=PASS_FOCAL|FAIL|BLOCKED
+FLUTTER_ANALYZE=PASS_CURRENT|REUSED_H9_M1|FAIL|NOT_RUN
+HOST_FOCAL_75=REUSED_H9_M1_PASS_HOST_NOT_RERUN
+BOOT_NORMAL=REUSED_H9_M1_PASS_HOST_NOT_RERUN
+NATIVE_CIPHER=PASS_EMULATOR_SCOPED|PARTIAL|NOT_RUN|BLOCKED_CONTRACT
+ANDROID_OFFLINE=PASS_HOST_ONLY|PARTIAL|PASS_EMULATOR_SCOPED
+PRO_HTTP_DB=PASS_HTTP_DB_QA|BLOCKED_CONTRACT|NOT_RUN
+PHYSICAL_ANDROID=NOT_RUN_UNAUTHORIZED
 H9_GLOBAL=NO_GO
-B22=NOT_AUTHORIZED
 RELEASE=NO_GO
-ZIP_PATH=<ruta absoluta comprobada del único ZIP>
-ZIP_SHA256=<SHA-256 real comprobado>
+ZIP_PATH=<ruta real de UN ZIP>
+ZIP_SHA256=<SHA comprobado>
 NEXT_OWNER=CHATGPT_DIRECTOR
 ~~~
 
-**Interpretación del resultado:** `WIP_PRESERVED=YES` significa que todo WIP ajeno se conservó, incluso si Codex cambió sus rutas autorizadas. `BACKEND_B21F_S3_158_REUSED=YES` significa reutilizar evidencia previa `PASS_SCOPED`, nunca certificarla como ejecución actual.
-
-**Criterio de cierre:** trabajo real sobre el WIP actual, trazabilidad de cambios y QA que Codex mismo ejecuta; **no declarar PASS con `exit != 0` ni evidencia de otro SHA; en APK/dispositivo exigir hash de artefacto, y en pruebas host/backend hash del código realmente probado**; no auditar de nuevo lo resuelto ni delegar pruebas al propietario. El macrobloque termina con entrega verificable aunque algunos gates queden `BLOCKED`.
-
-# 🚨 QUIÉN SIGUE AHORA: CODEX LUNA. DESPUÉS DEL ZIP: CHATGPT DIRECTOR. 🚨
+**NO HAY PASO DE AUDITORÍA FINAL DE 10+10 PARA CODEX.** Haz cambios de producto/QA útiles, prueba únicamente lo afectado y entrega. Si no puedes ejecutar un subgate por permisos o herramientas, termina lo independiente. **No pedir al usuario que haga pruebas.**
