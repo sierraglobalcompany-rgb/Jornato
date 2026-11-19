@@ -1,13 +1,13 @@
 # JORNATO — CONTINUIDAD CANÓNICA DE DIRECCIÓN (DOCUMENTAL)
-## ESTADO VIGENTE — CODEX REACTIVADO Y ORDEN H9-M1 ÚNICA (2026-11-19)
+## ESTADO VIGENTE — H9-M1 V2 AUDITADA 10 VERDUGO + 10 JUEZ (2026-11-19)
 
-**EL PROPIETARIO CONFIRMÓ QUE YA TIENE CODEX.** Orden vigente: [docs/CODEX_LOTE_ACTUAL.md](CODEX_LOTE_ACTUAL.md), TASK=JOR-H9-M1-REACTIVADO-ANDROID-OFFLINE-PRO-BOOT-20261119. Responsable ahora CODEX_LUNA, después de un único ZIP CHATGPT_DIRECTOR. El Markdown entregado al propietario coincide con la orden de este PR #2. **NO** pedir pruebas al propietario ni reactivar Actions; no generar otra auditoría.
+**RESPONSABLE ACTUAL: CODEX LUNA.** El propietario ya dispone de Codex, y las pruebas locales son exclusivamente suyas. El Director hizo **20 pasadas adversariales sobre la orden, NO veinte ejecuciones de QA**, con resultados y contraargumentos en [AUDITORÍA 10V+10J](JORNATO_H9M1_AUDITORIA_10_VERDUGO_10_JUEZ_20261119.md). La **única orden vigente** es [docs/CODEX_LOTE_ACTUAL.md](CODEX_LOTE_ACTUAL.md), misma TASK `JOR-H9-M1-REACTIVADO-ANDROID-OFFLINE-PRO-BOOT-20261119`, nueva versión V2. Sustituye la versión previa, no crear H9-M2 ni volver a auditar el prompt.
 
-**GitHub remoto al último cotejo:** PR #3 Draft, basado en PR #1, HEAD `104469b119752f395cf9881e732d582feab9db4e`. F0 tiene 119 tests Flutter fuente y 31 checks Dart fuente, **todos NOT_RUN**. La UI F0 recarga intervalos cada 30 s durante jornada/pausa/conflicto futuro y suspende el timer en segundo plano/cierre. No mezclar a ciegas PR3 con el WIP. PR #2 puente Python 15/15 PASS sintético histórico, nunca ejecutado contra WIP real.
+**Correcciones directivas:** custodia PRE/POST del WIP sucio sin stage/commit/push; parche solo de delta propio; P1 bootstrap Laravel corto sin overlay S3 ni DB ajena; **P2 Android offline cifrado primero** y P3 sync Pro sólo tras outbox duradera/autorización técnica; prueba focal de `requestId` real vs `requetId`, ACK perdido/idempotencia; nivel de evidencia SQLCipher y físico sin falso PASS; ZIP único, sanitizado con manifiesto no autorreferente. `WIP=D:\codex\Jornato` NO accesible aquí; Codex lo inspecciona y ejecuta QA, no el usuario.
 
-**META ÚNICA CODEX:** custodiar `D:\codex\Jornato`, verificar bootstrap normal Laravel sin overlay S3, completar vertical real Android offline + cifrado/rehidratación + sync Pro existente solo dentro de contratos aprobados; QA focal ejecutada por Codex. Reutilizar B21F-S3=PASS_SCOPED 158 tests/2450 assertions sin repetir suite histórica. No stage/commit/push/merge/deploy, no datos reales ni alteración de otro proyecto. Si faltan SDK/dispositivo/OD, completar lo independiente y marcar tramo bloqueado. H9=NO_GO; B22=NOT_AUTHORIZED; RELEASE=NO_GO hasta nueva evidencia.
+**GitHub fuente conocida:** `main=1ee6aae821f8cf177cc64149081ad8847f7fec2e`; PR #1 `faf5fe283191f8b5a2724b397009512a2caec1b6` Draft; PR #3 `104469b119752f395cf9881e732d582feab9db4e` Draft apilado sobre #1: **119 tests Flutter escritos NOT_RUN y 31 Dart checks escritos NOT_RUN**. PR #2 Draft documental conserva bridge Python 15/15 sintético PASS histórico, no WIP. B21F-S3 backend 158 tests/2450 assertions PASS_SCOPED histórico, no repetir suite. No PR nuevo, sin Actions, no merge ni deploy.
 
-**QA_EXECUTOR=CODEX_LUNA; NEXT_OWNER_AFTER_ZIP=CHATGPT_DIRECTOR.**
+**GATES:** `QA_EXECUTOR=CODEX_LUNA; NEXT_OWNER_AFTER_ZIP=CHATGPT_DIRECTOR; H9_GLOBAL=NO_GO; B22=NOT_AUTHORIZED; RELEASE=NO_GO`. El resultado final de Codex debe ser un ZIP único con cambios atribuibles, pruebas ejecutadas y bloqueos concretos. **No solicitar pruebas o instalaciones al propietario.**
 
 ---
 
