@@ -1,7 +1,9 @@
 # JORNATO — CONTINUIDAD CANÓNICA DE DIRECCIÓN (DOCUMENTAL)
-## ESTADO VIGENTE — PR #3 CON QA BLOQUEADO EXPLÍCITO, 2026-11-19
+## ESTADO VIGENTE — PR #3 CON RELOJ ACTUALIZABLE Y QA DIFERIDA A CODEX (2026-11-19)
 
-**HEAD PR #3** `029125df92b1403e804bb90c7d413d717d892231` (Draft, basado en PR #1); 5 archivos de QA/documentación modificados, **cero módulos de negocio y cero dependencias nuevas**. `scripts/qa_local_f0.ps1` registra `STATUS=BLOCKED` si faltan Flutter/Dart, con log externo al repo; README y guía ahora muestran exclusivamente **119 Flutter tests escritos NOT_RUN y 31 checks Dart escritos NOT_RUN**. `docs/NEXT-CODEX.md` se marcó HISTÓRICO/SUSPENDIDO. **PowerShell no ejecutado en Windows**, SDK Dart/Flutter no disponible aquí, Android/SQLCipher/Pro sin certificar. No alterar main ni WIP. `NEXT_OWNER=CHATGPT_DIRECTOR; H9=NO_GO; B22=NOT_AUTHORIZED; RELEASE=NO_GO`.
+**HEAD PR #3:** `104469b119752f395cf9881e732d582feab9db4e` (Draft, basado en PR #1). Cambio focal de cinco archivos: `lib/main.dart` actualiza horas/pausas cada 30 s **solo** si trabaja, está en pausa o existe marca futura; cancela temporizador al terminar jornada, en segundo plano y en `dispose`; actualiza al reanudar la aplicación. Sin conteos por ticks, se recalcula desde `DateTime.now()`. README y QA actualizados, `docs/NEXT-CODEX.md` y guía dejan la **QA diferida para Codex**. **El propietario expresó que NO puede hacer pruebas locales: nunca pedirle instalar Flutter, correr PowerShell, emuladores o tests.** No se escribieron/ejecutaron pruebas nuevas. **119 tests Flutter fuente = NOT_RUN, 31 checks Dart = NOT_RUN; temporizador/lifecycle = NOT_RUN**.
+
+**CONDICIONES:** el WIP avanzado Laravel/Android/SQLCipher permanece en `D:\codex\Jornato` y no está disponible en GitHub. El puente PR #2 mantiene 15/15 pruebas Python sintéticas históricas, pero no se ejecutó en WIP real. Nunca mezclar F0 a ciegas, no duplicar módulos con WIP, no merge ni despliegue. Cuando vuelva Codex, se autorice y exista entorno, ejecutar **una sola QA focal** del SHA exacto, validar reloj/pausa/reanudación, smoke y suite existente, sin repetir suite PHP histórica ni Actions pagos. `NEXT_OWNER=CHATGPT_DIRECTOR; QA_EXECUTOR_FUTURO=CODEX; SDK_FLUTTER=NOT_AVAILABLE_HERE; H9=NO_GO; B22=NOT_AUTHORIZED; RELEASE=NO_GO`.
 
 ---
 
