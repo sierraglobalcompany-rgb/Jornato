@@ -1,4 +1,12 @@
 # JORNATO — CONTINUIDAD CANÓNICA DE DIRECCIÓN (DOCUMENTAL)
+## F0 UI — CORTE TEMPORAL ÚNICO, PR #3 (2026-11-19)
+
+**ESTADO VIGENTE:** PR #3 Draft HEAD `51456f4749a956b5c4d6a18f5af84445ee55fb7f`, 4 archivos modificados respecto al padre; `lib/main.dart` usa `snapshot.status` al mismo `now` de horas/pausas, y admite un libro inyectado de prueba con marcación futura; nueva batería **8 testWidgets escritos (NO_RUN)**. Total PR #3: **119 tests fuente escritos, NOT_RUN**, smoke Dart 31 checks NOT_RUN. Verificación estructural REAL del SHA publicado: 27 archivos, 16 Dart, 41 imports, **0 rotos**, 0 `print()` detectados; **NO COMPILACIÓN NI QA de Flutter**. Flutter `ColorScheme.fromSeed(surface: ...)` es **válido**: falsa alarma de constructor rectificada, no se cambió diseño. No se introdujeron paquetes ni backend. `main` y PR #1 no se modificaron.
+
+**PRECONDICIÓN DEL DESARROLLO REAL:** WIP Laravel/Flutter avanzado sigue sólo en Windows `D:\codex\Jornato` y no se ha inspeccionado en este entorno. PR #2 conserva puente V3 probado con Python 15/15 sobre archivos sintéticos; **no ejecutado sobre el WIP**. Para terminar H9: conciliar fuente real con revisión manual, luego QA Android/SQLCipher/Pro. No volver a crear módulos paralelos ni pruebas sin runtime. `NEXT_OWNER=CHATGPT_DIRECTOR; H9=NO_GO; B22=NOT_AUTHORIZED; RELEASE=NO; CODEX=UNAVAILABLE; ACTIONS=UNAVAILABLE`.
+
+---
+
 ## PUENTE V3 — CORRECCIÓN FOCAL DE AUSENCIA DEPENDIENTE DEL ORDEN (2026-11-18)
 
 **ESTADO MÁS RECIENTE.** Sin Codex ni Actions, ChatGPT ejecutó nuevamente sobre fuentes sintéticas el puente de conciliación. Encontró un defecto material no cubierto: un módulo con nombre ausente podía clasificarse `NOT_FOUND_BY_BASENAME` antes de detectar la lectura fallida de otro candidato posterior. Se corrigió `tools/JORNATO_CONCILIAR_WIP_GITHUB_SIN_CODEX.py` con una segunda verificación global de `walk_errors/unreadable` que reclasifica las ausencias como `SCAN_INCOMPLETE`. Se añadió UN test focal de regresión sin duplicar los anteriores en `tests/test_jornato_wip_bridge.py`; guía actualizada. **QA local real: `15/15 unittest PASS`, `py_compile PASS`, CLI sintética PASS y reportes externos verificados.** Pruebas hechas con Python 3.13.5 en entornos temporales; **NO contra `D:\codex\Jornato` real**. No se cambió ningún componente móvil, WIP, CI, Actions ni servidor.
