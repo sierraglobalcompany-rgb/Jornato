@@ -1,3 +1,31 @@
+# H9-M1 / CODEX — ORDEN HISTÓRICA Y SUSPENDIDA (2026-11-19)
+
+El usuario informó que **no dispone de tokens de Codex ni de GitHub Actions**.
+**NO HAY NUEVO ENCARGO PARA CODEX.** La orden F0 que sigue debajo es
+histórica y no ejecutada: no usarla como tarea activa, no repetir tests ni
+modificar el WIP hasta conciliarlo. Continuidad canónica:
+[PR #2](https://github.com/sierraglobalcompany-rgb/Jornato/pull/2)
+y [PR #3](https://github.com/sierraglobalcompany-rgb/Jornato/pull/3).
+**NEXT_OWNER=CHATGPT_DIRECTOR; H9=NO_GO; RELEASE=NO_GO.**
+
+---
+
+## QA focal DIFERIDA a Codex, sin ejecución hasta nueva autorización
+
+**Propietario sin entorno local de QA. No enviarle tareas de Flutter,
+PowerShell, instalación, emulador ni teléfono.** Al reactivarse Codex,
+en una copia separada y limpia del PR #3, validar una sola vez SHA,
+`flutter analyze`, `flutter test`, smoke Dart, reloj y ciclo de vida
+de la pantalla (temporizador solo durante trabajo/pausa/conflicto futuro,
+cancelación al salir/segundo plano y actualización al reanudar).
+Investigar fallos demostrados y devolver logs + dictamen; no reejecutar
+tests PHP/Android antiguos ni modificar el WIP avanzado sin reconciliarlo.
+
+**Estado ahora: PRUEBAS DIFERIDAS / NOT_RUN.** No se activa ningún encargo
+de Codex en este chat y no hay Actions. Esto no autoriza merge/release.
+
+---
+
 # Jornato · NEXT autorizado de preparación (F0)
 
 Repos: https://github.com/sierraglobalcompany-rgb/Jornato

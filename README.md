@@ -1,35 +1,53 @@
 # Jornato
 
-**Jornato** — control inteligente de jornadas, horarios y asistencia para uso personal y pequeños negocios.
+Control de jornadas y asistencia para uso personal y pequeñas empresas, **Android primero**. Proyecto independiente de ERP-BDM.
 
-**Estado:** Fase 0 PARCIAL. Este repositorio contiene un prototipo de código Flutter/Dart, **NO** una app de producción ni un APK probado.
+**Estado al 19 de noviembre de 2026: prototipo remoto F0, NO apto para empleados ni producción.** El desarrollo avanzado de Laravel/Android/SQLCipher que permanece en **D:\codex\Jornato** no está en este árbol GitHub. No fusionar ni aplicar cambios sobre ese WIP sin comparar fuentes.
 
-## Estado de componentes
+## Situación real
 
-| Componente | Estado |
+| Componente | Estado verificable |
 |---|---|
-| Contrato de producto y roadmap | Documentado |
-| Motor de entradas, pausas, continuaciones y salidas | Código inicial no ejecutado en SDK |
-| UI personal | Código inicial en memoria |
-| Pruebas Dart | 8 casos escritos, sin ejecutar |
-| Android APK / QA físico | Pendiente |
-| Persistencia cifrada / backups | Pendiente |
-| Empresa, kiosco, QR, GPS, selfie | Pendiente |
-| Cloud, entitlements, iOS | Fuera del lote inicial |
+| Motor Dart (entrada, pausa, continuación, salida) | Código escrito; aún no ejecutado con SDK |
+| Turnos, archivo JSON, reconciliación y CSV | Código puro en memoria; JSON sin cifrar ni persistencia |
+| Regla GPS por precisión/edad/radio | Solo geometría local; no obtiene datos del teléfono ni certifica identidad |
+| Pantalla personal | Demo volátil; marca futura bloqueada; actualización de minutos automática en jornada/pausa, sin temporizador en reposo |
+| **Pruebas Flutter** | **119 casos fuente escritos, NOT_RUN** |
+| **Smoke Dart** | **31 comprobaciones escritas, NOT_RUN** |
+| Puente Python WIP, en PR #2 | **15/15 pruebas PASS con datos sintéticos**; Windows real NOT_RUN |
+| APK/Android, SQLCipher/Keystore, backend integrado, Pro | **NO_GO / no verificadas aquí** |
+| Lanzamiento o merge | **NO AUTORIZADO** |
 
-## Documentos
+Los tests Python del puente no son pruebas del producto móvil. El backend local ha tenido un resultado histórico PASS_SCOPED de 158 tests en B21F-S3, **no en este repositorio remoto**.
 
-- [Producto y reglas](docs/PRODUCTO.md)
-- [Decisión de arquitectura](docs/ADR-0001-ARQUITECTURA.md)
-- [Estado de QA y bloqueos](docs/QA-ESTADO.md)
-- [Cómo preparar Flutter](docs/COMO-EJECUTAR.md)
-- [Siguiente encargo para Codex](docs/NEXT-CODEX.md)
-- [Reglas de seguridad para agentes](AGENTS.md)
+## Ramas y responsabilidades
 
-## Origen / marca
+- [PR #1](https://github.com/sierraglobalcompany-rgb/Jornato/pull/1): base Flutter F0, Draft.
+- [PR #2](https://github.com/sierraglobalcompany-rgb/Jornato/pull/2): continuidad y herramientas de recuperación del WIP, Draft.
+- [PR #3](https://github.com/sierraglobalcompany-rgb/Jornato/pull/3): módulos Dart y QA F0, **Draft y basado en PR #1**.
+- **main**: sin código avanzado integrado. No alterar sin autorización.
 
-Es un producto nuevo y separado de ERP-BDM, basado en la **transferencia BDM-Menor v4 del 2026-10-24**. La imagen de Jornato suministrada por el propietario es la **referencia de identidad**; falta integrarla como asset verificable y crear iconos de tiendas.
+## QA pendiente — reservada para Codex
 
-**No subir** datos de empleados, claves, selfies, historias médicas ni otra información sensible a este repositorio público.
+**El propietario no dispone de entorno para pruebas locales. No solicitarle
+ejecutar PowerShell, Flutter ni instalar SDK.** Cuando vuelva Codex y sea
+autorizado, hará **una sola validación focal** del SHA exacto en un clon
+separado, nunca en el WIP de Windows. La [guía y el runner ya existentes](docs/COMO-EJECUTAR.md)
+conservan los comandos para Codex; no son tareas del propietario.
 
-La rama de F0 está bajo PR borrador y requiere validación antes de fusionar.
+**119 tests Flutter escritos, 31 checks Dart escritos: todos NOT_RUN.**
+La nueva actualización automática de pantalla también requiere que Codex
+compruebe avance del tiempo, pausa, reanudación, segundo plano y cierre del
+temporizador. No sumar tests ni declarar PASS antes de ejecutarlos.
+
+## Para continuar el producto real
+
+Comparar primero el WIP de Windows con el F0 remoto usando la [herramienta de conciliación en PR #2](https://github.com/sierraglobalcompany-rgb/Jornato/blob/docs/pingponglaw-l1-l6-canon-84e961c/tools/JORNATO_CONCILIAR_WIP_GITHUB_SIN_CODEX.py). La herramienta **no modifica** el WIP y todavía no se ha probado contra él. Compartir solo informes y fuentes revisadas para excluir secretos, bases de datos y datos personales. Después cerrar los pendientes reales de Android offline, cifrado, sincronización y QA físico.
+
+**Gates vigentes:** H9 = NO_GO; B22 = NOT_AUTHORIZED; release = NO_GO. **Sigue ChatGPT Director**, no Codex hasta que el propietario disponga de tokens y lo autorice.
+
+## Fuentes de verdad
+
+[Contrato de producto](docs/PRODUCTO.md) · [ADR provisional](docs/ADR-0001-ARQUITECTURA.md) · [QA e historial detallado](docs/QA-ESTADO.md) · [Guía local](docs/COMO-EJECUTAR.md) · [Continuidad canónica del PR #2](https://github.com/sierraglobalcompany-rgb/Jornato/blob/docs/pingponglaw-l1-l6-canon-84e961c/docs/JORNATO_CONTINUIDAD.md).
+
+No publicar identidades de empleados, fotografías, credenciales, bases de datos ni otros datos sensibles.
