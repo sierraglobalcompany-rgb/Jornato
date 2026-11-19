@@ -1,97 +1,109 @@
-# JORNATO — NO HAY ORDEN ACTIVA PARA CODEX (2026-11-18)
+# CODEX LUNA — JORNATO · MACROBLOQUE ÚNICO H9-M1 REACTIVADO
 
-**ESTADO VIGENTE: NEXT_OWNER=CHATGPT_DIRECTOR. CODEX_TOKENS=AGOTADOS (reportado por usuario), GITHUB_ACTIONS=NO_DISPONIBLES.** El bloque H9-M1 incluido debajo es **HISTÓRICO/NO EJECUTADO**: NO volver a ordenarlo sin autorización y sin reconciliar el WIP avanzado. No es un PASS ni una petición de trabajo en curso.
+**ORDEN ACTIVA — 19 de noviembre de 2026.** El propietario confirmó que **ya tiene Codex**. Ejecuta ahora este trabajo **de principio a fin en una sola intervención**, sin pedirle al propietario que haga pruebas, instale herramientas, elija entre alternativas técnicas o repita instrucciones. **Codex ejecuta, ChatGPT dirige y certifica el alcance después de recibir evidencias.**
 
-**Ahora:** [continuidad y gates](JORNATO_CONTINUIDAD.md); [herramienta local de fuente para revisión manual](../tools/JORNATO_PREPARAR_WIP_PARA_REVISION_SIN_CODEX.ps1); [PR #3 Dart F0 no integrado con WIP](https://github.com/sierraglobalcompany-rgb/Jornato/pull/3). El objetivo siguiente es inspeccionar el código avanzado en `D:\codex\Jornato` mediante snapshot sanitizado y compararlo, **no** lanzar otra auditoría ni ejecutar Codex/Actions. El PR #3 tiene 111 tests escritos y no ejecutados; `main` no contiene WIP; no merge ni release.
+`TASK=JOR-H9-M1-REACTIVADO-ANDROID-OFFLINE-PRO-BOOT-20261119`  
+`OWNER_ACTUAL=CODEX_LUNA`  
+`OWNER_DESPUES=CHATGPT_DIRECTOR`  
+`WIP_ORIGEN=D:\codex\Jornato`  
+`EVIDENCIAS=D:\codex\_REPORTES\Jornato\JOR-H9-M1-REACTIVADO-20261119`  
+`GITHUB_ACTIONS=NO_DISPONIBLES`  
+`RELEASE=NO_GO`
 
----
+## 1. Contexto congelado: no rehacer trabajo ni seguir un F0 paralelo
 
-## ARCHIVO HISTÓRICO — H9-M1 NO EJECUTADO
+**Fuentes de verdad, en orden:** código y contratos aprobados que existan hoy en el WIP avanzado local; `AGENTS.md` local y contrato de producto; fuente canónica PingPongLaw L1–L6 cuando esté accesible; resultados QA verificables por SHA; documentación de los PR remotos como referencia, **no** como sustituto del WIP.
 
-# CODEX LUNA — JORNATO H9-M1 · VERTICAL ANDROID OFFLINE → SINCRONIZACIÓN PRO Y BOOT NORMAL · MACROBLOQUE ÚNICO
+- Repositorio: `sierraglobalcompany-rgb/Jornato`. En la última comprobación de ChatGPT: `main=1ee6aae821f8cf177cc64149081ad8847f7fec2e` (sin WIP avanzado); PR #1 Draft `faf5fe283191f8b5a2724b397009512a2caec1b6`; PR #2 Draft/documental `f352b13e6b06759303d5b681838649bea7c1a97b`; PR #3 Draft **apilado sobre PR #1** `104469b119752f395cf9881e732d582feab9db4e`. **Verifica el HEAD real antes de usar referencias; no presupongas que siguen iguales.**
+- PR #3 contiene un prototipo Flutter F0 temporal en memoria, motor Dart, turnos, JSON de intercambio sin cifrar, informe CSV, evaluación GPS geométrica y pantalla con recálculo cada 30 segundos cuando hay jornada activa, pausa o marca futura; cancela en segundo plano/fin y recalcula al reanudar. **NO** es Android avanzado ni SQLCipher/Keystore productivo. **119 tests Flutter escritos, NOT_RUN**, más **31 checks Dart escritos, NOT_RUN** en esa rama.
+- PR #2 contiene el puente de comparación WIP por huellas; en su alcance sintético tuvo **15/15 pruebas Python PASS**, pero **no se ejecutó sobre el WIP real**. El puente solo compara cinco nombres de módulos Dart con base antigua; si el PR #3 ha avanzado, sus blobs aún corresponden a la referencia registrada. **No confundir igualdad de bytes con igualdad funcional.**
+- Backend histórico B21F-S3: **158 tests/2.450 assertions PASS_SCOPED**, con runner QA aislado que aportaba configuración de vistas. **No certificó bootstrap NORMAL ni producción.** No repetir esa suite ni abrir otra auditoría B13–B21 salvo que un cambio nuevo lo justifique. Mantener esquemas/containers de otras tareas intactos. Docker/IPAM tuvo bloqueos históricos; evitar imágenes/redes/reintentos exploratorios.
+- WIP histórico en Windows: cientos de entradas modificadas/no rastreadas y sin stage según reportes pasados; **ese conteo y SHA ya son históricos**, nunca exigir que coincidan hoy. Puede contener funciones avanzadas ya terminadas: **reutilízalas**.
+- Decisiones humanas **OD01–OD08 siguen NO APROBADAS** salvo evidencia de aprobación posterior en el WIP. No inventar consentimiento/retención, asociación empleado-cuenta, permisos RR. HH., acceso web, ATS/CV, firma, homologación salarial ni planes/cobros.
+- Las **L1–L6** son KISS/Ponytail, antirruido, causa raíz, diseño humano, evidencia atribuible y anti-ping-pong. Fuente fija: `sierraglobalcompany-rgb/PingPongLaw@84e961cadf482d234f4c0ee2ca60e8c7e9b388e8`, `docs/engineering/LEYES_IMPLEMENTACION_1_A_6.md`. **Léela si es accesible**, sin suponer que un enlace la carga automáticamente. Si no: `CANON_READ=BLOCKED`, aplicar seguridad y leyes ya documentadas localmente sin fingir verificación textual.
 
-**TAREA NUEVA:** `JOR-H9-M1-ANDROID-OFFLINE-SYNC-20261116`. **ESTA ES LA ÚNICA ORDEN SIGUIENTE**, ejecutable después de la entrega de B21F-S3 V2. **Responsable ahora: CODEX LUNA. Después del ZIP: CHATGPT DIRECTOR.** Trabaja únicamente en `D:\codex\Jornato`; evidencias sólo en `D:\codex\_REPORTES\Jornato\JOR-H9-M1-ANDROID-OFFLINE-SYNC-20261116`. **No hagas otra auditoría o plan para decidir si actuar: inspecciona el código vigente y ejecuta lo autorizado en un solo macrobloque.**
+## 2. Reglas duras de ejecución
 
-## 0. Resultado final buscado y límites de aceptación
+1. Trabajar **solo dentro de `D:\codex\Jornato`** y usar la carpeta externa indicada para informes. **No tocar otros proyectos**. Si la ruta no existe, identificar ubicación real sin crear otra aplicación; si no se identifica, cerrar `BLOCKED_WIP_NOT_FOUND` con evidencia útil.
+2. **WIP intocable salvo cambios de producto focales que hagas tú mismo después del preflight.** No ejecutar `git reset`, `clean`, `stash`, `checkout`, `switch`, `pull`, `merge`, `rebase`, `cherry-pick`, `add`, `commit`, `push` ni usar `force`. No pisar untracked, staged, cambios ajenos o worktrees. No sobrescribir historias con copias GitHub. Capturar `git status --porcelain=v1 -uall`, HEAD, rama e índice **antes y después**. Si otro agente toca el mismo archivo, no competir: continuar en otras piezas seguras.
+3. **No Actions, servicios de pago, nuevos repositorios, hooks, skills, upgrades de SDK por rutina, alteraciones del sistema, datos reales ni secretos en logs**. No desplegar, publicar APK, firmar release ni convertir pruebas host en PASS físico.
+4. Arquitectura **KISS/Ponytail**: una sola lógica de marcación, un almacenamiento aprobado, una outbox/sync existente, un contrato de tenant/actor. No crear backend paralelo, nueva tabla/canal/manager/provider sin necesidad demostrada. No añadir nuevos permisos, GPS real obligatorio, selfie, biometría ni facturación para saltar las OD.
+5. Los problemas ya probados se dejan cerrados; **solo tests pertinentes al delta real**. No producir diez nuevas auditorías, veinte prompts, otra reescritura de contrato o planes sucesivos. Después de implementar y corregir, una ronda focal de QA y un único ZIP final.
+6. Donde falte SDK, dispositivo, DB QA segura o decisión humana, marcar `NOT_RUN` o `BLOCKED_CONTRACT` **en ese tramo**; avanzar lo independiente. Nunca degradar seguridad ni inventar PASS.
 
-**OBJETIVO:** convertir el próximo tramo real del desarrollo en una vertical verificable de la app: **registro de jornada y pausas con persistencia local offline en Android/kiosco**, cierre coherente tras reinicio y **sincronización Pro idempotente con el backend que ya existe**, sin inventar otro sistema. Se parte de la realidad del WIP local, no del prototipo antiguo de GitHub. Completar en el mismo lote los defectos realmente observados y pruebas focales pertinentes. Si una parte ya está implementada y validada en el árbol/entorno pertinente, **reutiliza evidencia y NO la rehagas**. Si la función no existe pero corresponde al contrato vigente, impleméntala con la solución mínima integrada a los módulos actuales; no te limites a enumerar pendientes.
+## 3. Ejecución ordenada — actuar, no enviar plan para aprobación
 
-**SEGUNDA OBLIGACIÓN DE BAJO COSTO:** comprobar que el **backend puede inicializar su configuración normal** y resolver las vistas que usa el producto **sin el overlay de QA S3**. No es otra ronda backend; un smoke de arranque/configuración y render con datos ficticios y **sin migraciones/destrucción**. Si detectas un defecto real de producto, corrige la causa mínima y prueba su impacto focalmente. **No presupongas que falta `config/view.php`: constata si se necesita en este árbol y cómo arranca realmente.**
+### P0 — Custodia + correspondencia REAL (breve y suficiente)
 
-**Cierre de esta orden:** `VERTICAL_ANDROID_OFFLINE=PASS_REAL_DEVICE|PASS_EMULATOR|PASS_WIDGET_ONLY|PARTIAL|BLOCKED`, `PRO_SYNC=PASS_REAL_HTTP_DB_QA|PASS_LOCAL_ONLY|BLOCKED_CONTRACT|NOT_RUN`, `BOOT_NORMAL=PASS|FAIL|BLOCKED`, `WIP_SAFE=PASS|FAIL`, `NEXT_OWNER=CHATGPT_DIRECTOR`. **No confundir PASS de esta vertical con aceptación H9 completa, B22, tiendas, firma ni lanzamiento.**
+- Identifica los módulos Flutter/Android y Laravel existentes, el motor de eventos, servicio de almacenamiento local, SQLCipher/Keystore, migraciones ya aplicadas, outbox/receipt y endpoints de sincronización, además de los tests focales. Verifica rutas y contratos por código, no por nombre supuesto. Lee los README/AGENTS/ADR del **WIP actual**. No catalogar los cientos de archivos uno por uno.
+- Guardar en carpeta de informes la instantánea **sin secretos** de `HEAD`, rama, `git status` y lista staged; registrar hashes PRE únicamente de archivos candidatos al cambio. **Sin crear backups de todo el repo ni copiar bases.**
+- Contrastar las capacidades reales del WIP con los cinco módulos F0 de PR #3 solo cuando haya posibilidad de duplicación; revisar diferencias **semánticas**, no importarlas de manera masiva. Si ya existe una función mejor integrada, **no editarla por parecer distinta**. El puente Python del PR #2 es opcional y solo para acotar dudas de coincidencia; no condición de bloqueo, no reauditar sus 15 tests.
+- Determinar en máximo una tabla compacta: `EXISTE/YA_VALIDADO`, `FALTA/DEFECTO_DEMOSTRADO`, `BLOQUEADO_CONTRATO`. Ejecutar las piezas faltantes, sin regresar a ChatGPT entre pasos.
 
-## 1. Hechos verificados: no perseguirse la cola
+### P1 — Arranque NORMAL de Laravel, foco quirúrgico
 
-- ZIP S3 recibido por ChatGPT: `JOR-B21F-S3-FULLSUITE-20261116-UNICO.zip`, **SHA256** `DDE6B70681908DE341D46F4992D26CB04FF0275EA371DE928342E1D0ACF96280`, 19 entradas, CRC PASS, 18/18 manifiesto de SHA y tamaños PASS. Log PHPUnit final: `OK (158 tests, 2450 assertions)`, reporte `exit 0`. B18 1/3 y B13S3 1/80 PASS aislados. `B21F_S3_BACKEND_QA=PASS_SCOPED`, **no** PASS de producción.
-- Esos tests usaron un **runner de QA externo** que añadió `view.paths` y `view.compiled`; **NO** se verificó configuración de vistas de servidor en arranque normal/producción. B13S3 histórico S2 (contador correo 0 vs 1) no se volvió a reproducir; **causa histórica desconocida**, no abrir investigación sin nuevo fallo.
-- El ZIP informa **cero cambios de producto en S3**, índice sin stage, **235 entradas WIP**, rama local `codex/jor-b08-h4-domain-20261025`, HEAD `faf5fe283191f8b5a2724b397009512a2caec1b6`. Son datos del instante S3; **verifica estado actual antes de trabajar**. B17 fue corregido en un test untracked en S2 y su SHA S3 `448841295D81ECEB82E6394076F55B62A61A9A133AADD686ABF51D04E0DACBDA`; no tocar si no cambia el contrato.
-- MariaDB 11.8.9 QA S3 y test 158/2450 **ya cumplieron**, contenedor QA propio `exited` tras S3 según logs; esquemas S2/S3 **se conservaron**. **NO repetir suite backend, IPAM, migraciones desde cero, nuevas redes, auditorías B13–B21 o carreras antiguas**. Cualquier uso nuevo de DB debe ser exclusivo, sintético, aislado, autorizado por preflight y en su propio esquema temporal; nunca usar/eliminar esquemas S2/S3 retenidos.
-- GitHub al último cotejo: `main=1ee6aae821f8cf177cc64149081ad8847f7fec2e`; PR #1 código prototipo draft `faf5fe283191f8b5a2724b397009512a2caec1b6`; PR #2 **documentación**. GitHub **NO contiene el WIP móvil/backend avanzado**. No hacer pull/reset para «sincronizar» con main. Reconciliar si el Git remoto avanzó pero no integrar por reflejo.
-- Producto vigente: **Android primero**, piloto Colombia, eventos **entrada, inicio de pausa, fin de pausa, salida**; secuencias inválidas y duplicaciones prohibidas; trabajo calculado por intervalos reales; turnos nocturnos asociados a la entrada; pausa prevista sin evento artificial; gratis local sin nube y sin publicidad bloqueante; Pro sincroniza con los contratos existentes. Kiosco borra identidad temporal tras comprobante. No convertir BDM-Menor ni 196 pruebas históricas en QA de Jornato.
+- Verificar **una sola vez** el arranque/configuración normal del servidor y un render/flujo de vistas que el producto realmente use, **sin overlay de QA B21F-S3**. Usar entorno sintético local, sin credenciales ni producción, y sin migraciones destructivas. No iniciar Docker ni MariaDB solo para comprobar vistas.
+- Si falla por configuración de vistas, corregir la causa en la configuración Laravel existente y ejecutar el smoke focal. **No crear `config/view.php` por reflejo** si no lo necesita el producto. Si no hay ruta de vistas aplicable, registrar `NOT_APPLICABLE`, no inventar UI ni PASS.
+- Reutilizar el PASS_SCOPED anterior de 158/2450: **no repetir toda la suite backend**. Si corriges auth/tenant/arranque, solo las pruebas directamente afectadas y una regresión contigua.
 
-## 2. Leyes, contratos y prohibiciones
+### P2 — Vertical Android OFFLINE duradera, primero el producto
 
-Aplica el canon PingPongLaw `sierraglobalcompany-rgb/PingPongLaw@84e961cadf482d234f4c0ee2ca60e8c7e9b388e8`: **L1 KISS/Ponytail, L2 antirruido, L3 causa raíz, L4 diseño humano, L5 evidencia atribuible, L6 anti-ping-pong**. Lee `AGENTS.md` local y contratos/ADR efectivos antes de editar. Si difieren de documentos remotos, preserva decisiones locales aprobadas y registra conflicto sin borrarlas.
+- Con código real del WIP y usuario ficticio: **entrada → inicio pausa → continuación → salida**. Estado/hora/intervalos correctos, sin pausa prevista ficticia; guardado duradero **antes de confirmar en UI**; cierre, reinicio de proceso/app y lectura idéntica del historial. Jornada nocturna local correctamente atribuida según contrato aprobado. Doble tap y reintento no crean otro evento. Un evento con hora futura o reloj retrasado **no se normaliza ni reescribe silenciosamente**.
+- Usar el cifrado/aislamiento **ya existentes** (SQLCipher y Keystore cuando apliquen). Verificar por separado escritura, lectura, crash/reinicio, migraciones existentes, corrupción simulada y aislamiento espacio-sujeto. Si falta implementación y las decisiones técnicas ya están aprobadas, completar el menor tramo integrado posible con dependencias gratuitas/permitidas. Si depende de consentimiento, claves o SDK inaccesible, **NO** sustituirlo por JSON o SQLite en claro; dejar `SQLCIPHER=NOT_VERIFIED/BLOCKED` y continuar lo seguro.
+- UI mínima coherente: estado vigente, horas reales, pausa, offline/pendiente/sincronizado, error recuperable. Comprobar accesibilidad del flujo afectado. El temporizador de PR #3 es **referencia**: solo integrarlo si mejora una UI que no lo tiene; no sobreescribir una pantalla avanzada ni crear otra. Kiosco: eliminar identidad temporal tras comprobante antes del siguiente usuario **si ya corresponde al flujo aprobado**, sin crear nueva autorización OD.
 
-**PROHIBIDO:** `git add/commit/push/pull/merge/rebase/reset/clean/stash/checkout` de otra rama, alterar índice, `force`, sobrescribir untracked, cambiar política de ejecución PowerShell, instalar hooks o 9 skills por reflejo; nuevo backend, nueva autenticación, nuevo esquema de roles, pagos/ATS público, publicación, Hostinger, dispositivos reales con datos personales, permisos nuevos, facturación, firmas, cambios legales, despliegue, CI pagado, imágenes Docker adicionales, redes y contenedores ajenos, `docker prune`, `down -v`, `migrate:fresh` en DB conservada/ajena. No reabrir el `DENY-ALL` de B19/B20.
+### P3 — Sincronización Pro existente, sin romper Gratis local
 
-**Decisiones aún humanas NO APROBADAS:** OD01 privacidad/retención; OD02 asociación/revocación empleado↔cuenta; OD03 matriz RR. HH.; OD04 acceso y recuperación web; OD05 ATS/CV/antimalware; OD06 firma/entrega documental; OD07 homologación salarial; OD08 planes/cobros/facturación. No inventar respuestas para conseguir flujos positivos. No usar datos/credenciales de producción. Se permite QA sintética por los contratos técnicos YA existentes; no confundir pruebas con autorización comercial.
+- Revisar de verdad los tipos/campos HTTP y Laravel para `requestId` (ojo con error histórico `requetId`), idempotencia, receipt/ACK, cursor, tenant/actor. **No aceptar fallbacks silenciosos** ni inventar endpoints, tokens, acceso web o asociación empleado-cuenta sin aprobación.
+- Probar una secuencia ficticia: eventos creados sin red → outbox duradera → reconexión permitida → envío al backend QA **solo si el entorno aislado es seguro** → ACK/receipt → readback autorizado → reenvío idéntico sin duplicados; errores 401/403/404 y otro tenant no deben filtrar datos. Si no es posible el servidor QA seguro, verificar el contrato/transporte local y declarar `PASS_LOCAL_ONLY` o `BLOCKED_CONTRACT`, nunca `PASS_REAL_HTTP_DB_QA`.
+- El modo **Gratis local** no debe depender de login/nube ni bloquearse por Pro. Si una etapa depende de OD01/OD02/OD04/OD08, completar las partes sin decisión pendiente y especificar exactamente el punto bloqueado; no inventar permisos.
 
-## 3. EJECUCIÓN ÚNICA DE PRINCIPIO A FIN — NO VOLVER AL DIRECTOR ENTRE PASOS
+### P4 — QA proporcional que ejecuta CODEX (el propietario NO hace pruebas)
 
-### P0. Preflight breve, custodia e identificación exacta
+- Codex ejecuta lo disponible **en el equipo local**, nunca solicita al propietario comandos, instalación manual o pruebas de teléfono. Comprobar SDK Flutter/Dart, Android/ADB y backend solo para conocer disponibilidad; no instalar herramientas o manipular dispositivos ajenos automáticamente.
+- Ejecutar **una vez después del delta**: análisis del alcance cambiado, unit/widget sobre jornada, cifrado/rehidratación y outbox; smoke focal de arranque normal; integrar en emulador o teléfono **solo si ya disponible y autorizado**. Si hubo cambios efectivos en el motor/pruebas F0, se puede ejecutar la suite Flutter correspondiente en **clon separado de PR #3**, no sobre WIP; sus **119 tests fuente y 31 checks** siguen `NOT_RUN` hasta ejecución real. No distraerse revalidando esos 119 si el WIP avanzado usa otro árbol y el delta no los afecta.
+- Si hay Android SDK funcional, APK **debug local** y hash del artefacto, sin firmar, instalar para personas reales ni publicar. Verificar solamente el flujo objeto del lote; señalar plataforma, dispositivo, build y SHA específicos. No afirmar `PASS_REAL_DEVICE` por pruebas host o emulador.
+- Al encontrar un fallo, reproducir, corregir **causa raíz** en código propietario y volver a ejecutar el test afectado y vecinos pertinentes **una sola vez**. No usar `skip/xfail`, mocks para falsificar cifrado/red real ni cambiar expected para esconder error.
+- Matriz final corta: flujo/offline/reinicio, idempotencia, cifrado, aislamiento, sync, UI y lifecycle, backend normal. Cada fila: `PASS_REAL_DEVICE`, `PASS_EMULATOR`, `PASS_HOST`, `PASS_HTTP_DB_QA`, `PARTIAL`, `NOT_RUN`, `BLOCKED`, o `FAIL` con evidencia; no certificar H9 global por este lote.
 
-1. En D: confirma ruta, rama, HEAD, `git status --porcelain=v1 -uall`, contenido del índice (`git diff --cached --name-only` o equivalente no mutador), huella de `git status` y archivos potencialmente afectados. **No exigir exactamente 235 ni staged=0 si hubo progreso nuevo**: conservar lo que encuentres, y parar únicamente ante conflicto real en archivo objetivo. Captura hashes PRE para archivos que editarás, incluida la prueba B17 y los contratos clave. No recontar todo WIP de 237 rutas sin necesidad; realiza inventario focal y checksum de estado suficiente.
-2. Identifica `flutter/`, `android/`, `lib/`, paquetes Dart, tests Flutter, motor de marcas, persistencia SQLCipher, outbox, controladores/métodos API existentes y las rutas de prueba Android ya aprobadas. **Descubrir rutas, no inventarlas**; si hay varias apps, usa sólo el módulo Jornato previsto. Verifica herramientas disponibles (`flutter --version`, `flutter doctor -v`, `adb devices -l`, `php --version`) con comandos de consulta que NO cambien instalaciones ni emuladores ajenos. Reutiliza emulator/AVD únicamente si el entorno local permite una instancia propia sin invadir otra tarea.
-3. Evita colisión con otros agentes; compara timestamps y locks de archivos objetivo. Si existe ejecución concurrente del **mismo lote**, no la dupliques. Si otros proyectos usan Docker, déjalos intactos. Explicita la razón técnica de los módulos elegidos y no produzcas un plan maestro alterno.
+## 4. Entrega única obligatoria — sin ping-pong
 
-### P1. Smoke mínimo del backend en bootstrap NORMAL (sin overlay S3)
+Crear **un solo ZIP** en `D:\codex\_REPORTES\Jornato\JOR-H9-M1-REACTIVADO-20261119\delivery\JOR-H9-M1-REACTIVADO-20261119-UNICO.zip` con:
 
-4. Con entorno **local de pruebas sintético, sin conexión a producción ni DB externa**, inspecciona `server/bootstrap/app.php`, config de vistas actual, service providers, plantillas existentes y rutas reales de render. Verifica que el arranque y **un render Blade permitido por el producto** pueden funcionar con configuración normal (o por defecto del framework) y directorio de compilación apropiado, sin inyectar el overlay S3. **NO iniciar migraciones ni conectar Docker** para un simple smoke de vistas. No simules un PASS únicamente creando un directorio vacío; verifica el proceso que realmente resolverá configuración de vistas.
-5. Si hay fallo demostrado por configuración ausente, corrige dentro del patrón estándar **mínimo ya usado por Laravel** y prueba un render focal; conserva ubicación/contratos sin nueva capa. Si el backend no usa vistas en el flujo real, anota límite y no crees archivos de configuración decorativos. No introducir credenciales. Si editas configuración backend, ejecuta pruebas de impacto directo de ese cambio; **solo** plantea la suite completa una vez si el cambio material y su contrato la requieren, con DB QA totalmente confinada y sin tocar S2/S3. `BOOT_NORMAL` es independiente de `BACKEND_QA_S3=PASS`.
+1. `FINAL_REPORT.md` (máximo 2 páginas, componentes **realmente** completados/pendientes, raíz de defectos, justificación de nuevas dependencias si las hubo, estado REAL/DEMO/BLOCKED).
+2. `RESULTS.csv` (gate, alcance, tipo de prueba, comando, exit, SHA y referencia a log, distinguiendo `PASS_SCOPED` de `NOT_RUN`).
+3. `CHANGES.patch` o archivos completos **solo de los archivos que Codex cambió**; incluir rutas untracked propias necesarias, instrucciones de aplicación **no destructiva** y hashes PRE/POST, sin arrastrar el WIP ajeno.
+4. `WIP_PRE_POST.csv` de estado Git/índice/hash de archivos tocados; `BLOCKERS.md` solo si hay bloqueos materiales.
+5. Logs de QA focal y metadatos de APK debug (si realmente se generó); `MANIFEST_SHA256.csv` para cada miembro, con bytes y SHA256. Comprobar integridad CRC y manifiesto, calcular SHA256 del ZIP e informarlo.
 
-### P2. Cerrar una jornada local OFFLINE de extremo a extremo (primero funcionalidad real)
+**NUNCA incluir:** `.env`, passwords, tokens, Keystore/SQLCipher keys, bases, credenciales, fotos/biometría, nómina/CV/PII de empleados, dumps, datos de otras empresas, artefactos de otros proyectos. No adjuntar el WIP completo. Si no hay código cambiado porque todo existe, entregar evidencia real del bloqueo/foco, no fingir una implementación.
 
-6. Reutiliza motor de eventos/persistencia existentes. Implementa o corrige **sólo lo que falte** para que un actor sintético autorizado pueda hacer: **entrada → pausa → continuación → salida**, incluyendo recálculo de intervalos, cierre, lectura del histórico al reiniciar proceso/app y protección contra doble tap/reintento. No sustituir persistencia con una lista en memoria y declararla offline real.
-7. **No sacrificar cifrado/aislamiento:** si ya hay SQLCipher/Keystore, verificar escritura/lectura, reinicio y aislamiento por espacio/empresa/actor; si faltan piezas esenciales de cifrado, implementar la vía existente y compatible con licencias gratuitas, sin almacenar datos personales reales en claro ni meter un paquete nuevo sólo por estética. Si cifrado real no puede probarse por limitación de SDK/dispositivo, marcar `STORAGE_ENCRYPTION=NOT_VERIFIED` y `VERTICAL_ANDROID_OFFLINE≠PASS_REAL_DEVICE`.
-8. Respetar reglas de negocio existentes: turnos nocturnos, pausas reales, timezone y reloj; no «normalizar» discrepancias históricas para obtener PASS. Una pausa prevista no crea una marca. Si GPS está activo según política, exigir lectura y restricciones de precisión/edad/radio existentes; si no está activo, NO pedir GPS. Selfie, NFC, QR o reconocimiento 1:1 no se inventan como dependencias nuevas. **En kiosco borrar identificación temporal después de comprobante y antes del siguiente usuario**.
-9. La UI debe mostrar claramente estado actual, hora registrada, offline/pendiente/sincronizado, error recuperable y navegación accesible. No rediseño masivo ni botones ficticios. No añadir publicidad obstructiva. Pruebas widget focales para los estados realmente tocados.
+**No staged, no commit, no push, no merge, no deploy**. No editar el checkpoint remoto ni generar segundo prompt. Si hay impedimento material, entregar el ZIP con lo avanzado independiente y una sola causa bloqueante priorizada. El siguiente turno es ChatGPT Director; no delegar automáticamente otro lote.
 
-### P3. Sincronización PRO con backend existente, sin romper GRATIS LOCAL
+### Respuesta final obligatoria de Codex
 
-10. Verifica primero las rutas/tipos/campos reales Flutter ↔ Laravel y el contrato aprobado de outbox, **`requestId` exacto**, idempotencia, receipts y cursor; contrasta el fallo histórico escrito como `requetId` y **no lo reetiquetes como PASS ni aceptes silent fallback**. **Gratis local nunca requiere nube**. Pro sólo sincroniza cuando ya hay autorización sintética válida por contrato técnico; no crear login comercial OD02/OD04, no abrir R.R. H.H. por fixtures.
-11. Con los módulos ya existentes, ejecutar la cadena verificable con datos sintéticos: varios eventos locales offline → outbox duradero → reconexión → API/DB QA aislada cuando sea seguro → receipt/evento idempotente → readback autorizado del mismo actor/empresa; reenviar el mismo evento no debe duplicar jornada/receipt. Verificar rechazo cross-tenant y actor diferente **reutilizando gates backend S2/S3 si el contrato servidor no cambió**, sin repetir su suite global. Registrar bytes/crudos sanitizados del `requestId`, `idempotency_key` o su equivalente real; no fijar nombres que no existan sin mapeo documentado.
-12. Si la identidad empleado↔cuenta o un endpoint realmente requiere OD02/OD04 no aprobado, marcar `BLOCKED_CONTRACT` **solo en ese tramo**; continuar completando el offline local y las pruebas de transporte que no abran permisos. No crear segundo servicio de sync/otra tabla/cola/canal por ansiedad. Si no hay acceso seguro a MariaDB QA o Docker está ocupado, hacer pruebas Flutter/host y evidencia de integración limitada `PASS_LOCAL_ONLY`, no inventar `PASS_REAL_HTTP_DB_QA`.
-
-### P4. Pruebas y aceptación proporcionadas — no suites históricas rituales
-
-13. Ejecuta una vez por delta real: `flutter analyze` del alcance tocado (o equivalente), tests unit/widget específicos de jornada/persistencia/restart/outbox, e integración con emulador/teléfono sintético **si está disponible y permitido**. Si el SDK falta, no afirmes QA de dispositivo ni instales automáticamente toolchains gigantes; documenta bloqueo, pero entrega código/progreso verificable donde haya herramientas. Compilar APK **debug local** cuando el entorno lo permita, verificar nombre, hash, `minSdk` aprobado (>=24) y arranque; no firma release ni publicación. Un log de Flutter tests host no sustituye teléfono.
-14. Matriz por puerta: (a) secuencias válidas/invalidas; (b) idempotencia de doble toque; (c) datos tras reinicio; (d) aislamiento y cifrado local; (e) reconexión/pro sync y raw `requestId`; (f) 401/403/404 legítimos sin permisos nuevos; (g) kiosco limpia actor; (h) UI y accesibilidad focal; (i) backend bootstrap normal. Para cada una registra `PASS_REAL_DEVICE`, `PASS_EMULATOR`, `PASS_HOST`, `PASS_HTTP_DB`, `PARTIAL`, `NOT_RUN`, `BLOCKED_CONTRACT` y SHA/build. **No hacer 110 escenarios de H9 sin producto/build/contrato aprobado**; no repetir 158 tests del backend ni 24 focales solo por costumbre.
-15. Si un test falla, identifica causa raíz, corrige mínima función y su test/caller; repetir focal y vecinos afectados UNA vez tras cambio. No parche de estado, `skip`, xfail ni modificar el esperado para esconder un fallo. Una corrección en backend que toque auth/tenant exige regresión focal apropiada, no permiso nuevo ni reinicio total de QA.
-
-### P5. Cierre documental útil, un ZIP y devolver control
-
-16. Captura PRE/POST de `git status`, índice y hashes de **archivos tocados**; no redactes WIP ajeno. Construye un **ZIP único** `JOR-H9-M1-ANDROID-OFFLINE-SYNC-20261116-UNICO.zip` con: `FINAL_REPORT.md` en 1–2 páginas; `RESULTS.csv` (caso/contrato/PASS-LIMITADO/NOT_RUN/sha); `CHANGES.patch` o archivos exactos tocados **solo si hubo cambios** (incluye rutas untracked necesarias y instrucciones de aplicación no destructiva); `WIP_PRE_POST.csv`; logs/salida de comandos y pruebas; metadata de APK debug y SHA si existe; 1–3 capturas sanitizadas del flujo real si están permitidas; `BLOCKERS.md` sólo si hay bloqueos materiales; `MANIFEST_SHA256.csv` de cada miembro restante con bytes+SHA; `ZIP_SHA256.txt` fuera del ZIP sólo si hace falta informar checksum. Validar CRC, hashes, cantidad y rutas; **no ZIPs paralelos** ni reporte disperso.
-17. No poner en ZIP: secretos, tokens reales, `.env`, datos de DB, claves SQLCipher, firmas, cookies, clientes reales, fotos personales, CV ni contenido de otros proyectos. Solo datos ficticios y logs sanitizados. Si el ZIP contiene un archivo de producto para actualizar, conservar su contexto WIP y limitarlo al diff de causa raíz; no enviar todo el repositorio.
-18. Terminal de salida **sin consulta adicional al director**:
-
-```text
-TASK=JOR-H9-M1-ANDROID-OFFLINE-SYNC-20261116
+~~~text
+TASK=JOR-H9-M1-REACTIVADO-ANDROID-OFFLINE-PRO-BOOT-20261119
 RESULT=PASS_SCOPED|PARTIAL|BLOCKED
-BOOT_NORMAL=PASS|FAIL|BLOCKED
-ANDROID_OFFLINE=PASS_REAL_DEVICE|PASS_EMULATOR|PASS_WIDGET_ONLY|PARTIAL|BLOCKED
-SQLCIPHER_PERSISTENCE=PASS|PARTIAL|NOT_VERIFIED|BLOCKED
-PRO_SYNC=PASS_REAL_HTTP_DB_QA|PASS_LOCAL_ONLY|BLOCKED_CONTRACT|NOT_RUN
+SOURCE_WIP_HEAD=<HEAD real antes y después>
+SOURCE_WIP_BRANCH=<rama real>
 WIP_PRESERVED=YES|NO
-FILES_CHANGED=<cantidad y rutas, o NONE>
-BACKEND_S3_PASS_REUSED=YES
+FILES_CHANGED=<cantidad y rutas exactas, o NONE>
+BOOT_NORMAL=PASS|FAIL|NOT_APPLICABLE|BLOCKED
+ANDROID_OFFLINE=PASS_REAL_DEVICE|PASS_EMULATOR|PASS_HOST_ONLY|PARTIAL|BLOCKED
+SQLCIPHER=PASS_VERIFIED|PARTIAL|NOT_VERIFIED|BLOCKED
+PRO_SYNC=PASS_HTTP_DB_QA|PASS_LOCAL_ONLY|BLOCKED_CONTRACT|NOT_RUN
+PR3_FLUTTER_119=PASS|FAIL|NOT_RUN
+PR3_SMOKE_31=PASS|FAIL|NOT_RUN
+BACKEND_B21F_S3_158_REUSED=YES
 H9_GLOBAL=NO_GO
-RELEASE=NO
-ZIP_PATH=<ruta real del único ZIP>
-ZIP_SHA256=<hash real comprobado>
+B22=NOT_AUTHORIZED
+RELEASE=NO_GO
+ZIP_PATH=<ruta absoluta comprobada del único ZIP>
+ZIP_SHA256=<SHA-256 real comprobado>
 NEXT_OWNER=CHATGPT_DIRECTOR
-```
+~~~
 
-**STOP SOLO POR RIESGO REAL:** si falta autorización/SDK/dispositivo/contrato de una subparte, terminar lo independiente y marcar la subparte bloqueada, sin fabricar PASS ni lanzar segundo agente. **No cambiar de producto ni abrir nuevas fases. La meta es avanzar la aplicación Android, no seguir escribiendo auditorías.**
+**Criterio de cierre:** trabajo real sobre el WIP actual, trazabilidad de cambios y QA que Codex mismo ejecuta; no auditar de nuevo lo resuelto ni delegar pruebas al propietario. El macrobloque termina con entrega verificable aunque algunos gates queden `BLOCKED`.
 
-# 🚨 QUIÉN SIGUE: CODEX LUNA — MACROBLOQUE H9-M1. DESPUÉS DEL ZIP: CHATGPT DIRECTOR. 🚨
+# 🚨 QUIÉN SIGUE AHORA: CODEX LUNA. DESPUÉS DEL ZIP: CHATGPT DIRECTOR. 🚨

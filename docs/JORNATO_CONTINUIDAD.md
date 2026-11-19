@@ -1,9 +1,13 @@
 # JORNATO — CONTINUIDAD CANÓNICA DE DIRECCIÓN (DOCUMENTAL)
-## ESTADO VIGENTE — PR #3 CON RELOJ ACTUALIZABLE Y QA DIFERIDA A CODEX (2026-11-19)
+## ESTADO VIGENTE — CODEX REACTIVADO Y ORDEN H9-M1 ÚNICA (2026-11-19)
 
-**HEAD PR #3:** `104469b119752f395cf9881e732d582feab9db4e` (Draft, basado en PR #1). Cambio focal de cinco archivos: `lib/main.dart` actualiza horas/pausas cada 30 s **solo** si trabaja, está en pausa o existe marca futura; cancela temporizador al terminar jornada, en segundo plano y en `dispose`; actualiza al reanudar la aplicación. Sin conteos por ticks, se recalcula desde `DateTime.now()`. README y QA actualizados, `docs/NEXT-CODEX.md` y guía dejan la **QA diferida para Codex**. **El propietario expresó que NO puede hacer pruebas locales: nunca pedirle instalar Flutter, correr PowerShell, emuladores o tests.** No se escribieron/ejecutaron pruebas nuevas. **119 tests Flutter fuente = NOT_RUN, 31 checks Dart = NOT_RUN; temporizador/lifecycle = NOT_RUN**.
+**EL PROPIETARIO CONFIRMÓ QUE YA TIENE CODEX.** Orden vigente: [docs/CODEX_LOTE_ACTUAL.md](CODEX_LOTE_ACTUAL.md), TASK=JOR-H9-M1-REACTIVADO-ANDROID-OFFLINE-PRO-BOOT-20261119. Responsable ahora CODEX_LUNA, después de un único ZIP CHATGPT_DIRECTOR. El Markdown entregado al propietario coincide con la orden de este PR #2. **NO** pedir pruebas al propietario ni reactivar Actions; no generar otra auditoría.
 
-**CONDICIONES:** el WIP avanzado Laravel/Android/SQLCipher permanece en `D:\codex\Jornato` y no está disponible en GitHub. El puente PR #2 mantiene 15/15 pruebas Python sintéticas históricas, pero no se ejecutó en WIP real. Nunca mezclar F0 a ciegas, no duplicar módulos con WIP, no merge ni despliegue. Cuando vuelva Codex, se autorice y exista entorno, ejecutar **una sola QA focal** del SHA exacto, validar reloj/pausa/reanudación, smoke y suite existente, sin repetir suite PHP histórica ni Actions pagos. `NEXT_OWNER=CHATGPT_DIRECTOR; QA_EXECUTOR_FUTURO=CODEX; SDK_FLUTTER=NOT_AVAILABLE_HERE; H9=NO_GO; B22=NOT_AUTHORIZED; RELEASE=NO_GO`.
+**GitHub remoto al último cotejo:** PR #3 Draft, basado en PR #1, HEAD `104469b119752f395cf9881e732d582feab9db4e`. F0 tiene 119 tests Flutter fuente y 31 checks Dart fuente, **todos NOT_RUN**. La UI F0 recarga intervalos cada 30 s durante jornada/pausa/conflicto futuro y suspende el timer en segundo plano/cierre. No mezclar a ciegas PR3 con el WIP. PR #2 puente Python 15/15 PASS sintético histórico, nunca ejecutado contra WIP real.
+
+**META ÚNICA CODEX:** custodiar `D:\codex\Jornato`, verificar bootstrap normal Laravel sin overlay S3, completar vertical real Android offline + cifrado/rehidratación + sync Pro existente solo dentro de contratos aprobados; QA focal ejecutada por Codex. Reutilizar B21F-S3=PASS_SCOPED 158 tests/2450 assertions sin repetir suite histórica. No stage/commit/push/merge/deploy, no datos reales ni alteración de otro proyecto. Si faltan SDK/dispositivo/OD, completar lo independiente y marcar tramo bloqueado. H9=NO_GO; B22=NOT_AUTHORIZED; RELEASE=NO_GO hasta nueva evidencia.
+
+**QA_EXECUTOR=CODEX_LUNA; NEXT_OWNER_AFTER_ZIP=CHATGPT_DIRECTOR.**
 
 ---
 
