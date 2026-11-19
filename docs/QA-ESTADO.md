@@ -15,6 +15,37 @@ Fecha: 2026-10-24. Fuente de referencia v4: 196 pruebas reportadas por la transf
 - [ ] Aplicar canon PingPongLaw L1–L6 desde fuente completa validada; sólo se conoce su hash de referencia.
 - [ ] Validación legal de privacidad y tiendas/monetización antes de publicación.
 
+## Sexto bloque remoto — coherencia temporal de UI y prueba widget (2026-11-19)
+
+- **Defecto de consistencia**: `lib/main.dart` leía
+  `_ledger.status` para activar botones mientras mostraba
+  `_ledger.snapshot(at: now)` para horas. El resultado podía
+  discrepar cuando el evento más reciente tiene fecha posterior
+  al corte evaluado. Ahora los controles usan `state.status`,
+  calculado para el **mismo `now`**.
+- **Regresión UI**: nuevo `test/personal_day_screen_test.dart`
+  con **8 `testWidgets` escritos**: aviso prototipo, inicios,
+  secuencia legal entrada/pausa/reinicio/salida, salida desde pausa,
+  varios turnos, actualizar sin nueva marca, evento futuro contra corte actual y tema Material 3.
+  El test no solicita sensores ni usa empleados reales.
+- La revisión del constructor Flutter oficial detectó que
+  `surface` es argumento **VÁLIDO de `ColorScheme.fromSeed`**,
+  y NO es un argumento erróneo de `ThemeData`. Se preserva.
+- **Acumulado en PR #3**: **119 declaraciones de tests Flutter
+  escritas (111+8), NO_RUN** y 31 comprobaciones separadas del
+  smoke Dart, NO_RUN. Ni Dart/Flutter SDK ni GitHub Actions
+  disponibles en la ejecución. Los tests widget NO pasan solo
+  por estar escritos; certificar requiere `flutter analyze`
+  y `flutter test` en un clon separado.
+- Zero dependencias nuevas. No modificar ni reemplazar el WIP
+  avanzado `D:\\codex\\Jornato`. PR #3 Draft solo F0,
+  sin datos cifrados, dispositivo, backend o permisos reales;
+  `H9=NO_GO`, `B22=NOT_AUTHORIZED`, `RELEASE=NO`.
+- La mejora es focal en una sola capa propietaria, sin nuevos
+  managers/providers/estados duplicados (KISS/Ponytail).
+
+---
+
 ## Gate estructural enfocado — sin Codex ni Actions (2026-11-18)
 
 **Análisis realizado sobre el árbol GitHub del PR #3 antes de este

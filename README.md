@@ -11,12 +11,33 @@
 | Contrato de producto y roadmap | Documentado |
 | Motor de entradas, pausas, continuaciones y salidas | Código inicial no ejecutado en SDK |
 | UI personal | En memoria; muestra turnos, acumulados y resúmenes diarios |
-| Pruebas Dart | 111 casos escritos (8 originales + 103 nuevos), sin ejecutar |
+| Pruebas Flutter/Dart | 119 casos escritos (111 previos + 8 pruebas UI nuevas), sin ejecutar |
 | GPS: validación geométrica local | Código puro con 25 pruebas fuente; sin sensor, permisos ni evidencias reales | 
 | Android APK / QA físico | Pendiente |
 | Archivo determinista JSON (sin cifrar) | Restaurar y conciliar por prefijo append-only; NO respaldo ni sincronización |\n| Persistencia cifrada / backups | Pendiente |
 | Empresa, kiosco, QR, GPS, selfie | Pendiente |
 | Cloud, entitlements, iOS | Fuera del lote inicial |
+
+## Bloque UI F0 — un solo estado y 7 tests de interacción (19 nov 2026)
+
+Se corrigió `PersonalDayScreen` para utilizar **`snapshot.status` al
+mismo instante** con que calcula horas y pausas, en vez de leer
+independientemente el estado del último evento del libro. Eso evita
+que los botones muestren un estado incompatible con el resumen cuando
+el reloj o el corte temporal difieren.
+
+`test/personal_day_screen_test.dart` contiene **8 pruebas Flutter
+nuevas**: aviso de memoria volátil, botones iniciales, inicio, pausa/
+continuación/salida, salida desde pausa, varios turnos, recálculo sin
+nueva marcación corte futuro coherente y esquema de color Material 3. Total: **119 tests
+fuente escritos, NOT_RUN**. El smoke Dart separado conserva 31
+comprobaciones `NOT_RUN`; no se añadió plugin ni persistencia.
+
+La API oficial confirma que `surface:` dentro de
+`ColorScheme.fromSeed(...)` **es válida**, y por eso **no se modificó
+la paleta**. No declarar defecto de compilación allí. Sin SDK Flutter
+en este entorno, `flutter analyze/test/build`, Android real, H9
+y release siguen bloqueados; la UI es una demostración en memoria.
 
 ## Corrección focal del QA sin CI — 18 nov 2026
 

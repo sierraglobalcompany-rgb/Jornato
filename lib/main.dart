@@ -25,17 +25,27 @@ class JornatoApp extends StatelessWidget {
 }
 
 class PersonalDayScreen extends StatefulWidget {
-  const PersonalDayScreen({super.key});
+  const PersonalDayScreen({super.key, this.initialLedger});
+
+  // Sólo permite probar cortes horarios sintéticos en el prototipo F0.
+  // No sustituye identidad, permisos ni almacenamiento cifrado.
+  final AttendanceLedger? initialLedger;
 
   @override
   State<PersonalDayScreen> createState() => _PersonalDayScreenState();
 }
 
 class _PersonalDayScreenState extends State<PersonalDayScreen> {
-  final AttendanceLedger _ledger = AttendanceLedger(
-    workspaceId: 'personal-local-demo',
-    subjectId: 'personal-local-demo',
-  );
+  late final AttendanceLedger _ledger;
+
+  @override
+  void initState() {
+    super.initState();
+    _ledger = widget.initialLedger ?? AttendanceLedger(
+      workspaceId: 'personal-local-demo',
+      subjectId: 'personal-local-demo',
+    );
+  }
 
   String? _message;
 
@@ -80,7 +90,8 @@ class _PersonalDayScreenState extends State<PersonalDayScreen> {
       localTime: (instant) => instant.toLocal(),
     );
     final state = _ledger.snapshot(at: now);
-    final status = _ledger.status;
+    // El estado de botones y el tiempo mostrado deben compartir el corte.
+    final status = state.status;
     final canStart = status == DayStatus.idle || status == DayStatus.finished;
     final canPause = status == DayStatus.working;
     final canResume = status == DayStatus.paused;
