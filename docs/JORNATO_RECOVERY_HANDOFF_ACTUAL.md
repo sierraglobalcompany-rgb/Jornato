@@ -1,5 +1,7 @@
 # RECOVERY HANDOFF — JORNATO · C2 ANDROID FÍSICO / SDK LOG PRIVACY · 2026-11-20
 
+> **ACTUALIZACIÓN CANÓNICA POST-V5 · 20-NOV-2026:** C2 V5 finalizó con `BLOCKED_VM_SERVICE`; APK QA **ya instalado**, sin URI desde PID-only, forward NI driver. ZIP verificado SHA256 `711116067DDBF73E7CE4AD6A102D58E14AD5372D79A981F48978C54A76B35692` (8 miembros/7 manifiesto). V3/V4/V5 quedan **históricas**. **NEXT ÚNICO: [N1 CUSTODIA WIP + KIOSCO OFFLINE](CODEX_LOTE_ACTUAL.md)**; no tocar teléfono. [Acta](JORNATO_C2_V5_BLOQUEO_Y_NEXT_N1_20261120.md). Lanzamiento NO_GO.
+
 > **ACTUALIZACIÓN PRIORITARIA 20-NOV-2026:** La única instrucción ejecutable es **V5** en [CODEX_LOTE_ACTUAL.md](CODEX_LOTE_ACTUAL.md); V4 local y V3 anterior quedan superadas. V5 añade tres controles de privacidad en host y matriz metadata WIP. [Dictamen 10+10 nuevo](JORNATO_AUDITORIA_C2_V5_10V_10J_DELTA_20261120.md). **No repetir instalación si ya hay ZIP físico posterior.** El resto de este Handoff conserva el historial V3, NO es orden independiente.
 
 > **Recovery Universal V6 EJECUTADO en modo `REANUDAR + ACTUALIZAR_POR_DELTA`.** Handoff autónomo para un chat nuevo, NO respaldo del disco Windows, NO autorización de producción, borrado, merge ni despliegue. **Fecha de corte:** 2026-11-20 UTC / 2026-11-19 en Colombia. Responsable de dirección: ChatGPT. Ejecutor local de la próxima orden: Codex Luna.
@@ -70,7 +72,7 @@
 1. Releer **solo** este Handoff + `docs/CODEX_LOTE_ACTUAL.md` + ZIP si hay discrepancia material. GitHub PR #2 es **documental**, main/PR1/PR3 no contienen el árbol avanzado. No reauditar PingPongLaw/H9-M1/F1/C2 ni repetir suites históricas.
 2. Codex hace preflight de paquetes ausentes, APK y runner directo, logs PID-only y driver Dart. Si seguro, una instalación QA no reemplazable, una conexión/resultado nativo, ZIP único. Si falla, registra exactamente qué falta; no intenta cambiar SDK ni instalar con -r.
 3. Después del ZIP, ChatGPT Director evalúa CIPHER_ENGINE, KEYSTORE_EFFECTIVE, IDEMPOTENCY_NATIVE, CORRUPTION_FAIL_CLOSED y reinicio; define corrección causal si hay FAIL, y **luego** requisitos independientes de H9: QA dispositivo, tenant, Pro, web, accesibilidad, UAT, decisiones OD y L5 independiente. No adelantar B22 sin GO por cada puerta.
-4. `NEXT=CODEX_LUNA_JOR_H9_C2_PHYSICAL_DART_V5_20261120`; `OWNER_AFTER_ZIP=CHATGPT_DIRECTOR`; `FIN_DE_GATE=RESULTADOS_NATIVOS_ATRIBUIBLES_A_APK_O_BLOQUEO_TECNICO_ESPECIFICO`; `RELEASE=NO_GO`.
+4. `NEXT=CODEX_LUNA_JOR_N1_WIP_CUSTODIA_KIOSCO_OFFLINE_20261120`; `OWNER_AFTER_ZIP=CHATGPT_DIRECTOR`; `FIN_DE_GATE=RESULTADOS_NATIVOS_ATRIBUIBLES_A_APK_O_BLOQUEO_TECNICO_ESPECIFICO`; `RELEASE=NO_GO`.
 
 ## H. Adjuntos y diez controles Recovery V6
 
