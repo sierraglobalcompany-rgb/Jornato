@@ -1,27 +1,27 @@
-# JORNATO — CONTINUIDAD CANÓNICA · 20-NOV-2026 · V5 ÚNICA ACTIVA
+# JORNATO — CONTINUIDAD CANÓNICA · 20-NOV-2026 · C2 V5 CERRADO, N1 ACTIVO
 
-**Prioridad absoluta:** [Orden única de Codex](CODEX_LOTE_ACTUAL.md) contiene C2 V5 y TASK JOR-H9-C2-PHYSICAL-DART-V5-20261120. Sustituye V3 y V4. [Auditoría del delta, 10 verdugo y 10 juez](JORNATO_AUDITORIA_C2_V5_10V_10J_DELTA_20261120.md) justifica cambios sin repetir auditorías cerradas. Si existe un ZIP físico posterior de V3, V4 o V5, no instalar ni ejecutar nuevamente: revisar el ZIP primero.
+**Siguiente orden ÚNICA:** [CODEX_LOTE_ACTUAL.md](CODEX_LOTE_ACTUAL.md), TASK `JOR-N1-WIP-CUSTODIA-KIOSCO-OFFLINE-20261120`. Responsable **CODEX LUNA**, después del ZIP único **CHATGPT DIRECTOR**. **NO REEJECUTAR V5**. [Dictamen y evidencia V5](JORNATO_C2_V5_BLOQUEO_Y_NEXT_N1_20261120.md).
 
-**GitHub PR #2 es autoridad documental, NO fuente integrada del producto.** Repo público: main 1ee6aae821f8cf177cc64149081ad8847f7fec2e; PR1 Draft faf5fe283191f8b5a2724b397009512a2caec1b6; PR3 Draft apilado sobre PR1 104469b119752f395cf9881e732d582feab9db4e. SHA observados antes de esta actualización; verificar otra vez cuando cambien. WIP avanzado Windows D:\codex\Jornato NO accesible directamente por ChatGPT: 234 entradas status, staged 0, reportados históricamente por Codex. No hacer reset, clean, cherry-pick, merge ni publicar código privado con secretos en GitHub público.
+## Resultado verificado de C2 V5
 
-## Resultado histórico que se reutiliza
+- ZIP recibido `JOR-H9-C2-PHYSICAL-DART-V5-20261120-UNICO.zip`, SHA-256 **711116067DDBF73E7CE4AD6A102D58E14AD5372D79A981F48978C54A76B35692**, 7090 bytes, 8 miembros CRC PASS, 7/7 manifiesto SHA + tamaño PASS (verificación directa de archivo).
+- Codex informa: un solo APK QA nuevo **instalado** `com.sierraglobalcompany.jornato.b14qa`, Activity iniciada una sola vez, PID único, `adb shell logcat --pid=PID` no produjo URI del VM Service. `RESULT=BLOCKED_VM_SERVICE`, `INSTALL=PASS_NEW_PACKAGE`, `HOST_PRIVACY=PASS`, **NO forward**, **NO driver Dart**, cuatro gates SQLCipher, Keystore, idempotencia y corrupción **NOT_RUN**. El resultado **no permite inferir causa del VM Service**.
+- APK QA (reportado): SHA-256 `BEEA46F75B08CFA440A980BCEE4CC12E2A6B4C7B37A9457B16240C5427157593`. El APK no está en el ZIP. **No reemplazar, desinstalar, reabrir ni interactuar con el teléfono** sin nueva decisión y permiso apropiado.
+- WIP informado: `D:\codex\Jornato`, rama `codex/jor-b08-h4-domain-20261025`, HEAD `faf5fe283191f8b5a2724b397009512a2caec1b6`, 234 status: 223 untracked, 11 modified, 0 staged; hashes focales estables. **WIP_PRESERVED=PARTIAL_EVIDENCE**, NO custodia total ni respaldo fuera del disco.
+- Reusar pruebas conocidas **solo en su alcance**: B21F-S3 158/2450 PASS_SCOPED, H9-M1 75 host PASS, F1 widget PASS_FOCAL. H9_GLOBAL NO_GO; RESTART_READBACK BLOCKED_HARNESS; tenant y Pro HTTP/DB BLOCKED_CONTRACT; B22 NOT_AUTHORIZED; RELEASE NO_GO.
 
-Último ZIP físico reportado JOR-H9-C2-PHYSICAL-RUNNER-SAFE-20261119-UNICO.zip, SHA256 6EED1CA6A13558303D20435A744F95F16B7ED5A3135E4639F18DA6A845F5F4B5, terminó BLOCKED_RUNNER_POLICY porque Flutter Tool leía logcat global; ninguna prueba Android C2 se ejecutó. APK QA hash reportado BEEA46F75B08CFA440A980BCEE4CC12E2A6B4C7B37A9457B16240C5427157593, 112605171 bytes: binario no adjunto aquí.
+## Lo que realmente hace N1 (nuevo bloque PRODUCTIVO, no otro runner)
 
-Cuatro oráculos Android SQLCipher/Keystore/idempotencia/corrupción NOT_RUN. RESTART_READBACK BLOCKED_HARNESS; tenant Android y Pro HTTP/DB BLOCKED_CONTRACT. Backend B21F-S3 158 tests/2450 assertions PASS_SCOPED; H9-M1 75 PASS host; F1 widget PASS_FOCAL según informes: NO repetir suites si no cambia código o contrato. H9_GLOBAL NO_GO, B22 NOT_AUTHORIZED, RELEASE NO_GO. OD01–OD08 pendientes; no inventar roles QA, cuentas, permisos o cobros.
+1. Custodia recuperable de fuentes WIP privada y verificación de restauración de muestra **fuera del WIP**; no subir código/secretos a GitHub público.
+2. Reconciliar focalmente los cinco módulos del dominio y UI de PR3 F0 (HEAD observado `104469b119752f395cf9881e732d582feab9db4e`). El puente en PR2 usa referencia vieja `78b32284...`: **NO** considerar su comparación actualizada.
+3. Completar **un único defecto funcional comprobado** en kiosco Gratis Local offline o reutilizar evidencia scoped si ya está completo. No reabrir suites históricas ni inventar cambios.
+4. Diagnóstico **estático local** de condiciones para VM Service y una futura vía segura, sin leer celular, logs globales ni puertos.
+5. Entregar un ZIP único de informes, hashes focales y evidencia sanitizada; backup de fuentes permanece privado local.
 
-## Macrobloque vigente: qué hace Codex (solo si no hay ejecución en vuelo)
+## Gobierno y lanzamiento
 
-Preflight local de SDK Flutter y APK real, uso del driver Dart oficial con tres barreras host: filesystem en RAM, logger inerte antes de conectar, callback de respuesta nulo para evitar archivo JSON. Comprobar compatibilidad y package config offline, sin instalar dependencias; filtro ADB logcat PID aplicado en dispositivo, un teléfono físico, una sola instalación QA de paquete ausente, oráculos físicos atribuidos o bloqueo específico, matriz mínima read-only del WIP y UN ZIP con SHA/CRC y logs sanitizados.
+Leyes PingPongLaw L1 KISS/Ponytail, L2 antirruido, L3 causa raíz, L4 diseño humano, L5 evidencia independiente, L6 antipingpong. No cambiar contratos de `requestId`, `requetId` histórico ni `SERVER_STORED`/ `RECOGNIZED`. OD01–OD08 sin aprobación verificable. Pro, portal, RR. HH., UAT y QA físico continúan pendientes. No merge/deploy, no publicar WIP, no abrir B22 hasta integración, criterios y GO humano.
 
-NO Flutter drive/test/run sobre teléfono, ni logcat global, redes Pro, reinstalación, cambios de WIP, push/merge, ni acceso a paquetes ajenos.
+**GitHub: PR2 es SOLO documental.** Antes de N1, remoto observado `main=1ee6aae821f8cf177cc64149081ad8847f7fec2e`, PR1 Draft `faf5fe283191f8b5a2724b397009512a2caec1b6`, PR3 Draft `104469b119752f395cf9881e732d582feab9db4e`. Refs cambiarán al actualizar documentos; no fijar SHA de PR2 como condición eterna. [Handoff histórico](JORNATO_RECOVERY_HANDOFF_ACTUAL.md) preserva decisiones anteriores pero V3/V4/V5 **no son órdenes ejecutables**.
 
-**Nueva alerta útil para cierre Git:** script tools/JORNATO_CONCILIAR_WIP_GITHUB_SIN_CODEX.py y su guía en PR2 fijan un commit PR3 antiguo 78b32284..., diferente a HEAD observado 104469b.... No ejecutar su informe como reconciliación del PR3 actual hasta actualizar y verificar la referencia, en un lote posterior.
-
-## Puertas después del ZIP (no abrirlas todas como auditorías)
-
-P1 Dirección certifica C2 por evidencia (o causa concreta). P2 durabilidad real en otro proceso y kiosco offline. P3 custodia recuperable WIP, análisis de secretos y reconciliación PR3 HEAD vigente antes de integrar/push autorizado. P4 Pro, portal, empleado, RRHH y OD dependientes con fixtures, tenant A/B, outbox/PAT E2E. P5 QA independiente L4/L5, candidato firmado, UAT y aprobación explícita para B22 y despliegue.
-
-Leyes PingPongLaw: L1 KISS/Ponytail, L2 antirruido, L3 causa raíz, L4 diseño humano, L5 evidencia independiente, L6 antipingpong. [Handoff histórico](JORNATO_RECOVERY_HANDOFF_ACTUAL.md) conserva contexto previo: TODAS sus referencias V3 se entienden reemplazadas por esta autoridad V5.
-
-**NEXT_OWNER=CODEX_LUNA_IF_NO_NEWER_RUN; AFTER_SINGLE_ZIP=CHATGPT_DIRECTOR.**
+`NEXT_OWNER=CODEX_LUNA_N1` → `AFTER_SINGLE_ZIP=CHATGPT_DIRECTOR`. No iniciar si Codex ya está trabajando en una orden nueva.
