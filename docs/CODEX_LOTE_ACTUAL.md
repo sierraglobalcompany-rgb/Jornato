@@ -1,114 +1,102 @@
-# CODEX LUNA — JORNATO · C2 FÍSICO V2 · MACROBLOQUE ÚNICO DE EJECUCIÓN NATIVA SEGURA
+# CODEX LUNA — JORNATO C2 · DESBLOQUEO REAL DEL RUNNER ANDROID · MACROBLOQUE ÚNICO
 
-**ORDEN ÚNICA VIGENTE.** Sustituye íntegramente `CODEX_JORNATO_C2_QA_ANDROID_FISICO_AUTORIZADO_20261119.md` y su texto anterior en `docs/CODEX_LOTE_ACTUAL.md`; mantiene **la misma TASK**, no inaugura C3 ni pide otra revisión 10+10. **Haz trabajo y pruebas reales, no otro informe de arquitectura.** El propietario autorizó «usa el celular que esta conectado y disponible», exclusivamente para QA de Jornato. La revisión adversarial de esta orden ya la hizo ChatGPT Director: [auditoría específica V2](JORNATO_C2_FISICO_V2_AUDITORIA_10_VERDUGO_10_JUEZ_20261119.md). **NO ejecutar otra auditoría en Codex.**
+**ORDEN ACTIVA, 19 de noviembre de 2026 (hora de Colombia).** Esta orden **sustituye** la anterior C2 FÍSICO V2, ya ejecutada con resultado `BLOCKED_RUNNER_SIDE_EFFECT`. **No** volver a ejecutar C2 Readiness, el runner inseguro `flutter test integration_test/...`, ni las auditorías 10+10; **no** crear fases de producto, servicios, dependencias ni suites paralelas. ChatGPT decide la estrategia; Codex Luna realiza el trabajo técnico local, comprueba y entrega **un único ZIP**. El propietario **ya autorizó el teléfono físico conectado**, pero no autorizó reemplazar/desinstalar aplicaciones, borrar datos, usar otros dispositivos ni modificar configuraciones globales.
 
 ```text
-TASK=JOR-H9-C2-PHYSICAL-ANDROID-QA-20261119
-OWNER=CODEX_LUNA
-OWNER_AFTER_SINGLE_ZIP=CHATGPT_DIRECTOR
-WIP=D:\codex\Jornato
-REPORTS=D:\codex\_REPORTES\Jornato\JOR-H9-C2-PHYSICAL-ANDROID-QA-20261119
-GITHUB_ACTIONS=NO
-GIT_STAGE_COMMIT_PUSH_PULL_MERGE_RESET_CLEAN_STASH=NO
-PHYSICAL_DEVICE=PERMITTED_ONLY_ONE_CONNECTED_PHONE_FOR_SYNTHETIC_JORNATO_QA
-AVDS_OTHER_DEVICES=FORBIDDEN
-DELETE_UNINSTALL_PM_CLEAR_FACTORY_RESET_ROOT=FORBIDDEN
-READ_OR_CHANGE_OTHER_APPLICATIONS=FORBIDDEN
-PRO_HTTP_DB=BLOCKED_CONTRACT
-H9_GLOBAL=NO_GO
+TASK=JOR-H9-C2-PHYSICAL-RUNNER-SAFE-20261119
+OWNER_NOW=CODEX_LUNA
+OWNER_AFTER_ONE_ZIP=CHATGPT_DIRECTOR
+WORKTREE=D:\codex\Jornato
+REPORT_DIR=D:\codex\_REPORTES\Jornato\JOR-H9-C2-PHYSICAL-RUNNER-SAFE-20261119
+PHYSICAL_DEVICE=ONE_EXPLICIT_SERIAL_ONLY
+QA_APPLICATION_ID=com.sierraglobalcompany.jornato.b14qa
+QA_APK=build/app/outputs/flutter-apk/app-b14qa-debug.apk
+QA_APK_EXPECTED_SHA256=BEEA46F75B08CFA440A980BCEE4CC12E2A6B4C7B37A9457B16240C5427157593
+GIT_STAGE_COMMIT_PUSH_PULL_MERGE_REBASE_RESET_CLEAN_STASH=FORBIDDEN
+RUN_GITHUB_ACTIONS=NO
 RELEASE=NO_GO
 ```
 
-## 0. Decisiones ya cerradas; no perseguirse la cola
+## 1. Lo ya probado: NO perseguirse la cola
 
-**Fuente local prioritaria:** el WIP avanzado y su contrato aprobado. GitHub remoto no lo contiene. La orden está limitada al **cifrado Android SQLCipher/Keystore, idempotencia, corrupción en copia ficticia y, si existe soporte de dos etapas, readback tras reiniciar el proceso de la propia app**. No alterar UI, GPS, kiosco comercial, política OD01–OD08, backend/Pro, código de otras aplicaciones, integraciones de cobro ni esquema de datos. **No inventar una segunda persistencia, proveedor de claves, harness o aplicación.**
+1. Archivo de evidencia recibido `JOR-H9-C2-PHYSICAL-ANDROID-QA-20261119-UNICO.zip` **SHA-256 `6E58737061FA00D9CF60F630758D3C4E66CCF0F161027E83A641417C173BC278`**. Director comprobó **9 archivos, ZIP CRC correcto, manifiesto 8/8 tamaño+SHA correcto**. En logs: Flutter 3.47.8, Dart 3.13.7; APK `b14qaDebug` compilado offline, `applicationId=com.sierraglobalcompany.jornato.b14qa`, `minSdk=24`, `targetSdk=36`, firma debug; **APK BUILT_NOT_INSTALLED**, no se adjuntaron sus bytes al ZIP. Teléfono físico Android 30, ABI arm64-v8a; *un solo dispositivo autorizado*, usuario 0, sin coincidencias exactas de paquetes QA ni `.test` en ese momento. **Verifica nuevamente antes de actuar.**
+2. El hallazgo del runner **sí es real**: el `flutter test` de este SDK ejecuta `adb install -t -r`, puede desinstalar tras error y tiene teardown uninstall; `--no-uninstall` **no elimina** la instalación reemplazable/fallback. **Prohibido ese runner en este lote.** Este hallazgo **no** significa que una instalación manual de paquete nuevo deba estar bloqueada: la CLI ADB distingue `-t` (permitir APK de pruebas) de `-r` (reemplazar). Flutter también ofrece `flutter drive --use-existing-app=URI` para conectarse a un **proceso ya iniciado**, sin arrancarlo; **verificar implementación y flags en Flutter 3.47.8 antes de usar**, no asumir por documentación genérica.
+3. Estado local histórico reportado: rama `codex/jor-b08-h4-domain-20261025`, HEAD `faf5fe283191f8b5a2724b397009512a2caec1b6`, 235→234 entradas Git tras build, 0 staged, índice SHA igual. La entrada temporal `android/.kotlin/sessions/kotlin-compiler-8677482930770349621.salive` desapareció sin causa aislada: **cache/archivo transitorio, no afirmar pérdida de código ni restituirlo artificialmente**. Ninguna fuente cambió. SHA del APK construido `BEEA46F75B08CFA440A980BCEE4CC12E2A6B4C7B37A9457B16240C5427157593`.
+4. H9-M1: **75 host PASS**, Flutter Analyze PASS y Laravel bootstrap normal PASS, en sus respectivos logs; F1 widget folio PASS_FOCAL; C2 Readiness prueba `integration_test/kiosk_flow_test.dart` escrita pero no ejecutada; B21F-S3 backend **158/2450 PASS_SCOPED histórico**. **NO reejecutar** nada de esto por rutina. Pro HTTP/DB = `BLOCKED_CONTRACT`; tenant B = `BLOCKED_CONTRACT`; H9 y release = `NO_GO`.
+5. Módulos del WIP observados por Codex: `integration_test/kiosk_flow_test.dart`, `lib/src/persistence/local_encrypted_store.dart`, `lib/src/persistence/kiosk_repository.dart`, `android/app/build.gradle.kts`. El test actual incluye operaciones de SQLCipher/clave incorrecta, FlutterSecureStorage, reintentos idempotentes y corrupción sobre **copia sintética**; **RESTART_READBACK real no está demostrado**. Código WIP avanzado sigue solo en Windows, no lo sustituyas por F0 del PR #3. Fuentes Flutter/ADB de consulta del Director: `https://docs.flutter.dev/testing/integration-tests`, `https://github.com/flutter/flutter/blob/master/packages/integration_test/README.md`, `https://codebrowser.dev/flutter/flutter/packages/flutter_tools/lib/src/commands/drive.dart.html`, `https://android.googlesource.com/platform/packages/modules/adb/+/refs/heads/main/docs/user/adb.1.md`.
 
-**Históricos reutilizables, no repetir por rutina:**
+## 2. Decisión técnica fija: instalación NUEVA controlada y driver que reutiliza el proceso
 
-- H9-M1 ZIP SHA256 `571F0B288F8B582797AF4043417A2A1B44935B60D649F592172751F402D9A0B6`: 75/75 tests host PASS y bootstrap Laravel normal PASS en el alcance de sus logs; APK `productDebug` compilado pero no instalado.
-- F1 ZIP SHA256 `563ADC7CA9B4625B3B10CC16E0D83760F7996905A604BD49E93574EABEC71CBF`: fallo visual del folio **PASS_FOCAL**; no repetir.
-- C2 readiness ZIP SHA256 `3F9E1031AFA7FE0BEEABA7A82FB9114CFBA843E88158A2A8C57656E8FF21F576`: CRC PASS, 9/9 manifiesto; **solo** cambió `integration_test/kiosk_flow_test.dart` de SHA256 `E5E1227735E063F5E17F0C7FBE3965280E84081013AD66E1623E9A4D81022EB9` a `30267B4110336B479437CFFE3C31392EF67CD32DEDC684F2179EC47808BB3E30`. `flutter analyze --no-pub` PASS. **Los tests nativos fueron ESCRITOS, NO EJECUTADOS**; el adaptador productivo `lib/src/persistence/local_encrypted_store.dart` se mantuvo, SHA256 `AF5D835A56A6085F1851CEED371C3730D7CCCD374A382060B271D528808FE4A9` en esa entrega.
-- B21F-S3 backend 158 tests / 2450 assertions PASS_SCOPED histórico; no repetir. Pro HTTP/DB **BLOCKED_CONTRACT**: ni cuenta sintética aprobada ni servidor QA autorizado. Nunca inventar usuarios/roles/tokens.
-- WIP histórico `D:\codex\Jornato`, rama `codex/jor-b08-h4-domain-20261025`, HEAD `faf5fe283191f8b5a2724b397009512a2caec1b6`, 235 rutas status y 0 staged; **NO exigir que esos valores sigan iguales hoy**. El WIP avanzado no se debe copiar ni fusionar con PR #3 F0 remoto.
-- GitHub remoto al preparar esta orden: `main=1ee6aae821f8cf177cc64149081ad8847f7fec2e`, PR #1 `faf5fe283191f8b5a2724b397009512a2caec1b6`, PR #3 `104469b119752f395cf9881e732d582feab9db4e` Draft apilado, PR #2 documental. Estos SHA son referencias de contexto, no precondiciones para forzar un checkout.
+**Ruta principal, no un menú de experimentos:** comprobar el paquete QA y el binario existente; **instalar una sola vez** con `adb -s SERIAL install -t APK` (**SIN `-r`, `-d`, `-g`, `--instant`, uninstall ni clear**); iniciar exclusivamente su Activity de lanzador con `adb shell am start`; conectar el host driver a la VM Service del proceso **usando `flutter drive --use-existing-app=URI --keep-app-running`**, con test driver oficial de `integration_test` si está disponible. Ningún paso puede invocar `flutter test` sobre dispositivo ni `flutter run`/`flutter drive` sin `--use-existing-app`, porque esos caminos pueden reinstalar. La prueba debe recoger **resultados reales de aserciones**: un log de lanzamiento, `cipher_version` o `exit 0` del shell por sí solos NO dan PASS.
 
-**Autoridad:** las seis leyes L1 KISS/Ponytail, L2 antirruido, L3 causa raíz, L4 UX humano aprobado, L5 prueba atribuible y L6 antiping-pong están en PingPongLaw SHA fijo `84e961cadf482d234f4c0ee2ca60e8c7e9b388e8`. Consultar el canon una vez **solo si** no está disponible localmente; no instalar hooks, skills ni dependencias globales. La autorización del teléfono **no autoriza destruir/actualizar datos previos ni cambiar la configuración global**.
+**Plan limitado si falla un paso:** NO instalar con `-r`, no desinstalar ni crear otro flavor. Primero terminar los pasos de solo lectura y registrar el bloqueo preciso (`BLOCKED_PACKAGE`, `BLOCKED_DRIVER_CONNECT`, `BLOCKED_VM_SERVICE`, etc.). Si el paquete QA fue instalado en esta sesión y no hay canal confiable de resultados, dejarlo sin tocar y cerrar `PARTIAL`/`BLOCKED_HARNESS`, no encadenar más runners ni reemplazar el APK.
 
-## P0 — Proteger WIP y decidir si este celular admite prueba sin riesgos
+## 3. P0 — Preflight de custodia y riesgo real (solo consultas)
 
-1. **Custodia focal.** En el WIP, leer `AGENTS.md` y contratos aplicables, rama/HEAD/status/index sin cambiar Git. Guardar PRE de archivos que podrían editarse: SHA256 y copia byte a byte **fuera** del WIP para cada archivo `??` o tracked objetivo (en particular `integration_test/kiosk_flow_test.dart`, el store, runner/flavors si son relevantes). Si aparecen cambios simultáneos del mismo archivo, no sobrescribir; `BLOCKED_COLLISION` solo para ese tramo. No limpiar 235 rutas ni calcular hashes globales de toda la empresa. Nunca copiar datos reales a informes.
-2. **Identidad del dispositivo, solo consultas.** `adb devices -l` permite inventariar, pero no autoriza elegir automáticamente. Identificar un único equipo físico Android en estado `device` mediante propiedades read-only dirigidas por `adb -s <SERIAL>` (por ejemplo `ro.kernel.qemu`, API/ABI y compatibilidad con minSdk 24). Si hay más de un teléfono físico disponible, estado `unauthorized`, `offline`, perfil no identificable o conflicto de selección: `BLOCKED_DEVICE_AMBIGUOUS`; hacer solo trabajo local independiente. Todos los comandos posteriores ADB llevan `-s <SERIAL>` y Flutter `-d <SERIAL>`. **No abrir fotos, mensajes, cuentas, logs globales, apps de terceros, ni publicar el serial completo**. No AVD, root, reboot, USB settings ni cambios al teléfono fuera de la app Jornato debug.
-3. **Paquete final antes de tocar el teléfono.** Identificar el `applicationId` real del flavor/variante Android, su `applicationIdSuffix` si existe, test package y firma del APK debug desde Gradle/manifest/artefacto real, no desde nombres recordados. Verificar que el runner de integración usará **ese mismo** flavor/paquete; si corresponde a `productDebug`, no ejecutar un comando sin `--flavor` si este podría elegir otro paquete. Confirmar compatibilidad API/ABI y que las dependencias necesarias ya están en caché. No crear otro flavor ni modificar el ID productivo para fabricar aislamiento.
-4. **Puerta no negociable de preservación del teléfono.** Comprobar por consultas de paquete **limitadas a los ID exactos de Jornato y test APK**, incluidos perfiles Android relevantes cuando sea posible. **Una consulta de paquetes no informa si la app tiene datos: si el ID exacto ya está instalado y no existe evidencia inequívoca de que sea una instancia sintética y desechable propiedad de esta QA, NO actualizar, reinstalar, reemplazar ni ejecutar la suite sobre ese ID: `BLOCKED_PACKAGE_EXISTING_UNKNOWN_DATA`.** Una firma compatible NO demuestra datos descartables. Si hay un perfil/usuario desconocido que impide descartar colisión, `BLOCKED_PACKAGE_SCOPE`. Solo instalar si los ID destino **no están instalados** y el flujo de pruebas no afecta otras aplicaciones. No usar `pm clear`, `adb uninstall`, `install -r`, `uninstall-first`, factory reset ni flags para forzar reemplazo.
-5. **Puerta específica del runner (antes del primer `flutter test`).** Leer el comando/harness ya presente y comprobar su comportamiento con app APK, test APK y *teardown*: ¿instala, actualiza, desinstala o limpia datos automáticamente? ¿En qué package ID? ¿Reinstala tras `force-stop`? No basta con comprobar que `adb install` manual sería seguro: **Flutter puede gestionar instalaciones durante la integración**. Si alguna acción no autorizada es inevitable, `BLOCKED_RUNNER_SIDE_EFFECT` y no ejecutar. No lanzar `flutter run`, `flutter drive` o `flutter test` a ciegas para averiguar el efecto. Evitar doble instalación manual + automática. **La instalación inicial de un paquete debug nuevo, sintético, sin ID previo y sin desinstalación/limpieza posterior está cubierta por la autorización; ninguna otra operación destructiva lo está.**
+1. Confirmar WIP, rama/HEAD reales, `git status --porcelain=v1 -uall` e índice **solo lectura**. Preservar el estado actual, no exigir el conteo histórico. Antes de editar un archivo (en particular `?? integration_test/kiosk_flow_test.dart` o nuevo `test_driver/integration_test.dart`), guardar copia exacta y SHA-256 PRE **fuera del WIP**; PRE/POST de los objetivos y del índice. No tocar fuentes sin causa objetiva.
+2. `adb devices -l` y `adb -s SERIAL get-state`: exigir **exactamente un teléfono físico en estado `device`** que coincida con el autorizado. `SERIAL` debe extraerse del entorno, **nunca escribir el número real en ZIP o GitHub**. No usar `adb` sin `-s`, dispositivos ajenos, emuladores, perfiles secundarios, red ADB ni conectar servidores remotos. ADB API 30/ABI arm64-v8a se vuelve a cotejar por consultas de solo lectura.
+3. Extraer de Gradle/manifest/apkinfo la identidad exacta del paquete, tipo debug, entrypoint y Activity; verificar el **hash del APK local** contra el SHA esperado. Comprobar `pm list packages --user 0` con **coincidencia exacta** para `com.sierraglobalcompany.jornato.b14qa` y `.test`, y consultar `pm path` como corroboración, no como oráculo único. Repetir esta consulta **inmediatamente antes** de instalar. Si existe alguno de estos paquetes, hay datos de propiedad desconocida o firma/ID ambiguos: **NO INSTALAR, NO REEMPLAZAR, NO DESINSTALAR**. Si el APK difiere del hash histórico **sin cambios locales intencionales y documentados**, bloquear; si Codex debió modificar la instrumentación ANTES de instalar, registrar el nuevo hash SHA-256, la firma debug y el archivo fuente causante; no presentar el SHA anterior como artefacto final. Si la lista está incompleta/no concluyente: bloquear instalación.
+4. Inspeccionar sin ejecutar las rutas de Flutter 3.47.8 `drive.dart` y `drive_service.dart`: con `--use-existing-app` **no debe llamar a `start`/`install`/`uninstall` ni detener el proceso si `--keep-app-running`**, tampoco en la ruta de excepción. Verificar además que el host driver `integration_test` puede recibir los resultados (`test_driver/integration_test.dart` usa `Future<void> main() => integrationDriver();`). **Si esta garantía falla en este SDK, no usar ese driver.** No modificar Flutter SDK, global PATH, hooks, Android Studio ni otros proyectos. El driver mínimo puede escribirse en el WIP solo si la dependencia ya está disponible offline; sin dependencias nuevas.
+5. Registrar PRE del APK, status y destino, sin capturar valores sensibles. Si el build previo sigue siendo válido, **no recompilar**. Si hace falta cambiar código de test antes de instalar para corregir una limitación demostrada o añadir **solo la fase de restart** (ver P2), hacerlo de una vez, usar paquete/variante ya existentes, correr analyze focal y compilar **una sola vez offline** para producir la versión final que se instalará. El paquete debe seguir siendo `com.sierraglobalcompany.jornato.b14qa`, con firma debug comprobada. Comprobar permisos del manifest y no conceder cámara, ubicación u otros permisos sensibles ajenos a los casos C2, ni responder a diálogos de consentimiento no autorizados. Nunca recompilar/reinstalar en bucle.
 
-**Regla de avance:** sin P0 completo, no ejecutar código de integración sobre el teléfono. Continuar con análisis de fuente y corrección estrictamente focal fuera del dispositivo; no simular `PASS_PHYSICAL` ni pedir al propietario que haga pruebas.
+## 4. P1 — Un solo despliegue seguro en el teléfono autorizado
 
-## P1 — Inspeccionar el único test nativo existente, corregir solo un riesgo comprobado
+6. Revalidada la ausencia exacta y huella del APK, ejecutar una sola vez, sobre el SERIAL explícito, **`adb -s SERIAL install -t RUTA_APK`** sin `-r` ni flags que eludan controles. Guardar salida y exit code. **Si falla, detener: no reintentar con variantes, no fallback, no quitar nada.** Solo `Success` + paquete exacto presente habilitan continuar. Instalar la app QA modifica exclusivamente ese paquete; esto sí está dentro de la autorización de QA. No recopilar otras apps/datos del teléfono.
+7. Resolver el componente de lanzador **del paquete QA**, a partir de su manifest/PackageManager; usar `adb -s SERIAL shell am start -n PAQUETE/ACTIVITY_REAL` una vez. No lanzar otra actividad, ni `monkey`, ni borrar logs globales con `logcat -c`. Capturar logcat **filtrado por PID del paquete QA** en un archivo de QA local y redactar tokens/URI de VM service antes del ZIP. Si el entrypoint es un script `integration_test`, sus assertions pueden correr al arrancar: preservar su salida, esperar el resultado del driver, no dar PASS por estar abierta la UI.
+8. Con el proceso vivo, localizar la **VM Service URL real** publicada para ese proceso debug en logs locales (sin inventarla). Si requiere `adb forward`, establecer solo un forward específico y libre sobre **ese SERIAL**, sin `--remove-all`, sin sobreescribir otros puertos, conservando la ruta/puerto/estado PRE para retirar **solo el forward creado por este lote**. No publicar tokens del URI.
+9. Con driver oficial preexistente o mínimo de integración, ejecutar **una sola vez** su conexión a la app **ya instalada y ejecutándose**. Plantilla conceptual — sustituir URI, rutas y SERIAL por valores verificables, no por placeholders literales:
 
-6. Leer `integration_test/kiosk_flow_test.dart`, `lib/src/persistence/local_encrypted_store.dart`, `lib/src/persistence/kiosk_repository.dart`, `pubspec.lock`, Gradle y runner. Antes de ejecutar, verificar las precondiciones **reales** de datos ficticios y namespace del test: `jornato.c2.missing-key.qa`, archivo principal, rutas de backup y `Directory.systemTemp`. El test C2 ya llama a `sqlcipher.openDatabase(..., readOnly: true, singleInstance: false)` con clave ausente/incorrecta; crea una base **sintética** en directorio temporal, altera un byte en offset 100 de su **copia** y comprueba que el original queda legible. El propio test también prueba reintentos a través de `KioskRepository`, sin modificar tablas productivas. **No declarar inocuidad por el nombre del archivo**: demostrar que los paths/namespace reales se restringen al paquete debug recién instalado y que no acceden a datos previamente existentes.
-7. **Dos hipótesis, no defectos ya demostrados:** (a) el namespace fijo `jornato.c2.missing-key.qa` podría estar contaminado si se reutiliza instalación; (b) cambiar un byte de una página no necesariamente produce un rechazo en la consulta usada. Si las precondiciones de una instalación QA nueva y aislada garantizan el namespace vacío, no añadir código. Si hay colisión/rechazo impredecible, corregir **solo el caso causal**, sin borrar datos ni manipular bases reales. Para corrupción, si el oráculo no visita la región alterada, mejorar **la prueba sobre la copia ficticia**, conservar el original, sin concluir que SQLCipher del producto es inseguro. Evitar tests duplicados, más fixtures, backdoors, proveedores nuevos, hooks y cambios de esquema.
-8. Separar las afirmaciones: SQLCipher version + cabecera opaca + lectura con clave legítima + fallos de apertura sin/con clave errónea = evidencia del cifrado efectivo del archivo probado; **no** garantiza resistencia criptográfica integral. `FlutterSecureStorage` en Android y recuperación de clave legítima prueban el camino del plugin, **no certifican por sí solos el uso efectivo de Android Keystore ni hardware-backed Keystore/attestation**. Para `KEYSTORE_EFFECTIVE=PASS_KEYSTORE_VERIFIED` se requiere evidencia nativa verificable de uso del mecanismo Keystore por el proveedor real sin leer secretos; si solo hay recorrido del plugin marcar `PASS_PLUGIN_PATH` y dejar C2 global `PARTIAL_NATIVE`. No leer/imprimir claves. La idempotencia valida que mismo ID/payload no duplique y que mismo ID/diferente payload lance conflicto con tablas/outbox inalteradas. La corrupción de una copia sintética solo certifica ese alcance, no la recuperación de la DB de producción.
+   ```text
+   flutter drive -d SERIAL --no-pub --driver=test_driver/integration_test.dart --target=integration_test/kiosk_flow_test.dart --use-existing-app=URI_VERIFICADA --keep-app-running
+   ```
 
-## P2 — Ejecutar un solo lote nativo condicionado a P0, corregir causa raíz y parar
+   Antes de ejecutarla, comprobar `flutter drive --help` de **esa SDK** y el código de la rama `--use-existing-app`. Si ese comando intentase compilar, instalar, borrar, parar o reemplazar el paquete QA, **NO EJECUTAR**; documentar el mecanismo exacto. Si falta un driver compatible, construir **solo el test driver mínimo del ejemplo oficial** con dependencias existentes, analizarlo, sin cambiar el producto ni el APK. Si el proceso no publica VM Service accesible o no se puede atribuir el resultado al SHA instalado, marcar el subgate BLOQUEADO y parar.
+10. Registrar test/exit y **aserciones individuales**: `CIPHER_ENGINE`, `KEYSTORE_EFFECTIVE`, `IDEMPOTENCY_NATIVE`, `CORRUPTION_FAIL_CLOSED`; cada uno `PASS_PHYSICAL|FAIL_PHYSICAL|NOT_RUN|INCONCLUSIVE`. `KEYSTORE_EFFECTIVE=PASS` exige ejercicio realmente nativo y prueba de clave, **no** hardware attestation, no basta plugin inicializado ni `cipher_version`. La prueba de corrupción en copia aislada solo da PASS si verifica rechazo medible; si no toca página inválida, `INCONCLUSIVE`, nunca cambiar test para falsear resultado. No leer claves, no exportar la DB, no tomar fotos/screen del teléfono ni logs generales.
 
-9. **Si P0 pasó**, elegir **un único comando** respaldado por el runner real del repositorio para `integration_test/kiosk_flow_test.dart`, especificando dispositivo exacto y flavor real (cuando aplique). Preferir las opciones existentes; comprobar `flutter help test` o `flutter help drive` antes de usar flags no conocidas. Ejemplo *condicional*, NO plantilla obligatoria: `flutter test integration_test/kiosk_flow_test.dart -d <SERIAL> --flavor <FLAVOR_REAL>` si ese SDK/árbol soporta la variante y su instalación/teardown fue evaluada. Usar caché local; no descargar SDK, imágenes, gradle plugins ni dependencias no autorizadas; detener si hay descarga obligatoria. No activar permisos de GPS/cámara ni red Pro. Registrar el SHA de **fuentes actuales**, versión Flutter/Dart, API/ABI, applicationId/variante, SHA del APK generado, firma de depuración pública y comando/exit real, saneando identificadores. Capturar salida del test sin volcar un `logcat` de todas las aplicaciones. La suite puede ejecutar varios tests dentro del mismo archivo: confirmar cuáles y sus efectos **antes** de lanzarla.
-10. Clasificar fallos sin tirar todo abajo: `BUILD_FAIL`, `PACKAGE_CONFLICT`, `PLUGIN/ABI_FAIL`, `ASSERTION_FAIL`, `HARNESS_FAIL` o `DEVICE_UNAVAILABLE`. Si un test demuestra una brecha de causa raíz, corregir **el archivo propietario existente y el test afectado**; si demuestra solo un supuesto defectuoso del test, corregir **solo el test**. Guardar PRE/POST de archivos tocados (untracked incluidos) y comprobar `flutter analyze --no-pub` más prueba focal relacionada **una vez tras cambio**. No repetir los 75 host, Laravel bootstrap, F1 widget, auditorías ni toda la integración en bucle. Si el bloqueo requiere permiso, descarga, datos de usuario o nuevo esquema, detener **solo** ese subgate y continuar lo independiente.
-11. **Reinicio auténtico, solo si existe mecanismo en dos fases ya soportado por el proyecto.** El test integrado de un único proceso no puede demostrar persistencia tras `am force-stop` y luego continuar asertando dentro del mismo controlador que fue detenido. Antes de ejecutar force-stop, verificar que los datos sintéticos se escribieron y existe un modo seguro y preexistente de nueva sesión que **no reinstale ni limpie el paquete** y permita leer los mismos IDs/eventos/outbox. Usar `adb -s <SERIAL> shell am force-stop <EXACT_QA_PACKAGE>` exclusivamente para ese paquete y **únicamente** cuando esté garantizada la reanudación sin efectos no autorizados; después comprobar el readback desde nueva instancia real. Si el harness no soporta estas dos fases, `RESTART_READBACK=BLOCKED_HARNESS`; no crear una API oculta de producto ni llamar `close/open` del mismo proceso «reinicio». No cerrar otras apps, no reiniciar el teléfono.
-12. **Aislamiento tenant A/B:** solo probar con mecanismo y autorización ya existentes; si no, `BLOCKED_CONTRACT`. **Pro HTTP/DB:** `BLOCKED_CONTRACT` sin credenciales QA/tenant autorizados; no conectar a producción ni inventar autorizaciones para cerrar H9. Ningún resultado C2 autoriza RELEASE, B22 ni merge de WIP avanzado.
+## 5. P2 — Recuperación tras reinicio: puerta separada y no invasiva
 
-## P3 — Matriz de aceptación exacta, sin PASS inflados
+11. **NO confundir** `LocalEncryptedStore.close/open` con reinicio Android. ANTES del primer build/instalación, comprobar si el test ya tiene protocolo de dos fases con marcador sintético persistido y observador host capaz de reconectar, sin desinstalar/limpiar. Si no lo tiene, **implementar, cuando sea compatible con el test y contrato existentes, una extensión mínima al MISMO `integration_test/kiosk_flow_test.dart`**: al inicio consultar el almacén QA cifrado para saber si hay un marcador único de fase 1; primera ejecución escribe evento/outbox e IDs ficticios y reporta fase 1; segunda ejecución, en un proceso Android nuevo sobre el mismo APK y datos persistidos, **lee y compara los IDs originales antes de escribir otros eventos** y reporta fase 2. Registrar los resultados en el canal de test ya existente (no crear un framework, canal nativo, endpoint, permiso ni repositorio nuevos). Si no puede hacerse con seguridad sin modificar producción, dejar `BLOCKED_HARNESS` y completar el resto. Ejecutada y verificada la fase 1, el controlador host puede aplicar `adb -s SERIAL shell am force-stop com.sierraglobalcompany.jornato.b14qa` **solo a la QA app creada en este lote**, tras cerrar el canal del test y comprobar la captura íntegra de fase 1; después inicia otra vez esa misma Activity y **vuelve a conectar con una nueva VM Service URI** sin reinstalar, sin borrar y sin asumir que el test runner previo sobrevivirá. Solo `PASS_NEW_PROCESS` con IDs/bytes atribuibles a ambas fases, no por simplemente abrir UI. No usar `pm clear`, uninstall, reinstall, `adb kill-server`, reinicio del teléfono ni cambios globales.
+12. `TENANT_ISOLATION` y `PRO_HTTP_DB` siguen `BLOCKED_CONTRACT` sin autorización del contrato/identidad QA. No fabricar fixture cruzado ni abrir Docker/credenciales. La app QA no necesita sync remota para la prueba de cifrado local.
 
-| Gate | Evidencia suficiente y estado si falta |
-|---|---|
-| `PACKAGE_ISOLATION` | ID final, consulta previa del ID exacto y prueba de no sobrescritura; si instalado con propiedad/datos no demostrados = `BLOCKED_PACKAGE` |
-| `CIPHER_ENGINE` | Prueba real Android: header no SQLite claro, apertura legítima y rechazo no-key/wrong-key con origen de archivo comprobado; si host/mock = `NOT_RUN_NATIVE` |
-| `KEYSTORE_EFFECTIVE` | Plugin seguro Android real y recuperación de clave sin extracción; `PLUGIN_PATH_PASS` si no hay evidencia de Keystore/hardware; NO atribuir hardware-backed sin prueba propia |
-| `IDEMPOTENCY_NATIVE` | Evento repetido una sola vez, payload incompatible rechazado, secuencia/outbox inmutables; falla observada = `FAIL` |
-| `CORRUPTION_FAIL_CLOSED` | Solo copia cifrada temporal/sintética con sentinel intacto en original y rechazo reproducible; si región alterada no se lee = `INCONCLUSIVE`, no asumir PASS/bug |
-| `RESTART_READBACK` | Nuevo proceso Android, mismo ID y datos persistidos sin reinstall/clear; si harness solo reabre DB en mismo proceso = `BLOCKED_HARNESS` |
-| `TENANT_ISOLATION` | Solo con tenant/rol existente y autorizado; en WIP actual `BLOCKED_CONTRACT` hasta nueva evidencia |
-| `PRO_HTTP_DB` | Sigue `BLOCKED_CONTRACT`; nunca cambiar por pasar C2 |
+## 6. P3 — Reparación focal y custodia; no reintentos invasivos
 
-**RESULTADO GLOBAL C2:** `PASS_PHYSICAL_SCOPED` solo cuando **las cuatro pruebas nativas centrales** (`CIPHER_ENGINE=PASS`, `KEYSTORE_EFFECTIVE=PASS_KEYSTORE_VERIFIED`, `IDEMPOTENCY_NATIVE=PASS`, `CORRUPTION_FAIL_CLOSED=PASS_COPY_SCOPED`) más **`RESTART_READBACK=PASS` real** tengan pruebas de ejecución atribuibles a la compilación/paquete exactos, sin fallos y con `PACKAGE_ISOLATION=PASS`. `PASS_PLUGIN_PATH` no basta para este veredicto. Si lo nativo central pasa pero reinicio queda bloqueado, `PARTIAL_NATIVE` y detallar sus PASS individuales. Si no se pudo instalar por conflicto, `BLOCKED_PACKAGE` y ningún PASS nativo. No confundir PASS de C2 con `H9_GLOBAL=GO` ni con aprobación de Pro/tenant.
+13. Si una aserción del test **efectivamente ejecutado** falla, capturar la causa por archivo/método y corregir solo la fuente propietaria y/o aserción incorrecta. No cambiar expectativas para esconder un fallo, no `skip`/`xfail`, no paquetes nuevos, no nuevo servicio de sync. Ejecutar `flutter analyze --no-pub` y host tests **solo relacionados con el delta**; no repetir 75 tests host, suite Laravel, F1 ni Android con reinstall. **Una corrección posterior a la instalación queda escrita y NOT_RUN en dispositivo** hasta un despliegue seguro explícitamente autorizado, no un falso PASS.
+14. Registrar WIP PRE/POST a nivel focal, huellas SHA256 de todo archivo tocado (incluidos `??`), cambios de índice y delta propio; capturar el cambio del artefacto APK solo si se recompiló. Un archivo `.salive` Kotlin temporal no es código fuente y no se reconstruye manualmente; anotarlo si afecta status. No tocar instalaciones previas de Jornato, archivos ni apps ajenas. **No stage, commit, push, pull, merge, reset, clean, stash, release, publish**.
 
-## P4 — Evidencia ZIP único y entrega sin preguntas intermedias
+## 7. P4 — Entregar exactamente un ZIP sanitizado
 
-13. Capturar `HEAD`, rama, `git status --porcelain=v1 -uall`, índice staged y hashes **PRE/POST de cada archivo editado**, incluido untracked; decir `WIP_PRESERVED=PARTIAL_EVIDENCE` si no hasheaste todos los archivos ajenos (no fingir invariancia global). El delta del archivo `??` se genera desde copia PRE exacta; no uses un `git diff` vacío como prueba. Si aparece un cambio ajeno concurrente, no lo incluyas. No hacer `git add/commit/push/pull/rebase/merge/reset/clean/stash/checkout`, no publicar fuentes privadas en GitHub, no alterar CI, no tocar otro proyecto.
-14. Generar **exactamente un ZIP** en `REPORTS\delivery\JOR-H9-C2-PHYSICAL-ANDROID-QA-20261119-UNICO.zip` con: `FINAL_REPORT.md` (máximo 2 páginas: qué se ejecutó y límites), `RESULTS.csv` (gate, `PASSED/FAIL/NOT_RUN/BLOCKED`, origen SHA, comando/exit, nivel prueba, `log_path`, `log_sha256`, `artifact_sha256` separados), `WIP_PRE_POST.csv`, logs **sanitizados** solo de acciones ejecutadas, `CHANGES.patch` real si modificaste archivos, `BLOCKERS.md` solo si bloqueo material, `MANIFEST_SHA256.csv` con bytes y SHA256 de **todos los miembros menos el propio manifiesto**. Validar CRC, rutas, cantidades y SHA de cada miembro; calcular SHA256 final del ZIP fuera de él y devolver una sola ruta para adjuntarlo. No incluir serial íntegro, IMEI, IMEI-like, fotos, cuentas, identidad, tokens, DB, claves, certificados, APK, `.env`, otros proyectos ni logcat general.
-15. Responder en un único bloque terminal, usando **valores observados** y una única instrucción NEXT; **sin delegar al usuario pruebas manuales**:
+15. Crear en `REPORT_DIR/delivery` **un solo ZIP** `JOR-H9-C2-PHYSICAL-RUNNER-SAFE-20261119-UNICO.zip` que contenga: `FINAL_REPORT.md` (máx. 2 páginas), `RESULTS.csv` (gate, test exacto, estado, exit, fuente SHA, APK SHA, `log_path`, `log_sha256`), `WIP_PRE_POST.csv`, logs **solo del paquete QA** y comandos focales, `CHANGES.patch` **solo si se editó fuente** (diff entre bytes PRE/POST, no `git diff` de `??`), `BLOCKERS.md` solo si existe bloqueo material, `MANIFEST_SHA256.csv` con tamaño/SHA de **los demás miembros** (sin autorreferencia). Verificar CRC, integridad SHA/tamaños, rutas y secretos ANTES de adjuntar. No adjuntar APK, ADB serial, firmas privadas, claves, DB, tokens, cookies, datos personales ni WIP completo.
+16. Responder en terminal con valores reales, una sola entrega:
 
-```text
-TASK=JOR-H9-C2-PHYSICAL-ANDROID-QA-20261119
-RESULT=PASS_PHYSICAL_SCOPED|PARTIAL_NATIVE|PARTIAL|BLOCKED_PACKAGE|BLOCKED_DEVICE|BLOCKED_RUNTIME|BLOCKED_RUNNER_SIDE_EFFECT
-SOURCE_HEAD=<observado>
-SOURCE_BRANCH=<observado>
-WIP_PRESERVED=YES|PARTIAL_EVIDENCE|NO
-CHANGED_FILES=<lista o NONE>
-DEVICE_AUTH=USER_GRANTED_SCOPED
-TARGET_DEVICE=ONE_PHYSICAL_REDACTED|BLOCKED
-PACKAGE_ISOLATION=PASS|BLOCKED_PACKAGE|BLOCKED_SCOPE|NOT_RUN
-APK_DEBUG=BUILT_INSTALLED|BUILT_NOT_INSTALLED|NOT_RUN
-PHYSICAL_ANDROID=PASS_PHYSICAL_SCOPED|PARTIAL_NATIVE|FAIL|BLOCKED|NOT_RUN
-CIPHER_ENGINE=PASS|FAIL|INCONCLUSIVE|NOT_RUN
-KEYSTORE_EFFECTIVE=PASS_PLUGIN_PATH|PASS_KEYSTORE_VERIFIED|FAIL|INCONCLUSIVE|NOT_RUN
-HARDWARE_ATTESTATION=NOT_RUN
-IDEMPOTENCY_NATIVE=PASS|FAIL|INCONCLUSIVE|NOT_RUN
-CORRUPTION_FAIL_CLOSED=PASS_COPY_SCOPED|FAIL|INCONCLUSIVE|NOT_RUN
-RESTART_READBACK=PASS|FAIL|BLOCKED_HARNESS|NOT_RUN
-TENANT_ISOLATION=BLOCKED_CONTRACT|PASS|NOT_RUN
-PRO_HTTP_DB=BLOCKED_CONTRACT
-H9_M1_HOST_75=REUSED_PASS_NOT_RERUN
-F1_WIDGET=REUSED_PASS_FOCAL_NOT_RERUN
-BOOT_NORMAL=REUSED_PASS_NOT_RERUN
-H9_GLOBAL=NO_GO
-B22=NOT_AUTHORIZED
-RELEASE=NO_GO
-ZIP_PATH=<ruta real verificada>
-ZIP_SHA256=<huella comprobada del único ZIP>
-NEXT_OWNER=CHATGPT_DIRECTOR
-```
+   ```text
+   TASK=JOR-H9-C2-PHYSICAL-RUNNER-SAFE-20261119
+   RESULT=PASS_NATIVE_SUBSET|PARTIAL|BLOCKED_PACKAGE|BLOCKED_DRIVER_CONNECT|BLOCKED_VM_SERVICE|BLOCKED_HARNESS|BLOCKED_DEVICE
+   SOURCE_BRANCH=<real>
+   SOURCE_HEAD=<real>
+   WIP_PRESERVED=YES|PARTIAL_EVIDENCE|NO
+   APK_SHA256=<exacto instalado, o NOT_INSTALLED>
+   PACKAGE=<identidad exacta>
+   MANUAL_INSTALL=PASS_NEW_PACKAGE|NOT_RUN|FAIL
+   DRIVER_USE_EXISTING=PASS|FAIL|NOT_RUN
+   CIPHER_ENGINE=PASS_PHYSICAL|FAIL_PHYSICAL|INCONCLUSIVE|NOT_RUN
+   KEYSTORE_EFFECTIVE=PASS_PHYSICAL|FAIL_PHYSICAL|INCONCLUSIVE|NOT_RUN
+   IDEMPOTENCY_NATIVE=PASS_PHYSICAL|FAIL_PHYSICAL|INCONCLUSIVE|NOT_RUN
+   CORRUPTION_FAIL_CLOSED=PASS_PHYSICAL|FAIL_PHYSICAL|INCONCLUSIVE|NOT_RUN
+   RESTART_READBACK=PASS_NEW_PROCESS|BLOCKED_HARNESS|NOT_RUN|FAIL
+   TENANT_ISOLATION=BLOCKED_CONTRACT
+   PRO_HTTP_DB=BLOCKED_CONTRACT
+   H9_M1_HOST_75=REUSED_PASS_NOT_RERUN
+   F1_WIDGET=REUSED_PASS_FOCAL_NOT_RERUN
+   BOOT_NORMAL=REUSED_PASS_NOT_RERUN
+   PHONE_OTHER_APPS_TOUCHED=NO|UNKNOWN
+   H9_GLOBAL=NO_GO
+   B22=NOT_AUTHORIZED
+   RELEASE=NO_GO
+   ZIP_PATH=<única ruta real>
+   ZIP_SHA256=<SHA256 real comprobado>
+   NEXT_OWNER=CHATGPT_DIRECTOR
+   ```
 
-**STOP SOLO EN LA OPERACIÓN INSEGURA, NO EN TODO EL MACROBLOQUE.** Si el teléfono está ocupado por un paquete de datos desconocidos, deja el dispositivo intacto, completa lo seguro del código fuente y entrega `BLOCKED_PACKAGE` con evidencia. **No sustituir el bloqueo con otro AVD o teléfono no autorizado.** Si el paquete está ausente y el runner es seguro, haz la integración real, corrige fallos causales focales y entrega. No crear un nuevo prompt, nueva auditoría ni segunda ronda de infraestructura.
+**Estrategia de cierre:** si la prueba ya puede ejecutarse sin la gestión invasiva del runner, avanzar nativo de verdad y reportar solo lo medido. Si no se puede establecer un canal de resultados seguro, no volver a etiquetar el problema como genérico «no hay autorización»: **la autorización de QA física existe**, y el bloqueo nuevo será **técnico y concreto**. **NO repetir auditorías 10+10 ni volver a pedir permiso para instalar un paquete QA nuevo cuando esté ausente.** La puerta global H9 y la publicación siguen NO_GO hasta evidencia del resto de contratos.
 
-# 🚨 QUIÉN SIGUE AHORA: CODEX LUNA · DESPUÉS DEL ÚNICO ZIP: CHATGPT DIRECTOR. 🚨
+# 🚨 QUIÉN SIGUE: CODEX LUNA — INSTALACIÓN NUEVA CONTROLADA Y EJECUCIÓN NATIVA. DESPUÉS DEL ZIP: CHATGPT DIRECTOR. 🚨
