@@ -1,3 +1,12 @@
+# JORNATO — F1 YA EJECUTADO, SIN ORDEN ACTIVA PARA CODEX (2026-11-19)
+
+**NO VOLVER A EJECUTAR EL MACROBLOQUE INFERIOR.** Codex entregó `JOR-H9-M1-F1-VISUAL-NATIVE-20261119-UNICO.zip`, verificado SHA256 `563ADC7CA9B4625B3B10CC16E0D83760F7996905A604BD49E93574EABEC71CBF`. Resultado aceptado **PASS_SCOPED**: test widget folio PASS_FOCAL y análisis Flutter PASS; 75 host + Laravel normales se reutilizan sin repetición. SQLCipher/Keystore Android = NOT_RUN; Pro HTTP/DB = BLOCKED_CONTRACT; H9/release = NO_GO.
+
+**Siguiente acción:** no existe orden activa ni nueva tarea automática. Solicitar UNA decisión de autorización para que Codex cree/use un emulador Android exclusivo Jornato, desechable y aislado con recursos SDK ya instalados, SIN teléfono físico ni AVD ajenos, sin descargas ni cambios globales. Solo después emitir un nuevo macrobloque nativo corto; Codex ejecutará los tests, el propietario no hace QA local. Hasta entonces no reejecutar F1, no abrir otra auditoría, no stage/commit/push/merge.
+
+**La orden inferior se conserva únicamente como historia de lo ya ejecutado.**
+
+---
 # CODEX LUNA — JORNATO · H9-M1/F1 V2 · MACROBLOQUE ÚNICO DE CIERRE VISUAL Y GATE NATIVO
 
 **ORDEN ACTIVA Y ÚNICA · 19 de noviembre de 2026.** Reemplaza íntegramente la versión F1 previa `CODEX_JORNATO_H9M1_F1_CIERRE_FOCAL_POST_ZIP_20261119.md`. Conserva la tarea `JOR-H9-M1-F1-VISUAL-NATIVE-SCOPE-20261119`: **NO ejecutar otra vez H9-M1**, **NO crear F2 ni nuevas arquitecturas**. Esta orden fue revisada en **10 pasadas adversariales como verdugo y 10 de contraste como juez** sobre el texto F1 (no sobre el producto). Esa auditoría está cerrada y no se delega a Codex.
