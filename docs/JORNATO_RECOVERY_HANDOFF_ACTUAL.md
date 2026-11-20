@@ -1,5 +1,7 @@
 # RECOVERY HANDOFF — JORNATO · C2 ANDROID FÍSICO / SDK LOG PRIVACY · 2026-11-20
 
+> **ACTUALIZACIÓN PRIORITARIA 20-NOV-2026:** La única instrucción ejecutable es **V5** en [CODEX_LOTE_ACTUAL.md](CODEX_LOTE_ACTUAL.md); V4 local y V3 anterior quedan superadas. V5 añade tres controles de privacidad en host y matriz metadata WIP. [Dictamen 10+10 nuevo](JORNATO_AUDITORIA_C2_V5_10V_10J_DELTA_20261120.md). **No repetir instalación si ya hay ZIP físico posterior.** El resto de este Handoff conserva el historial V3, NO es orden independiente.
+
 > **Recovery Universal V6 EJECUTADO en modo `REANUDAR + ACTUALIZAR_POR_DELTA`.** Handoff autónomo para un chat nuevo, NO respaldo del disco Windows, NO autorización de producción, borrado, merge ni despliegue. **Fecha de corte:** 2026-11-20 UTC / 2026-11-19 en Colombia. Responsable de dirección: ChatGPT. Ejecutor local de la próxima orden: Codex Luna.
 
 ## A. RECOVERY SEED: primera pantalla
@@ -8,7 +10,7 @@
 
 **Hecho más reciente observado:** `JOR-H9-C2-PHYSICAL-RUNNER-SAFE-20261119` = **`BLOCKED_RUNNER_POLICY`**, ZIP SHA256 **`6EED1CA6A13558303D20435A744F95F16B7ED5A3135E4639F18DA6A845F5F4B5`**. Archivo recibido y leído por ChatGPT en este chat: **9 miembros, CRC PASS, manifiesto 8/8 bytes/SHA PASS**, ningún test Android ejecutado. Causa reportada mediante lectura de fuente SDK 3.47.8: aunque `flutter drive --use-existing-app` evita reinstalar/iniciar la app, `reuseApplication` abre `AndroidDevice.getLogReader()`, que ejecuta logcat global y puede transmitir tags de otros procesos; el propio permiso del dueño prohíbe recolectar logs ajenos. Codex bloqueó **antes de instalar**, sin tocar paquetes, sin editar fuente. `RESTART_READBACK=BLOCKED_HARNESS`, `TENANT_ISOLATION` y `PRO_HTTP_DB=BLOCKED_CONTRACT`. `H9_GLOBAL=NO_GO`, `RELEASE=NO_GO`, `B22=NOT_AUTHORIZED`.
 
-**NEXT ÚNICO:** ejecutar el **test nativo ya compilado** sin Flutter Tool, mediante el **driver Dart existente** `test_driver/integration_test.dart`, que usa `integrationDriver()` y `FlutterDriver.connect()` vía `VM_SERVICE_URL`; obtener la URI del VM Service **únicamente** de logcat filtrado por PID a nivel de dispositivo y conexión por forward ADB del celular autorizado. El método está **documentado por Flutter/Dart**, pero **todavía NO se verificó en el SDK y teléfono concretos**. Aun así, elimina el paso del SDK que motivó el último bloqueo y evita inventar otro framework. Orden completa: [docs/CODEX_LOTE_ACTUAL.md](CODEX_LOTE_ACTUAL.md) (copia descargable: `CODEX_JORNATO_C2_DART_DIRECTO_PID_ONLY_20261120.md`).
+**NEXT ÚNICO V5:** ejecutar **solo** [docs/CODEX_LOTE_ACTUAL.md](CODEX_LOTE_ACTUAL.md), TASK JOR-H9-C2-PHYSICAL-DART-V5-20261120, con barreras host verificadas, QA dispositivo condicionada y ZIP único. La ruta V3 que sigue en este documento es HISTÓRICA y NO debe ejecutarse.
 
 **SIGUE: CODEX LUNA**, una sola ejecución local, entregar ZIP único. **DESPUÉS: CHATGPT DIRECTOR** para adjudicar evidencia y continuar el cierre. No repetir C2 V2 ni versiones previas ni las auditorías 10+10 ya escritas.
 
@@ -68,7 +70,7 @@
 1. Releer **solo** este Handoff + `docs/CODEX_LOTE_ACTUAL.md` + ZIP si hay discrepancia material. GitHub PR #2 es **documental**, main/PR1/PR3 no contienen el árbol avanzado. No reauditar PingPongLaw/H9-M1/F1/C2 ni repetir suites históricas.
 2. Codex hace preflight de paquetes ausentes, APK y runner directo, logs PID-only y driver Dart. Si seguro, una instalación QA no reemplazable, una conexión/resultado nativo, ZIP único. Si falla, registra exactamente qué falta; no intenta cambiar SDK ni instalar con -r.
 3. Después del ZIP, ChatGPT Director evalúa CIPHER_ENGINE, KEYSTORE_EFFECTIVE, IDEMPOTENCY_NATIVE, CORRUPTION_FAIL_CLOSED y reinicio; define corrección causal si hay FAIL, y **luego** requisitos independientes de H9: QA dispositivo, tenant, Pro, web, accesibilidad, UAT, decisiones OD y L5 independiente. No adelantar B22 sin GO por cada puerta.
-4. `NEXT=CODEX_LUNA_JOR_H9_C2_PHYSICAL_DART_DIRECT_20261120`; `OWNER_AFTER_ZIP=CHATGPT_DIRECTOR`; `FIN_DE_GATE=RESULTADOS_NATIVOS_ATRIBUIBLES_A_APK_O_BLOQUEO_TECNICO_ESPECIFICO`; `RELEASE=NO_GO`.
+4. `NEXT=CODEX_LUNA_JOR_H9_C2_PHYSICAL_DART_V5_20261120`; `OWNER_AFTER_ZIP=CHATGPT_DIRECTOR`; `FIN_DE_GATE=RESULTADOS_NATIVOS_ATRIBUIBLES_A_APK_O_BLOQUEO_TECNICO_ESPECIFICO`; `RELEASE=NO_GO`.
 
 ## H. Adjuntos y diez controles Recovery V6
 
