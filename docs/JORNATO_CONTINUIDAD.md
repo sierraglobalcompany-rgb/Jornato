@@ -1,24 +1,27 @@
-# JORNATO — CONTINUIDAD CANÓNICA / ESTADO VIGENTE
+# JORNATO — CONTINUIDAD CANÓNICA · 20-NOV-2026 · V5 ÚNICA ACTIVA
 
-**Corte:** 2026-11-20 UTC / 2026-11-19 Colombia. **MODO:** Recovery V6 REANUDAR+ACTUALIZAR_POR_DELTA. **FUENTE PRINCIPAL:** [Handoff autónomo actualizado](JORNATO_RECOVERY_HANDOFF_ACTUAL.md). **ÚNICA ORDEN CODEX ACTIVA:** [CODEX_LOTE_ACTUAL.md](CODEX_LOTE_ACTUAL.md), `TASK=JOR-H9-C2-PHYSICAL-DART-DIRECT-20261120`. **SIGUE CODEX LUNA**; después del ZIP **CHATGPT DIRECTOR**.
+**Prioridad absoluta:** [Orden única de Codex](CODEX_LOTE_ACTUAL.md) contiene C2 V5 y TASK JOR-H9-C2-PHYSICAL-DART-V5-20261120. Sustituye V3 y V4. [Auditoría del delta, 10 verdugo y 10 juez](JORNATO_AUDITORIA_C2_V5_10V_10J_DELTA_20261120.md) justifica cambios sin repetir auditorías cerradas. Si existe un ZIP físico posterior de V3, V4 o V5, no instalar ni ejecutar nuevamente: revisar el ZIP primero.
 
-## Último resultado C2 (NO REPETIR)
+**GitHub PR #2 es autoridad documental, NO fuente integrada del producto.** Repo público: main 1ee6aae821f8cf177cc64149081ad8847f7fec2e; PR1 Draft faf5fe283191f8b5a2724b397009512a2caec1b6; PR3 Draft apilado sobre PR1 104469b119752f395cf9881e732d582feab9db4e. SHA observados antes de esta actualización; verificar otra vez cuando cambien. WIP avanzado Windows D:\codex\Jornato NO accesible directamente por ChatGPT: 234 entradas status, staged 0, reportados históricamente por Codex. No hacer reset, clean, cherry-pick, merge ni publicar código privado con secretos en GitHub público.
 
-- ZIP `JOR-H9-C2-PHYSICAL-RUNNER-SAFE-20261119-UNICO.zip` **SHA256 `6EED1CA6A13558303D20435A744F95F16B7ED5A3135E4639F18DA6A845F5F4B5`**, 9 miembros, CRC PASS, **8/8 SHA y tamaño PASS**, inspeccionado en recuperación.
-- `RESULT=BLOCKED_RUNNER_POLICY` distinto al anterior `BLOCKED_RUNNER_SIDE_EFFECT`: `flutter drive --use-existing-app` no reinstala, pero SDK Flutter 3.47.8 llama `AndroidDevice.getLogReader` y abre **`adb logcat -v time` global**. Política usuario impide logs ajenos. **Ninguna instalación, inicio, test físico o cambio fuente ocurrió.**
-- APK QA `com.sierraglobalcompany.jornato.b14qa`, SHA256 histórico/reportado `BEEA46F75B08CFA440A980BCEE4CC12E2A6B4C7B37A9457B16240C5427157593` (112.605.171 bytes) con target `integration_test/kiosk_flow_test.dart`; existe solo en `D:\codex\Jornato`, no incluido en ZIP. Driver `test_driver/integration_test.dart` SHA256 `2F80A384A6D27EAFF7C355E92644A0AB171504857103A4D53579236E8ECDB05F` sin modificar.
-- WIP local reportado rama `codex/jor-b08-h4-domain-20261025`, HEAD `faf5fe283191f8b5a2724b397009512a2caec1b6`, status 234, staged 0; hashes PRE/POST de 9 objetivos y APK consistentes; **WIP_PRESERVED=PARTIAL_EVIDENCE**, disco D: no accesible al Director.
-- `FINAL_REPORT.md` del ZIP contiene literales `$branch`, `$head` y `$(...)` sin interpolar; referenciar valores del log `p0_checkout_artifact.txt`/CSV, no repetir el defecto documental.
+## Resultado histórico que se reutiliza
 
-## Próxima ejecución ya definida, una sola vez
+Último ZIP físico reportado JOR-H9-C2-PHYSICAL-RUNNER-SAFE-20261119-UNICO.zip, SHA256 6EED1CA6A13558303D20435A744F95F16B7ED5A3135E4639F18DA6A845F5F4B5, terminó BLOCKED_RUNNER_POLICY porque Flutter Tool leía logcat global; ninguna prueba Android C2 se ejecutó. APK QA hash reportado BEEA46F75B08CFA440A980BCEE4CC12E2A6B4C7B37A9457B16240C5427157593, 112605171 bytes: binario no adjunto aquí.
 
-**Ruta diferencial:** evitar POR COMPLETO `flutter drive`, `flutter test` y `flutter run` en el teléfono; reutilizar el **driver Dart existente** que usa `integrationDriver()`→`FlutterDriver.connect()`→`VM_SERVICE_URL`, corroborado en [Flutter API](https://api.flutter.dev/flutter/package-integration_test_integration_test_driver/integrationDriver.html) y [FlutterDriver.connect](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/connect.html). Obtener URI de VM Service únicamente desde **`adb -s SERIAL shell logcat --pid=PID -d`** del paquete QA: filtro **en el dispositivo**; un solo forward del serial correcto y una sola instalación QA `adb install -t` **SIN `-r`** solo si no existe ningún ID exacto. Ejecutar `dart run test_driver/integration_test.dart` como host con `VM_SERVICE_URL` temporal, sin Flutter Tool. **Verificar SDK/seguridad local antes; esto es propuesta ejecutable, NO PASS ya observado.**
+Cuatro oráculos Android SQLCipher/Keystore/idempotencia/corrupción NOT_RUN. RESTART_READBACK BLOCKED_HARNESS; tenant Android y Pro HTTP/DB BLOCKED_CONTRACT. Backend B21F-S3 158 tests/2450 assertions PASS_SCOPED; H9-M1 75 PASS host; F1 widget PASS_FOCAL según informes: NO repetir suites si no cambia código o contrato. H9_GLOBAL NO_GO, B22 NOT_AUTHORIZED, RELEASE NO_GO. OD01–OD08 pendientes; no inventar roles QA, cuentas, permisos o cobros.
 
-## Resultado y puertas
+## Macrobloque vigente: qué hace Codex (solo si no hay ejecución en vuelo)
 
-- H9-M1 75 host PASS y boot Laravel PASS históricos, F1 widget PASS_FOCAL; backend B21F-S3 158/2450 PASS_SCOPED históricos. C2 Cipher/Keystore/idempotencia/corrupción **NOT_RUN físico**; reinicio proceso `BLOCKED_HARNESS`; tenant/Pro `BLOCKED_CONTRACT`.
-- No repetir auditorías 10 VERDUGO+10 JUEZ: V2 ya auditada y documentación preservada; nuevo riesgo de logcat resuelto conceptualmente con conexión Dart directa, no hace falta volver a inspeccionar suites viejas. Respetar L1–L6 y no abrir B22.
-- PR2 **solo documental**; `main=1ee6aae821f8cf177cc64149081ad8847f7fec2e`, PR1 `faf5fe283191f8b5a2724b397009512a2caec1b6` DRAFT, PR3 F0 `104469b119752f395cf9881e732d582feab9db4e` DRAFT, inalterados al preflight. No confundir con WIP local.
-- OD01–OD08 siguen sin aprobación verificada; permisos Pro, producción y release sin autorizar. **H9_GLOBAL=NO_GO; B22=NOT_AUTHORIZED; RELEASE=NO_GO.**
+Preflight local de SDK Flutter y APK real, uso del driver Dart oficial con tres barreras host: filesystem en RAM, logger inerte antes de conectar, callback de respuesta nulo para evitar archivo JSON. Comprobar compatibilidad y package config offline, sin instalar dependencias; filtro ADB logcat PID aplicado en dispositivo, un teléfono físico, una sola instalación QA de paquete ausente, oráculos físicos atribuidos o bloqueo específico, matriz mínima read-only del WIP y UN ZIP con SHA/CRC y logs sanitizados.
 
-**NEXT_OWNER=CODEX_LUNA; AFTER_SINGLE_ZIP=CHATGPT_DIRECTOR.**
+NO Flutter drive/test/run sobre teléfono, ni logcat global, redes Pro, reinstalación, cambios de WIP, push/merge, ni acceso a paquetes ajenos.
+
+**Nueva alerta útil para cierre Git:** script tools/JORNATO_CONCILIAR_WIP_GITHUB_SIN_CODEX.py y su guía en PR2 fijan un commit PR3 antiguo 78b32284..., diferente a HEAD observado 104469b.... No ejecutar su informe como reconciliación del PR3 actual hasta actualizar y verificar la referencia, en un lote posterior.
+
+## Puertas después del ZIP (no abrirlas todas como auditorías)
+
+P1 Dirección certifica C2 por evidencia (o causa concreta). P2 durabilidad real en otro proceso y kiosco offline. P3 custodia recuperable WIP, análisis de secretos y reconciliación PR3 HEAD vigente antes de integrar/push autorizado. P4 Pro, portal, empleado, RRHH y OD dependientes con fixtures, tenant A/B, outbox/PAT E2E. P5 QA independiente L4/L5, candidato firmado, UAT y aprobación explícita para B22 y despliegue.
+
+Leyes PingPongLaw: L1 KISS/Ponytail, L2 antirruido, L3 causa raíz, L4 diseño humano, L5 evidencia independiente, L6 antipingpong. [Handoff histórico](JORNATO_RECOVERY_HANDOFF_ACTUAL.md) conserva contexto previo: TODAS sus referencias V3 se entienden reemplazadas por esta autoridad V5.
+
+**NEXT_OWNER=CODEX_LUNA_IF_NO_NEWER_RUN; AFTER_SINGLE_ZIP=CHATGPT_DIRECTOR.**
