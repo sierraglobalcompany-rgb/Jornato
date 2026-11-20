@@ -1,3 +1,12 @@
+# JORNATO — C2 ENTREGADO BLOCKED_AUTH, SIN ORDEN ACTIVA PARA CODEX (2026-11-19)
+
+**NO REEJECUTAR LA ORDEN C2 INFERIOR.** Entrega recibida: `JOR-H9-C2-NATIVE-READINESS-20261119-UNICO.zip` SHA256 `3F9E1031AFA7FE0BEEABA7A82FB9114CFBA843E88158A2A8C57656E8FF21F576`; CRC PASS, 9/9 manifiesto; `flutter analyze PASS_CURRENT`. Solo se modificó `integration_test/kiosk_flow_test.dart`, instrumentación nativa WRITTEN_NOT_RUN. SQLCipher/Keystore/restart en emulador siguen NOT_RUN, HTTP Pro BLOCKED_CONTRACT. H9_GLOBAL=NO_GO; RELEASE=NO_GO.
+
+**Siguiente dependencia:** autorización explícita del dueño para que Codex cree/use AVD nuevo exclusivo de Jornato, aislado, con herramientas ya instaladas; NO teléfono físico, NO ocho AVD ajenos, NO descargas ni cambios globales. No se presume autorización a partir de esta entrega. Sin autorización, no ejecutar el subgate nativo ni generar otro bloque ritual. Cuando se autorice, Director emite **una sola orden nativa ejecutable** con casos ya escritos y correcciones focales basadas en fallos reales. Owner actual: CHATGPT_DIRECTOR. El usuario no ejecuta QA local.
+
+**Texto inferior archivado solo para trazabilidad.**
+
+---
 # CODEX LUNA — JORNATO H9/C2 · MACROBLOQUE ÚNICO DE CIFRADO NATIVO Y PREPARACIÓN EJECUTABLE
 
 **ORDEN ÚNICA NUEVA · 19 de noviembre de 2026 (Colombia).** Sustituye el estado "sin orden activa" del checkpoint posterior a F1 **solo para el gate C2**. **NO** repetir H9-M1 ni H9-M1/F1, ni iniciar una fase nueva de producto, ni repetir su auditoría 10 verdugo + 10 juez. El director contrastó el cierre F1 y la decisión sobre C2 en 20 pasadas documentales; ese trabajo está cerrado. Tu tarea es **actuar sobre el código local real**, no redactar otro plan.
