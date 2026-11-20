@@ -1,102 +1,98 @@
-# CODEX LUNA — JORNATO C2 · EJECUCIÓN ANDROID FÍSICO CON APK YA COMPILADO · ORDEN ÚNICA V2
+# CODEX LUNA — JORNATO C2 · CIERRE ANDROID FÍSICO V3 · DRIVER DART DIRECTO, SIN LOGCAT GLOBAL
 
-**ORDEN EJECUTABLE VIGENTE — 20-11-2026, Colombia.** Sustituye INTEGRAMENTE `CODEX_JORNATO_C2_DESBLOQUEO_RUNNER_INSTALACION_UNICA_20261119.md`; no ejecutar ambas. ChatGPT Director corrigió el procedimiento al leer el ZIP del último intento: **el APK QA ya se compiló desde `integration_test/kiosk_flow_test.dart`**. NO es un APK normal cuya entrada sea `lib/main.dart`; NO volver a compilar por confundir el target. La tarea ahora es hacer que **las aserciones nativas existentes se ejecuten una vez en el teléfono previamente autorizado**, con huellas y sin tocar otros paquetes. Esta orden fue contrastada en 10 pasadas VERDUGO y 10 JUEZ sobre el **encargo**, no sobre código al que el Director no tiene acceso.
+**ORDEN ÚNICA ACTIVA — 20-11-2026 UTC / 19-11-2026 en Colombia.** Sustituye la V2 del PR documental #2 y las órdenes C2 previas; mismo gate C2, **no** otra fase de producto ni auditoría. Ejecuta el trabajo, no generes otro prompt. ChatGPT Director inspeccionó el ZIP nuevo `JOR-H9-C2-PHYSICAL-RUNNER-SAFE-20261119-UNICO.zip` (SHA256 `6EED1CA6A13558303D20435A744F95F16B7ED5A3135E4639F18DA6A845F5F4B5`, CRC PASS, manifiesto 8/8). Resultado: `BLOCKED_RUNNER_POLICY`: el SDK Flutter 3.47.8, incluso con `flutter drive --use-existing-app`, inicializa un lector `adb logcat -v time` **global** que puede transmitir tags de otros procesos. No se instaló ni inició el APK. **PROHIBIDO repetir `flutter drive`, `flutter test` o cambiar el Flutter SDK** para evadirlo.
+
+## Orden y límites invariantes
 
 ```text
-TASK=JOR-H9-C2-PHYSICAL-RUNNER-SAFE-20261119
+TASK=JOR-H9-C2-PHYSICAL-DART-DIRECT-20261120
+WIP=D:\codex\Jornato
+OUTPUT=D:\codex\_REPORTES\Jornato\JOR-H9-C2-PHYSICAL-DART-DIRECT-20261120
 OWNER_NOW=CODEX_LUNA
-OWNER_AFTER_ONE_ZIP=CHATGPT_DIRECTOR
-ROOT=D:\codex\Jornato
-OUT=D:\codex\_REPORTES\Jornato\JOR-H9-C2-PHYSICAL-RUNNER-SAFE-20261119
-AUTHORIZATION=PHYSICAL_PHONE_SCOPED_JORNATO_QA_GRANT_ALREADY_RECEIVED
-TARGET_SERIAL=RESOLVE_EXACT_ONE_PHYSICAL_DEVICE; NEVER_EMIT_IN_ZIP
-PACKAGE=com.sierraglobalcompany.jornato.b14qa
-APK=build/app/outputs/flutter-apk/app-b14qa-debug.apk
-APK_PREVIOUS_SHA256=BEEA46F75B08CFA440A980BCEE4CC12E2A6B4C7B37A9457B16240C5427157593
-FLUTTER=3.47.8_REPORTED; VERIFY_INSTALLED_SDK
-REMOTE_PUSH_MERGE_COMMIT=FORBIDDEN
-NATIVE_PASS=UNPROVEN
-H9_GLOBAL=NO_GO
+OWNER_AFTER_SINGLE_ZIP=CHATGPT_DIRECTOR
+TARGET_PHONE=EXACTLY_ONE_CONNECTED_AUTHORIZED_PHYSICAL_ANDROID
+QA_PACKAGE=com.sierraglobalcompany.jornato.b14qa
+QA_APK=build/app/outputs/flutter-apk/app-b14qa-debug.apk
+EXPECTED_SHA256=BEEA46F75B08CFA440A980BCEE4CC12E2A6B4C7B37A9457B16240C5427157593
+APP_TEST_ENTRYPOINT=integration_test/kiosk_flow_test.dart
+HOST_DRIVER=test_driver/integration_test.dart
+FLUTTER_RUNNER=FORBIDDEN
+LOGCAT_GLOBAL=FORBIDDEN
+LOGCAT_HOST_POST_FILTER=FORBIDDEN
+ADB_LOGCAT_ON_DEVICE_PID_ONLY=PERMITTED
+GIT_ADD_COMMIT_PUSH_PULL_MERGE_RESET_STASH_CLEAN=FORBIDDEN
 RELEASE=NO_GO
 ```
 
-## 0. Decisiones técnicas ya resueltas — sin más investigación general
+**Autorización vigente:** propietario autorizó «usa el celular que esta conectado y disponible» solo para QA sintética Jornato. No permite borrar, reemplazar, desinstalar apps, `pm clear`, acceso a logs de otros procesos/usuarios, root, reiniciar celular, usar AVD/otros teléfonos, alterar permisos globales, instalar herramientas, tocar datos reales ni redes Pro.
 
-1. **Fuente/artefacto demostrado:** El ZIP `JOR-H9-C2-PHYSICAL-ANDROID-QA-20261119-UNICO.zip`, SHA256 `6E58737061FA00D9CF60F630758D3C4E66CCF0F161027E83A641417C173BC278`, fue inspeccionado por ChatGPT: 9 miembros, CRC correcto y manifiesto 8/8. El informe y `logs/build_offline_success.log` registran `gradlew --offline :app:assembleB14qaDebug -Ptarget=integration_test/kiosk_flow_test.dart -Ptarget-platform=android-arm64 -Pdart-defines=...`, **BUILD SUCCESSFUL**. APK `app-b14qa-debug.apk` SHA256 arriba, app ID aislado, debug, Android 30 arm64 en un teléfono, paquete exacto ausente entonces. Bytes del APK **no están dentro del ZIP**: verificarlos en el checkout local antes de instalarlos. **NO construir otro APK** salvo que el archivo local no exista y haya que reconstruirlo con el MISMO entrypoint; si su SHA cambia sin modificación fuente explicable, no instalar a ciegas.
-2. **Causa del bloqueo anterior:** `flutter test integration_test/...` en Flutter 3.47.8 instala con `-r`, podría desinstalar tras error y al cerrar. Este runner es **PROHIBIDO** para el teléfono. No volver a examinar todo el SDK: hacer una comprobación focal de `drive.dart`/`drive_service.dart` instalados y el help real para el camino `--use-existing-app`. Código upstream `drive.dart` muestra que con este flag llama a `reuseApplication(uri,...)` en lugar de `start(...)` y por defecto mantiene la app; no significa por sí mismo que las aserciones estén en la app (en este caso, el build **ya utilizó el target de integración**). Referencias: `https://codebrowser.dev/flutter/flutter/packages/flutter_tools/lib/src/commands/drive.dart.html`, `https://docs.flutter.dev/testing/integration-tests`, `https://github.com/flutter/flutter/blob/master/packages/integration_test/README.md`, `https://android.googlesource.com/platform/packages/modules/adb/+/refs/heads/main/docs/user/adb.1.md`.
-3. **Autorización exacta:** El propietario dijo «usa el celular que esta conectado y disponible». Se permite **instalar una vez un paquete QA nuevo ausente, iniciarlo y ejecutar tests sintéticos**, en un único celular físico identificado por serial. NO se permiten `-r`, desinstalar, `pm clear`, `--no-uninstall` como falsa protección, cambiar ajustes/roles/permisos del teléfono, root, reset, capturar otras apps/datos, usar ocho AVD ajenos o otros dispositivos. No suponer autorización nueva para redes Pro, tenancy real ni publicar.
-4. **Resultados históricos que NO debes repetir:** H9-M1 75 tests host PASS, Laravel bootstrap normal PASS, B21F-S3 backend 158/2450 PASS_SCOPED, F1 test visual PASS_FOCAL, C2 readiness Flutter analyze PASS y APK QA ya compilado. El test nativo (`integration_test/kiosk_flow_test.dart`) **AÚN NO SE HA EJECUTADO**. `PRO_HTTP_DB` y `TENANT_ISOLATION` siguen bloqueados por contratos/identidades QA no autorizadas. `RELEASE=NO_GO`.
-5. **Una sola ruta, sin ping-pong:** P0 cotejar paquete+APK+fuente+runner → P1 instalar una sola vez → P2 iniciar y ejecutar test empaquetado con driver adjuntado → P3 aceptar o identificar fallo causal y, si existe soporte seguro YA PRESENTE, verificar restart → P4 ZIP único. **No crear un framework ni otro plugin o motor de cifrado.** No hacer otra auditoría 10+10 ni otra prueba visual.
+## P0 — Comprobación focal (sin repetir preparaciones)
 
-## P0 — Prefiltro determinista y custodia (lectura, sin alterar el teléfono)
+1. **Custodia WIP:** constatar rama/HEAD/status e índice sin cambiarlos. Histórico, no forzar igualdad: `codex/jor-b08-h4-domain-20261025` / `faf5fe283191f8b5a2724b397009512a2caec1b6`, 234 entradas, 0 staged; marker Kotlin `.salive` ausente. Tomar SHA PRE de archivos objetivo y de APK, especialmente si están como `??`. Detener solo ante colisión simultánea real. **No descargar nada ni correr tests host/Android ya aprobados.**
+2. **Conservar APK listo:** cotejar SHA256 del binario existente con `BEEA...7593`, tamaño previo 112.605.171 bytes, app ID QA, actividad `com.sierraglobalcompany.jornato.MainActivity`, firma debug, target de integración demostrado por el build Gradle histórico `-Ptarget=integration_test/kiosk_flow_test.dart`; fuente previa SHA256 `30267B4110336B479437CFFE3C31392EF67CD32DEDC684F2179EC47808BB3E30`. Si falta o no coincide sin causa documentable, `BLOCKED_ARTIFACT`; **no recompilar a ciegas**.
+3. **Un solo teléfono:** identificar un único serial físico en estado `device`, Android API/ABI compatibles. Todos los ADB deben usar `adb -s SERIAL ...`. Comprobar paquetes **exactos** `com.sierraglobalcompany.jornato.b14qa` y `.test` por perfil observable, justo antes de instalar; si algún ID existe o no puede comprobarse su ausencia, `BLOCKED_PACKAGE`, sin borrar ni reemplazar. Nunca inspeccionar otras apps ni exportar serial/IMEI al ZIP.
+4. **Verificar la ruta alternativa EN EL SDK INSTALADO, solo lectura:** confirmar que el driver host preexistente importa `package:integration_test/integration_test_driver.dart` y llama a `integrationDriver()`, que esta función usa `FlutterDriver.connect()` y `requestData(null)` y que el driver lee `VM_SERVICE_URL` del entorno del proceso host. Revisar solo el código Dart local de esa dependencia. **Ejecutar el driver con el Dart SDK del Flutter instalado (`dart run test_driver/integration_test.dart` o invocación equivalente de `dart` que use `.dart_tool/package_config.json`) SIN invocar `flutter drive` ni `flutter test` ni leer logcat global.** Si el driver llama internamente al Flutter tool, a `adb logcat` sin `--pid` o requiere descarga, bloquear y documentar `BLOCKED_DIRECT_DRIVER_POLICY` antes de instalar.
+5. **Comprobar logcat estrictamente por PID antes de instalar:** consultar `adb -s SERIAL shell logcat --help` o herramienta local equivalente **sin abrir buffer de logs**, confirmar soporte de `--pid=<PID>` en el dispositivo. El argumento debe filtrarse en el **dispositivo**, no lanzar `adb logcat -v time` y filtrar texto en PowerShell. No `logcat -c`, no dumps globales, no leer tags por whitelist. Confirmar un procedimiento sencillo para detectar la URI de Dart VM Service **solo desde líneas emitidas por el PID del paquete QA**; si no existe canal seguro, `BLOCKED_VM_SERVICE_POLICY`.
 
-1. Abrir `D:\codex\Jornato` existente. Registrar rama, HEAD, `git status --porcelain=v1 -uall`, staged e índice; no forzar a coincidir con históricos de 235/234 rutas. Proteger mediante copias PRE y SHA-256 **solo los archivos específicos que se editen**, en `OUT` fuera del WIP. Los archivos `??` no se cubren con `git diff`; prohibido `git add/commit/push/pull/merge/rebase/reset/clean/stash/checkout`. No tocar Docker, datos reales, otros proyectos ni archivos de usuarios. El `.salive` Kotlin que desapareció en la compilación anterior es transitorio: registrarlo, no recrearlo.
-2. Identificar exactamente UN dispositivo físico ADB en estado `device`, Android 30 u otro valor observado, sin emuladores seleccionados, con serial estable. **Todos los comandos ADB llevan `-s SERIAL`**, incluido logcat y forwards. Si cero/múltiples elegibles, `BLOCKED_DEVICE`; no adivinar. No incorporar serial, propiedades de identidad ni URI con token al ZIP.
-3. Verificar read-only por **igualdad exacta** el ID `com.sierraglobalcompany.jornato.b14qa` y cualquier sufijo `.test` en **todos los usuarios/perfiles instalados observables** (o bloquear si falta visibilidad). `pm path`/`pm list packages` sobre nombres precisos; no inferir ausencia del exit=0 de la consulta global. Si el paquete existe, incluso con datos desconocidos, `BLOCKED_PACKAGE`, **no reemplazar, desinstalar, ni limpiar**. No consultar paquetes ajenos ni exportar inventario global. Revalidar presencia **inmediatamente antes** del único install.
-4. Comprobar en el archivo APK real: ruta, SHA256, `aapt dump badging`/herramienta instalada para `applicationId`, Activity/manifest, flavor `b14qa`, firma debug, ABI, minSdk y **que su compilación corresponde al punto de entrada `integration_test/kiosk_flow_test.dart`**, según log Gradle correlacionado con insumos SHA y fecha. PRE de fuente C2 reportado en bloque anterior: SHA256 `30267B4110336B479437CFFE3C31392EF67CD32DEDC684F2179EC47808BB3E30`; comprobar el actual sin sobrescribir si difiere. **El APK ya construido es la ruta preferida.** Si falta o está corrupto, permitir **UNA** reconstrucción offline *idéntica* desde ese target usando la orden Gradle corregida demostrada (no la ruta relativa incorrecta que falló). Si fuente/Gradle han cambiado sin atribución o el nuevo artefacto no puede verificarse, `BLOCKED_ARTIFACT` y no instalar. No volver a reconstruir por no encontrar el driver host.
-5. Comprobar que la misma suite `integration_test/kiosk_flow_test.dart` contiene `main()` y `IntegrationTestWidgetsFlutterBinding.ensureInitialized()` o su equivalente real y que el APK no cambia por pasar un `--target` a `drive` **después de compilar**. Host driver: si ya existe `test_driver/integration_test.dart`, reutilizar; si falta pero `integration_test` ya está en dependencias y existe driver oficial, **única adición opcional** al WIP es el mínimo estándar `import 'package:integration_test/integration_test_driver.dart'; Future<void> main() => integrationDriver();`, sin packages nuevos, analizando solo ese archivo. Ese driver HOST no obliga a reconstruir APK. Capturar PRE de la ruta si ya existe. **No programar una nueva suite antes de haber ejecutado la actual.**
-6. `flutter drive --help` y lectura focal de `drive.dart` **exactamente instalado**: confirmar que `--use-existing-app=URI` llama a `reuseApplication`, no a `start`/install, y que `--keep-app-running` impide `stop`/uninstall; confirmar cómo asigna dispositivo y el driver host. Si no puede demostrarse, `BLOCKED_RUNNER_POLICY`, no ejecutar ningún comando Flutter sobre el celular. Prohibido `flutter test integration_test/...`, `flutter run` y `flutter drive` sin `--use-existing-app`. Consultar opciones con `--help` no ejecuta aplicaciones.
+**Base técnica contrastada externamente por ChatGPT:** `integrationDriver()` usa `FlutterDriver.connect()` y `driver.requestData(null)`; el método `FlutterDriver.connect` recibe `dartVmServiceUrl` o `VM_SERVICE_URL`; documentación oficial: https://api.flutter.dev/flutter/package-integration_test_integration_test_driver/integrationDriver.html y https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/connect.html . El runner Flutter Tool es el que contiene el lector global, no el driver Dart estándar. **Esto es una ruta viable propuesta, NO una ejecución nativa certificada.** El SDK local y la conexión real son las fuentes decisivas.
 
-## P1 — ÚNICA instalación manual no reemplazable
+## P1 — Una instalación, una ejecución nativa, sin cambios de producto
 
-7. Solo con P0 completo: revalidar ausencia del ID exacto, hash del APK y serial; **UNA** invocación `adb -s SERIAL install -t RUTA_APK` (con PowerShell quoting adecuado; **sin** `-r`, `-d`, `-g`, `--instant`, `--user all`, flags de fallback). Guardar comando saneado, exit y respuesta. Si falla, **no repetir ni cambiar flags**; `BLOCKED_INSTALL`. La instalación del paquete QA nuevo es parte del permiso concedido. Si no existe un APK QA cuyos bytes y target sean fiables, no instalar un producto normal solo para abrir UI.
-8. Si la instalación devuelve `Success`, comprobar el paquete exacto y resolver su `Activity` **desde manifest / PackageManager del propio paquete QA**. Una sola invocación `adb -s SERIAL shell am start -n PAQUETE/ACTIVITY_REAL`. Si falla, detener `BLOCKED_LAUNCH`, sin reinstalar. **Dejar instalada la app QA** al terminar; no borrar datos como limpieza implícita. Nunca lanzar Activities de otros paquetes, ni tocar permisos sensibles, ni usar `monkey`.
-
-## P2 — Conectar y obtener pruebas nativas reales, no un exit aparente
-
-9. Obtener PID **solo del paquete QA** tras su inicio y, mediante logcat estrictamente filtrado a ese PID y serial, detectar si la aplicación debug publica una VM Service URI de **ese proceso**. Redactar token de URI/serial antes de redactar logs de salida. Si hace falta forward ADB, elegir un puerto libre y establecer **uno** exclusivamente para ese serial, registrando PRE; retirar al final solamente el forward que creaste tú, no `--remove-all`. No limpiar logcat global ni recolectar datos de otras apps. Si no hay VM Service accesible o no se puede atribuir al APK instalado, `BLOCKED_VM_SERVICE`.
-10. Con URL real y driver host disponible, invocar **una sola vez** la orden conceptual, sustituyendo valores comprobados y con opción `--timeout` finita si la versión la admite:
+6. Solo si P0 pasó: revalidar paquete ausente + APK/hash/serial justo antes de ejecutar UNA vez `adb -s SERIAL install -t RUTA_APK`, **sin `-r`, `-d`, `-g`, `--instant`, uninstall ni flags de fallback**. Si falla, registrar `BLOCKED_INSTALL`; no reintentar. Si pasa, comprobar paquete QA exacto y lanzar UNA vez únicamente `adb -s SERIAL shell am start -n com.sierraglobalcompany.jornato.b14qa/com.sierraglobalcompany.jornato.MainActivity` (reconfirmar Activity del manifest, no confiar ciegamente en la ruta de ejemplo). **Dejar el APK instalado** para preservar la evidencia; no limpiar ni desinstalar.
+7. Con app QA iniciada, obtener `PID` exclusivamente de `pidof` para ese paquete y corroborar proceso/actividad. Ejecutar solo lectura **`adb -s SERIAL shell logcat --pid=<PID> -d -v time`** o variante PID-only soportada, capturando **solo logs del proceso QA**. Verificar que el PID no cambió; no guardar en ZIP la URI completa de VM Service ni su token. Obtener la URI real del VM Service desde ese flujo, jamás inventarla. Si solo aparecen mensajes del sistema de otro PID, **NO** leer logcat global para hallar la URL: `BLOCKED_VM_SERVICE`.
+8. Si existe URI de servicio y requiere `adb forward`: verificar `adb -s SERIAL forward --list` y elegir un puerto local libre; crear solo el forward de ese paquete/dispositivo, registrar el identificador para retirar **solo el forward que creaste** al terminar. Construir URI de host `http://127.0.0.1:PUERTO_HOST/SEGMENTO_PRIVADO/` sin imprimir el segmento en logs ni guardarlo en archivo de entrega; probar conectividad solo a ese VM Service. Si no se puede, `BLOCKED_VM_SERVICE` y parar conexión, sin desinstalar.
+9. Iniciar **una sola vez** el driver host Dart ya existente **como proceso local** con `VM_SERVICE_URL` en su entorno **solo para ese proceso**, sin invocar Flutter CLI (`flutter drive`/`flutter test`/`flutter run`). Ejemplo CONCEPTUAL PowerShell, sustituir variables por valores verificados y no imprimir URI:
 
    ```powershell
-   flutter drive -d SERIAL --no-pub --driver=test_driver/integration_test.dart --target=integration_test/kiosk_flow_test.dart --use-existing-app=URI_DEL_PROCESO_QA --keep-app-running
+   # Establecer $env:VM_SERVICE_URL para este proceso host, NO como variable global permanente.
+   # Desde D:\codex\Jornato, usando el SDK Dart instalado y dependencias cacheadas:
+   dart run test_driver/integration_test.dart
+   # Restaurar inmediatamente el valor previo de la variable del proceso, si lo había.
    ```
 
-   **Este `--target` sirve para identificar el driver/test declarado; NO recompila ni cambia el punto de entrada del APK ya instalado.** Sólo ejecutar tras P0: probar que **el dispositivo no recibirá otra instalación ni desinstalación por ese camino de la CLI real**. Guardar logs sanitizados, exit y test individual; **un solo intento**. Si no conecta, detener `BLOCKED_DRIVER_CONNECT` sin intentar el runner inseguro ni modificar SDK. Si conecta pero no se observan las aserciones esperadas, `INCONCLUSIVE_TEST_NOT_EXECUTED`, no falso PASS.
-11. Gates **independientes**, atribuidos al SHA APK y al test ejecutado: `CIPHER_ENGINE` = motor SQLCipher real más archivo no legible como SQLite plano, clave errónea rechazada y readback legítimo; `KEYSTORE_EFFECTIVE` = evidencia de ruta nativa del proveedor de clave y manejo de fallo/recuperación en Android (distinguir `PLUGIN_PATH_PASS` de Keystore efectiva y de **hardware attestation no verificada**); `IDEMPOTENCY_NATIVE` = reintento con mismo ID/payload no duplica y conflicto ID/carga diferente rechazado; `CORRUPTION_FAIL_CLOSED` = únicamente copia sintética corrupta y rechazo observable (si byte alterado no afecta lectura, `INCONCLUSIVE`). Cada gate `PASS_PHYSICAL|FAIL_PHYSICAL|INCONCLUSIVE|NOT_RUN` — sin `PASS` si solo se encuentra `cipher_version`, un import, build exitoso o proceso vivo. No copiar DB real, secretos ni claves, ni capturas de apps ajenas.
+   Exigir un límite de tiempo con supervisor externo estándar de PowerShell si el driver no lo incorpora, sin alterar SDK ni test. El `exit=0` **solo** acredita los tests si el driver confirma respuestas `integrationDriver()`/`requestData` correspondientes al paquete, PID, source test y APK exactos; no inferir PASS de conexión, arranque o `cipher_version`. Si error, `BLOCKED_DIRECT_DRIVER_CONNECT` o `FAIL_TEST` por causa observada, SIN reinstalar/reintentar otras rutas.
+10. Clasificar separadamente resultados: `CIPHER_ENGINE` (SQLCipher y archivo no plano, clave incorrecta/no-key rechazada, readback legítimo), `KEYSTORE_EFFECTIVE` (camino real Android del proveedor seguro y recuperación, **no inferir hardware-backed/attestation de plugin**), `IDEMPOTENCY_NATIVE` (mismo ID una vez, payload conflictivo rechazado), `CORRUPTION_FAIL_CLOSED` (rechazo observable de copia sintética, original intacto). Si algún oráculo no se ejecutó u observó, `INCONCLUSIVE`/`NOT_RUN`; no modificar expectativa para que pase.
 
-## P3 — Reinicio nativo y reparación focal SIN reinstalar
+## P2 — Reinicio verdadero y estado contractual
 
-12. **NO existe todavía en la evidencia un harness de dos fases**: `LocalEncryptedStore.close/open` dentro del mismo proceso **no** prueba `RESTART_READBACK`. Para evitar reconstrucción/instalación adicional y una nueva batería de cambios a ciegas, **NO reescribir la prueba ni recompilar antes de intentar los cuatro gates de P2**. Si el APK YA contiene marcador persistido y driver de dos fases, y puede demostrarse con fuente/resultado, ejecutar de forma segura: fase 1, detener **exclusivamente** `com.sierraglobalcompany.jornato.b14qa` tras terminar la captura, iniciar otra vez el mismo paquete sin reinstalar, nueva URI, fase 2 verifica IDs y eventos persistidos antes de mutarlos. Si **no** existe tal harness, `RESTART_READBACK=BLOCKED_HARNESS` de forma expresa; no improvisar un `force-stop` sobre test/driver vivo ni vender un readback en el mismo proceso como recuperación. No reiniciar el teléfono, borrar app, limpiar datos ni forzar otro paquete.
-13. Si un test físico demuestra bug reproducible, registrar método/archivo y la entrada sintética exacta sin secretos. Corregir **solo** la causa propietaria en el WIP y el test afectado, sin `skip/xfail`, parches superficiales, DB/endpoint nuevos, dependencias/roles ni alteración de contratos OD01–08. Si esa corrección exige recompilar/reinstalar, queda `FIX_WRITTEN_NOT_RERUN_PHYSICAL` hasta un despliegue seguro posterior; **no utilizar `-r`** ni desinstalar para insistir en esta sesión. Ejecutar host/analyze solo de lo tocado. Si hay fuente untracked, incluir parche propio PRE→POST real.
-14. `TENANT_ISOLATION` y `PRO_HTTP_DB` = `BLOCKED_CONTRACT` sin credenciales y fixture autorizados. No abrir Docker/MariaDB, no probar contra servidor o cuentas reales, no repetir 75 tests host, Laravel, F1 ni 10+10 auditorías. `H9_GLOBAL` y `RELEASE` continúan `NO_GO` aunque C2 dé PASS focal.
+11. `RESTART_READBACK` requiere cerrar un proceso y que **otro proceso nuevo** lea el mismo marcador cifrado/ID sin reinstalación ni `pm clear`. El ZIP anterior documenta **NO HARNESS DOS FASES**. No crear API/canal nuevo ni reescribir suite antes de obtener los 4 subgates. Si el APK existente incluye protocolo dos fases demostrable, realizarlo solo tras terminar driver y preservar datos sintéticos: stop **únicamente paquete QA**, nuevo proceso/URI/PID, readback de mismo evento. Si no existe, `BLOCKED_HARNESS`. No confundir `LocalEncryptedStore.close/open` con restart.
+12. `TENANT_ISOLATION=BLOCKED_CONTRACT` y `PRO_HTTP_DB=BLOCKED_CONTRACT` sin identidades/roles QA aprobadas; no crear cuentas ni redes externas. B21F-S3 suite 158/2450 PASS_SCOPED, H9-M1 75 host PASS, F1 widget PASS_FOCAL, bootstrap Laravel PASS reportados y **reutilizados**; no reejecutar por inercia. H9_GLOBAL=NO_GO y RELEASE=NO_GO.
+13. Si el test descubre un fallo concreto en el código, preservar PRE, corregir **solo propietario** en el WIP, `flutter analyze --no-pub` y prueba host focal afectada; **no** reinstalar ni actualizar APK QA para retest en esta autorización. Declarar `FIX_WRITTEN_NOT_RERUN_PHYSICAL`. Sin stage/commit/push/merge. Si WIP no cambió: `CHANGED_FILES=NONE`.
 
-## P4 — Un solo ZIP de evidencias (no filtrar información del teléfono)
+## P3 — ÚNICO ZIP: cierre atribuible y privacidad
 
-15. Guardar solamente: `FINAL_REPORT.md` (máx. 2 págs.), `RESULTS.csv` (gate/test real/estado/exit/SHA fuente/SHA APK/log_path/log_sha256), `WIP_PRE_POST.csv` con hashes focales, `CHANGES.patch` **solo si hay cambios fuente**, logs focales filtrados y sanitizados (sin serial, URI VM, token, certificados privados, nombres de persona), `BLOCKERS.md` solo si bloqueos reales y `MANIFEST_SHA256.csv` sin autorreferencia. Si algún paso falla, reportarlo: jamás reemplazarlo por un PASS de fuente. Verificar ZIP CRC, entradas, SHA256+bytes después de cerrarlo. **No incluir el APK, datos DB, archivo de clave, fotos, ni WIP completo**.
-16. Ruta exacta `D:\codex\_REPORTES\Jornato\JOR-H9-C2-PHYSICAL-RUNNER-SAFE-20261119\delivery\JOR-H9-C2-PHYSICAL-RUNNER-SAFE-20261119-UNICO.zip`. Reportar su SHA-256 en el mensaje terminal. Nada de seis archivos sueltos. Mantener staging en cero, sin commit/push/merge/deploy/Actions. GitHub público lo actualiza ChatGPT Director tras revisar ZIP.
-
-## Resultado terminal obligatorio
+14. Generar **un solo archivo nuevo** (no sobrescribir ZIP previo): `D:\codex\_REPORTES\Jornato\JOR-H9-C2-PHYSICAL-DART-DIRECT-20261120\delivery\JOR-H9-C2-PHYSICAL-DART-DIRECT-20261120-UNICO.zip` con `FINAL_REPORT.md` (resultados reales), `RESULTS.csv` (por gate, estado, fuente/APK SHA, comando y exit, ruta/hash de log), `WIP_PRE_POST.csv` (incluye untracked y APK), logs **únicamente QA PID y host Dart sanitizados**, `BLOCKERS.md` si aplica, `CHANGES.patch` si hay edición real, `MANIFEST_SHA256.csv` (miembros sin manifiesto, bytes+hash). Verificar CRC/8+ SHA y SHA256 final fuera del ZIP. **No incluir APK, secretos, VM URI, serial, fotos, DB ni logs de otros PID**. Nota: el reporte anterior contenía interpolaciones literales de shell en `FINAL_REPORT.md` (`$branch`, `$head`, `$...`); evitarlo: reportar rama/HEAD como valores verificados y usar logs CSV como respaldo, no copiar status completo al informe.
+15. **Terminal precisa, sin PASS ficticio**:
 
 ```text
-TASK=JOR-H9-C2-PHYSICAL-RUNNER-SAFE-20261119
-RESULT=PASS_NATIVE_SUBSET|PARTIAL|BLOCKED_ARTIFACT|BLOCKED_PACKAGE|BLOCKED_DEVICE|BLOCKED_RUNNER_POLICY|BLOCKED_INSTALL|BLOCKED_LAUNCH|BLOCKED_VM_SERVICE|BLOCKED_DRIVER_CONNECT|INCONCLUSIVE_TEST_NOT_EXECUTED
+TASK=JOR-H9-C2-PHYSICAL-DART-DIRECT-20261120
+RESULT=PASS_NATIVE_SUBSET|PARTIAL|BLOCKED_ARTIFACT|BLOCKED_PACKAGE|BLOCKED_DEVICE|BLOCKED_VM_SERVICE_POLICY|BLOCKED_VM_SERVICE|BLOCKED_DIRECT_DRIVER_POLICY|BLOCKED_DIRECT_DRIVER_CONNECT|FAIL_TEST
 SOURCE_BRANCH=<real>
 SOURCE_HEAD=<real>
-CHANGED_FILES=<lista o NONE>
 WIP_PRESERVED=YES|PARTIAL_EVIDENCE|NO
-QA_PACKAGE=com.sierraglobalcompany.jornato.b14qa
-APK_SHA256=<verificado desde binario real o NOT_AVAILABLE>
-APK_ENTRYPOINT=integration_test/kiosk_flow_test.dart|UNVERIFIED
+CHANGED_FILES=<ruta(s) o NONE>
+APK_SHA256=<real o NOT_AVAILABLE>
+PACKAGE_ISOLATION=PASS|BLOCKED
 MANUAL_INSTALL=PASS_NEW_PACKAGE|NOT_RUN|FAIL
-DRIVER_ATTACHED=PASS|FAIL|NOT_RUN
+DART_DIRECT_DRIVER=PASS|FAIL|NOT_RUN
+PID_ONLY_LOGCAT=PASS|NOT_RUN|BLOCKED
 CIPHER_ENGINE=PASS_PHYSICAL|FAIL_PHYSICAL|INCONCLUSIVE|NOT_RUN
-KEYSTORE_EFFECTIVE=PASS_PHYSICAL|PLUGIN_PATH_PASS_ONLY|FAIL_PHYSICAL|INCONCLUSIVE|NOT_RUN
+KEYSTORE_EFFECTIVE=PASS_NATIVE_SCOPED|PLUGIN_PATH_PASS_ONLY|FAIL_PHYSICAL|INCONCLUSIVE|NOT_RUN
 IDEMPOTENCY_NATIVE=PASS_PHYSICAL|FAIL_PHYSICAL|INCONCLUSIVE|NOT_RUN
-CORRUPTION_FAIL_CLOSED=PASS_PHYSICAL|FAIL_PHYSICAL|INCONCLUSIVE|NOT_RUN
+CORRUPTION_FAIL_CLOSED=PASS_COPY_SCOPED|FAIL_PHYSICAL|INCONCLUSIVE|NOT_RUN
 RESTART_READBACK=PASS_NEW_PROCESS|BLOCKED_HARNESS|FAIL|NOT_RUN
 TENANT_ISOLATION=BLOCKED_CONTRACT
 PRO_HTTP_DB=BLOCKED_CONTRACT
 H9_M1_HOST_75=REUSED_PASS_NOT_RERUN
 F1_WIDGET=REUSED_PASS_FOCAL_NOT_RERUN
-PHYSICAL_DEVICE_OTHER_PACKAGES_TOUCHED=NO|UNKNOWN
 H9_GLOBAL=NO_GO
 B22=NOT_AUTHORIZED
 RELEASE=NO_GO
-ZIP_PATH=<única ruta real>
-ZIP_SHA256=<verificado>
+ZIP_PATH=<único ZIP real>
+ZIP_SHA256=<SHA comprobado>
 NEXT_OWNER=CHATGPT_DIRECTOR
 ```
 
-**Regla de aceptación:** `PASS_NATIVE_SUBSET` únicamente si hay aserciones nativas reales ejecutadas con evidencia en celular sobre el APK/test correcto; los otros gates pueden permanecer inconclusos, debidamente marcados. Un `exit=0` de `adb install`, un VM Service conectado o un APK que abre NO certifican SQLCipher/Keystore. `PASS_NEW_PROCESS` exige dos procesos y readback del mismo marcador. Sin driver seguro, devolver bloqueo específico y **no solicitar otra auditoría o permiso ya concedido**.
+**Antiping-pong:** si P0 falla por evidencia material nueva, documentar ese bloqueo concreto y hacer solo los análisis no invasivos restantes; NO volver a auditar el prompt ni probar otras variantes en bucle. Si P0 pasa, avanzar directamente a la única instalación y la prueba nativa. No publicar WIP a GitHub hasta reconciliarlo, sin confundir PR #3 F0 con el trabajo avanzado de Windows.
 
-# 🚨 QUIÉN SIGUE: CODEX LUNA — PROBAR EL APK DE INTEGRACIÓN YA COMPILADO, UNA INSTALACIÓN, UN TEST. DESPUÉS DEL ZIP: CHATGPT DIRECTOR. 🚨
+# 🚨 SIGUE CODEX LUNA — DRIVER DART DIRECTO + LOGCAT FILTRADO EN DISPOSITIVO. DESPUÉS DEL ZIP: CHATGPT DIRECTOR. 🚨
