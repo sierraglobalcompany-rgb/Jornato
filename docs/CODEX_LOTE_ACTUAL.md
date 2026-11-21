@@ -1,107 +1,115 @@
-# CODEX LUNA — JORNATO — N1-R2 MACROBLOQUE ÚNICO DE EJECUCIÓN: CUSTODIA REAL + KIOSCO GRATIS LOCAL OFFLINE COMPLETO EN HOST
+# CODEX LUNA — JORNATO · N2 MACROBLOQUE ÚNICO · RECUPERAR SDK EXISTENTE Y CERTIFICAR KIOSCO OFFLINE EN HOST
 
-> **EJECUTAR, NO VOLVER A AUDITAR NI VOLVER A PEDIR OTRO PROMPT.** Este archivo **SUSTITUYE N1 original** (que limitaba la corrección a un solo defecto), y NO es otra versión de C2. Director = ChatGPT; manos = Codex Luna. Objetivo: completar **de punta a punta** la misma vertical kiosco offline usando clases y almacén existentes, arreglando todos los **defectos demostrados dentro de esa vertical** en un solo lote seguro, y proteger la fuente antes de editar. NUNCA declarar lanzamiento o PASS físico por pruebas de host. **Si ya existe un resultado posterior de N1/N1-R2, detenerse y devolver el ZIP previo sin repetir ejecución.**
+**ORDEN ÚNICA PARA EJECUTAR. NO AUDITES EL PROMPT; TRABAJA.** ChatGPT Director adjudicó el ZIP N1-R2 y esta N2 **reemplaza** la orden N1-R2 como ejecutable. No repetir N1-R2, C2 V3/V4/V5, B17/B21F, H9-M1/F1 ni otras auditorías. Si N2 ya se ejecutó o hay agente modificando el mismo WIP, STOP y devuelve solamente evidencia vigente. Director = ChatGPT; ejecutor local = Codex Luna.
 
 ```text
-TASK=JOR-N1-R2-CUSTODIA-KIOSCO-OFFLINE-20261120
+TASK=JOR-N2-SDK-RECOVERY-HOST-GATE-20261120
 WIP=D:\codex\Jornato
-OUTPUT=D:\codex\_REPORTES\Jornato\JOR-N1-R2-CUSTODIA-KIOSCO-OFFLINE-20261120
-DOCS_GITHUB_PR=2
-DOCS_AUTHORITY=docs/CODEX_LOTE_ACTUAL.md
-GITHUB_REPO=sierraglobalcompany-rgb/Jornato
-PR3_HEAD_OBSERVED_BEFORE_RUN=104469b119752f395cf9881e732d582feab9db4e
-WIP_HEAD_HISTORICAL=faf5fe283191f8b5a2724b397009512a2caec1b6
-C2_V5_RESULT=BLOCKED_VM_SERVICE
-C2_V5_ZIP_SHA256=711116067DDBF73E7CE4AD6A102D58E14AD5372D79A981F48978C54A76B35692
+N1R2_OUTPUT=D:\codex\_REPORTES\Jornato\JOR-N1-R2-CUSTODIA-KIOSCO-OFFLINE-20261120
+N2_OUTPUT=D:\codex\_REPORTES\Jornato\JOR-N2-SDK-RECOVERY-HOST-GATE-20261120
+N1R2_ZIP_SHA256=5EACC3643A00D0EC338E1EB62698A1B4AEA88C957FD3B113C0BF25B394E61540
+SOURCE_BRANCH_REPORTED=codex/jor-b08-h4-domain-20261025
+SOURCE_HEAD_REPORTED=faf5fe283191f8b5a2724b397009512a2caec1b6
+EXPECTED_HISTORICAL_FLUTTER=3.47.8
+EXPECTED_HISTORICAL_DART=3.13.7
 QA_PACKAGE_ALREADY_INSTALLED_REPORTED=com.sierraglobalcompany.jornato.b14qa
-ANDROID_NATIVE=NOT_RUN
+NEXT_OWNER_AFTER_ONE_ZIP=CHATGPT_DIRECTOR
 RELEASE=NO_GO
-NEXT_OWNER=CHATGPT_DIRECTOR
 ```
 
-## 0. Reglas de trabajo, precedencia y STOP
+## 1. Evidencia que se acepta y NO se repite
 
-**Leyes invariables de PingPongLaw:** L1 KISS/Ponytail (un motor de jornadas + una única fuente de verdad + almacén local ya decidido), L2 antirruido (no auditorías/pruebas redundantes), L3 causa raíz (corrección propietaria), L4 UX humana (estados comprensibles, errores no engañosos), L5 oráculo y evidencia independiente por SHA, L6 antipingpong (un bloque grande + un ZIP). No instalar hooks/skills ni herramientas nuevas. No cambiar criterios de seguridad, semántica de `requestId` y del histórico `requetId`; `SERVER_STORED` NO equivale a `RECOGNIZED`. B19/B20 siguen deny-all salvo contrato posterior.
+1. **N1-R2 termina `PARTIAL_WITH_GAPS`, NO PASS funcional.** ZIP de 10 archivos: 10/10 CRC, 9/9 manifest SHA y tamaño; seis rutas focales ya estaban `??` antes de editar. Codex informa 216 fuentes autorizadas copiadas a snapshot privado en D: (2.904.617 bytes), muestra 5/5 restaurada, WIP 234 estados (223 untracked, 11 modificados, 0 staged), índice igual. Es **custodia focal en el mismo disco**, NO respaldo integral ni fuera del dispositivo. No volver a copiar 216 archivos si la evidencia privada sigue íntegra.
+2. Cambios pendientes **sin prueba ejecutada**: acciones nocturnas hasta fin programado de turno; acumulado local marcado provisional/referencial; pruebas host nuevas de límite nocturno, reapertura SQLite y tarjeta de acumulado. N1-R2 seleccionó siete archivos y 73 declaraciones; `0 PASS/0 FAIL/NOT_RUN`. El ZIP **NO incluye código/diff**; la única fuente de código es el WIP privado y su `N1R2_OUTPUT\private`. No inferir éxito de un informe.
+3. Contradicción del entorno que debes resolver **sin instalar nada**: en C2 V5 `RESULTS.csv` se registró `A2_sdk=PASS` (Flutter 3.47.8, Dart 3.13.7) y `A5_offline_compile=PASS` con package config existente, mientras N1-R2 registra ejecutables `NOT_FOUND` en PATH y rutas estándar inspeccionadas. **No afirmes que es el mismo proceso/máquina ni que el SDK se borró.** Buscar la **procedencia y ubicación** que usó C2 V5, usando registros autorizados locales.
+4. PR #3 F0 sigue siendo comparación histórica read-only; no importar sus módulos: el WIP avanzado tiene propietarios propios. No volver a comparar los 20 archivos si no cambió el HEAD remoto. El puente antiguo del PR2 apunta a otro SHA y no es una orden de merge.
 
-**Prohibiciones absolutas de esta ejecución:**
-- **No tocar teléfono**: no `adb` ni AVD, logcat, package inspection, ports, forward, Activity, install, uninstall, `pm clear`, force-stop, reinicios, `flutter drive`, `flutter run`, `flutter test integration_test` con dispositivo. El APK QA V5 **ya está instalado según el ZIP**. No repetir V3/V4/V5, B17, B21F-S3 (158/2450), H9-M1 (75), F1 widget ni Android C2. No abrir B22, no despliegue.
-- **No alterar Git**: no `git add/commit/push/pull/fetch/merge/rebase/cherry-pick/reset/clean/checkout/stash`, force ni cambio de rama; tampoco GitHub Actions. `git status`, `git diff` y consultas Git locales **solo lectura** sí. Nunca publicar WIP, snapshots, diffs o secretos a GitHub; PR2 es documentación, no repositorio avanzado de producto. No hacer red Pro, cuentas reales, producción, pagos, facturación, ATS, contratos OD.
-- **No descargas**: dependencias, Flutter SDK, SDK Android, Docker/MariaDB o herramientas pagas. Pruebas host únicamente con SDK y paquetes cacheados, sin usar teléfono.
-- **STOP seguro:** ante WIP cambiante por otro agente, imposibilidad de verificar custodia, peligro de pérdida de archivos o violación de privacidad, **no editar**. Generar ZIP de bloqueo. Un servicio fuera de alcance no justifica cambiar arquitectura ni repetir runners.
+## 2. Prohibiciones y leyes
 
-**Regla de alcance funcional:** Codex puede corregir **varios defectos del mismo flujo** UI kiosco → motor de jornadas → almacén local existente → readback/representación, en **un solo lote**. No extender a módulos Pro/tenant/web/RR. HH. Si para satisfacer la vertical se necesita una **nueva DB/capa de servicios, nuevo schema/migración, permiso de ubicación obligatorio, sincronización o un contrato no aprobado**, NO inventar esa arquitectura: marcar ese criterio `BLOCKED_CONTRACT`/`BLOCKED_MISSING_APPROVED_STORAGE` y completar los criterios independientes que no dependan de ella. No reducir arbitrariamente el trabajo a un bug si existen varios defectos comprobados del **mismo propietario**.
+- Mantén L1 KISS/Ponytail: **un solo motor de turnos, el almacén local ya aprobado**; L2 sin suites/auditorías repetidas; L3 corregir causa real, no maquillaje; L4 UX comprensible; L5 evidencia reproducible por SHA; L6 una ejecución, un ZIP, vuelta al Director.
+- **Teléfono absolutamente intocable**: NO `adb`, AVD, PID/logcat, `flutter run/drive`, install, remove, `pm clear`, reabrir APK, forwards, red Pro ni datos reales. El QA instalado en C2 V5 debe permanecer como quedó. No usar Android para compensar falta de SDK host.
+- **No modificar Git ni publicarlo**: prohibidos `git add/commit/push/pull/fetch/merge/rebase/reset/stash/checkout/clean` y Actions. Sí consultas locales read-only. No tocar main/PR1/PR3, ni publicar WIP privado en GitHub público. No asumir permisos de negocio OD01-OD08 ni abrir B22.
+- **Cero descargas, nuevas instalaciones, cambios de PATH global, Flutter upgrade, pub get online, SDK Flutter/Android nuevo, Docker o herramientas pagas**. No tocar otros proyectos, contenedores, datos, servicios ni carpetas privadas ajenas. Si no existe toolchain verificable, detente con un bloqueo técnico preciso, no inventes ambiente ni conviertas esto en otra ronda de arquitectura.
+- Sólo ficheros de **esta vertical** y tests vecinos en WIP. Todo diff, copia, source, manifest de rutas, y evidencias crudas quedan en `N2_OUTPUT\private` sin entrar al ZIP.
 
-## 1. Preparación y guardias (mínima, no otra auditoría)
+## 3. PRE — custodia y no concurrencia (una comprobación focal)
 
-1. En `D:\codex\Jornato`, comprobar directorio, rama, HEAD, staged y `git status --porcelain=v1 -uall`; **histórico orientativo**: rama `codex/jor-b08-h4-domain-20261025`, HEAD `faf5fe...`, 234 estados, 223 untracked, 11 modificados, 0 staged. **No asumir que sigue igual**. Si otro Codex ejecuta u ocurren cambios concurrentes, `BLOCKED_CONCURRENT_WIP`; sin checkout/reset/clean.
-2. Comprobar si ya existe **cierre de N1 o N1-R2 posterior al ZIP V5** en `D:\codex\_REPORTES\Jornato` o en el historial local (solo nombres, fechas y un manifiesto, sin inspeccionar secretos); si hay evidencia válida de la misma tarea, **no duplicar**. Informar `SUPERSEDED_BY_NEWER_RUN` al Director.
-3. Salida bajo `OUTPUT\private\` (**solo local, fuera de ZIP**) y `OUTPUT\delivery\` (**ZIP del retorno**). Resolver rutas y evitar que apunten dentro del WIP, symlinks, junctions, o una carpeta compartida remota. Comprobar espacio suficiente antes de copiar. No tocar archivos de producto hasta que el inventario y copia focal pasen.
+1. Confirmar un único WIP y ausencia de ejecución simultánea. Registrar rama, HEAD, status 234 histórico sin exigir igualdad automática, índice y staged; identificar diferencias nuevas. Buscar una entrega **N2 posterior**: si existe y es válida no repetir. Hacer inventario SHA **solo** de las seis rutas focales de N1-R2 (consultarlas desde `private` y `KIOSK_VERTICAL_MATRIX.csv`, no adivinar nombres) y de los siete tests. Comparar con hash POST privado N1-R2; detener edición si hubo cambios ajenos no conciliables (`BLOCKED_CONCURRENT_WIP`).
+2. Confirmar existencia y acceso de `N1R2_OUTPUT\private\snapshot_*`, inventario e informe de restauración muestral. **Reutilizar** integridad focal y registrar alcance. No crear segundo backup amplio. Antes de *cualquier* modificación adicional, conservar PRE exacto de archivos afectados bajo `N2_OUTPUT\private\before_changes`, junto con SHA, sin copiar secretos. `OFF_DEVICE_BACKUP=NO` sigue fijo. Si no se puede proteger un archivo candidato: `BLOCKED_CUSTODY` y sin editar.
+3. El ZIP recibido N1-R2 **no demuestra por sí mismo la corrección**; fuente, diff y tests viven sólo en Windows. Verificar que los cambios locales efectivamente contienen los comportamientos reportados y registrar SHA. No declarar `PASS_HOST` por análisis estático.
 
-## 2. Custodia real, recuperable EN EL ALCANCE, sin falsa seguridad
+## 4. A — localizar **una vez** el Flutter/Dart que antes funcionó
 
-4. Inventariar SIN seguir enlaces simbólicos: (a) archivos tracked modificados, (b) tracked limpios cuya reconstrucción depende de HEAD Git, (c) untracked fuentes/recursos/configuración **no secreta** necesarios para compilar/entender el código avanzado, (d) ignored críticos y secretos EXCLUIDOS (registrar solo categoría y cantidad). Incluye Dart/Flutter, Laravel/PHP, Android/Kotlin/Java, YAML/manifest, migraciones, scripts, assets imprescindibles, tests y documentación contractual, solo archivos de fuente y configuración autorizados. Excluir `.git`, caches/build, bases, logs, paquetes vendor, secretos, `.env`, keystores, certificados, credenciales, datos de empleados y dispositivos. **No seguir hardlinks/symlinks/junctions**; avisar sobre un archivo ilegible o mutable. No inventariar contenido de otros proyectos.
-5. Crear en `private\snapshot_<identificador>` copia **no pública** de fuentes y configuración autorizadas preservando estructura relativa y SHA-256 de cada archivo incluido, con manifest de rutas internas **privado**. Separar la identidad del commit base y comprobar que Git conserva los objetos de HEAD (`git cat-file -e HEAD^{commit}` solo lectura). Opcionalmente crear `git bundle` **privado** solo si sus objetos/alcance y privacidad son verificables; no hacerlo requisito para declarar copia de fuentes focal. No exportar objetos privados a GitHub ni usar `git add` como supuesto respaldo. No copiar secretos aunque se cataloguen como críticos.
-6. Construir tres verificaciones distintas: `SNAPSHOT_INTEGRITY` = archivo a archivo tamaño+SHA coincidentes y sin cambio de origen durante captura; `RESTORE_SAMPLE` = restaurar muestra representativa de **5 o más, incluyendo untracked y modificado**, fuera del WIP y comparar hashes; `RESTORABILITY_SCOPE` = si el HEAD Git más el snapshot y los recursos excluidos permitirían recuperar el alcance editado. **NO decir «backup completo», «recuperación integral», «backup fuera del dispositivo»**. Queda fijo `OFF_DEVICE_BACKUP=NO` porque todo está en D:. Si la copia es parcial o un recurso esencial está excluido, registrar `RESTORABILITY_SCOPE=PARTIAL` y concretar categoría sin filtrar datos.
-7. Al identificar archivos a editar, guardar PRE exacto de cada uno en `private\before_edits` y hash; si ocurre fallo, preservar ambas versiones sin borrado global, no hacer resets. `BLOCKED_CUSTODY` si no se pueden preservar los candidatos o no hay espacio. No tocar el teléfono para «mejorar» evidencia.
+Este es el único bloqueo de infraestructura que vale la pena perseguir en N2. Realiza un **preflight limitado y causal**, sin búsqueda recursiva de todo `C:\` o `D:\`:
 
-## 3. Reconciliación remota PR3 vs WIP (focal, cero merge)
+1. Pistas exactas, **en este orden**: `Get-Command flutter,dart -ErrorAction SilentlyContinue`, `where.exe flutter`, `where.exe dart`, `$env:FLUTTER_ROOT`, PATH del proceso; `WIP\android\local.properties` (`flutter.sdk`); `WIP\.dart_tool\package_config.json` y su referencia a paquetes Flutter; configuración Flutter del IDE/repositorio si existe; reportes **locales** C2 V5 en `D:\codex\_REPORTES\Jornato\JOR-H9-C2-PHYSICAL-DART-V5-20261120` (especialmente `private`, SDK/kernel o log A2/A5) y el antecedente de compilación del APK `app-b14qa-debug.apk` (`gradle`/script reportado). Las rutas de privacidad sólo se usan para resolver el ejecutable; **no copiarlas al ZIP**.
+2. Para cada candidato derivado de estas pistas, **verificar existencia**, tipo de archivo, versión/cache sin actualizar: `<flutter-root>\bin\flutter.bat` y `<flutter-root>\bin\cache\dart-sdk\bin\dart.exe`. Evitar ejecutar versiones no identificadas y no alterar SDK de otro proyecto. Un `flutter --version` o `dart --version` se ejecuta **una vez como máximo** tras validar que no activará descargas automáticas; si hay riesgo de bootstrap/descarga, clasificar `BLOCKED_SDK_CACHE` y no ejecutar. No cambiar PATH permanente: invocar rutas absolutas verificadas sólo dentro del proceso Codex actual.
+3. Verificar `pubspec.lock`, `.dart_tool\package_config.json`, caché de paquetes y que el SDK tiene dependencias de la vertical accesibles offline. **No ejecutar `flutter pub get` ni instalar paquetes para recuperar el entorno**. Si hace falta materializar cache, solicitar autorización en otro lote; no improvisar.
+4. Emitir una conclusión causal, no genérica: `SDK_FOUND_COMPATIBLE` (versión y cache), `SDK_FOUND_INCOMPLETE`, `SDK_VERSION_MISMATCH`, `SDK_PATH_NOT_RECOVERED`, `SDK_HOST_DIFFERENT_UNDETERMINED`, o `BLOCKED_SDK_CACHE`. Informar **qué pista fue útil y cuáles fallaron** sin incluir rutas personales sensibles. Si no recuperas el SDK, ve directamente a sección 7: un ZIP único de bloqueo con la receta exacta de recuperación/permiso necesario. **No repetir búsquedas ni inventar más trabajo**.
 
-8. PR3 es **Draft y apilado sobre PR1**, HEAD observado previamente `104469b119752f395cf9881e732d582feab9db4e`. Si hay acceso público read-only **fuera del WIP**, verificar HEAD actual del PR3 y blob SHA de cinco módulos: `lib/src/domain/attendance.dart`, `attendance_archive.dart`, `attendance_csv_report.dart`, `attendance_report.dart`, `location_rule.dart`; sumar UI `lib/main.dart` y tests relativos. Si la lectura no está disponible, utilizar sólo observaciones **históricas** y poner `REMOTE_CURRENT=NOT_VERIFIED`. Nunca ejecutar el puente del PR2 como si fuese vigente: fija commit `78b32284...`, que no coincide con HEAD observado. **No modificar el script de puente durante este lote.**
-9. Contrastar para cada módulo **función y comportamiento**, no solo basename: `EXACT_BYTES`, `SAME_BEHAVIOR_OWNER_LOCAL`, `DIFFERENT_RELEVANT_BEHAVIOR`, `MISSING_IN_LOCAL`, `UNKNOWN`. Si un módulo tiene otro nombre o ubicación pero misma responsabilidad, reutilizar propietario local. PR3 tiene `AttendanceLedger.shifts/snapshot`, `AttendanceArchive.encode/decode/reconcile`, `LocationRule` y UI de jornada; esto se verificó en GitHub pero **no** significa que esos componentes pertenezcan al WIP. PR3 tiene 119 tests Flutter y 31 checks Dart **ESCRITOS PERO NOT_RUN**; ninguna de esas cifras equivale a PASS.
-10. Guardar `PR3_WIP_MATRIX.csv` sin código fuente sensible, con módulo, HEAD PR3 (si confirmado), bytes iguales SÍ/NO/NO_VERIFICADO, función local responsable, diferencia material, `KEEP_LOCAL|TARGETED_FIX|NO_ACTION|BLOCKED`. No copiar/eliminar/importar módulos por rutina, ni JSON en texto plano fuera del contenedor cifrado.
+## 5. B — ejecutar la QA host faltante (únicamente con SDK offline verificable)
 
-## 4. Vertical productiva de kiosco GRATIS LOCAL OFFLINE: **cerrar todo lo demostrablemente incompleto de la misma vertical**
-
-11. Leer primero solo las clases propietarias de dominio, UI y almacenamiento local del WIP (no asumir rutas del PR3). Trazar un flujo sintético completo: identificación empresa/sujeto autorizada LOCALMENTE → iniciar jornada → pausar → reanudar → cerrar → ver estado/acumulado → reabrir lectura de dato según capacidad host existente; **sin red**. Cada paso debe usar la **misma** fuente de eventos y cálculo. Crear `KIOSK_VERTICAL_MATRIX.csv`: criterio, método dueño, interfaz/caso, test existente, evidencia previa ligada al SHA, `PRESENT|MISSING_PROVEN|HOST_PASS|NOT_RUN|BLOCKED_CONTRACT`, corrección.
-12. Casos requeridos **solo si están dentro del contrato vigente**: secuencia legal, pausa sin entrada rechazada, cierre en pausa según regla ya aprobada, duplicado exacto idempotente, mismo ID con payload distinto rechazado, no-cronología / marcas futuras, cálculo preciso de pausas y cruce de medianoche, horas con un único `now` capturado por interacción, UI sin botones imposibles, ciclo temporal suspendido al background, ningún evento automático, recuperación de lectura en host si el almacén local soporta reabrir sin Android. No añadir geolocalización si es opcional; no cambiar soporte/leyes de jornada ni remuneraciones.
-13. **CORREGIR en un mismo bloque los defectos demostrados de toda esa cadena** que puedan solucionarse reutilizando propietarios existentes. Agrupar por causa raíz, no parches en capas; preferir máximo un pequeño conjunto de archivos dueños más tests vecinos en vez de nuevas carpetas. Si está todo implementado pero falta prueba local de esa vertical, ejecutar oráculo focal y documentar sin editar. Si no existe almacén local aprobado o se requiere modificar formato/esquema público, STOP en esa subcapacidad, `BLOCKED_MISSING_APPROVED_STORAGE`/`BLOCKED_CONTRACT`, continuar otras partes seguras. No fabricar cambios por aparentar avance.
-14. Pruebas focales locales **host** con SDK/cache instalado y sin descargas (`flutter analyze --no-pub` solo para archivos/impacto si el comando lo permite; `flutter test --no-pub <test_host_específico>` para tests host, nunca `integration_test/` en dispositivo; Dart puro si ya hay harness). No repetir suites aprobadas sin cambio causal. **Si se modificó UI + dominio, ejecutar casos adyacentes en ambas capas** con positivos, negativos y regresión. Capturar test ejecutado, SHA fuente/artefacto, comando y exit; `TEST_WRITTEN` ≠ `TEST_RUN_PASS` ≠ `REUSED_PASS_AT_SAME_HASH`. Si la herramienta falta, `BLOCKED_LOCAL_TOOL`, no instalar nada y no declarar PASS. No hacer builds Android sólo para medir host. Comprobar que los tests host no creen archivos de salida dentro de `OUTPUT\private` ni escriban datos reales de negocio; usar fixtures sintéticos existentes.
-15. Tras edición, hashes POST focales y comparación `git diff` de rutas modificadas, control de status pre/post y stage 0; cualquier delta externo **no creado por ti** obliga a detener nuevas ediciones y documentar. No ejecutar commit/stash/reset. Clasificar cada criterio `HOST_PASS_SCOPED|CODE_PRESENT_NOT_TESTED|BLOCKED_CONTRACT|BLOCKED_TOOL|MISSING` y resultado vertical `PASS_HOST_SCOPED` solo si están cubiertos todos los criterios **dentro de alcance autorizado**, con evidencia concreta de integración host; **no decir «kiosco aprobado en producción» ni «Android PASS»**. Si cualquier criterio esencial no demostrado, `PARTIAL_WITH_GAPS` aunque el código parezca correcto.
-
-## 5. Anexo VM Service: máximo una investigación estática focal, no otro C2
-
-16. Reutilizar el ZIP C2 V5 como fuente histórica: APK QA instalado una sola vez, `adb shell logcat --pid=PID` no aportó URI, forward no realizado, driver no ejecutado, oráculos C2 NOT_RUN. **No tocar ADB, procesos ni teléfono**. Inspeccionar únicamente código local Flutter SDK, Gradle/manifest, target `integration_test/kiosk_flow_test.dart` y debug manifest **ya existentes**. Contestar en `VM_STATIC_FINDINGS.md` las condiciones observables que habilitan/avisan Dart VM Service y si tal anuncio necesariamente comparte PID de la app. Si falta evidencia real, `VM_ROOT_CAUSE=UNDETERMINED`, sin especular que SQLCipher falló ni que VM no está activo. Escribir **una** futura ruta no invasiva propuesta con condición de autorización, sin ejecutarla. No convertir este anexo en línea crítica del kiosco.
-
-## 6. Entrega en UN ZIP, sin secretos ni código fuente privado
-
-17. Preparar **solo** `OUTPUT\delivery\JOR-N1-R2-CUSTODIA-KIOSCO-OFFLINE-20261120-UNICO.zip` (nunca sobrescribir un ZIP previo). Lista positiva: `FINAL_REPORT.md` con decisiones/hitos reales, `CUSTODY_SUMMARY.md` (cobertura agregada y restauración muestral, fuera del disco = NO), `PR3_WIP_MATRIX.csv`, `KIOSK_VERTICAL_MATRIX.csv`, `RESULTS.csv` (por puerta y test ejecutado), `NEXT_GATE_MATRIX.md`, `VM_STATIC_FINDINGS.md`, `BLOCKERS.md` si corresponde, `MANIFEST_SHA256.csv` y logs host **sanitizados focales**. No poner código, fuentes, SNAPSHOT privado, `CHANGES.patch`, git diff, nombres de empleados, rutas con datos sensibles, token VM, APK, DB, `.env`, serial, fotos, capturas ni credenciales en ZIP. Conservar diffs/backup solamente en `OUTPUT\private` y entregar la ubicación local sin exponer contenido.
-18. Verificar **sin excepciones**: ZIP cerrado, CRC, sin entradas duplicadas ni path traversal/symlink, sin ficheros prohibidos, manifiesto SHA-256 + bytes de todos los miembros excepto manifiesto, SHA-256 externo del ZIP y apertura del ZIP de vuelta. `FINAL_REPORT.md` con SHA/HEAD/estado concretos **no literales de PowerShell**; marcar observación directa vs reporte. Resultado final con único NEXT propietario.
+Los siete archivos pendientes son, literalmente:
 
 ```text
-TASK=JOR-N1-R2-CUSTODIA-KIOSCO-OFFLINE-20261120
-RESULT=PASS_HOST_SCOPED|PARTIAL_WITH_GAPS|ALREADY_PRESENT_HOST_SCOPED|BLOCKED_CUSTODY|BLOCKED_CONCURRENT_WIP|BLOCKED_LOCAL_TOOL|BLOCKED_CONTRACT|SUPERSEDED_BY_NEWER_RUN
-SOURCE_BRANCH=<real>
-SOURCE_HEAD=<real>
-STAGED_PRE_POST=<real>
-WIP_PRESERVED=YES_SCOPED|PARTIAL_EVIDENCE|NO
-SNAPSHOT_INTEGRITY=PASS_SCOPED|PARTIAL|BLOCKED
-RESTORE_SAMPLE=PASS|FAIL|NOT_RUN
-RESTORABILITY_SCOPE=PASS_SCOPED|PARTIAL|BLOCKED
+test/attendance_test.dart
+test/attendance_repository_test.dart
+test/kiosk_repository_test.dart
+test/kiosk_time_test.dart
+test/attendance_report_test.dart
+test/kiosk_employee_today_card_test.dart
+test/widget_test.dart
+```
+
+1. Asegurar fuente no concurrente, fixture sintético, cache y `package_config.json` válidos. Primero comprobar formato de los **seis archivos focales** con `dart format --output=none --set-exit-if-changed` si la versión instalada soporta exactamente esos flags (no emitir ficheros); luego análisis estático focal `flutter analyze --no-pub` con objetivos soportados por esa CLI. Si el CLI no permite alcance por rutas, un único analyze de proyecto es una comprobación de **cambios N1-R2**, no repetición automática de QA vieja. Guardar exit/status/ruta/snapshot SHA; no llamar `pub get`.
+2. Ejecutar **una sola campaña** de `flutter test --no-pub` sobre exactamente los siete tests host (en una invocación si el CLI acepta varias rutas, o individualmente, una vez cada uno si no). No seleccionar `integration_test`, device, ni emulador. Límite de tiempo por test/campaña, capturar salida sanitizada y códigos de retorno. Registrar **conteo real ejecutado**, no inferir 73 PASS de 73 declaraciones.
+3. Si falla por **causa de producto demostrada**, preservar PRE exacto, corregir **todos los fallos relacionados de la misma causa** en la clase propietaria (jornada nocturna, consolidación referencial o persistencia/reapertura), más test vecino. Una campaña de corrección y una de regresión final focal de los mismos siete tests, no 10 ciclos. No añadir segundo motor, nueva DB, nuevos paquetes, servidor, sincronización o contratos. Si la causa es cache/harness, no editar producto.
+4. Validaciones semánticas que deben tener oráculo observable: antes del fin nocturno funcionan pausa/reanudar/salida según contrato; en el límite exacto y después ya no se apropia una jornada anterior; fecha de servicio estable; entrada futura/no cronológica no crea evento; idempotencia y conflicto se rechazan según motor; SQLite close/reopen conserva mismo ID/estado en host; acumulado excluye pausas y está rotulado **referencial/provisional**, no nómina. No afirmar SQLCipher/Keystore Android desde SQLite FFI.
+5. Resultado: `HOST_GATE=PASS_SCOPED` sólo si formato/análisis/pruebas corridas pasan para los SHAs finales; `FAIL_HOST_PRODUCT` para fallos demostrados no corregidos; `BLOCKED_LOCAL_TOOL` si el SDK sigue ausente; `BLOCKED_DEPENDENCIES` si caches insuficientes. Registrar qué pruebas se ejecutaron y qué quedó sin cubrir.
+
+## 6. C — preparar la salida hacia integración (sólo metadata, sin mover código)
+
+Si `HOST_GATE=PASS_SCOPED`, en la misma ejecución producir **una matriz mínima de promoción**: seis archivos focales, estado tracked/untracked, hash POST y propietario; inventario de prerequisitos para un backup **fuera del disco** y revisión de secretos antes de integrar WIP con GitHub, PR3 como referencia histórica sin merge. No versionar aún, no copiar private ni tocar PRs. Declarar claramente que host PASS no aprueba app Android, QA SQLCipher o lanzamiento.
+
+Si hay bloqueo de SDK, NO reabrir PR3 ni repetir la custodia N1-R2 para “llenar” el lote. Presentar una instrucción de desatasco precisa al Director: qué instalación/caché faltó, qué artefacto previo lo contradice, y qué autorización mínima sería necesaria si no existe ya herramienta local.
+
+## 7. Entrega — UN ZIP sanitizado, terminal inequívoca
+
+Crear en `N2_OUTPUT\delivery\JOR-N2-SDK-RECOVERY-HOST-GATE-20261120-UNICO.zip`, sin sobrescribir otra entrega, con **lista positiva**:
+
+- `FINAL_REPORT.md`: fuentes directas vs reportadas, estado de 7 tests, efectos sobre WIP, gate y NEXT.
+- `SDK_PROVENANCE.md`: pistas revisadas, resultado, versiones verificadas, por qué V5 sí y N1-R2 no; **no rutas privadas detalladas ni tokens**.
+- `HOST_RESULTS.csv`: test/ruta, SHA fuente, ejecutado SÍ/NO, count real PASS/FAIL, comando y exit, log sanitizado.
+- `KIOSK_GATE_MATRIX.csv`: nocturnos, acumulado, SQLite reopen, negativos, UI y límite offline, con estado probado/no probado.
+- `WIP_DELTA_SUMMARY.csv`: sólo rutas relativas autorizadas, tracked/untracked, hash PRE/POST **sin contenido privado**; si la ruta pudiera revelar secretos, resumir categoría y no mostrarla.
+- `NEXT_GATE_MATRIX.md`: siguiente puerta real, ni B22 ni Android reutilizado ficticiamente.
+- `BLOCKERS.md` sólo cuando aplique; logs host sanitizados si se ejecutó; `MANIFEST_SHA256.csv` (bytes y hash SHA de todos los demás miembros).
+
+**Prohibido meter:** snapshot, `private`, patch/diff, código WIP, APK, DB, archivos `.env`, keystore, serial/IMEI, información de empleados, tokens, URI VM, rutas de usuario detalladas o logs crudos. ZIP sin entradas repetidas, traversal, symlinks; CRC completo, 100% hash + bytes y SHA externo de ZIP. Comprobar apertura de ZIP. Los backups privados siguen fuera del ZIP y en el mismo disco; `OFF_DEVICE_BACKUP=NO`.
+
+```text
+TASK=JOR-N2-SDK-RECOVERY-HOST-GATE-20261120
+RESULT=PASS_HOST_SCOPED|PARTIAL_WITH_GAPS|BLOCKED_LOCAL_TOOL|BLOCKED_DEPENDENCIES|FAIL_HOST_PRODUCT|BLOCKED_CUSTODY|BLOCKED_CONCURRENT_WIP|SUPERSEDED
+SDK=SDK_FOUND_COMPATIBLE|SDK_FOUND_INCOMPLETE|SDK_VERSION_MISMATCH|SDK_PATH_NOT_RECOVERED|SDK_HOST_DIFFERENT_UNDETERMINED|BLOCKED_SDK_CACHE
+N1R2_SOURCE_BASELINE=UNCHANGED|CHANGED_WITH_EVIDENCE|BLOCKED
+SOURCE_BRANCH=<observado>
+SOURCE_HEAD=<observado>
+WIP_STATUS_PRE_POST=<conteo>
+STAGED_PRE_POST=<conteo>
+HOST_TARGETED_TESTS=<n_pass/n_fail/n_not_run, prueba por ruta>
+HOST_ANALYZE=PASS|FAIL|NOT_RUN
+HOST_FORMAT=PASS|FAIL|NOT_RUN
+KIOSK_HOST_GATE=PASS_SCOPED|PARTIAL_WITH_GAPS|BLOCKED
 OFF_DEVICE_BACKUP=NO
-PR3_HEAD_VERIFIED=<sha|NOT_VERIFIED>
-PR3_WIP_COMPARE=PASS_SCOPED|PARTIAL|NOT_VERIFIED
-KIOSK_VERTICAL=PASS_HOST_SCOPED|PARTIAL_WITH_GAPS|ALREADY_PRESENT_HOST_SCOPED|BLOCKED
-HOST_TARGETED_TESTS=<N_PASS/N_FAIL/NOT_RUN + rutas de logs>
-CHANGED_FILES=<rutas o NONE>
-VM_ROOT_CAUSE=SOURCE_SCOPED|UNDETERMINED
-QA_PACKAGE_INSTALLED=REPORTED_UNCHANGED_NOT_RECHECKED
-ANDROID_C2_NATIVE=NOT_RUN
-RESTART_READBACK_ANDROID=BLOCKED_HARNESS
-TENANT_ISOLATION_ANDROID=BLOCKED_CONTRACT
-PRO_HTTP_DB=BLOCKED_CONTRACT
+ANDROID_NATIVE=NOT_RUN
 H9_GLOBAL=NO_GO
 B22=NOT_AUTHORIZED
 RELEASE=NO_GO
-ZIP_PATH=<única ruta verificable>
-ZIP_SHA256=<SHA256 comprobado>
+ZIP_PATH=<una ruta real>
+ZIP_SHA256=<hash real>
 NEXT_OWNER=CHATGPT_DIRECTOR
 ```
 
-## 7. Criterio de salida y qué sigue SIN nuevas auditorías
+**Cierre anti-pingpong:** si SDK apareció, **ejecuta las siete pruebas en este mismo lote** y corrige sus fallos reales relacionados; no pidas otro prompt intermedio. Si SDK no apareció, **un único STOP verificable**, no reintentar variaciones ni rehacer N1-R2. Después del ZIP sólo continúa ChatGPT Director.
 
-- **Si se completó la vertical:** pruebas host atribuibles por SHA + recuperabilidad focal; Director decide **siguiente macrobloque de integración/custodia Git y tests Android** en función de las brechas verdaderas. No forzar deploy.
-- **Si hubo bloqueos parciales:** avanzar en subcapacidades independientes dentro de este lote; el informe distingue gaps reales de test no ejecutado. No abrir otra N1-R3 por gusto.
-- **Si no hubo cambios:** debe existir evidencia anterior **válida para el mismo SHA** o tests host actuales suficientes; si solo hay presencia de código usar `PARTIAL_WITH_GAPS`.
-- **Puertas posteriores:** integrar WIP con PR3 y respaldo fuera de dispositivo cuando el propietario autorice, retomar pruebas Android con causa/permiso, Pro/tenant/web/empleado/OD, revisión independiente L4/L5, UAT, publicación **solo por GO humano**. Prohibido presentar backend 158/2450 scoped o F1 como release integral.
-
-# 🔴🚨 EJECUTA CODEX LUNA N1-R2 UNA VEZ → ENTREGA UN ZIP ÚNICO → SIGUE CHATGPT DIRECTOR. 🚨🔴
+# 🔴🚨 SIGUE CODEX LUNA — N2 · RECUPERA SDK EXISTENTE Y EJECUTA PRUEBAS HOST, SIN TOCAR EL TELÉFONO. 🚨🔴
