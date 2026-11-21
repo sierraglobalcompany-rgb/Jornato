@@ -219,11 +219,19 @@ def self_test() -> None:
         assert report['inventory_complete_within_selected_groups']
         missing = inspect(t)
         assert missing['status'] == 'BLOCKED_SOURCE_STRUCTURE'
-        (server / 'routes' / 'extra.php').symlink_to(server / 'routes' / 'api.php')
-        linked = inspect(server)
-        assert linked['groups']['routes_php']['skipped_links'] == 1
-        assert linked['groups']['routes_php']['files'] == 1
-    print('SELF_TEST=PASS checks=11 (synthetic only, no Jornato server inspected)')
+        symlink_check = 'SKIPPED_PERMISSIONS'
+        try:
+            (server / 'routes' / 'extra.php').symlink_to(server / 'routes' / 'api.php')
+        except (OSError, NotImplementedError):
+            # Windows can require Developer Mode/admin for creating symlinks.
+            pass
+        else:
+            linked = inspect(server)
+            assert linked['groups']['routes_php']['skipped_links'] == 1
+            assert linked['groups']['routes_php']['files'] == 1
+            symlink_check = 'PASS'
+    print('SELF_TEST=PASS base_checks=9 symlink=' + symlink_check +
+          ' (synthetic only, no Jornato server inspected)')
 
 
 def main() -> int:
