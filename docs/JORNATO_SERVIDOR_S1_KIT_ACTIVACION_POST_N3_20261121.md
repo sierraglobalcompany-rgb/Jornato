@@ -8,7 +8,7 @@ Este documento complementa [S0 Ready Room](JORNATO_SERVIDOR_S0_READY_ROOM_202611
 
 ## Qué adelantamos realmente
 
-1. Herramienta de solo lectura: [JORNATO_SERVER_SOURCE_INTAKE_S1.py](../tools/JORNATO_SERVER_SOURCE_INTAKE_S1.py). SHA-256 `5d87865d3a4cd0d746380f6a1b1adbdb2148219070935a2f1904b21db493ce85`. Git blob `0a5c236d7f8e8a5c155ea5d0760d097793f3d01e`. Sin dependencias, sin subprocess, sin PHP, sin credenciales, sin DB, sin red. Ejecutada con un servidor ficticio: 11 comprobaciones sintéticas PASS. **NO** prueba Jornato.
+1. Herramienta de solo lectura: [JORNATO_SERVER_SOURCE_INTAKE_S1.py](../tools/JORNATO_SERVER_SOURCE_INTAKE_S1.py). SHA-256 `85636f9acd9b8b511d25397b3892550b1dcff4fa80498051d0b2a0af989a0908`. Git blob `b651b6008ac4d8a8e02c65bab1771f635da3f2bf`. Requiere Python >=3.10 disponible. Sin dependencias, sin subprocess, sin PHP, sin credenciales, sin DB, sin red. Ejecutada con un servidor ficticio: 9 comprobaciones base PASS y prueba de symlink PASS si el sistema lo permite (SKIP si Windows requiere privilegios). **NO** prueba Jornato.
 2. Una ruta de ejecución S1 agrupada: identidad de código, QA MariaDB aislada, contratos API extraídos del backend real, pruebas adversariales tenant/outbox y plan de staging.
 3. Ocho casos E2E precisos, condicionados a las rutas reales y a autorización de fixtures, para que Codex no invente interfaces o roles.
 4. Separación de dos posibles candidatos de entrega (Gratis Local y Pro), propuesta que requiere decisión del propietario.
