@@ -1,37 +1,27 @@
-# JORNATO — CONTINUIDAD CANÓNICA · 21 NOV 2026 · N3-R1 CERRADO / N4 ACTIVO
+# JORNATO — CONTINUIDAD CANÓNICA · 21 NOV 2026 · N4 CERRADO / N5 ACTIVO
 
-**ÚNICA ORDEN ACTIVA:** [CODEX_LOTE_ACTUAL.md](CODEX_LOTE_ACTUAL.md), TASK `JOR-N4-FULL-SOURCE-AND-SERVER-QA-20261121`. N3-R1 YA TERMINÓ; NO repetir C2, N1, N2, N3 o las anteriores auditorías 10+10. Si aparece ZIP N4 nuevo o Codex ya está ejecutando N4, adjudicar ese resultado antes de delegar nuevamente. [Dictamen N3-R1](JORNATO_N3_R1_DICTAMEN_Y_N4_20261121.md).
+**ORDEN ÚNICA DE CODEX LUNA:** `docs/CODEX_LOTE_ACTUAL.md`, TASK `JOR-N5-DOCKER-NONET-PUB-GATES-20261121`. [Dictamen ZIP N4](JORNATO_N4_DICTAMEN_Y_N5_20261121.md). **N4 está cerrado** (`PARTIAL_WITH_GAPS`). El [borrador post-N4 NO EJECUTAR](CODEX_POST_N4_DOCKER_BORRADOR_NO_EJECUTAR_20261121.md) queda sustituido; no ejecutar ambos. Si ya hay ZIP N5 posterior, adjudicarlo primero; no duplicar ejecución.
 
-## Evidencia de N3-R1 ya adjudicada
+## Evidencia verificada, no repetir
 
-- ZIP original `JOR-N3-UI-OFFLINE-INTEGRATION-CANDIDATE-20261121-UNICO.zip`, SHA256 `C960FA83ABAE677E4DDF1E59432C0915B75A85017FD02D65F4FBD9731ACA57DA`, 13.164 bytes, 11 miembros CRC PASS, manifiesto 10/10 SHA y bytes PASS (verificación directa de ZIP).
-- `RESULT=PARTIAL_WITH_GAPS`. UI host `KioskScreen` **9/9 PASS** y widget vecina **4/4 PASS** más análisis focal PASS según registros de Codex. Test SHA `A1317B664570CDA738DD017C50C02E079A34B332137E026978B190B95CEA7BF3`; pantalla POST SHA `7925AC0074A74081E8DFE4D0B8CEB9DB4E20C3137D9756C615EED861D9B9A6A5`. Doble toque corregido: una sola marcación. Ruta SQLite FFI sintética host con 0 creaciones `HttpClient` en los nueve casos, pero NO certifica login empleado, Android ni todo el producto.
-- Fuente candidata N3 = **65 archivos**, overlay 56 fuentes cotejadas, **155 rutas backend** omitidas, 179/235 rutas modificadas WIP no incluidas. `CANDIDATE_SOURCE_PARITY=PASS_SCOPED`, `CANDIDATE_HOST_SMOKE=BLOCKED_ENV`, `SOURCE_CANDIDATE=PARITY_ONLY_NOT_COMPILED`. Ausencia de `.dart_tool/package_config.json` y `android/local.properties` en copia nueva no demuestra defecto de código: entorno host aislado puede generar config offline solo si caches están completos y sin red.
-- N2-R1: siete archivos / **86 PASS** host, no reejecutados por N3; backend histórico B21F-S3 **158/2450 PASS_SCOPED** solo en su SHA y alcance, no E2E.
-- WIP Windows reportado: `D:\codex\Jornato`, branch `codex/jor-b08-h4-domain-20261025`, HEAD `faf5fe283191f8b5a2724b397009512a2caec1b6`, 235 status, 224 untracked, 11 tracked modified, stage 0; índice SHA `25CC609803D7E68D5F3ECF428198B2432CF1EA37030546735DD3F03299D905E1` intacto. Copias privadas solo D:, `OFF_DEVICE_BACKUP=NO`; ChatGPT no inspecciona la fuente privada desde GitHub.
+- ZIP N4 `JOR-N4-FULL-SOURCE-AND-SERVER-QA-20261121-UNICO.zip`, SHA256 `C5B1F0F344ED6E2B280FCFB92126664593715C24B0B27D29A5A0C4460898D1F8`, **21.966 bytes, 12 miembros CRC PASS, manifiesto 11/11 SHA+bytes PASS**, 232 entradas sin duplicidades de ruta en `FULL_SOURCE_COVERAGE.csv`.
+- Candidato privado N4: **232 archivos**, 150 `server`, 230 overlays WIP/2 objetos HEAD finales; paridad 232/232 **según verificador local reportado**, no comprobable directamente sin fuentes. WIP `D:\codex\Jornato`, rama `codex/jor-b08-h4-domain-20261025`, HEAD `faf5fe283191f8b5a2724b397009512a2caec1b6`, status 235 (224 untracked/11 modified), staged 0, índice `25CC609803D7E68D5F3ECF428198B2432CF1EA37030546735DD3F03299D905E1`, sin delta según Codex.
+- Laravel fuente estático: PHP ^8.3, Laravel **13.40.0**, Sanctum **4.3.3**, PHPUnit **12.5.43**, **11 migraciones**, **34 declaraciones API**, 109 pares vendor/lock coincidentes según N4. **No runtime PHP ni migraciones ejecutadas**. E01–E08 0 ejecutadas.
+- Flutter N4: Flutter 3.47.8/Dart 3.13.7 y ocho artefactos host completos; `pubspec.lock` 79 hosted packages, **22 paquetes/sellos faltantes en el cache predeterminado**; ningún comando Flutter N4. N2-R1: **86 host PASS**; N3-R1: **9 UI PASS + 4 vecinos PASS**, no repetir en WIP sin cambio causal.
+- Docker N4: Engine 29.9.2 / Compose 5.6.1; imágenes PHP y MariaDB 11.8.9 cacheadas según Codex, Compose validado, **crear red bridge falló por IPAM agotado**. No se crearon contenedores, redes o volúmenes N4 ni se ejecutó SQL/PHP. No alterar daemon ni otros proyectos.
+- `OFF_DEVICE_BACKUP=NO`; Android SQLCipher/Keystore/corrupción/reinicio nativo `NOT_RUN`; H9 GLOBAL NO_GO; B22 NOT_AUTHORIZED; RELEASE NO_GO.
 
-## N4 — macrobloque grande de ejecución, no otra revisión
+## N5: una sola campaña de dos carriles y ZIP
 
-1. Custodia y **candidato privado integral app + Laravel + migraciones + tests** desde HEAD + overlays tracked/untracked necesarios. Controlar los 155 backend del inventario N3; filtrar secretos/PII; sin git stage/commit/reset/merge/push.
-2. Smoke host en candidato privado con Flutter 3.47.8 y caché existente, generando `package_config` con resolución estrictamente offline **solo si segura**. No copiar configuraciones derivadas del WIP, no repetir las siete suites N2. La ausencia de `android/local.properties` no implica automáticamente fallo del test widget host.
-3. Intake backend Laravel y extracción de contratos **reales**, reutilizando los kits existentes: [S0 ready room](JORNATO_SERVIDOR_S0_READY_ROOM_20261121.md), [24 gates](JORNATO_SERVIDOR_GATES_S0_20261121.csv), [S1 intake](JORNATO_SERVIDOR_S1_KIT_ACTIVACION_POST_N3_20261121.md), [S2 preflight](JORNATO_S2_PAQUETE_DESPLIEGUE_Y_PISTAS_DE_RELEASE_20261121.md). No crear Laravel nuevo ni dar por hecho que el script PR2 está en WIP.
-4. Solo con MariaDB QA NUEVA y exclusiva, PHP/deps ya disponibles y aislamiento comprobado: migraciones y hasta ocho pruebas adversariales E2E tenant A/B, PAT revocado, `requestId` y recibos. Si falla DB/caché, clasificar bloqueo causal y continuar el subalcance independiente. No red Pro/producción ni deploy.
-5. Un único ZIP de resultados sanitizados; fuentes/snapshots/patches privados fuera del ZIP. No tocar Android/ADB, `B22` ni release.
+1. **Caché Pub real:** localizar las rutas de cache utilizadas por N2/N3 mediante `PUB_CACHE` y `package_config.json` del WIP leído sin mutarlo; validar 79 entradas de lock y 22 ausentes, reunir solo paquetes íntegros en cache privado sin descargas; si se desbloquea, `flutter pub get --offline --enforce-lockfile` y prueba **en candidato aislado**. Si falta material real, informar paquetes/versiones y `BLOCKED_PUB_PACKAGES`, no repetir N2/N3.
+2. **PHP+MariaDB Docker:** [norma transversal](JORNATO_DOCKER_AISLAMIENTO_PROYECTOS_20261121.md) y propuesta de **única contingencia** no-IPAM: MariaDB `network_mode: none`, PHP `network_mode: service:db`, ambos en proyecto Compose privado de Jornato, compartiendo **solo loopback interno**, sin puertos host ni red externa. Docker oficial documenta los modos; **no está probado en el host**. Preflight estricto; un intento; si Compose exige crear bridge o falla, STOP, sin prune, cambios daemon, red de otros proyectos o segunda variante. Con entorno PASS, PHP vendor+extensiones, migraciones sobre DB nueva sintética y E01–E08 de tenant/PAT/requestId/acuse.
+3. **Custodia:** reusar candidato N4 (no reconstruir 232 archivos), no tocar WIP/index/GitHub de código, no montar datos/servicios ajenos, un ZIP sanitizado y sin fuentes. Ninguna prueba física Android, staging ni producción.
 
-## GitHub y reglas
+## Gobernanza y recursos anteriores
 
-Repo público `sierraglobalcompany-rgb/Jornato`, `main=1ee6aae821f8cf177cc64149081ad8847f7fec2e`, PR1 F0 Draft `faf5fe283191f8b5a2724b397009512a2caec1b6`, PR3 F0 Draft `104469b119752f395cf9881e732d582feab9db4e` observado antes de editar esta nota. PR2 es solo documentación; el WIP avanzado **NO** está publicado. Sin autorización expresa para divulgar fuentes o secretos. Leyes PingPongLaw L1 KISS L2 antirruido L3 causa raíz L4 UX humana L5 QA independiente L6 antipingpong. `requestId`/histórico `requetId`, `SERVER_STORED != RECOGNIZED`, B19/B20 deny-all, OD01–OD08 pendientes.
+- Repo público `sierraglobalcompany-rgb/Jornato`: main `1ee6aae821f8cf177cc64149081ad8847f7fec2e`, PR #1 F0 Draft `faf5fe283191f8b5a2724b397009512a2caec1b6`, PR #3 F0 Draft `104469b119752f395cf9881e732d582feab9db4e`. PR #2 solo docs, no WIP.
+- Reusar [S0](JORNATO_SERVIDOR_S0_READY_ROOM_20261121.md), [S1](JORNATO_SERVIDOR_S1_KIT_ACTIVACION_POST_N3_20261121.md), [S2](JORNATO_S2_PAQUETE_DESPLIEGUE_Y_PISTAS_DE_RELEASE_20261121.md); no otra auditoría ni runner.
+- PingPongLaw L1 KISS, L2 antirruido, L3 raíz, L4 UX humana, L5 evidencia, L6 antipíngpong; `requestId`/legado `requetId`; `SERVER_STORED != RECOGNIZED`; B19/B20 deny-all; OD02/03/04 no aprobados.
+- Backup fuera de D:, autorización para repositorio privado/publicación de fuentes y GO release siguen pendientes. No usar la QA de N5 como autorización de producción.
 
-**ANDROID_NATIVE=NOT_RUN; RESTART_READBACK=BLOCKED_HARNESS; H9_GLOBAL=NO_GO; B22=NOT_AUTHORIZED; RELEASE=NO_GO.**
-
-**NEXT_OWNER=CODEX_LUNA_N4_IF_NOT_ALREADY_RUNNING; AFTER_SINGLE_ZIP=CHATGPT_DIRECTOR.**
-
-## Política nueva — Docker aislado por proyecto (21-nov-2026)
-
-**Regla explícita del propietario, prevalece para FUTURAS ejecuciones PHP y BD:** [JORNATO_DOCKER_AISLAMIENTO_PROYECTOS_20261121.md](JORNATO_DOCKER_AISLAMIENTO_PROYECTOS_20261121.md). Toda ejecución de PHP/Artisan/PHPUnit/Composer y MariaDB/MySQL debe ser **dentro de contenedores Docker propios** por proyecto Compose, con redes/volúmenes/puertos sin colisiones; no servicios en Windows ni recursos Docker de otros proyectos. Docker disponible **según propietario**, no validado aquí. Ante IPAM agotado u otra colisión `BLOCKED_DOCKER_IPAM`, sin prune, modificaciones daemon o borrar redes ajenas.
-
-**N4 ya está en ejecución; no se modificó `CODEX_LOTE_ACTUAL.md`**. N4 C3 contempla MariaDB host, ahora considerado **NO CONFORME** con esta nueva norma. Cuando llegue ZIP, Director distinguirá pruebas hechas en contenedor de pruebas host y decidirá sin repetir suites no afectadas. No abrir otro Codex ni interrumpir N4 desde documentos.
-
-## 21-NOV-2026 — Auditoría delta Docker vs N4 (SIN interrumpir ejecución)
-
-Se ejecutaron 10 pasadas VERDUGO y 10 JUEZ **sobre el cambio de política Docker**, no otra auditoría del producto: [dictamen N4×Docker](JORNATO_N4_AUDITORIA_DELTA_DOCKER_10V_10J_20261121.md). Hallazgo: N4 C3 admite MariaDB directamente en Windows y C4 no obliga PHP en contenedor, incompatibles con [política Docker](JORNATO_DOCKER_AISLAMIENTO_PROYECTOS_20261121.md). **Codex está ejecutando N4**, por lo que `CODEX_LOTE_ACTUAL.md` NO se altera ni se lanza N4-R1 concurrente. Se dejó [bosquejo condicionado POST-N4, NO EJECUTAR](CODEX_POST_N4_DOCKER_BORRADOR_NO_EJECUTAR_20261121.md), que el Director ajustará solo al recibir ZIP. Evaluar `SERVER_DOCKER_COMPLIANCE` antes de acreditar QA PHP/DB. `RELEASE=NO_GO`.
+**NEXT_OWNER=CODEX_LUNA_N5; AFTER_ZIP=CHATGPT_DIRECTOR.**
