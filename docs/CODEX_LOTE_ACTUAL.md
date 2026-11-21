@@ -1,110 +1,166 @@
-# CODEX LUNA — JORNATO N4 — MACROBLOQUE ÚNICO: CANDIDATO COMPLETO + QA REAL DEL SERVIDOR
+# CODEX LUNA — JORNATO N5 · MACROBLOQUE ÚNICO DE DESBLOQUEO REAL: DOCKER PRIVADO SIN IPAM + CACHÉ PUB EXACTA
 
-**ORDEN DE EJECUCIÓN, NO DE REAUDITORÍA.** Director: ChatGPT. Ejecutor: Codex Luna (un único proceso). Fecha de decisión: 21-11-2026 (America/Bogota). **N3-R1 HA TERMINADO** y su ZIP fue recibido, abierto y verificado; no reabrir N3, N2 ni C2. La prioridad operativa N4 es producir un **árbol reconstruible de app+servidor**, validar el cliente en host aislado **si el caché existente lo permite** y ejecutar QA Laravel real **solo sobre base aislada y comprobada**. Una campaña, un ZIP de evidencias, código y backups privados fuera del ZIP.
+**EJECUTAR, NO AUDITAR DE NUEVO EL PROMPT.** Director: ChatGPT. Ejecutor único: Codex Luna, Windows. Esta orden **sustituye** el borrador `CODEX_POST_N4_DOCKER_BORRADOR_NO_EJECUTAR_20261121.md` únicamente después de que N4 haya terminado. No retoma N4, no rehace su candidato, ni abre otro backend. 
 
 ```text
-TASK=JOR-N4-FULL-SOURCE-AND-SERVER-QA-20261121
+TASK=JOR-N5-DOCKER-NONET-PUB-GATES-20261121
 WIP_ROOT=D:\codex\Jornato
-REPORT_ROOT=D:\codex\_REPORTES\Jornato\JOR-N4-FULL-SOURCE-AND-SERVER-QA-20261121
-REMOTE_REPO=sierraglobalcompany-rgb/Jornato
-PR2_DOCS_BRANCH=docs/pingponglaw-l1-l6-canon-84e961c
-EXPECTED_WIP_BRANCH_OBSERVED=codex/jor-b08-h4-domain-20261025
-EXPECTED_WIP_HEAD_OBSERVED=faf5fe283191f8b5a2724b397009512a2caec1b6
-N3_R1_ZIP_SHA256=C960FA83ABAE677E4DDF1E59432C0915B75A85017FD02D65F4FBD9731ACA57DA
-N3_R1_RESULT=PARTIAL_WITH_GAPS
-N3_UI_HOST=9_PASS_0_FAIL_0_SKIP
-N3_NEIGHBOR_HOST=4_PASS_0_FAIL_0_SKIP
-N3_KIOSK_SCREEN_POST_SHA256=7925AC0074A74081E8DFE4D0B8CEB9DB4E20C3137D9756C615EED861D9B9A6A5
-N3_NEW_TEST_SHA256=A1317B664570CDA738DD017C50C02E079A34B332137E026978B190B95CEA7BF3
-N3_SOURCE_CANDIDATE=65_FILES_56_OVERLAYS_PARITY_ONLY_NOT_COMPILED
-N3_OMITTED_BACKEND_CHANGED_PATHS=155
-N3_WIP_STATUS_OBSERVED=235_TOTAL_224_UNTRACKED_11_MODIFIED_0_STAGED
-N2_HOST=86_PASS_7_FILES_REUSED_ONLY
-OFF_DEVICE_BACKUP=NO
-ANDROID_NATIVE=NOT_RUN
-RELEASE=NO_GO
-NEXT_OWNER_AFTER_SINGLE_ZIP=CHATGPT_DIRECTOR
-```
-
-## 0. Leyes, alcance y prioridades: no perseguirse la cola
-
-**L1 KISS/Ponytail:** un motor y un almacén por responsabilidad, **nada de segundo backend, migrador, sync worker, esquema o UI de administración**. **L2:** cero suites repetidas sin cambio causal. **L3:** corregir propietaria y causa demostrada, no parches de entorno fingidos. **L4:** pruebas de interfaz y errores veraces. **L5:** PASS respaldado por comando + exit + hash de fuente y entorno. **L6:** macrobloque grande + un ZIP, sin nuevas rondas de prompts. No instalar skills/hooks/dependencias globales. Conservar `requestId` y legado `requetId` exactamente como existan, `SERVER_STORED` ≠ `RECOGNIZED`, B19/B20 `deny-all`, OD01–OD08 sin aprobación nueva. No fabricar roles, token/consentimiento o contratos HTTP.
-
-**Prohibiciones:** No teléfono/ADB/AVD/logcat, instalar o borrar APK, ni producción/staging, ni Hostinger/ERP-BDM/otro proyecto. No hacer `git add`, `commit`, `push`, `fetch`, `pull`, `checkout`, `reset`, `clean`, `stash`, `merge`, `rebase` o `cherry-pick` en el WIP; no ejecutar Actions. No subir fuentes a GitHub público ni ZIP de ChatGPT sin examen de seguridad y autorización específica. **No downloads**: Composer, Pub, Flutter, binarios de MariaDB, Docker, extensiones, plugins, yarn/npm; no reemplazar herramientas faltantes. No modificar versiones/contratos para obtener verde. **No ejecutar DB real sin poder probar que es exclusivamente desechable de este proyecto.**
-
-**Prioridad y presupuesto:** A→B→C→D. A es conservación y árbol integral; B smoke del cliente; C servidor real. Si falla B por entorno, **seguir C si es independiente y seguro**, y viceversa. No gastar una campaña de QA repitiendo tests exitosos N2-R1 (86) o N3 (9+4) en el WIP intacto. Máximo una ejecución focal por puerta y una repetición **solo** después de un arreglo causal; no más de una suite global de backend y únicamente si hay cambio causal que invalide 158/2450 previamente aprobado. No hacer otra auditoría 10+10.
-
-## A. Preflight, preservación y árbol completo (sin modificar Git)
-
-A1. Confirmar exclusividad de ejecución y ausencia de ZIP N4 anterior. Leer `git status --porcelain=v1 -uall`, `git rev-parse HEAD`, rama, staged y hash del índice Git. Historial **informativo** N3: branch `codex/jor-b08-h4-domain-20261025`, HEAD `faf5fe...`, status 235 (224 untracked + 11 modified), stage 0. Si hay concurrencia o reemplazo de fuente desconocido, `BLOCKED_CONCURRENT_WIP`. Acreditar hash de `lib/src/ui/kiosk_screen.dart` y `test/kiosk_screen_actions_test.dart` frente a los hashes N3 arriba. **No restablecer el WIP para satisfacer el hash.** Si cambió legítimamente, registrar delta y probar solo cobertura causal.
-
-A2. Reutilizar snapshot N1-R2 de 216 archivos y el candidato N3 de 65 cuando su ruta/manifest exista. No recrear íntegra la copia por rito. El snapshot local D: sigue `OFF_DEVICE_BACKUP=NO`. Congelar en `REPORT_ROOT\private\pre_edit` bytes y SHA de **cualquier archivo que se vaya a editar**; controlar espacio y no seguir symlinks/junctions/hardlinks. Mantener `REPORT_ROOT` fuera del WIP. Si un secreto parece necesario para levantar la app, **no copiarlo** a candidato o ZIP: usar configuración sintética de QA en ubicación privada, sin modificar producción, solo si aprobada/posible.
-
-A3. Construir **una** fuente candidata integral en `REPORT_ROOT\private\full_source_candidate` de forma determinista: exportar el `HEAD` verificado a un árbol vacío fuera del WIP; superponer todos los archivos de código, manifests, recursos, migraciones y tests pertinentes tanto tracked modificados como untracked **necesarios para app+server**, usando lista positiva, rutas relativas y SHA-256 origen/destino. **Incluir backend** cuando sus 155 rutas de N3 sigan existiendo y no sean secreto/artefacto. La cifra 155 es inventario de N3, **no cuota obligatoria**: verificar categoría y archivos de código reales. No usar checkout ni sobrescribir tracked del WIP; no importar PR3 ni añadir `.git` al candidato. Si hay ruta en conflicto, registrar decisión y autoridad de código. No tratar un `git archive` de 13 archivos como app+server completa.
-
-A4. Excluir `.env*`, llaves/keystores, DB, información laboral/PII, secretos, logs, cache, binarios generados, `.dart_tool`, `vendor`, `.gradle`, `build`, `node_modules`, SDKs, archivos ignorados localmente que sean configuración del equipo. Documentar **categoría + cantidad**, nunca secreto, token ni ruta sensible detallada en ZIP. Examinar contenido de fuentes candidatas con chequeo de patrones de secretos/PII y revisión por ruta de alto riesgo; el escáner NO es garantía total. Si no se puede asegurar seguridad: `CANDIDATE_PRIVACY_BLOCKED`, conservar solo en private y no transmitir. No excluir migraciones esenciales por su nombre sin razón.
-
-A5. Verificar: reconstrucción desde HEAD + manifiesto de overlay, totalidad por categoría, bytes/SHA origen y destino, dependencias internas/imports/entrypoints del proyecto y ubicación de `server/composer.json`, `composer.lock`, `routes`, `database/migrations`, tests y cliente Flutter. Producir matrices sanitizadas `FULL_SOURCE_COVERAGE.csv`, `FULL_SOURCE_PARITY.csv` (sin código, nombres internos sensibles ni ruta absoluta), `SOURCE_EXCLUSIONS_SUMMARY.md`. Clasificar distinto: `SOURCE_COMPLETE_SCOPED`, `SOURCE_PARITY_PASS_SCOPED`, `PRIVATE_SOURCE_CANDIDATE_ONLY`, `NOT_COMPILED`. La fuente puede estar íntegra aunque falte runtime; **no declararla READY/DEPLOYABLE solo por hashes**. Si un archivo imprescindible está ausente o excluido, `SOURCE_COMPLETE_SCOPED=NO`, causa concreta. Reconciliación PR3 se **REUTILIZA** desde matriz N1; no rehacerla ni mezclar demo F0 por defecto.
-
-## B. Smoke host del cliente en el candidato privado (solo si offline viable)
-
-B1. Identificar Flutter 3.47.8/Dart 3.13.7 desde el entorno que N2/N3 usaron, sin búsqueda de unidad global; comprobar artefactos de Flutter y `PUB_CACHE` de lectura, `pubspec.yaml` y lock. `--no-pub` no garantiza no-descargas de artefactos: **no iniciar Flutter CLI sin preflight del cache completo**. No reutilizar a ciegas `.dart_tool/package_config.json` del WIP porque codifica rutas y contexto. **La ausencia de `.dart_tool/package_config.json` en una copia nueva es normal, no una prueba de fallo del código.** `android/local.properties` es configuración de máquina/Android; **no exigirlo para el smoke Flutter host si la prueba puede funcionar sin él**.
-
-B2. Si existe todo el caché y el comando no accederá a red, permitir **únicamente sobre el candidato privado aislado** generar configuración derivada con `flutter pub get --offline` o equivalente que use paquetes ya cacheados; NUNCA en WIP, NUNCA cambiar versiones o lock ni instalar. Debe comprobarse el guard de artefactos de Flutter previamente y no utilizar internet de forma oculta. Si no se puede probar operación sin red, `CANDIDATE_SMOKE=BLOCKED_OFFLINE_CACHE` y **continuar C** sin modificar producto. Si falla por ruta/config local, una corrección de QA/entorno aislado; no editar app para forzar un smoke.
-
-B3. Smoke mínimo **sobre el candidato**: `flutter analyze --no-pub` focal cuando sea viable, test widget `test/kiosk_screen_actions_test.dart` (los nueve casos) y **solo** los tests afectados por diferencias de fuentes/candidato. Es una prueba de **árbol distinto**, no repetición innecesaria del WIP; si las rutas son idénticas y las precondiciones impiden ejecución, reutilizar evidencia con hash y marcar `REUSED_SCOPE` sin llamarlo smoke. Registrar comandos, exit, hash de árbol y hashes de test. No instalar APK; build Android únicamente cuando exista preflight autorizado futuro. Si el candidato no tiene la configuración temporal necesaria, registrarla como `CANDIDATE_RUNTIME_GAP` y no calificar de defecto funcional.
-
-B4. Cierre B: `CANDIDATE_HOST_SMOKE=PASS_SCOPED|BLOCKED_OFFLINE_CACHE|FAIL_PRODUCT|FAIL_ENV|NOT_RUN`. Si surge defecto real y localizado, corregir propietario solo tras PRE backup del WIP, propagar el fichero al candidato, repetir prueba focal una sola vez y guardar POST hashes. No cambiar interfaz si el fallo es mero package-config. La validación de pantalla sigue sin cubrir **login de empleado** ni Android nativo.
-
-## C. Servidor real Laravel: intake + QA focal aislada en el MISMO macrobloque
-
-C1. Acceder **solo ahora, sin N3 concurrente** al backend existente bajo el WIP, sin crear segundo Laravel. Leer `server/composer.json`, `composer.lock`, `server/routes`, middleware/policies, migraciones, tests, configuración de QA **excluyendo contenidos `.env*`**, y confirmar rutas exactas. Verificador opcional ya preparado en PR2: `tools/JORNATO_SERVER_SOURCE_INTAKE_S1.py` (Python ≥3.10, solo lectura, SHA256 histórico `85636f9acd9b8b511d25397b3892550b1dcff4fa80498051d0b2a0af989a0908`); su presencia en PR2 **NO implica** que exista en el WIP. Si está disponible localmente y su SHA coincide, usarlo; si no está, inventariar con Python/Powershell estándar sin bajar software. No copiar un script desconocido ni inventar dependencia. El kit S2 
-`tools/JORNATO_SERVER_BUNDLE_PREFLIGHT_S2.py` sirve para un **ZIP real ya creado**; no fabricar ZIP de código para ejecutar esa herramienta si aún no hay permiso de publicación. No necesita reejecutar self-tests sintéticos ya aprobados.
-
-C2. Construir una matriz `REAL_API_CONTRACT.csv` desde **source real** con cada caso, método+patrón de ruta ya existente (sanitizado si privado), middleware, controlador, policy, request/response DTO, test anterior, SHA source y decisión `PRESENT|BLOCKED_CONTRACT|MISSING|UNKNOWN`. Prioridad: identidad tenant; token Sanctum revocado/vencido; evento y `requestId` idempotente; mismo ID/diferente payload; `SERVER_STORED`≠`RECOGNIZED`; `occurredAt`/`recordedAt`; B19/B20 deny-all. No imaginar endpoints/códigos de respuesta. OD02/03/04 no se resuelven con mocks o roles inventados.
-
-C3. Preflight MariaDB de QA **independiente y exclusiva**. Confirmar existencia de runtime MariaDB ya instalado o ZIP binario local **preexistente**; host loopback `127.0.0.1`, puerto libre, carpeta de datos NUEVA solo de Jornato dentro de `REPORT_ROOT\private\qa_db`, sin servicio Windows, admin, firewall, puertos ajenos, Docker ajeno, ni procesos de otra app. Si no hay binario seguro/no se puede crear instancia aislada, `QA_DB=BLOCKED_ENV` y continuar revisión estática; no descargar. Evitar instancia preexistente aunque se llame QA si no prueba propiedad/aislamiento. No acceder a DB de ERP-BDM, producción ni bases laborales. No ejecutar migraciones destruyendo datos existentes. Usar fixtures sintéticos solo cuando el esquema nuevo, usuario, puerto y datadir sean inequívocamente propios, con registro sanitizado de sentinel del entorno; **si cualquier identidad del destino es ambigua STOP antes de crear esquema**.
-
-C4. Sobre **única DB efímera nueva, vacía y con acceso mínimo**, si PHP y vendor/deps compatibles ya existen: migraciones y smoke HTTP/kernel reales; no usar `.env` de producción. Diseñar/ejecutar **hasta ocho** pruebas críticas E01–E08 del kit S1 si ya hay rutas existentes: E01 anónimo denegado; E02 A a A permitido; E03 A intenta leer B denegado; E04 A intenta escribir B sin mutar; E05 PAT revocado/vencido falla cerrado; E06 requestId igual + payload igual una sola operación; E07 requestId igual + payload distinto colisión rechazada; E08 `SERVER_STORED` nunca se atribuye `RECOGNIZED` solo por persistencia. Si un caso está bloqueado por OD02/03/04, no abrir endpoint ni introducir falsa autorización: marcar `BLOCKED_CONTRACT`. Si no existe la ruta no inventarla para que pase el test. Medir DB después de E04, E06 y E07, no solo HTTP status. Si falla código propio, reparar raíz en backend bajo PRE/POST backup, repetir prueba afectada y vecinas solamente, sin reiniciar 158/2450 históricos salvo cambio causal que realmente afecte suite.
-
-C5. Nunca ejecutar comandos Composer `install/update`, `migrate:fresh`, `db:wipe`, `reset`, seed de datos reales, `queue:work` o 
-`php artisan` con configuración incierta. No poner en marcha cron/worker si el código no lo requiere. Si hay ejecución Laravel real en sandbox, identificar runtime PHP, entorno fixture y aislamiento antes de boot; `route:list` también ejecuta proveedores, no es una mera lectura de fichero. Si no hay DB/vendor/ejecutable, entregar `SERVER_SOURCE_VERIFIED_SCOPED` más `QA_DB=BLOCKED_ENV`, **no** `PASS_E2E`.
-
-C6. Preparar en un único archivo breve `SERVER_DEPLOY_READINESS.md` lo necesario para staging **sin desplegar**: PHP/extensiones y Laravel reales (no asumir versión 13), proveedor/dominio/TLS aún no elegido, raíces `public`, APP_DEBUG false, secretos aislados, respaldos/restore DB ensayables, migraciones no reversibles por rollback simple, scheduler/queues solo si existen. `SERVER_STAGING=NOT_AUTHORIZED`, `SERVER_PROD=NOT_TOUCHED` y `RELEASE=NO_GO` obligatorios. No crear otro documento de arquitectura.
-
-## D. Entrega única, verificaciones y siguiente decisión
-
-D1. Confirmar `git status` PRE/POST, SHA índice PRE/POST, staged 0, no cambios ajenos, no GitHub push/PR/merge. Inventariar POST de todos los archivos tocados. Candidato íntegro, snapshots y DIFF **solo** en `REPORT_ROOT\private`; no incluir fuentes ni parches en ZIP. `OFF_DEVICE_BACKUP=NO` hasta copia restaurable y autorizada en destino diferente de D:; no inventar autorización o enlace de backup.
-
-D2. Crear **un solo ZIP** `REPORT_ROOT\delivery\JOR-N4-FULL-SOURCE-AND-SERVER-QA-20261121-UNICO.zip` con lista positiva mínima: `FINAL_REPORT.md`, `FULL_SOURCE_COVERAGE.csv`, `SOURCE_EXCLUSIONS_SUMMARY.md`, `CANDIDATE_SMOKE_RESULTS.csv`, `SERVER_SOURCE_SUMMARY.md`, `REAL_API_CONTRACT.csv` (**sin revelar endpoints privados sensibles**), `SERVER_E2E_RESULTS.csv`, `SERVER_DEPLOY_READINESS.md`, `BLOCKERS.md` (si aplica), `NEXT_GATE_MATRIX.md`, `WIP_GUARDS.csv`, `MANIFEST_SHA256.csv` y extractos SANITIZADOS solo si indispensables. No dar 12 informes separados fuera del ZIP; informe íntegro dentro. Nada de claves, hashes de contraseñas, tokens, `.env`, secretos, datos laborales, RUT/NIT, nombres de empleados, imágenes, seriales, logs crudos, SQL real con datos ni ZIP de código. Manifiesto de rutas relativas, SHA-256 y bytes de todos los miembros menos el propio manifiesto; verificar CRC, nombre único, no traversal/symlinks, integridad SHA y hash del ZIP externo.
-
-D3. Cada puerta debe distinguir **observación directa** vs **reportado** vs **bloqueado**. Una CLI con exit 0 **no** certifica negocio si faltan aserciones. Asegurar que candidate smoke se clasifique por árbol privado y QA DB por esquema propio. No se acepta sumar pruebas históricas y actuales como si corrieran juntas.
-
-```text
-TASK=JOR-N4-FULL-SOURCE-AND-SERVER-QA-20261121
-RESULT=PASS_SCOPED_CANDIDATE_AND_SERVER|PARTIAL_WITH_GAPS|BLOCKED_SOURCE|BLOCKED_CUSTODY|BLOCKED_CONCURRENT_WIP
-WIP_BRANCH=<real>
-WIP_HEAD=<real>
-WIP_STATUS_PRE_POST=<counts_and_delta>
-INDEX_SHA_PRE_POST=<sha_or_blocked>
-SNAPSHOT_REUSED=YES_SCOPED|PARTIAL|NOT_AVAILABLE
-SOURCE_COMPLETE_SCOPED=YES|NO|BLOCKED
-SOURCE_PARITY=PASS_SCOPED|PARTIAL|NOT_RUN
-CANDIDATE_HOST_SMOKE=PASS_SCOPED|BLOCKED_OFFLINE_CACHE|FAIL_PRODUCT|FAIL_ENV|NOT_RUN
-SERVER_SOURCE_VERIFIED=PASS_SCOPED|PARTIAL|BLOCKED_SOURCE
-SERVER_QA_DB=PASS_ISOLATED|BLOCKED_ENV|BLOCKED_IDENTITY|NOT_RUN
-SERVER_MIGRATIONS=PASS_QA|FAIL|NOT_RUN
-SERVER_E2E=<N_PASS>/<N_FAIL>/<N_BLOCKED>/<N_NOT_RUN>
-SERVER_STAGING=NOT_AUTHORIZED
-ANDROID_NATIVE=NOT_RUN
-OFF_DEVICE_BACKUP=NO
-WIP_PUBLISHED_GITHUB=NO
-H9_GLOBAL=NO_GO
-B22=NOT_AUTHORIZED
-RELEASE=NO_GO
-ZIP_PATH=<verified_local_path>
-ZIP_SHA256=<verified_digest>
+N4_REPORT_ROOT=D:\codex\_REPORTES\Jornato\JOR-N4-FULL-SOURCE-AND-SERVER-QA-20261121
+OUTPUT_ROOT=D:\codex\_REPORTES\Jornato\JOR-N5-DOCKER-NONET-PUB-GATES-20261121
+N4_ZIP_SHA256=C5B1F0F344ED6E2B280FCFB92126664593715C24B0B27D29A5A0C4460898D1F8
+N4_SOURCE=232/232_PARITY_PASS_SCOPED;SERVER=150_FILES;API_ROUTE_DECLARATIONS=34;MIGRATIONS=11
+N4_FLUTTER=BLOCKED_OFFLINE_CACHE_22_OF_79;SDK=3.47.8;DART=3.13.7
+N4_DOCKER=29.9.2;COMPOSE=5.6.1;BLOCKED_DOCKER_IPAM;E2E=0_RUN
+N4_WIP_HEAD=faf5fe283191f8b5a2724b397009512a2caec1b6
+N4_WIP_INDEX_SHA=25CC609803D7E68D5F3ECF428198B2432CF1EA37030546735DD3F03299D905E1
+N4_WIP_PATHS=235;UNTRACKED=224;MODIFIED=11;STAGED=0
+N2_HOST=86_PASS_0_FAIL_0_SKIP;N3_KIOSK=9_PASS;N3_NEIGHBOR=4_PASS
+N5_RELEASE=NO_GO
 NEXT_OWNER=CHATGPT_DIRECTOR
 ```
 
-**Después de N4 (no ejecutarlo dentro de N4):** Director adjudica resultado, solicita aprobación del destino de backup privado/off-device, prepara una integración de código con revisión de secretos y autorización, retoma Android físico y servidor staging según sus gates. **No hay release hasta GO humano.**
+## 0. Resultado y límites: no hagas trabajo repetido
+
+**Objetivo A (Flutter):** averiguar si los 22 faltantes fueron falsos negativos por inspeccionar solo el Pub cache predeterminado; recuperar la resolución **exacta de pubspec.lock** desde caches ya presentes sin descargas y hacer un único smoke focal **en el candidato N4 aislado**. Si realmente faltan bytes, lista precisa y `BLOCKED_PUB_PACKAGES`; no actualizar paquetes, no cambiar `pubspec.lock`, no inventar resultados.
+
+**Objetivo B (servidor):** probar **una única topología Docker QA aislada** que no asigna ninguna red bridge ni IPAM: contenedor MariaDB `network_mode: none`; contenedor PHP `network_mode: service:db` en el MISMO namespace privado; PHP accede a MariaDB por `127.0.0.1:3306`. Ambos bajo un único proyecto Compose de Jornato y sin puertos publicados, DNS/egress externo, volúmenes o conexiones de otros proyectos. Si Docker/Compose no permite esta topología o intenta crear red, **STOP** inmediatamente con evidencia. Si pasa y existen extensiones/deps, ejecutar migraciones nuevas y los ocho E2E focales E01–E08 con dos empresas ficticias A/B, sin pruebas generales. No tocar producción, staging o Android.
+
+**El mecanismo Docker es una hipótesis técnica respaldada por especificación oficial, NO probado aún en este host.** Referencias: https://docs.docker.com/reference/compose-file/container-spec/ (`none` / `service:{name}`), https://docs.docker.com/engine/network/drivers/none/ (solo loopback), https://docs.docker.com/compose/how-tos/startup-order/ (dependencia entre servicios). Si falla, el bloqueo honesto es correcto. No improvisar otra arquitectura de red.
+
+**No repetir:** reconstrucción de 232 fuentes N4, hash masivo/analizador en WIP, 86 tests N2, 9+4 tests N3 en WIP, 158/2450 backend históricos, 10+10 jueces, C2 Android. No crear nueva app, ORM, servicio PHP host, BD host ni framework/runner alterno. PingPongLaw L1 KISS, L2 antirruido, L3 causa raíz, L4 UX humana, L5 evidencia real, L6 anti-pingpong. Mantener `requestId` y legado `requetId`; `SERVER_STORED != RECOGNIZED`; B19/B20 DENY-ALL y OD02/03/04 sin aprobar. Todo QA con datos sintéticos.
+
+### Prohibiciones duras
+
+- NO descargar herramientas ni paquetes, `docker pull`, `docker build` conectado, `apt-get`, `composer install` desde red, `flutter pub get` online, `dart pub upgrade`, `precache` o alteración de `pubspec.lock`.
+- NO usar servicios PHP/DB nativos de Windows. NO reutilizar/inspeccionar credenciales de otros proyectos, redes/volúmenes/contendedores ajenos. NO `docker network create`, `prune` (de ninguna clase), `docker system prune`, `docker network connect`, `docker stop/rm` sobre recursos ajenos, `docker compose down --volumes` para proyectos no identificados, ni cambios globales en Docker Desktop/daemon/IPAM.
+- NO usar `network_mode: host`, `network_mode: bridge`, redes Docker predeterminadas/ajenas o publicar puertos en host. **Solamente** namespace privado `none`/`service:db` para QA. No segunda variante si falla.
+- NO ejecutar `git add/commit/push/fetch/pull/merge/reset/stash/clean/checkout` ni mutar index, branch o HEAD del WIP. No tocar teléfono, ADB, AVD, firmas ni despliegue. No copiar `.env` real, tokens, bases, llaves ni datos de trabajadores.
+- NO crear ZIP de fuentes; toda fuente, diff, fixture privado y logs sensibles quedan en `OUTPUT_ROOT\private` sobre D: y no se envían. Sigue `OFF_DEVICE_BACKUP=NO`.
+
+## 1. Preflight único: seguridad y reuso de N4
+
+1. Confirmar que N4 concluyó, su ZIP es el indicado y no existe N5 anterior ni otro Codex que modifique `D:\codex\Jornato`. Si ya existe entrega N5, detener sin repetir. No operar dos instancias sobre este proyecto.
+2. Consultar WIP read-only: `git rev-parse HEAD`, rama, `git status --porcelain=v1 -uall`, `git diff --cached --quiet`, hash de índice y hashes **solo de archivos necesarios**. Registrar estado PRE y comprobar cambios relevantes posteriores a N4. Si el WIP está siendo editado por otro, `BLOCKED_CONCURRENT_WIP` sin tocarlo. El estado N4 de referencia es 235 rutas, 224 untracked, 11 modificadas y 0 staged, no un requisito para forzar `git reset`.
+3. Identificar exactamente la carpeta candidata privada de N4 (nunca asumir subcarpetas): partir de `N4_REPORT_ROOT`, `FULL_SOURCE_COVERAGE.csv` con 232 rutas/hashes y el informe N4. Confirmar 232/232 originales **por comparación de manifiesto existente**, no rehacer `git archive` o overlay. Si cambió el candidato, describir delta acotado antes de usar; si falta, recuperar SOLO desde la custodia N4 y manifest, una vez. `SOURCE_N4_REUSE=PASS|BLOCKED`, no reauditar todas las rutas sin causa.
+4. Preparar `OUTPUT_ROOT\private` como único laboratorio; salida dentro de D:, no montar ni editar el WIP directamente. Probar rutas canónicas, sin symlinks/junction/hardlinks; salida QA/DB solo en ese árbol. Anotar hashes PRE/POST y no borrar materiales ajenos.
+5. Docker es compartido con otros proyectos Codex. Leer solamente versiones, contenedores, nombres/labels de redes/volúmenes y recursos (sin `inspect` completo ni secretos), y capturar un resumen BEFORE de **IDs/estados/puertos ajenos**. Comprobar capacidad razonable RAM/disco; si no es seguro agregar 2 contenedores, `BLOCKED_DOCKER_RESOURCE`. El hecho de que N4 devolvió IPAM agotado NO autoriza limpieza o ajuste de redes.
+
+## 2. Carril Flutter — investigar la caché real de N3 antes de concluir que faltan paquetes
+
+1. **No escanear todo Windows.** Obtener `pubspec.yaml`, `pubspec.lock` del candidato N4; comparar SHA del lock antes de trabajar. Revisar solo: `PUB_CACHE` del proceso, `%LOCALAPPDATA%\Pub\Cache`, variable/cache de los entornos que ejecutaron N2/N3 y **rutas `rootUri` de dependencias en el `.dart_tool/package_config.json` actual del WIP**. El package_config se lee únicamente para descubrir rutas de cache; **NO** copiarlo al candidato tal cual, porque puede apuntar al WIP. No buscar en unidades ajenas ni usar caches de otros proyectos sin verificar versión+integridad y ausencia de mutación.
+2. Generar en `private` una tabla `PUB_CACHE_GAP.csv` (package,version,lock_hash_available,cache_root_redacted,package_dir_present,hash_stamp_present,decision) para los **79 packages hosted** del lock, destacando los 22 marcados ausentes en N4. No incluir rutas absolutas personales en ZIP. Verificar que los archivos de paquete y metadatos correspondan al paquete/versión exactos. Un nombre de directorio no acredita hashes de contenido.
+3. Si existe una caché íntegra compatible, establecer `PUB_CACHE` SOLO para el proceso dentro de un candidato privado de trabajo. Si es necesario combinar caches, hacer **copias de los 22 paquetes exclusivamente** a un cache privado bajo N5, con integridad y licencia conservadas; no modificar ni borrar caches originales, no usar enlaces a otras apps. No copiar `package_config.json` del WIP ni cambiar dependencias de código.
+4. Solo con cache completa probada, y sin red, comprobar si esta versión soporta `flutter pub get --offline --enforce-lockfile` mediante ayuda local; si es compatible, ejecutar **una sola vez dentro del candidato privado**. Si no admite `--enforce-lockfile`, se admite solo `flutter pub get --offline`, después comprobar SHA de `pubspec.lock` exactamente igual PRE/POST; ante delta restaurar copia privada y bloquear sin actualizar dependencias. Registrar stdout/stderr sanitizados; cero downloads/requests.
+5. Si resulta PASS, ejecutar en candidato (NO WIP) `flutter analyze --no-pub` solo sobre archivos relevantes y **una vez** `flutter test --no-pub test/kiosk_screen_actions_test.dart`. Test widget vecino **solo si hubo cambio de propietario relevante**, no por rutina. El objetivo es demostrar que el candidato completo se puede ejecutar con dependencias resueltas, no certificar Android. Hash de código PRE/POST igual o delta justificado; no construir APK ni generar artefactos Android.
+6. Si los 22 faltantes son reales, `BLOCKED_PUB_PACKAGES` con lista exacta package+version+hash faltante (sin fuentes) y ruta futura **condicionada a autorización para recuperar paquetes oficiales con lock fijo**. No descargar ni usar versiones viejas para obtener PASS. **Continuar Docker igualmente.**
+
+## 3. Carril Docker — una sola topología sin puente IPAM y sin host networking
+
+### 3.1 Requisitos antes de crear ningún contenedor
+
+1. Confirmar Docker 29.9.2/Compose 5.6.1 o versiones actuales detectadas, daemon accesible y **las imágenes exactas** ya locales para PHP 8.3 y MariaDB 11.8.9. Guardar IDs/digests observados; no usar `latest`, `pull`, `build`, Dockerfiles ajenos ni registro privado. Verificar etiquetas de proyecto Compose exclusivas y un solo identificador nuevo `jornato-n5-qa-<sufijo_corto>` distinto de todos los proyectos vigentes. Un máximo de **dos contenedores N5** bajo ese nombre.
+2. La definición Compose se escribe **solo** en `OUTPUT_ROOT\private\docker-qa\compose.yaml`; todos los bind mounts/volúmenes deben ser del árbol N5 privado o un volumen nombrado nuevo propiedad del proyecto. No montar Docker socket, raíz de D:, rutas de otros proyectos ni datadir externo. Versiones de imágenes **sustituir por TAGS CACHEADOS REALES identificados**; no asumir que el runtime PHP existente ya incluye todas las extensiones.
+3. **Plantilla de topología permitida** (configurar rutas/credenciales QA sintéticas exclusivamente en private; no registrar sus valores):
+
+```yaml
+services:
+  db:
+    image: mariadb:11.8.9 # sustituir solo por el tag/ID local confirmado
+    pull_policy: never
+    network_mode: "none"
+    environment:
+      MARIADB_DATABASE: jornato_n5_qa
+      MARIADB_USER: jornato_n5_qa
+      MARIADB_PASSWORD: ${N5_DB_PASSWORD:?set_in_private_env}
+      MARIADB_ROOT_PASSWORD: ${N5_ROOT_PASSWORD:?set_in_private_env}
+    volumes:
+      - n5_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mariadb-admin ping --protocol=tcp -h 127.0.0.1 --silent"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+  php:
+    image: php:8.3-cli # sustituir solo por el tag/ID local confirmado
+    pull_policy: never
+    network_mode: "service:db"
+    depends_on:
+      db:
+        condition: service_healthy
+    working_dir: /app/server
+    environment:
+      APP_ENV: testing
+      APP_DEBUG: "false"
+      DB_CONNECTION: mysql
+      DB_HOST: 127.0.0.1
+      DB_PORT: "3306"
+      DB_DATABASE: jornato_n5_qa
+      DB_USERNAME: jornato_n5_qa
+      DB_PASSWORD: ${N5_DB_PASSWORD:?set_in_private_env}
+    volumes:
+      - "${N5_CANDIDATE_BIND:?set_in_private_env}:/app"
+    entrypoint: ["sh", "-c", "sleep infinity"]
+volumes:
+  n5_data:
+```
+
+**Ajustes obligatorios:** usar sufijo/nombre Compose único por proyecto; ruta de bind candidata N5 contiene copia privada real de `server/vendor` local ya validado contra composer.lock, y la fuente N4 completa. El volumen `n5_data` lo crea **solo** este Compose. La DB no publica puerto, escucha loopback interno, PHP comparte exclusivamente ese namespace con `service:db`, conecta por `127.0.0.1`. No existe top-level `networks`, ni `ports`, ni `network_mode: host` o `bridge`, ni redes `external` y no se asocia ningún servicio a red externa. No agregar servicios extra. La lectura de env/Compose puede revelar secretos; guardar archivos env exclusivamente en private, no imprimir `docker compose config` entero en salida. Registrar solamente campos permitidos.
+
+4. Resolver variables con archivo env privado usando `docker compose --project-name <jornato-n5-qa-sufijo> --env-file <ruta_privada> -f <ruta_compose> config --format json` **guardando el JSON exclusivamente en private** y mostrando externamente SOLO campos estructurales no sensibles. El comando `config` puede revelar las contraseñas interpoladas; nunca mostrar su salida completa ni adjuntarla al ZIP. Verificar programáticamente que `services.db.network_mode == 'none'`, `services.php.network_mode == 'service:db'`, ningún servicio tenga `networks`, `ports`, `network_mode: host`, volúmenes external o bind fuera de N5 private. Si Compose muestra una red `default` **que deba aprovisionar para un servicio**, `BLOCKED_COMPOSE_NETWORK`, sin `up`. Si el config renderiza puertos o monta WIP/otro proyecto, STOP. Restringir CPU/memoria a límites razonables según el host, sin competir con otros procesos.
+
+### 3.2 Una ejecución productiva, sin nuevas redes
+
+1. Ya con preflight PASS, ejecutar **una sola vez** `docker compose --project-name <jornato-n5-qa-sufijo> --env-file <ruta_privada> -f <ruta_compose> up -d --pull never --no-build` sin imprimir variables sensibles; si Docker vuelve a pedir asignación de bridge/IPAM o Compose crea/intenta crear red fuera de namespace `none`, **STOP con `BLOCKED_DOCKER_IPAM`**. No cambiar a `host`, `bridge`, red por defecto, `container:` de otro proyecto, subred manual, prune, ni segundo Compose alterno.
+2. Si los contenedores arrancan, comprobar **identidad real con inspect filtrado y sanitizado**: labels Compose del proyecto exclusivo, DB con network mode `none`, PHP con mode de namespace container propio de DB, sin conexiones a redes ajenas, sin IP nueva, sin puertos publicados y volumen DB/paths propios. Ante cualquier inconsistencia STOP, sin ejecutar tests. Capturar solo IDs/labels/estados, nunca environment o inspect completo.
+3. Verificar desde PHP contenedor PHP/extensiones obligatorias PHP ^8.3; PDO/MySQL, mbstring/dom/xml/otros exigidos en composer.lock, y 109 paquetes vendor exactos. **No ejecutar ni instalar Composer**. Si faltan extensiones, `BLOCKED_PHP_EXTENSIONS` con nombres y seguir cierre; no `apt-get` ni cambio de imagen arbitrario. No ejecutar PHP host.
+4. Confirmar MariaDB SQL READY real en `127.0.0.1:3306` dentro de este namespace y que DB `jornato_n5_qa` está vacía. Verificar sentinel privado y conexión PDO; luego, y solo luego, migraciones Laravel originales desde PHP contenedor (nunca `migrate:fresh` en base existente). Usar `.env` sintético exclusivo fuera del código WIP y `APP_KEY` de laboratorio, fixture sintética A/B. Registrar filas/tablas del nuevo esquema. No invocar `Artisan` antes de estar demostrados env/DB/code paths.
+5. Ejecutar como máximo **8 oráculos E01–E08** ya definidos en kit S1, aprovechando tests existentes; E01 anónimo, E02 A propia, E03 lectura B negada, E04 escritura B negada sin efecto, E05 PAT revocado/vencido, E06 requestId mismo/payload mismo un solo efecto, E07 requestId mismo/payload distinto conflicto, E08 `SERVER_STORED` no implica `RECOGNIZED`. Usar rutas y roles **reales** extraídos de código N4; no abrir B19/B20 ni inventar OD02/03/04. Para E04/E06/E07 verificar estado persistido antes/después. Si falta contrato, `BLOCKED_CONTRACT`, NO PASS ficticio.
+6. Si se demuestra fallo de PRODUCTO, reparar causa solamente en **copia N5 privada** con hash PRE/POST y test focal; **NO** fusionar al WIP, subir PR, ni repetir suite global. Director decidirá integración al WIP después de recibir el ZIP y respaldo seguro. Si es fallo de imagen/extensión/DB, bloquear como entorno, no parchear Laravel. Nunca hacer cambios destructivos a un esquema ajeno.
+7. Cerrar **exclusivamente** recursos N5 cuya propiedad se haya verificado por labels/IDs. Dejar evidencias y ficheros privados en D:; si la DB de prueba debe conservarse para reproducir, dejar volumen identificado y reportado, sin borrar ni afectar ajenos. Registrar AFTER de contenedores/puertos ajenos y confirmar ausencia de deltas. Si falla limpieza propia, `CLEANUP_PARTIAL` con IDs, no ejecutar prune. No tocar Docker Desktop global.
+
+## 4. Contratos de salida y clasificación (no simular verde)
+
+- `N5_FLUTTER=PASS_CANDIDATE_SCOPED|BLOCKED_PUB_PACKAGES|BLOCKED_SDK|FAIL_PRODUCT|NOT_RUN`. No heredar N3 PASS como si hubiera ejecutado el candidato N5.
+- `N5_DOCKER_TOPOLOGY=PASS_PRIVATE_NETNS|BLOCKED_COMPOSE_NETWORK|BLOCKED_IPAM|BLOCKED_DOCKER|BLOCKED_RESOURCE|FAIL_RUNTIME`; adjuntar evidencia de que **no usó redes de otros proyectos**. Que el diseño exista no implica PASS.
+- `N5_PHP_RUNTIME=PASS|BLOCKED_PHP_EXTENSIONS|BLOCKED_VENDOR|NOT_RUN`; `N5_DB_MIGRATIONS=PASS_QA_ONLY|BLOCKED|FAIL_PRODUCT|NOT_RUN`.
+- `N5_E2E=E01..E08` cada uno con `PASS_E2E_SCOPED|FAIL_PRODUCT|BLOCKED_CONTRACT|BLOCKED_ENV|NOT_RUN` y test/fixture/observación exactos. No agregar casos que no correspondan a ruta existente.
+- `N5_WIP_GUARDS=PASS_UNCHANGED|BLOCKED_CONCURRENT|DELTA_UNEXPECTED`; no stage/merge/push. `OFF_DEVICE_BACKUP=NO`, `ANDROID_NATIVE=NOT_RUN`, `SERVER_STAGING=NOT_AUTHORIZED`, `RELEASE=NO_GO` siempre en este bloque.
+- No atribuir automáticamente los 158/2450 históricos a una fuente distinta; no repetir suites históricas si no hay delta relevante.
+
+## 5. UNA sola entrega: no archivos dispersos ni otra auditoría
+
+Directorio `OUTPUT_ROOT\delivery`, **exactamente un ZIP final sanitizado**, acompañado fuera del ZIP únicamente por ruta Windows y SHA-256. Contenido máximo útil:
+
+```text
+FINAL_REPORT.md
+N5_GATE_MATRIX.csv
+PUB_CACHE_GAP.csv
+FLUTTER_HOST_RESULTS.csv
+DOCKER_PRIVATE_NETNS_EVIDENCE.csv
+PHP_DB_E2E_RESULTS.csv
+WIP_GUARDS.csv
+CANDIDATE_DELTA_SUMMARY.csv
+BLOCKERS.md                 (si los hay)
+MANIFEST_SHA256.csv
+```
+
+CRC y SHA+bytes de cada miembro incluidos en manifiesto, comprobados; rutas fuente **relativas y hashes** sí, código real, ZIP de vendor, JSON de package_config, snapshots, SQL dump, tokens, logs crudos, datos personales, env, comandos con secretos y contratos privados **NO**. Mantener logs privados sanitizables en D: si se requieren para revisión local. Un ZIP de bloqueo por causas es mejor que un PASS falso; no crear un nuevo lote para repetir el mismo fallo.
+
+El mensaje final a ChatGPT Director debe contener solo:
+
+```text
+TASK=JOR-N5-DOCKER-NONET-PUB-GATES-20261121
+RESULT=PASS_SCOPED|PARTIAL_WITH_GAPS|BLOCKED
+N5_FLUTTER=...
+N5_DOCKER_TOPOLOGY=...
+N5_PHP_RUNTIME=...
+N5_DB_MIGRATIONS=...
+N5_E2E=...
+WIP_GUARDS=...
+RELEASE=NO_GO
+ZIP_PATH=...
+ZIP_SHA256=...
+NEXT_OWNER=CHATGPT_DIRECTOR
+```
+
+**Terminación:** un solo bloque N5, sin otra auditoría y sin promesas de deploy. CHATGPT DIRECTOR revisa el ZIP N5 y decide si necesita permiso de paquetes Pub oficiales, una imagen PHP con extensiones o liberación de recursos de Docker por el dueño. No repetir ninguna campaña aprobada. 
