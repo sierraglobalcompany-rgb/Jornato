@@ -1,5 +1,7 @@
 # JORNATO — RECOVERY HANDOFF ACTUAL · 21 NOV 2026 · N3-R1
 
+> **DELTA 21-NOV-2026, POST S0:** El propietario confirmó que CODEX LUNA SIGUE EJECUTANDO N3-R1. ChatGPT preparó [kit S1 servidor post-N3](JORNATO_SERVIDOR_S1_KIT_ACTIVACION_POST_N3_20261121.md), [intake Python de solo lectura](../tools/JORNATO_SERVER_SOURCE_INTAKE_S1.py) y 8 oráculos E2E dependientes del Laravel real, sin tocar WIP ni cambiar la orden N3. S1 NO ejecutado, deploy NO_GO, PR2 solo documental y utilidades. Después del ZIP N3 sigue ChatGPT Director.
+
 > **PARALELO S0, 21-NOV-2026:** ChatGPT creó [ready room servidor](JORNATO_SERVIDOR_S0_READY_ROOM_20261121.md) y [matriz 24 puertas](JORNATO_SERVIDOR_GATES_S0_20261121.csv) solo en PR2. **Codex Luna sigue ejecutando N3-R1**; no modificar su prompt ni darle otra tarea mientras trabaja. Ningún backend remoto se instaló, QA servidor no corrió, staging no está autorizado; release NO_GO.
 
 **PRIMERA INSTRUCCIÓN AL REANUDAR:** consultar [JORNATO_CONTINUIDAD.md](JORNATO_CONTINUIDAD.md) y [CODEX_LOTE_ACTUAL.md](CODEX_LOTE_ACTUAL.md). Única ejecución N3 `JOR-N3-UI-OFFLINE-INTEGRATION-CANDIDATE-20261121`, revisión correctiva **N3-R1**. No ejecutar N3-R1 si N3 original ya empezó ni si hay ZIP posterior. No reiniciar C2/N1/N2 ni reabrir auditorías 10+10. [Dictamen N3-R1](JORNATO_N3_R1_AUDITORIA_10V_10J_20261121.md).
