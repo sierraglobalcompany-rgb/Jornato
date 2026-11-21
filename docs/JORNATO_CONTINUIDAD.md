@@ -1,29 +1,29 @@
-# JORNATO — CONTINUIDAD CANÓNICA · 20-NOV-2026 · N1-R2 TERMINADO / N2 ACTIVO
+# JORNATO — CONTINUIDAD CANÓNICA · 20 NOV 2026 · N2-R1 CORRECCIÓN ÚNICA ACTIVA
 
-**ÚNICA ORDEN VIGENTE:** [CODEX_LOTE_ACTUAL.md](CODEX_LOTE_ACTUAL.md), TASK `JOR-N2-SDK-RECOVERY-HOST-GATE-20261120`. N1-R2 ya devolvió ZIP y NO SE REPITE. Director de trabajo ChatGPT; ejecutor local CODEX LUNA, solo si no hay una ejecución N2 nueva en curso. [Dictamen del N1-R2](JORNATO_N1R2_DICTAMEN_Y_NEXT_N2_20261120.md).
+**Orden ÚNICA de CODEX LUNA:** [docs/CODEX_LOTE_ACTUAL.md](CODEX_LOTE_ACTUAL.md), TASK `JOR-N2-SDK-RECOVERY-HOST-GATE-20261120`, REVISION `N2-R1_20261120`. **Es el mismo gate N2, no una ejecución N3**: sustituye la orden N2 previa únicamente si aún no se ejecutó. Si N2 ya empezó o generó ZIP, detener la nueva delegación y adjudicar **ese** resultado antes de intervenir. [Auditoría del delta N2-R1 (10 verdugo y 10 juez)](JORNATO_N2_R1_AUDITORIA_10V_10J_20261120.md).
 
-## Evidencia verificada en la recuperación
+## Hechos cerrados sin nuevas auditorías
 
-- ZIP N1-R2 `JOR-N1-R2-CUSTODIA-KIOSCO-OFFLINE-20261120-UNICO.zip`, SHA-256 `5EACC3643A00D0EC338E1EB62698A1B4AEA88C957FD3B113C0BF25B394E61540`, 11.742 bytes: **10 entradas CRC y 9/9 miembros con hash+bytes correcto**. Comprobación directa del ZIP, NO del código Windows.
-- Resultado `PARTIAL_WITH_GAPS`: Codex informa reparación de acciones hasta el fin programado de turnos nocturnos y tarjeta de acumulado local rotulada provisional/referencial, con oráculos host nuevos. **7 archivos de pruebas/73 declaraciones seleccionadas, 0 ejecutadas**. Se prohíbe presentar `CODE_WRITTEN_NOT_TESTED` como PASS.
-- Custodia reportada: snapshot privado de 216 archivos, 2.904.617 bytes, muestra 5/5 restaurada, todo en **D:**; no es respaldo fuera del disco ni restauración total. WIP reportado 234 entradas (223 untracked/11 modificadas), 0 staged, índice estable; seis rutas N1-R2 modificadas ya eran `untracked`. No hay commit del producto.
-- El ZIP C2 V5 previo fue reabierto y su `RESULTS.csv` contiene **Flutter 3.47.8 / Dart 3.13.7 `A2_sdk=PASS` y `A5_offline_compile=PASS`**. N1-R2 encontró los ejecutables ausentes en PATH/rutas estándar. **Discrepancia de procedencia/entorno por resolver**, no prueba de SDK borrado. No instalar ni descargar todavía.
-- N1-R2 no tocó teléfono/ADB/AVD. C2 V5 dejó APK QA instalado según Codex y fue `BLOCKED_VM_SERVICE`; el host SQLCipher/FFI no certifica Keystore ni SQLCipher nativo. `VM_ROOT_CAUSE=UNDETERMINED`, Android C2 físico `NOT_RUN`, `RESTART_READBACK=BLOCKED_HARNESS`, Pro y tenant `BLOCKED_CONTRACT`.
+- ZIP N1-R2 `JOR-N1-R2-CUSTODIA-KIOSCO-OFFLINE-20261120-UNICO.zip`, SHA256 `5EACC3643A00D0EC338E1EB62698A1B4AEA88C957FD3B113C0BF25B394E61540`: 10 miembros CRC PASS; 9 miembros de manifiesto 9/9 correcto. `PARTIAL_WITH_GAPS`, correcciones nocturnas/acumulado referencial escritas; **siete archivos de tests host y 73 declaraciones seleccionadas, 0 ejecutadas**. No reabrir N1-R2 ni aprobar por fuente escrita.
+- Snapshot privado del WIP de 216 archivos/2.904.617 bytes y muestra de restauración 5/5 **reportados** por Codex; todo en el mismo D:. No es backup externo ni restauración integral. WIP reportado en `D:\codex\Jornato`, rama `codex/jor-b08-h4-domain-20261025`, HEAD `faf5fe283191f8b5a2724b397009512a2caec1b6`, status 234 (223 untracked, 11 modificados), staged 0. ChatGPT no accede al WIP.
+- ZIP físico C2 V5 `JOR-H9-C2-PHYSICAL-DART-V5-20261120-UNICO.zip`, SHA256 `711116067DDBF73E7CE4AD6A102D58E14AD5372D79A981F48978C54A76B35692`: `A2_sdk=PASS` Flutter 3.47.8/Dart 3.13.7 y `A5_offline_compile=PASS` **en su entorno reportado**. El SDK no se encontró en PATH/rutas comunes en N1-R2. No hay evidencia de que ambos lotes hayan corrido en el mismo host. APK QA instalado según Codex, C2 `BLOCKED_VM_SERVICE`; **no tocar teléfono/ADB/AVD**.
+- Backend B21F-S3 158 tests/2450 assertions `PASS_SCOPED`, H9-M1 75 host PASS y F1 widget focal PASS según lotes históricos; no repetir. `CIPHER_ENGINE/KEYSTORE_EFFECTIVE/IDEMPOTENCY_NATIVE/CORRUPTION_FAIL_CLOSED=NOT_RUN` físico; reinicio Android `BLOCKED_HARNESS`, tenant/Pro `BLOCKED_CONTRACT`.
 
-## N2 — próximo único macrobloque
+## Hallazgo material del N2 original y reparación
 
-1. Proteger hashes de los seis archivos N1-R2 y no repetir snapshot ni comparación PR3 sin causa.
-2. Recuperar **la ruta del SDK que V5 utilizó** mediante `android/local.properties`, `.dart_tool/package_config.json`, variables del proceso, registros C2 V5 y rutas derivadas verificables, sin búsqueda de disco completa ni descargas.
-3. Si existe Flutter/Dart compatible + cachés offline: verificar formatter/analyze y ejecutar exactamente los siete tests host de `NEXT_GATE_MATRIX.md`, arreglar fallos de producto relacionados y reejecutar solo la regresión afectada en el mismo lote. Registrar conteos/sha reales, no 73 PASS imaginarios.
-4. Si SDK sigue indisponible: un ZIP único con evidencia de las pistas y autorización mínima requerida; sin más vueltas, cambios no comprobados ni otras auditorías.
-5. No móvil/AVD/ADB, no Git stage/merge/push WIP, no red Pro, no sustituciones de arquitectura, no herramientas de pago ni dependencias nuevas. Entregar un ZIP sin código/secretos y NEXT al Director.
+En [Flutter 3.47.8 `flutter_command.dart`](https://github.com/flutter/flutter/blob/3.47.8/packages/flutter_tools/lib/src/runner/flutter_command.dart), `FlutterCommand._updateCacheAndRunPubGet` actualiza artefactos con `cache.updateAll` **antes** de evaluar el `pub.get` condicionado. Así, `flutter test --no-pub` por sí solo **NO asegura cero descargas**. N2-R1 obliga a revisar artefactos/stamps/caches localmente sin ejecutables Flutter y solo ejecutar la CLI cuando se demuestre que está completa; si faltan, una sola salida `BLOCKED_CACHE_ARTIFACTS` / `SDK_RUNTIME_POLICY_UNVERIFIED`.
 
-## Estado remoto y ruta de lanzamiento
+## Instrucciones N2-R1, sin pingpong
 
-Repositorio `sierraglobalcompany-rgb/Jornato`: PR #2 es **documentación Draft** (esta rama); main `1ee6aae821f8cf177cc64149081ad8847f7fec2e`; PR1 F0 Draft `faf5fe283191f8b5a2724b397009512a2caec1b6`; PR3 F0 Draft `104469b119752f395cf9881e732d582feab9db4e` (observados en esta revisión). GitHub NO aloja el WIP avanzado; no publicar código privado antes de consentimiento, respaldo externo y análisis de secretos. El puente PR2 usa referencia PR3 antigua; reutilizar la matriz N1-R2, no ejecutar ese comparador como vigente.
+1. Guardar PRE SHA de seis rutas N1-R2 y siete tests, revisar ausencia de agente concurrente o ZIP N2 posterior, y reutilizar custodia; no copiar de nuevo 216 fuentes.
+2. Localizar SDK por pistas delimitadas del WIP y C2 V5; verificar **procedencia de host**, `flutter.bat`, `dart.exe`, artefactos de caché y package-config. Sin escanear unidades enteras, sin descargas, instalaciones o PATH global.
+3. Validar los siete tests y fixtures SQLite sintéticos/no red/no datos reales. Solo si SDK/cache y dependencias son compatibles, formato y analyze focal y **los siete archivos de pruebas host**, sin dispositivo. En caso de fallos de producto propios, una campaña de corrección causal y una de regresión focal; resultados PASS/FAIL/SKIP reales y por SHA.
+4. Si SDK/caché sigue inaccesible, **un ZIP único de bloqueo causal** sin retoques de producto; Director decide insumo mínimo, sin otra reauditoría de N2. Toda salida sanitizada, diffs privados fuera del ZIP.
 
-Leyes PingPongLaw: L1 KISS/Ponytail, L2 antirruido, L3 causa raíz, L4 UX humana, L5 evidencia independiente, L6 antipingpong. OD01–OD08 siguen pendientes; B19/B20 deny-all; semántica `requestId`/`requetId` histórico y `SERVER_STORED` distinto de `RECOGNIZED` intacta.
+## GitHub y puertas hacia release
 
-Después de N2: si host PASS, custodiar fuente **fuera del equipo** bajo destino autorizado y preparar integración WIP/PR3 con revisión de secretos; luego diagnóstico físico Android bajo permiso, Pro/tenant/portal/empleados, L4/L5/UAT, B22 solo con GO explícito. `H9_GLOBAL=NO_GO`, `B22=NOT_AUTHORIZED`, `RELEASE=NO_GO`.
+Repo `sierraglobalcompany-rgb/Jornato` público: `main=1ee6aae821f8cf177cc64149081ad8847f7fec2e`; PR #1 Draft `faf5fe283191f8b5a2724b397009512a2caec1b6`; PR #3 Draft apilado sobre PR1 `104469b119752f395cf9881e732d582feab9db4e` **refs observados antes de este cambio**. PR #2 es documental, **NO** contiene WIP de Windows. No merge, push WIP, ni publicación de secretos/código privado. Las seis leyes PingPongLaw L1 KISS, L2 antirruido, L3 causa raíz, L4 diseño humano, L5 evidencia independiente, L6 antipingpong permanecen.
 
-**NEXT_OWNER=CODEX_LUNA_N2_IF_NO_NEWER_RESULT; AFTER_SINGLE_ZIP=CHATGPT_DIRECTOR.**
+**Después del ZIP N2:** Director adjudica, prepara respaldo fuera del equipo **con permiso**, concilia PR3 y WIP, integra de forma segura, desbloquea Android C2 con autorización, después Pro/tenant/web/empleados y decisiones OD01–OD08, QA L4/L5/UAT y solo entonces B22, firma y publicación con GO del propietario. **H9_GLOBAL=NO_GO, B22=NOT_AUTHORIZED, RELEASE=NO_GO.**
+
+**NEXT_OWNER=CODEX_LUNA_N2_R1_IF_NO_EXISTING_RUN; AFTER_SINGLE_ZIP=CHATGPT_DIRECTOR.**
