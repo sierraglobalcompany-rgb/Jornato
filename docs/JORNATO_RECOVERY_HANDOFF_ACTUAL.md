@@ -1,5 +1,7 @@
 # JORNATO — RECOVERY HANDOFF ÚNICO · 21 NOV 2026 · N4 ACTIVO
 
+> **NUEVA POLÍTICA DEL PROPIETARIO · 21-NOV-2026:** [Docker PHP + DB aislado por proyecto](JORNATO_DOCKER_AISLAMIENTO_PROYECTOS_20261121.md). **N4 YA EN EJECUCIÓN**, su prompt anterior permite MariaDB Windows en C3; no se modifica a mitad de corrida. La próxima orden PHP/DB exigirá Docker Compose exclusivo, sin compartir contenedores/redes/volúmenes/puertos ni alterar Docker de proyectos ajenos. Si aparece IPAM agotado: STOP, no prune. En ZIP N4 revisar conformidad antes de acreditar QA backend.
+
 > **LEER PRIMERO:** [continuidad canónica](JORNATO_CONTINUIDAD.md) y [orden vigente N4](CODEX_LOTE_ACTUAL.md). N3-R1 terminó y se adjudicó, NO está en vuelo. Si existe ZIP N4 posterior, revisarlo ANTES de dar otra orden. No repetir las auditorías 10+10 ni suites aprobadas.
 
 ## Proyecto, dueño y objetivo
