@@ -1,20 +1,20 @@
-# JORNATO — HANDOFF CANÓNICO · 20 NOV 2026 · N2-R1
+# JORNATO — RECOVERY HANDOFF ÚNICO · 21 NOV 2026 · N3 ACTIVO
 
-> **RECUPERAR AQUÍ:** [continuidad vigente](JORNATO_CONTINUIDAD.md) → [orden única Codex N2-R1](CODEX_LOTE_ACTUAL.md) → [auditoría delta 10+10](JORNATO_N2_R1_AUDITORIA_10V_10J_20261120.md). La revisión **N2-R1 corrige N2, conserva su TASK y no es N3**. No iniciar si Codex ya ejecuta N2 o hay ZIP posterior. No repetir C2/N1/N1-R2, 10+10 de lotes previos o suites aprobadas.
+> **LEER:** [continuidad vigente](JORNATO_CONTINUIDAD.md), luego [orden CODEX N3](CODEX_LOTE_ACTUAL.md), luego [dictamen N2-R1](JORNATO_N2_R1_DICTAMEN_NEXT_N3_20261121.md). No ejecutar N1/N1-R2/N2/N2-R1 de nuevo. Si existe ZIP N3 posterior, adjudicarlo primero. Este archivo no constituye autorización para publicar WIP privado, tocar Android o hacer release.
 
-## Identidad y metas
-Jornato: asistencias/jornadas de empresas; kiosco Gratis Local offline; Pro Flutter/SQLCipher/outbox; backend Laravel/Sanctum/MariaDB, portal empleado/RR.HH. ChatGPT Director define gates y contratos; CODEX LUNA ejecuta sobre Windows; el dueño no realiza QA local. Meta es integrar y lanzar de manera segura, no obtener otro informe sin pruebas.
+## Contexto de producto y gobierno
+Jornato controla jornadas y asistencia: kiosco Gratis Local offline, Pro Flutter/SQLCipher/outbox, backend Laravel/Sanctum/MariaDB y portal/empleados/RR.HH. **ChatGPT Director, CODEX LUNA ejecutor en Windows; propietario no hace QA local.** Meta: terminar e integrar el producto sin arquitectura paralela ni auditorías repetidas. Leyes L1 KISS, L2 antirruido, L3 causa raíz, L4 UX humana, L5 evidencia independiente, L6 antipingpong.
 
-## Últimos resultados
-- N1-R2 SHA256 ZIP `5EACC3643A00D0EC338E1EB62698A1B4AEA88C957FD3B113C0BF25B394E61540`, 10 miembros CRC PASS; implementado no probado: nocturnos y acumulado provisional/referencial; **siete tests host/73 declaraciones, 0 ejecutados**. Snapshot privado 216 archivos/2.904.617 bytes, restauración muestra 5/5 reportada. WIP D:\codex\Jornato, rama `codex/jor-b08-h4-domain-20261025`, HEAD `faf5fe283191f8b5a2724b397009512a2caec1b6`; 234 status y 0 staged reportados; no copiado aquí.
-- C2 V5 ZIP SHA256 `711116067DDBF73E7CE4AD6A102D58E14AD5372D79A981F48978C54A76B35692`: Flutter 3.47.8/Dart 3.13.7 + kernel offline PASS reportados, pero host actual de N1-R2 no localizó los ejecutables. **No asumir mismo host ni SDK borrado**. C2 físico `BLOCKED_VM_SERVICE`; APK QA se dejó instalado; **no tocar celular/ADB**.
-- Hallazgo oficial de N2-R1: `flutter --no-pub` puede ejecutar `cache.updateAll` antes de `pub.get`; hay que validar artefactos de la caché sin red antes de ejecutar Flutter CLI. No instalar/descargar SDK ni corregir arquitectura por falta de dependencia.
-- Backend B21F-S3 158/2450 PASS_SCOPED, H9-M1 75 host PASS, F1 focal PASS históricos; Android 4 oráculos NOT_RUN, reinicio Android BLOCKED_HARNESS, tenant y Pro BLOCKED_CONTRACT. H9_GLOBAL NO_GO, B22 NOT_AUTHORIZED, RELEASE NO_GO.
+## Última verdad comprobada
+- N2-R1 ZIP `JOR-N2-SDK-RECOVERY-HOST-GATE-20261120-UNICO.zip`, 7264 bytes, SHA256 `CC4846C6D901564E246D17B8A28C2B28A772F5A76E00442E0A3BFD19D19B04DB`, **7/7 entradas CRC, 6/6 SHA del manifiesto**. Reporte: Flutter/Dart local, formato/análisis PASS, **7 archivos host / 86 PASS / 0 FAIL / 0 SKIP**. HOST_GATE PASS_HOST_SCOPED, no Android ni release.
+- Código de `KioskScreen` acciones nocturnas y prueba host de límite offline `ESCRITO_NO_PROBADO` en matriz N2. Estos son los únicos gaps focales host de N3.
+- Código avanzado WIP reportado `D:\codex\Jornato`, HEAD `faf5fe283191f8b5a2724b397009512a2caec1b6`, rama `codex/jor-b08-h4-domain-20261025`, 234 rutas (223 untracked / 11 modified), staged 0. N2 solo formateó `test/kiosk_repository_test.dart`. Snapshot local 216 archivos, 5/5 restauración muestral, **OFF_DEVICE_BACKUP=NO**. No se ha accedido al WIP desde ChatGPT.
+- C2 V5 APK QA instalado según Codex, VM discovery `BLOCKED_VM_SERVICE`; no hacer adb/avd/logcat/instalación. Cuatro oráculos Android NOT_RUN; restart BLOCKED_HARNESS; Pro/tenant BLOCKED_CONTRACT. H9_GLOBAL NO_GO; B22 NOT_AUTHORIZED; RELEASE NO_GO.
 
-## Github, custodia y leyes
-Repo `sierraglobalcompany-rgb/Jornato`: main `1ee6aae...`, PR1 `faf5fe...` Draft, PR3 `104469...` Draft apilado sobre PR1; **PR2 solo documental**. No publicar WIP privado sin respaldo externo autorizado, revisión de secretos y conciliación; sin merge/deploy automático. L1–L6 PingPongLaw, `requestId` y `requetId` histórico, `SERVER_STORED != RECOGNIZED`, B19/B20 deny-all, OD01–OD08 pendientes.
+## GitHub y confidencialidad
+`sierraglobalcompany-rgb/Jornato`: main `1ee6aae...`, PR #1 Draft F0 `faf5fe...`, PR #3 Draft F0 `104469...` apilado sobre PR1. PR2 documental contiene esta orden, acta y continuidad; los PR no contienen el WIP avanzado. **No publicar WIP en repositorio público, no merge/deploy ni empujar código con secretos**, primero candidato privado reconstruible, cobertura y respaldo off-device autorizado. Semántica `requestId`/legado `requetId`, `SERVER_STORED != RECOGNIZED`, B19/B20 deny-all, OD01–OD08 pendientes.
 
-## Única ejecución siguiente
-CODEX LUNA: N2-R1 (mismo TASK `JOR-N2-SDK-RECOVERY-HOST-GATE-20261120`), baseline SHA de seis rutas, búsqueda acotada SDK, precache y package config sin mutación, fixtures host sintéticos, formato/analyze y exactamente 7 tests si es seguro; una corrección causal + regresión focal, **un ZIP de evidencia sanitizada** o bloqueo reproducible. Sin Git push/merge, sin teléfono, sin otro runner ni nueva instalación. Si N2 ya está en vuelo, tomar su ZIP y no reiniciar.
+## ÚNICA ORDEN siguiente
+**CODEX LUNA** ejecuta una vez TASK `JOR-N3-UI-OFFLINE-INTEGRATION-CANDIDATE-20261121`: test real host de botones nocturnos `KioskScreen`, prueba/evidencia de dependencia cero de red en flujo local, correcciones propietarias focales, candidato aislado privado a partir de HEAD+WIP sin modificar Git fuente, matriz de cobertura/publicación, un ZIP sanitizado. No repetir las 86 pruebas sin delta de código, no tocar el móvil, no subir WIP. Si falta seam/test/local SDK, reportar bloqueo causal sin parche de arquitectura.
 
-**DESPUÉS DEL ZIP: CHATGPT DIRECTOR** planifica respaldo externo/integración producto y cierre de QA, no otra auditoría ritual.
+**DESPUÉS DEL ZIP: CHATGPT DIRECTOR.** No pedir al usuario que ejecute comandos ni crear otra auditoría por rutina.
