@@ -228,7 +228,7 @@ def self_test() -> None:
 
 def main() -> int:
     args = argparse.ArgumentParser(description=__doc__)
-    args.add_argument('--source', type=Path, help='Existing Laravel server root (e.g. D:\codex\Jornato\server)')
+    args.add_argument('--source', type=Path, help='Existing Laravel server root (e.g. D:\\codex\\Jornato\\server)')
     args.add_argument('--out', type=Path, help='JSON report path OUTSIDE source tree')
     args.add_argument('--self-test', action='store_true')
     opt = args.parse_args()
