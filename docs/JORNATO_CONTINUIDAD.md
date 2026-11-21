@@ -1,4 +1,14 @@
-# JORNATO — CONTINUIDAD CANÓNICA · 21 NOV 2026 · N3-R1 VIGENTE SI N3 NO COMENZÓ
+# JORNATO — CONTINUIDAD CANÓNICA · 21 NOV 2026 · N3-R1 EN EJECUCIÓN; S1 PREPARADO
+
+## 21-NOV-2026 · S1 SERVIDOR PREPARADO EN PARALELO, NO EJECUTADO
+
+**Estado operativo reportado por el propietario: N3-R1 EN EJECUCIÓN.** No enviar otro prompt a Codex, no tocar D:\codex\Jornato, no sustituir [CODEX_LOTE_ACTUAL.md](CODEX_LOTE_ACTUAL.md) ni declarar GO de N3 antes de su ZIP.
+
+Trabajo paralelo concreto de ChatGPT Director: [S1 kit de activación de servidor](JORNATO_SERVIDOR_S1_KIT_ACTIVACION_POST_N3_20261121.md) y [herramienta verificada de intake Laravel](../tools/JORNATO_SERVER_SOURCE_INTAKE_S1.py), sobre los [24 gates S0](JORNATO_SERVIDOR_GATES_S0_20261121.csv). Tool Python stdlib, autoflujo sintético: 9 comprobaciones base PASS, prueba de symlink PASS cuando disponible (SKIP permitido si Windows lo prohíbe). SHA256 script 85636f9acd9b8b511d25397b3892550b1dcff4fa80498051d0b2a0af989a0908; blob b651b6008ac4d8a8e02c65bab1771f635da3f2bf. **Solo probado en fixture sintética; no ejecutado sobre el servidor real.**
+
+**No se creó backend nuevo, no se inspeccionó el Laravel avanzado, no se ejecutó MariaDB/Artisan/HTTP, no se desplegó nada y no se publicó WIP privado.** Contratos E01-E08 son oráculos preparados, NO URLs ni tests PASS. SERVER_S0=PREPARED_DOCS_ONLY; SERVER_S1=KIT_READY_NOT_EXECUTED; SERVER_RUNTIME=NOT_VERIFIED; HOSTING_TARGET=NOT_DECIDED; RELEASE=NO_GO.
+
+Orden después de N3: ChatGPT Director adjudica el ZIP; si hay fuente autorizada y QA aislada, activar una sola campaña S1 fuente + DB QA + contratos app/API + casos E2E. Si faltan precondiciones, resolver bloqueos concretos, no empezar de nuevo auditorías ni construir arquitectura alternativa.
 
 > **ÚNICA ORDEN DESCARGABLE / GITHUB:** [CODEX_LOTE_ACTUAL.md](CODEX_LOTE_ACTUAL.md), TASK `JOR-N3-UI-OFFLINE-INTEGRATION-CANDIDATE-20261121`, `PROMPT_REVISION=N3-R1-20261121`. **Mismo N3; NO otra ejecución ni N4.** Si Codex ya empezó N3 original o existe ZIP N3 posterior, **no ejecutar N3-R1**: recibir el ZIP anterior y adjudicarlo. [Auditoría delta 10 verdugo + 10 juez](JORNATO_N3_R1_AUDITORIA_10V_10J_20261121.md).
 
