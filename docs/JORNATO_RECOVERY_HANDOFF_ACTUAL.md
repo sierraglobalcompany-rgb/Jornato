@@ -1,5 +1,7 @@
 # JORNATO — RECOVERY HANDOFF ÚNICO · 21 NOV 2026 · N4 ACTIVO
 
+> **N4 sigue activo, NO REINICIAR:** [Auditoría focal 10 VERDUGO + 10 JUEZ del delta Docker](JORNATO_N4_AUDITORIA_DELTA_DOCKER_10V_10J_20261121.md). N4 C3/C4 no garantiza PHP/BD Docker. [Borrador post-N4](CODEX_POST_N4_DOCKER_BORRADOR_NO_EJECUTAR_20261121.md) = **NO EJECUTAR** hasta ZIP N4 adjudicado por Director. No cambiar `CODEX_LOTE_ACTUAL.md`; no correr N4-R1 en paralelo. QA fuera de Docker no acredita aislamiento conforme a nueva ley. 
+
 > **NUEVA POLÍTICA DEL PROPIETARIO · 21-NOV-2026:** [Docker PHP + DB aislado por proyecto](JORNATO_DOCKER_AISLAMIENTO_PROYECTOS_20261121.md). **N4 YA EN EJECUCIÓN**, su prompt anterior permite MariaDB Windows en C3; no se modifica a mitad de corrida. La próxima orden PHP/DB exigirá Docker Compose exclusivo, sin compartir contenedores/redes/volúmenes/puertos ni alterar Docker de proyectos ajenos. Si aparece IPAM agotado: STOP, no prune. En ZIP N4 revisar conformidad antes de acreditar QA backend.
 
 > **LEER PRIMERO:** [continuidad canónica](JORNATO_CONTINUIDAD.md) y [orden vigente N4](CODEX_LOTE_ACTUAL.md). N3-R1 terminó y se adjudicó, NO está en vuelo. Si existe ZIP N4 posterior, revisarlo ANTES de dar otra orden. No repetir las auditorías 10+10 ni suites aprobadas.
