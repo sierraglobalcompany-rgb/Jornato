@@ -25,3 +25,9 @@ Repo público `sierraglobalcompany-rgb/Jornato`, `main=1ee6aae821f8cf177cc641490
 **ANDROID_NATIVE=NOT_RUN; RESTART_READBACK=BLOCKED_HARNESS; H9_GLOBAL=NO_GO; B22=NOT_AUTHORIZED; RELEASE=NO_GO.**
 
 **NEXT_OWNER=CODEX_LUNA_N4_IF_NOT_ALREADY_RUNNING; AFTER_SINGLE_ZIP=CHATGPT_DIRECTOR.**
+
+## Política nueva — Docker aislado por proyecto (21-nov-2026)
+
+**Regla explícita del propietario, prevalece para FUTURAS ejecuciones PHP y BD:** [JORNATO_DOCKER_AISLAMIENTO_PROYECTOS_20261121.md](JORNATO_DOCKER_AISLAMIENTO_PROYECTOS_20261121.md). Toda ejecución de PHP/Artisan/PHPUnit/Composer y MariaDB/MySQL debe ser **dentro de contenedores Docker propios** por proyecto Compose, con redes/volúmenes/puertos sin colisiones; no servicios en Windows ni recursos Docker de otros proyectos. Docker disponible **según propietario**, no validado aquí. Ante IPAM agotado u otra colisión `BLOCKED_DOCKER_IPAM`, sin prune, modificaciones daemon o borrar redes ajenas.
+
+**N4 ya está en ejecución; no se modificó `CODEX_LOTE_ACTUAL.md`**. N4 C3 contempla MariaDB host, ahora considerado **NO CONFORME** con esta nueva norma. Cuando llegue ZIP, Director distinguirá pruebas hechas en contenedor de pruebas host y decidirá sin repetir suites no afectadas. No abrir otro Codex ni interrumpir N4 desde documentos.
