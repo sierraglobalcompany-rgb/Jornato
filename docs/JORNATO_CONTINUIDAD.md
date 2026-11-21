@@ -27,3 +27,9 @@ Repositorio público `sierraglobalcompany-rgb/Jornato`; `main=1ee6aae821f8cf177c
 Leyes PingPongLaw L1 KISS, L2 no ruido, L3 causa raíz, L4 UX humana, L5 QA independiente, L6 no pingpong. Mantener `requestId`/legado `requetId`, `SERVER_STORED != RECOGNIZED`, B19/B20 deny-all, OD01–OD08 pendientes. Después de N3: (a) Director certifica ZIP, (b) autorización de backup **off-device** privado y revisión de secretos, (c) integración de producto segura + PR en destino autorizado, (d) Android físico 4 oráculos y restart con runner seguro, (e) Pro/tenant/web/empleados y UAT, (f) release con GO explícito. `H9_GLOBAL=NO_GO`, `B22=NOT_AUTHORIZED`, `RELEASE=NO_GO`.
 
 **NEXT_OWNER=CODEX_LUNA_N3_R1_IF_N3_NOT_STARTED; AFTER_N3_ZIP=CHATGPT_DIRECTOR.**
+
+## Frente paralelo S0 del servidor — ChatGPT (sin tocar N3)
+
+**21-nov-2026: preparado en PR #2, SOLO DOCUMENTOS.** [Ready room servidor S0](JORNATO_SERVIDOR_S0_READY_ROOM_20261121.md) + [24 puertas verificables en CSV](JORNATO_SERVIDOR_GATES_S0_20261121.csv). Incluyen matriz fuente Laravel, QA MariaDB aislada, tenant A/B, PAT, outbox/acuse, contratos OD, hosting, staging, copias/rollback y release. **NO habilitan desplegar ni ejecutar un segundo Codex.** `SERVER_S0=PREPARED_DOCS_ONLY`, `SERVER_RUNTIME=NOT_VERIFIED`, `SERVER_DEPLOY=NOT_RUN` y `RELEASE=NO_GO`.
+
+**IMPORTANTE:** El propietario confirmó que CODEX LUNA **está ejecutando N3-R1**. Por ello, conservar **exactamente** la orden `CODEX_LOTE_ACTUAL.md` vigente; NO crear N4 ni cambiar la asignación ahora. Al recibir el ZIP N3-R1, Director evalúa y decide primer macrobloque servidor real con **fuente y entorno autorizados**; no repetir N2-R1 (86 PASS host) ni promover los PASS históricos B21F-S3 a E2E.
