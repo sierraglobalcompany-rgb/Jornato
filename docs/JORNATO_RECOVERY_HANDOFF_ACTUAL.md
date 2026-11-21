@@ -1,30 +1,26 @@
-# JORNATO — RECOVERY HANDOFF ACTUAL · 21 NOV 2026 · N3-R1
+# JORNATO — RECOVERY HANDOFF ÚNICO · 21 NOV 2026 · N4 ACTIVO
 
-> **S2 paralelo (21-NOV-2026):** [guía S2 de paquete Laravel](JORNATO_S2_PAQUETE_DESPLIEGUE_Y_PISTAS_DE_RELEASE_20261121.md) y [herramienta S2](../tools/JORNATO_SERVER_BUNDLE_PREFLIGHT_S2.py) disponibles en PR #2. 12 casos sintéticos PASS; **no se examinó ni desplegó el backend de Jornato**. S1 sigue preparado; S2 solo valida metadatos/nombres ZIP, no secretos dentro del contenido. **N3-R1 está en curso y su orden permanece INTACTA; no enviar segundo Codex.**
+> **LEER PRIMERO:** [continuidad canónica](JORNATO_CONTINUIDAD.md) y [orden vigente N4](CODEX_LOTE_ACTUAL.md). N3-R1 terminó y se adjudicó, NO está en vuelo. Si existe ZIP N4 posterior, revisarlo ANTES de dar otra orden. No repetir las auditorías 10+10 ni suites aprobadas.
 
-> **DELTA 21-NOV-2026, POST S0:** El propietario confirmó que CODEX LUNA SIGUE EJECUTANDO N3-R1. ChatGPT preparó [kit S1 servidor post-N3](JORNATO_SERVIDOR_S1_KIT_ACTIVACION_POST_N3_20261121.md), [intake Python de solo lectura](../tools/JORNATO_SERVER_SOURCE_INTAKE_S1.py) y 8 oráculos E2E dependientes del Laravel real, sin tocar WIP ni cambiar la orden N3. S1 NO ejecutado, deploy NO_GO, PR2 solo documental y utilidades. Después del ZIP N3 sigue ChatGPT Director.
+## Proyecto, dueño y objetivo
 
-> **PARALELO S0, 21-NOV-2026:** ChatGPT creó [ready room servidor](JORNATO_SERVIDOR_S0_READY_ROOM_20261121.md) y [matriz 24 puertas](JORNATO_SERVIDOR_GATES_S0_20261121.csv) solo en PR2. **Codex Luna sigue ejecutando N3-R1**; no modificar su prompt ni darle otra tarea mientras trabaja. Ningún backend remoto se instaló, QA servidor no corrió, staging no está autorizado; release NO_GO.
+Jornato: control de jornadas y asistencia — Gratis Local offline Flutter, Pro con SQLCipher/outbox, backend Laravel/Sanctum/MariaDB, portal y RR. HH. ChatGPT Director planifica, CODEX LUNA ejecuta Windows; propietario no hace QA local. Objetivo inmediato: proteger e integrar **fuente completa app + servidor** y ejecutar QA Laravel real sobre DB exclusiva, sin crear sistemas paralelos. Leyes PingPongLaw L1–L6.
 
-**PRIMERA INSTRUCCIÓN AL REANUDAR:** consultar [JORNATO_CONTINUIDAD.md](JORNATO_CONTINUIDAD.md) y [CODEX_LOTE_ACTUAL.md](CODEX_LOTE_ACTUAL.md). Única ejecución N3 `JOR-N3-UI-OFFLINE-INTEGRATION-CANDIDATE-20261121`, revisión correctiva **N3-R1**. No ejecutar N3-R1 si N3 original ya empezó ni si hay ZIP posterior. No reiniciar C2/N1/N2 ni reabrir auditorías 10+10. [Dictamen N3-R1](JORNATO_N3_R1_AUDITORIA_10V_10J_20261121.md).
+## Evidencia última
 
-## Producto y leyes
+- N3-R1 ZIP SHA256 `C960FA83ABAE677E4DDF1E59432C0915B75A85017FD02D65F4FBD9731ACA57DA`, 13.164 B, 11 entradas CRC PASS, 10/10 manifiesto. UI real 9/9 host PASS, vecinas 4/4, análisis PASS; doble toque corregido; ruta host local SQLite FFI, sin HttpClient en acción. No prueba el login del empleado ni Android.
+- Candidato N3 **65 archivos**, 56 overlays con paridad; excluyó **155 rutas backend** y 179/235 rutas cambiadas. Smoke host `BLOCKED_ENV` por falta de configuración DERIVADA en candidato, no fallo de código demostrado. N2-R1 86 host PASS históricos; backend B21F-S3 158/2450 scoped histórico, NO E2E.
+- WIP solo reportado en `D:\codex\Jornato`, branch `codex/jor-b08-h4-domain-20261025`, HEAD `faf5fe283191f8b5a2724b397009512a2caec1b6`, 235 rutas status, 224 untracked/11 modified, 0 staged. Sin fuente WIP en GitHub público; copias solo en D:, **OFF_DEVICE_BACKUP=NO**.
+- C2 físico SQLCipher/Keystore/idempotencia/corrupción `NOT_RUN`, reinicio Android `BLOCKED_HARNESS`, Pro/tenant `BLOCKED_CONTRACT`, H9_GLOBAL `NO_GO`, B22 `NOT_AUTHORIZED`, RELEASE `NO_GO`.
 
-Jornato: kiosco Gratis Local offline en Flutter con asistencia/jornadas; Pro con SQLCipher/outbox y backend Laravel/Sanctum/MariaDB; web y módulos empleado/RR. HH. Director de producto **ChatGPT**; ejecutor local **Codex Luna**; propietario no hace QA local. Arquitectura L1 KISS/pony-tail, L2 antirruido, L3 causa raíz, L4 UX humana, L5 evidencia independiente, L6 antipingpong. NO segundo motor ni nueva DB/sync/harness, sin distorsionar `requestId`, histórico `requetId`, `SERVER_STORED` vs `RECOGNIZED`; B19/B20 deny-all; OD01–OD08 no aprobadas.
+## Orden N4 ÚNICA
 
-## Evidencia cerrada (no volver a comprobar por rutina)
+CODEX LUNA debe ejecutar TASK `JOR-N4-FULL-SOURCE-AND-SERVER-QA-20261121`: fuente candidata privada app+Laravel+migraciones+tests desde HEAD+overlays, paridad y exclusión de secretos; smoke Flutter host en copia con cachés offline seguros; source intake y contrato Laravel **real**; QA MariaDB NUEVA/exclusiva con hasta ocho casos E2E sintéticos solo cuando entorno verificado; reparar defectos causales y una regresión focal, un ZIP sanitizado. Si no hay DB o caché, no inventar PASS, cerrar subpuerta con bloqueo y avanzar otras puertas seguras. No Git mutación, publicar fuentes, conectar a producción, ADB/AVD, staging/deploy ni instalar paquetes nuevos. Mantener `requestId`/legado `requetId`, `SERVER_STORED != RECOGNIZED`, B19/B20 deny-all, OD01–OD08 sin aprobación.
 
-1. N2-R1 ZIP SHA256 `CC4846C6D901564E246D17B8A28C2B28A772F5A76E00442E0A3BFD19D19B04DB`, 7 entradas CRC PASS, 6 hashes PASS. Registros 7 archivos / **86 PASS, 0 FAIL, 0 SKIP** y formato/análisis PASS sobre Flutter 3.47.8 y Dart 3.13.7; `PASS_HOST_SCOPED` solo para SHAs cubiertos, no Android/release.
-2. `KioskScreen` acciones reales y dependencia offline: `ESCRITO_NO_PROBADO`. Siguiente N3 widget test real + reloj fijo + tap + repositorio local + barrera de red verificable, no solo helper/spies ficticios.
-3. Windows WIP `D:\codex\Jornato` reportado 234 rutas (223 untracked), HEAD `faf5fe...`, staged 0; no hay acceso directo en ChatGPT ni publicación GitHub del código avanzado. Snapshot N1-R2 216 archivos en D:, restore 5/5 reportado; **OFF_DEVICE_BACKUP=NO**.
-4. C2 V5 dejó APK QA instalado, pero 4 oráculos Android NOT_RUN, restart BLOCKED_HARNESS, Pro/tenant BLOCKED_CONTRACT, H9_GLOBAL NO_GO, B22 NOT_AUTHORIZED, RELEASE NO_GO. No tocar teléfono/ADB ni hacer deploy.
+## Material reutilizable ya preparado en PR #2
 
-## GitHub y permiso de publicación
+[S0 servidor](JORNATO_SERVIDOR_S0_READY_ROOM_20261121.md), [matriz 24 gates](JORNATO_SERVIDOR_GATES_S0_20261121.csv), [S1 intake](JORNATO_SERVIDOR_S1_KIT_ACTIVACION_POST_N3_20261121.md), [S2 preflight de ZIP](JORNATO_S2_PAQUETE_DESPLIEGUE_Y_PISTAS_DE_RELEASE_20261121.md). Son herramientas/documentos, **no** certificado del Laravel de Jornato. No repetir self-tests sintéticos ni asumir herramientas presentes en WIP.
 
-Repo público `sierraglobalcompany-rgb/Jornato`: `main=1ee6aae...`, PR1 F0 Draft `faf5fe...`, PR3 F0 Draft `104469...` basado en PR1; PR2 Draft documental con esta orden. **Nunca** subir WIP avanzado al repo público sin autorizar divulgación y revisión completa de secretos/PII. Los cambios de documentación en PR2 no sustituyen integración de producto. Próxima decisión de Director: backup off-device privado autorizado y PR de código en destino apropiado.
+GitHub `sierraglobalcompany-rgb/Jornato`: PR2 documental Draft; `main=1ee6aae...`, PR1 F0 Draft `faf5fe...`, PR3 Draft `104469...` apilado en PR1 (refs observados antes del nuevo commit). Fuentes privadas NO publicadas. Después del ZIP N4: **CHATGPT DIRECTOR** decide custodia externa autorizada, integración Git de código con secretos depurados, gates Android, staging y UAT. Release solo por GO explícito.
 
-## Instrucción N3-R1
-
-Codex: preflight y custodia focal; test verdadero de UI `KioskScreen` en noche, cruce de fecha y fin planificado con reloj fijo; demostrar camino offline sin HTTP de la app; corregir fallos propios, repetir únicamente tests afectados; base candidata privada `git archive HEAD` + overlay controlado de tracked/untracked, sin `.git` y sin symlinks/secretos; exigir paridad y smoke antes de `READY_LOCAL_SCOPED`. Un único ZIP con informe, matrices, hashes sanitizados, manifest y CRC; código/patch/snapshot en `OUTPUT_ROOT/private` **sin salir de D:**. No ejecutar N3 dos veces; si ya está ejecutándose, revisar ZIP original.
-
-**NEXT=CODEX_LUNA_N3_R1_IF_NOT_ALREADY_STARTED; AFTER_ZIP=CHATGPT_DIRECTOR.**
+**NEXT=CODEX_LUNA_N4_IF_NO_NEWER_RUN; AFTER_SINGLE_ZIP=CHATGPT_DIRECTOR.**
