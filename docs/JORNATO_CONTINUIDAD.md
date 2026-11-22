@@ -1,6 +1,14 @@
-# JORNATO — CONTINUIDAD CANÓNICA · N5-R1 CERRADO / N6 ACTIVO · 21-NOV-2026
+# JORNATO — CONTINUIDAD CANÓNICA · N5-R1 CERRADO / N6-R2 CONDICIONAL · 21-NOV-2026
 
 > **UNA SOLA ORDEN ACTIVA:** [CODEX_LOTE_ACTUAL.md](CODEX_LOTE_ACTUAL.md) = `JOR-N6-PHP-RUNTIME-CAUSE-ISOLATED-QA-20261121`. [Dictamen N5 real](JORNATO_N5_DICTAMEN_Y_N6_20261121.md). **No ejecutar de nuevo N5-R1**, ni sus 10 verdugo/10 juez, ni N4/N3/N2. Si N6 comenzó o existe ZIP N6 posterior, recibir/adjudicar ese ZIP ANTES de cualquier prompt nuevo. **Codex Luna ejecutor, ChatGPT Director; un único ZIP por tarea.**
+
+## DELTA VIGENTE 21-NOV — AUDITORÍA N6-R1 10V + 10J Y N6-R2
+
+**Orden descargable/revisada:** [CODEX_LOTE_ACTUAL.md](CODEX_LOTE_ACTUAL.md), mismo `TASK=JOR-N6-PHP-RUNTIME-CAUSE-ISOLATED-QA-20261121`, `PROMPT_REVISION=N6-R2-20261121`. **NO ES N7.** Reemplaza N6-R1 solo **si Codex aún NO empezó N6-R1**. Si N6-R1 ya inició, hay ZIP N6 o no puede comprobarse que no empezó, **no ejecutar N6-R2, no duplicar**, recibir el ZIP original e ir a ChatGPT Director. Histórico N6-R1 recuperable por HEAD PR #2 anterior `d8ff01aff04689d4312e604f868bcd3d6b889ecc`, sin crear otra copia del prompt.
+
+**[Auditoría delta N6-R2 — 10 VERDUGO + 10 JUEZ](JORNATO_N6_R2_AUDITORIA_10_VERDUGO_10_JUEZ_20261121.md):** 20 pasadas sobre instrucciones N6-R1, NO sobre código/QA anterior. Corrige: preflight contexto/arquitectura **real** de daemon/imagen, `--entrypoint /bin/sh` explícito para discriminar error de wrapper, máximo dos imágenes locales por ID, sondas de shell/PHP separadas sin red, requisitos de extensiones basados en `composer.lock`, y mismo laboratorio N6 aislado únicamente tras gate PHP. Probes no se han ejecutado en el host desde ChatGPT. Flutter N5 9/9 ya PASS acotado; E01–E08 bloqueados hasta SQL real.
+
+**Orden exacta:** un único macrobloque N6 si no iniciado; WIP y N5 read-only; sin PHP/DB nativo Windows, sin red IPAM ni puertos, sin pull/build/prune y sin tocar otros proyectos Docker; un solo ZIP. Si falta imagen PHP compatible, cerrar con causa/permiso mínimo sin dar PASS ficticio. `H9_GLOBAL=NO_GO`, `B22=NOT_AUTHORIZED`, `OFF_DEVICE_BACKUP=NO`, `RELEASE=NO_GO`.
 
 ## Fuente de verdad al corte
 
@@ -23,4 +31,4 @@
 - PingPongLaw L1 KISS L2 no ruido L3 causa raíz L4 UX humana L5 evidencia verificable L6 no pingpong. `requestId` / histórico `requetId`, `SERVER_STORED != RECOGNIZED`; B19/B20 deny-all, OD02/OD03/OD04 bloquean funciones sin contrato aprobado. Android nativo, SQLCipher/Keystore/corrupción/restart y UAT pendientes. 
 - `H9_GLOBAL=NO_GO`, `B22=NOT_AUTHORIZED`, `SERVER_STAGING=NOT_AUTHORIZED`, `OFF_DEVICE_BACKUP=NO`, `RELEASE=NO_GO`. No vender un PASS Flutter host como release.
 
-**NEXT_OWNER=CODEX_LUNA_N6; AFTER_ZIP=CHATGPT_DIRECTOR.**
+**NEXT_OWNER=CODEX_LUNA_N6_R2_IF_N6_R1_NOT_STARTED; OTHERWISE=CHATGPT_DIRECTOR_REVIEW_N6_EXISTING; AFTER_ZIP=CHATGPT_DIRECTOR.**
