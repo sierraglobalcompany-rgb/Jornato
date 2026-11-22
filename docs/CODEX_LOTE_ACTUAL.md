@@ -1,121 +1,196 @@
-# CODEX LUNA — JORNATO A2-R4 · COMPATIBILIDAD OFICIAL AGP 9 → UNA COMPILACIÓN APK QA
+# CODEX LUNA — JORNATO A2-R4-V2 · UNA SOLA CORRECCIÓN AGP 9, UNA COMPILACIÓN APK QA
 
-> **TAREA EJECUTABLE Y PRODUCTIVA. No reauditar, no rediseñar, no crear A3.** ChatGPT Director decide; Codex Luna verifica puertas y ejecuta. La revisión afecta únicamente el delta real observado en A2-R3. El producto sigue offline; esta es QA de desarrollo, no un release. Fecha 22-NOV-2026 (Colombia).
+> **EJECUTA, NO REDISEÑES.** ChatGPT Director fija la decisión; Codex Luna únicamente ejecuta gates. **ESTE ES EL MISMO TASK DE A2, NO A3.** Este V2 sustituye A2-R4 original **solo si A2-R4 aún NO ha empezado**. Si empezó, hay un proceso activo, un checkpoint R4, `delivery-r4` o ZIP R4: **STOP**, no lanzar un segundo build, no interferir, remitir evidencia existente. No repasar auditorías N2–N7/A1/A2-R1–R3.
 
 ```text
 TASK=JOR-A2-GRADLE-DEPS-APK-QA-20261122
-PROMPT_REVISION=A2-R4-20261122
-A2_ROOT=D:\codex\_REPORTES\Jornato\JOR-A2-GRADLE-DEPS-APK-QA-20261122
-WIP_ROOT=D:\codex\Jornato
-R3_ZIP=delivery-r3\JOR-A2-GRADLE-DEPS-APK-QA-20261122-R3-UNICO.zip
-R3_SHA256=5C3E7B1758380CE8D7895C1EF1981F2FD131A4A90F79C8A300BAF57153214D11
-A2_R1_ZIP_SHA256=C891EC71F5D30511065E0F902B1D97A19F5AA22F2D913FA48770E8D6328B6B24
-WIP_REFERENCE_HEAD=faf5fe283191f8b5a2724b397009512a2caec1b6
-WIP_INDEX_SHA256=25CC609803D7E68D5F3ECF428198B2432CF1EA37030546735DD3F03299D905E1
-EXACT_BUILD_TASK=:app:assembleB14qaDebug
-RELEASE=NO_GO
+PROMPT_REVISION=A2-R4-V2-20261122
+OWNER=CODEX_LUNA
 NEXT_OWNER=CHATGPT_DIRECTOR
+WIP_ROOT=D:\codex\Jornato
+A2_ROOT=D:\codex\_REPORTES\Jornato\JOR-A2-GRADLE-DEPS-APK-QA-20261122
+R3_ZIP=delivery-r3\JOR-A2-GRADLE-DEPS-APK-QA-20261122-R3-UNICO.zip
+R3_ZIP_SHA256=5C3E7B1758380CE8D7895C1EF1981F2FD131A4A90F79C8A300BAF57153214D11
+R1_ZIP_SHA256=C891EC71F5D30511065E0F902B1D97A19F5AA22F2D913FA48770E8D6328B6B24
+R3_WIP_HEAD=faf5fe283191f8b5a2724b397009512a2caec1b6
+R3_WIP_INDEX_SHA256=25CC609803D7E68D5F3ECF428198B2432CF1EA37030546735DD3F03299D905E1
+TARGET_TASK=:app:assembleB14qaDebug
+RELEASE=NO_GO
 ```
 
-## 0. DECISIÓN DEL DIRECTOR: UN SOLO CAMBIO CAUSAL, NINGÚN OTRO
+## 0. Hechos cerrados y objetivo único
 
-**Resultado R3 verificado por el Director:** ZIP 9.188 bytes, 7 miembros, CRC PASS, manifiesto 6/6 SHA+bytes PASS. UNA ejecución `:app:assembleB14qaDebug` con exit 1 en `dev.flutter.flutter-gradle-plugin`. AGP 9.1.0 creó `ApplicationExtensionImpl`; Flutter 3.47.8 intenta `AbstractAppExtension` en `FlutterPlugin.kt:354`, provocando `ClassCastException` ANTES de compilar fuentes Jornato. Fuente 82/82 y Pub ya certificados. Las 22 variantes que faltaban en A1 están disponibles; R3 inventarió 39 JAR nuevos (38 GAV). En R3 no hubo APK; WIP y R1 quedaron intactos; no Docker ni Android físico.
+- R3 ZIP original adjudicado: **9.188 bytes**, 7 miembros, CRC PASS y manifiesto 6/6 de tamaño+SHA-256, SHA-256 exacto arriba. `SOURCE=PASS_82_OF_82_REUSED`. Pub/lock N5 y A1 PASS en su alcance; no repetirlos.
+- Una sola compilación R3 `:app:assembleB14qaDebug` falló **antes de compilar Jornato**, al aplicar `dev.flutter.flutter-gradle-plugin`: `ApplicationExtensionImpl$AgpDecorated_Decorated cannot be cast to AbstractAppExtension`, en `FlutterPlugin.kt:354`. Flutter 3.47.8 / AGP 9.1.0 / Gradle 9.3.1 / Kotlin 2.4.0 / JDK 21.0.12 / SDK 36 reportados. No APK.
+- Caché Gradle privada A2 quedó con 22/22 variantes faltantes de A1, 39 archivos JAR nuevos inventariados (38 GAV). **No volver a descargar esas 22 variantes ni recontarlas**. La evidencia de R3 no acredita integridad criptográfica fijada ni un sandbox de egreso; conservar esa limitación.
+- Corrección **única y oficial**: `android.newDsl=false` para compatibilidad temporal de AGP 9 con DSL antigua. Android documenta la `ClassCastException` observada y Flutter recomienda esa propiedad; **no hay garantía de PASS hasta compilar**. Fuentes oficiales: https://developer.android.com/build/releases/agp-9-0-0-release-notes y https://docs.flutter.dev/release/breaking-changes/migrate-to-built-in-kotlin/for-app-developers .
+- Prohibido cambiar versión de Flutter, AGP, KGP/Kotlin, Gradle o JDK; `android.builtInKotlin`, SDK, NDK, `FlutterPlugin.kt`, fuentes Dart, manifiestos, build scripts, `pubspec.lock` o repositorios. Si el error siguiente exige otra decisión, STOP con primera causa, no improvisar flags ni parches.
 
-**Única corrección permitida por esta orden:** En `android/gradle.properties` **de una COPIA PRIVADA R4**, establecer `android.newDsl=false`, propiedad de compatibilidad oficial y temporal de Flutter/AGP 9. Verificar que la propiedad no se contradiga en otra configuración efectiva. NO editar otros scripts ni cambiar versiones. Conservar Flutter **3.47.8**, Gradle **9.3.1**, AGP **9.1.0**, Kotlin **2.4.0**, JDK **21.0.12**, SDK **36** y `pubspec.lock` intactos. No tocar `FlutterPlugin.kt`, Kotlin, Gradle wrapper, `android.builtInKotlin`, `settings.gradle.kts`, AGP/KGP, lock, manifest o fuentes Dart. Si una segunda causa emerge después del cambio, entregar evidencia causal y STOP; no explorar diez alternativas.
+## 1. Gate G0 — custodia y no duplicación (antes de escribir)
 
-**Base oficial:** Flutter documenta la propiedad `android.newDsl=false` para mantener compatibilidad con APIs DSL antiguas de AGP 9; en proyectos Flutter, sus migradores la agregan al usar `flutter run/build`, pero en un build invocado con el wrapper Gradle no se debe suponer que ya se aplicó. Documentación: https://docs.flutter.dev/release/breaking-changes/migrate-to-built-in-kotlin/for-app-developers . No inventar que el cambio asegura el PASS: es una hipótesis causal sólida pendiente de prueba en este proyecto.
+1. Confirmar que no existe proceso A2-R4 ni trabajo activo del mismo TASK, ni ZIP/documentos R4 previos. Si R4 ya empezó, no detenerlo ni reejecutarlo: `ALREADY_IN_FLIGHT_OR_FINISHED`. La existencia de R3 **sí se espera** y NO bloquea este V2. Si no puede establecer propiedad o exclusividad del laboratorio, `BLOCKED_CONCURRENT_A2`.
+2. Comprobar **una sola vez** SHA del ZIP R3 y leer exclusivamente su `BLOCKERS.md`, `BUILD_AND_APK.csv`, `SOURCE_WIP_GUARDS.csv`; el registro prueba un fallo de API, no de fuente Dart. Preservar entregas `delivery`, `delivery-r3`, candidato previo y hashes. No repetir suite/descargas/inspección exhaustiva de cache.
+3. WIP de `D:\codex\Jornato` es solo lectura; registrar **PRE/POST** rama, HEAD, SHA del índice, staged y digest/contador de status para distinguir trabajo de otros Codex. Referencia histórica HEAD `faf5...`, 235 entradas (11 modified, 224 untracked), staged 0, índice `25CC...`; **no restaurar ni forzar** esas cifras si hubo cambios concurrentes, bloquear y explicar. Nunca `git add/commit/push/pull/reset/stash/clean/checkout/merge`; no editar WIP ni GitHub.
+4. Copiar `A2_ROOT/private/candidate` a **un solo** `A2_ROOT/private/r4/candidate` nuevo, con copia ordinaria (sin links, junctions, hardlinks) y **sin** `.gradle`, `build`, `.dart_tool/flutter_build`, APK, temporales ni outputs de R3. Si la carpeta R4 ya existe con material no clasificado, STOP, **no sobrescribir ni limpiar**. Tomar hashes puntuales de `android/gradle.properties`, `settings.gradle.kts`, `app/build.gradle.kts`, wrapper y lock; original y R3 intocables. Los resultados de paridad 82/82 de R3 se reutilizan.
+5. Reusar `A2_ROOT/private/gradle-home`, `pub-cache`, `android-user`, `temp` y el signing **QA privado**, sin modificar las cachés globales. No inventar claves release ni regenerar la firma QA si la privada previa es válida; la firma efectiva no debe apuntar fuera de A2. Si WIP u otros agentes tocan la copia/caché A2 simultáneamente, STOP.
 
-## 1. GATE R4-0 — NO DUPLICACIÓN, CUSTODIA Y ALCANCE
+## 2. Gate G1 — única modificación: `android.newDsl=false` en copia QA
 
-1. Antes de escribir, verificar que **A2-R3 terminó** y que NO existe R4 en proceso/ZIP/directorio con resultados. Si ya hay ejecución R4 o evidencia, **NO iniciar otra**: devolver `ALREADY_IN_FLIGHT_OR_FINISHED`. Si A2-R2 apareciera simultáneamente, STOP. No limpiar archivos ajenos ni cambiar estados de Codex.
-2. Reutilizar R3 **sin repetir test, descarga, preflight de SDK ni pruebas de fuente**. Verificar una sola vez ruta/sha de R3 ZIP igual al de arriba; leer `BLOCKERS.md`, `BUILD_AND_APK.csv` y `SOURCE_WIP_GUARDS.csv` ya certificados. No volver a comparar los 39 JAR o las 82 fuentes; solo control focal de `gradle.properties` y WIP PRE/POST. No usar GitHub público como fuente de app: la app avanzada vive únicamente en el A2 privado.
-3. Custodia de WIP `D:\codex\Jornato`: antes y después capturar HEAD, rama, número/digest de status, index SHA, staged diff; referencia R3: rama `codex/jor-b08-h4-domain-20261025`, HEAD anterior, 235 entradas (11 modified, 224 untracked), staged 0 e índice anterior. Si otro agente modifica WIP: `BLOCKED_CONCURRENT_WIP`, sin atribuir o corregir cambios. NUNCA `git add/commit/push/pull/reset/stash/clean/checkout/merge`, no pruebas del WIP.
-4. Ningún PHP, Docker, MariaDB, dispositivos/emulador, ADB, cambio global Windows, variables persistentes, caches compartidos, instalaciones, SDK/JDK nuevo, proxy/firewall, repositorio improvisado o versión nueva. No ejecutar suites N2–N7, N5 Flutter, A1, A2 R1–R3. `OFF_DEVICE_BACKUP=NO`, no simular backup.
-5. **Fuente única:** el candidato de `A2_ROOT\private\candidate`, preexistente y privado. Crear **una nueva copia R4** en `A2_ROOT\private\r4\candidate`, únicamente si no existe, con copia ordinaria y verificación de que no haya junction/symlink/hardlink ni rutas fuera de A2. Excluir directorios generados `.gradle`, `build`, `.dart_tool/flutter_build` y APK viejos. No tocar el candidato R3 ni `delivery` y `delivery-r3`. Reusar los directorios de caché ya privados `A2_ROOT\private\gradle-home`, `pub-cache`, `android-user`, `temp` y firma debug con custodia de A2; **no descargar de nuevo las 22 variantes y no copiar cachés globales**. No crear un nuevo keystore si ya hay uno QA privado válido; verificar ruta de firma efectiva y no exponer la clave.
+**Reglas de precedencia:** revisar exclusivamente `private/r4/candidate/android/gradle.properties`, propiedades del `private/gradle-home` de A2, configuración raíz efectivamente utilizada, distribución Gradle y variables del **proceso R4** (`GRADLE_OPTS`, `JAVA_TOOL_OPTIONS`, `ORG_GRADLE_PROJECT_*`), sin revelar valores sensibles. Gradle da prioridad a User Home sobre gradle.properties de proyecto; si un origen distinto impone valor incompatible, **STOP**. No modificar ni sobreescribir config compartida. Referencia: https://docs.gradle.org/current/userguide/build_environment.html .
 
-## 2. GATE R4-1 — UNA PROPIEDAD EN UN ARCHIVO DE QA
+**Casos únicos:** propiedad ausente -> añadir solo `android.newDsl=false`; propiedad única `true` -> sustituir solo `true` por `false`; propiedad única `false` **ya presente en la fuente original previa al cambio** -> `BLOCKED_CAUSE_NOT_CONFIRMED` (no repetir build); duplicados/valor ambiguo/encoding no soportado -> `BLOCKED_GRADLE_PROPERTY_CONFLICT`. Nunca “borrar y volver a poner” un `false` existente. No tocar `android.builtInKotlin` (si la migración Kotlin falla después, Director decidirá con evidencia nueva).
 
-Ejecutar estáticamente en la **copia R4**, sin lanzar Gradle, estas instrucciones simples:
+**Editor determinista, probado con 10 fixtures sintéticos** (ausente LF/CRLF/BOM, sin EOF, `true`, `false`, duplicados, comentario, formato ambiguo, UTF-8 inválido). Conservar bytes originales, BOM, CRLF y líneas existentes; no usar `TrimEnd`, `Set-Content` para reescribir `gradle.properties` ni normalizar su codificación. El script se crea **solo bajo** `A2_ROOT/private/r4` y se ejecuta una vez con Python ya instalado en el PC (lo usó N7), nunca instala Python. Si no existe Python >=3.9, `BLOCKED_PYTHON_ENV`, sin herramienta alternativa improvisada.
 
-1. Confirmar los archivos `candidate/android/gradle.properties`, `candidate/android/settings.gradle.kts`, `candidate/android/app/build.gradle.kts` y el wrapper. Inspeccionar **solo** versiones declaradas del proyecto y Gradle properties. `android.newDsl=false` se configura en `candidate/android/gradle.properties`; no en el SDK Flutter, WIP ni repositorios compartidos.
-2. Buscar líneas activas `android.newDsl` ignorando comentarios. Casos:
-   - **Ausente:** añadir exactamente una línea `android.newDsl=false` al final, conservando todas las existentes.
-   - **Única `android.newDsl=true`:** cambiar SOLO su valor a `false` en copia R4.
-   - **Única `android.newDsl=false` ya presente antes de aplicar R4:** STOP `BLOCKED_CAUSE_NOT_CONFIRMED`; el mismo cast con compatibilidad activa requiere otra investigación focal del Director, **no construir a ciegas**.
-   - **Duplicadas, otro valor, variables dinámicas o sobrescritura oculta:** STOP `BLOCKED_GRADLE_PROPERTY_CONFLICT`. **Nunca** eliminar otras propiedades ni asumir precedencia.
-3. Revisar solo lugares con precedencia potencial de la propiedad: `candidate/gradle.properties` si existe, el Gradle-home privado A2, comandos/properties `-P...` y variables de proceso Gradle/Java. No leer o imprimir secretos. Si un origen efectivo indica `true` o no se puede determinar con seguridad, STOP; no tocar variables globales. Preservar `android.builtInKotlin` y todas las demás flags exactamente como están, incluso si valen `true` o `false`. Registrar PRE/POST SHA de `android/gradle.properties`, cambio de 1 línea y hashes focales de los scripts NO modificados.
-4. **No modificar** `FlutterPlugin.kt`, `build.gradle.kts`, AGP/Kotlin, wrapper, SDK/NDK, min/target SDK, signing config, manifest, código Dart o Java/Kotlin. Si el proyecto exige otro cambio, STOP `BLOCKED_NEXT_CAUSE`, describirlo sin hacerlo. Este lote autoriza una **sola modificación de propiedad** para evitar el círculo de parches.
-
-Plantilla ilustrativa en PowerShell; Codex debe sustituir la ruta real **solo dentro de A2** y validar el resultado final. No ejecutar esta plantilla contra `D:\codex\Jornato`:
+**PowerShell ejecutable; correr este bloque exactamente en el contexto R4 después del gate de custodia/precedencia. El script se guarda en `private/r4` y se borra el archivo temporal propio solo mediante la sustitución atómica; no tocar WIP ni otras carpetas:**
 
 ```powershell
-$props = 'D:\codex\_REPORTES\Jornato\JOR-A2-GRADLE-DEPS-APK-QA-20261122\private\r4\candidate\android\gradle.properties'
-if (-not [IO.File]::Exists($props)) { throw 'BLOCKED_GRADLE_PROPERTIES_MISSING' }
-$raw = [IO.File]::ReadAllText($props)
-$pattern = '(?m)^[ \t]*android\.newDsl[ \t]*=[ \t]*(?<val>[^\r\n#]+?)[ \t]*$'
-$hits = [regex]::Matches($raw, $pattern)
-# Una clave activa no reconocida (':', comentario inline, valor ambiguo) es conflicto, no ausencia.
-$activeKeys = [regex]::Matches($raw, '(?m)^[ \t]*android\.newDsl(?=[ \t=:])[^\r\n]*$')
-if ($activeKeys.Count -ne $hits.Count) { throw 'BLOCKED_GRADLE_PROPERTY_CONFLICT' }
-if ($hits.Count -gt 1) { throw 'BLOCKED_GRADLE_PROPERTY_CONFLICT' }
-if ($hits.Count -eq 0) { $raw = $raw.TrimEnd([char]13,[char]10) + [Environment]::NewLine + 'android.newDsl=false' + [Environment]::NewLine }
-else {
-  $oldValue = $hits[0].Groups['val'].Value.Trim()
-  if ($oldValue -eq 'false') { throw 'BLOCKED_CAUSE_NOT_CONFIRMED' }
-  if ($oldValue -ne 'true') { throw 'BLOCKED_GRADLE_PROPERTY_CONFLICT' }
-  $raw = $raw.Remove($hits[0].Index,$hits[0].Length).Insert($hits[0].Index,'android.newDsl=false')
-}
-[IO.File]::WriteAllText($props,$raw,[System.Text.UTF8Encoding]::new($false))
-if (([regex]::Matches([IO.File]::ReadAllText($props),'(?m)^android\.newDsl=false\s*$')).Count -ne 1) { throw 'BLOCKED_GRADLE_PROPERTY_VERIFY' }
+$a2 = 'D:\codex\_REPORTES\Jornato\JOR-A2-GRADLE-DEPS-APK-QA-20261122'
+$r4 = Join-Path $a2 'private\r4'
+$candidate = Join-Path $r4 'candidate'
+$props = Join-Path $candidate 'android\gradle.properties'
+$py = Join-Path $r4 'set_agp_legacy_dsl.py'
+if (!(Test-Path -LiteralPath $props -PathType Leaf)) { throw 'BLOCKED_GRADLE_PROPERTIES_MISSING' }
+if (Test-Path -LiteralPath $py) { throw 'BLOCKED_EXISTING_SCRIPT' }
+if (!(Get-Command python -ErrorAction SilentlyContinue)) { throw 'BLOCKED_PYTHON_ENV' }
+$source = @'
+#!/usr/bin/env python3
+"""A2-R4: change a single Gradle property in the isolated candidate, preserving bytes."""
+from pathlib import Path
+import hashlib
+import os
+import re
+import sys
+
+
+def fail(code: str) -> None:
+    raise SystemExit(code)
+
+
+def update_property(file_arg: str, candidate_root_arg: str) -> str:
+    candidate = Path(candidate_root_arg).resolve(strict=True)
+    prop = Path(file_arg)
+    if not prop.is_file() or prop.is_symlink():
+        fail("BLOCKED_GRADLE_PROPERTIES_MISSING_OR_LINK")
+    dest = prop.resolve(strict=True)
+    if not dest.is_relative_to(candidate) or dest != candidate / "android" / "gradle.properties":
+        fail("BLOCKED_WRITE_BOUNDARY")
+    original_bytes = prop.read_bytes()
+    if original_bytes.startswith((b"\xff\xfe", b"\xfe\xff")):
+        fail("BLOCKED_NON_UTF8_PROPERTIES")
+    bom = b"\xef\xbb\xbf" if original_bytes.startswith(b"\xef\xbb\xbf") else b""
+    try:
+        original = original_bytes[len(bom):].decode("utf-8", "strict")
+    except UnicodeDecodeError:
+        fail("BLOCKED_NON_UTF8_PROPERTIES")
+    if "\x00" in original:
+        fail("BLOCKED_BINARY_PROPERTIES")
+
+    lines = original.splitlines(keepends=True)
+    indices = []
+    valid = re.compile(r"(?P<before>^[ \t]*android\.newDsl[ \t]*=[ \t]*)(?P<value>true|false)(?P<after>[ \t]*$)")
+    for index, line in enumerate(lines):
+        bare = line.rstrip("\r\n")
+        if re.match(r"^[ \t]*android\.newDsl(?=[ \t=:]|$)", bare):
+            match = valid.fullmatch(bare)
+            if match is None:
+                fail("BLOCKED_GRADLE_PROPERTY_CONFLICT")
+            indices.append((index, match))
+    if len(indices) > 1:
+        fail("BLOCKED_GRADLE_PROPERTY_CONFLICT")
+    if len(indices) == 1:
+        index, match = indices[0]
+        if match.group("value") == "false":
+            fail("BLOCKED_CAUSE_NOT_CONFIRMED")
+        line = lines[index]
+        assert match.group("value") == "true"
+        lines[index] = (line[:match.start("value")] + "false" + line[match.end("value"):])
+        expected = "".join(lines)
+        operation = "TRUE_TO_FALSE"
+    else:
+        newline = "\r\n" if "\r\n" in original else "\n"
+        prefix = "" if (not original or original.endswith(("\n", "\r"))) else newline
+        expected = original + prefix + "android.newDsl=false" + newline
+        operation = "APPEND_ONE_PROPERTY"
+
+    result_lines = expected.splitlines()
+    if sum(bool(re.fullmatch(r"[ \t]*android\.newDsl[ \t]*=[ \t]*false[ \t]*", l)) for l in result_lines) != 1:
+        fail("BLOCKED_GRADLE_PROPERTY_VERIFY")
+    new_bytes = bom + expected.encode("utf-8")
+    if new_bytes == original_bytes:
+        fail("BLOCKED_NO_CHANGE")
+    temp = prop.with_name(prop.name + ".a2r4.tmp")
+    if temp.exists():
+        fail("BLOCKED_EXISTING_TEMP_FILE")
+    with temp.open("xb") as f:
+        f.write(new_bytes)
+    if temp.read_bytes() != new_bytes:
+        fail("BLOCKED_TEMP_HASH_MISMATCH")
+    os.replace(temp, prop)
+    if prop.read_bytes() != new_bytes:
+        fail("BLOCKED_GRADLE_PROPERTY_VERIFY")
+    before = hashlib.sha256(original_bytes).hexdigest().upper()
+    after = hashlib.sha256(new_bytes).hexdigest().upper()
+    return f"AGP_DSL_CHANGE={operation}\nAGP_DSL_BEFORE_SHA256={before}\nAGP_DSL_AFTER_SHA256={after}"
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        fail("BLOCKED_BAD_ARGS")
+    print(update_property(sys.argv[1], sys.argv[2]))
+'@
+[IO.File]::WriteAllText($py, $source, [System.Text.UTF8Encoding]::new($false))
+python -I $py $props $candidate
+if ($LASTEXITCODE -ne 0) { throw 'BLOCKED_AGP_DSL_CHANGE' }
 ```
 
-**IMPORTANTE:** No ejecutar ningún comando de edición hasta completar el gate de custodia y confirmar que el origen/copia R4 es el correcto. Si hay `android.newDsl=false` en origen, la plantilla DETIENE; no inventar otro cambio ni borrarlo para volver a colocarlo. El cambio R4 es un workaround **oficial pero temporal**, no refactor de arquitectura. No migrar al WIP sin decisión posterior del Director.
+**Codex no necesita inventar otro editor:** tras guardar el código Python literal en `$py`, el comando de invocación anterior aplica el cambio. Verificar que los hashes de `settings.gradle.kts`, `build.gradle.kts`, wrapper, `pubspec.lock` y otros archivos de la copia permanecen iguales; **solo** `android/gradle.properties` puede diferir, según `AGP_DSL_BEFORE/AFTER_SHA256` del script. Si hay delta inesperado, STOP y reportar; no reintentar.
 
-## 3. GATE R4-2 — UNA COMPILACIÓN, CON EL CHECKPOINT RESUELTO
+## 3. Gate G2 — una sola compilación y sin descargas repetidas
 
-1. Preflight focal de proceso: wrapper Gradle 9.3.1 ya existente; JDK 21, SDK 36, NDK/CMake existentes; `local.properties` en la copia R4 apunta a rutas válidas. Usar `GRADLE_USER_HOME=A2_ROOT/private/gradle-home`, `PUB_CACHE=A2_ROOT/private/pub-cache`, `ANDROID_USER_HOME=A2_ROOT/private/android-user`, `TEMP/TMP=A2_ROOT/private/temp`, sin afectar otros procesos. Si variables Gradle heredadas introducen init-scripts/credenciales/repositorios diferentes, STOP. Firma QA solo en A2. No volver a ejecutar `pub get`, analyze, tests, precache, wrapper download, sdkmanager, gradle dependencies, flutter build apk ni otra tarea.
-2. Ejecutar **UNA Y SOLO UNA** invocación de la tarea exacta desde `private/r4/candidate/android`:
+- Confirmar que el único cambio QA permitido quedó aplicado y que no hay conflicto de precedencia. `local.properties` debe apuntar a SDK y Flutter existentes, no crear rutas globales. `android.builder.sdkDownload=false` y `org.gradle.java.installations.auto-download=false` siguen presentes; **no actualizar ni instalar SDK/JDK**.
+- Configurar **variables solo del proceso** `GRADLE_USER_HOME=A2_ROOT/private/gradle-home`, `PUB_CACHE=A2_ROOT/private/pub-cache`, `ANDROID_USER_HOME=A2_ROOT/private/android-user`, `TEMP/TMP=A2_ROOT/private/temp`, JAVA_HOME/Android SDK originales. Verificar una sola vez que el keystore QA siga privado. Sin Docker, PHP, MariaDB, Gradle daemon ajeno, Android físico, ADB o emulador.
+- Ejecutar **exactamente una vez** desde `A2_ROOT/private/r4/candidate/android`:
 
 ```powershell
 .\gradlew.bat :app:assembleB14qaDebug --no-daemon --console=plain --max-workers=2
 ```
 
-Solo se admite la resolución de dependencias de compilación oficiales ya autorizadas: `https://plugins.gradle.org/m2`, `https://plugins-artifacts.gradle.org/`, `https://repo.maven.apache.org/maven2`, `https://dl.google.com/dl/android/maven2` y `https://storage.googleapis.com/download.flutter.io/` (o la única variante `engine.realm` validada por R3). **No es un sandbox de egreso**: declarar `NETWORK_SCOPE=POLICY_CONTROLLED_NOT_EGRESS_SANDBOXED`. No descargar herramientas/versiones nuevas; mantener `android.builder.sdkDownload=false` y `org.gradle.java.installations.auto-download=false` sin editarlos. Si falla por redirección o falta otro host, STOP sin añadirlo automáticamente. No `--refresh-dependencies`, nuevo build offline, segunda variante ni segundo intento por causa ambiental o de producto.
-3. Registrar exit, fase, causa y comandos sin secretos. `PASS_APK_QA` requiere exit 0 de ESTA invocación, APK nuevo y verificable, no un APK viejo. Si persiste `ClassCastException`, verificar solo si la propiedad quedó efectiva: detener, etiquetar `BLOCKED_AGP_DSL_STILL_ACTIVE`, no aplicar más flags a ciegas. Si aparece otro error KGP, AGP, plugins o del producto, registrar primera causa y STOP `BLOCKED_NEXT_CAUSE`; no ejecutar correcciones extra por iniciativa propia. Esto es diagnóstico productivo de **un cambio y un build**, no una cadena de ensayo-error.
+- Usar la caché A2 ya poblada. **No anteponer build `--offline` ni ejecutar `--refresh-dependencies`, `flutter build`, `gradle dependencies`, `pub get`, `flutter analyze` o tests antiguos.** Si Gradle aún necesita un transitivo nuevo, solo están permitidos los repositorios HTTPS oficiales ya autorizados para A2-R3: `plugins.gradle.org/m2`, `plugins-artifacts.gradle.org`, `repo.maven.apache.org/maven2`, `dl.google.com/dl/android/maven2`, y **solamente** `storage.googleapis.com/download.flutter.io/` para Flutter Engine (R3 declaró `engine.realm` vacío). No ampliar host/bucket/redirecciones. Esto es política de uso, NO aislamiento técnico de egreso: `NETWORK_SCOPE=POLICY_CONTROLLED_NOT_EGRESS_SANDBOXED`.
+- Capturar **un** exit code, etapa de fallo y el primer error relevante, con logs privados redactados. Si persiste el cast de AGP, registrar `BLOCKED_AGP_DSL_STILL_ACTIVE`, sin cambiar otro parámetro. Si emerge otro error real, `BLOCKED_NEXT_CAUSE`, sin arreglos improvisados ni segundo build. Un éxito solo existe con exit 0 **y APK nuevo** proveniente de esta compilación.
 
-## 4. GATE R4-3 — SI SE GENERA APK QA, VERIFICAR SIN INSTALAR
+## 4. Gate G3 — APK nueva, estática, sin dispositivo
 
-1. Buscar APK solo dentro de outputs nuevos de `private/r4/candidate` (antes no debe existir APK); verificar marca temporal, build exit 0, SHA256, tamaño y copiar artefacto a `A2_ROOT/private/r4/product` sin incluirlo en ZIP. **No mezclar con los APK C2 o A1**.
-2. Ejecutar `apksigner verify --verbose --print-certs` y `aapt dump badging` o `apkanalyzer manifest print` usando herramientas SDK existentes; registrar package/applicationId, versión, min/target SDK, certificado debug, debug/release flag, permisos/exported, ABI, launch Activity, `usesCleartextTraffic`, si existe. Verificar merged manifest real. Nunca declarar PASS si hay fallo de firma, manifest o secreto integrado.
-3. La variante QA `b14qa/debug` tenía en fuente `usesCleartextTraffic=true`; si se conserva en manifest final, declarar `QA_DEBUG_CLEARTEXT=TRUE`, y **no distribuir ni usar con datos reales**. Nunca confundir APK QA con release.
-4. No instalar en Xiaomi ni usar ADB, emulador o teléfono. No afirmar SQLCipher/Keystore, rehidratación offline, respaldo/restauración, seguridad tenant o release por haber compilado. `RELEASE=NO_GO`.
+**Solo si el build termina bien:** comprobar que no existía APK en la copia R4 antes de G2; localizar el APK generado en outputs de esa copia y confirmar timestamp/variante `b14qaDebug`/tamaño/SHA-256. Copiarlo a `A2_ROOT/private/r4/product` sin agregarlo al ZIP público de evidencias. Usar herramientas locales `apksigner verify --verbose --print-certs` y `aapt dump badging` o `apkanalyzer manifest print`; verificar applicationId, versionCode/name, min/target SDK, firma debug, launch Activity, exported/permisos, ABI, merged manifest y ausencia de secretos.
 
-## 5. ZIP ÚNICO R4, AUDITABLE Y SANITIZADO
+En fuente QA `b14qa/debug` hay `usesCleartextTraffic=true`; el APK final debe registrar `QA_DEBUG_CLEARTEXT=TRUE` si aparece, **sin homologarlo para distribución externa ni datos reales**. No aprobar SQLCipher, Android Keystore, outbox, GPS/selfie real, respaldo/restauración, integridad tras reinicio, ni acceso a tenants por la sola compilación. Ningún teléfono, emulador o ADB. `RELEASE=NO_GO`.
 
-Crear exactamente **un nuevo ZIP** en `A2_ROOT/delivery-r4/` (no tocar `delivery` ni `delivery-r3`), con manifiesto SHA-256+bytes y CRC comprobados. Archivos suficientes, sin exceso:
+## 5. Entrega única en ZIP y siguiente propietario
+
+**Un solo ZIP nuevo** `A2_ROOT/delivery-r4/JOR-A2-GRADLE-DEPS-APK-QA-20261122-R4-UNICO.zip`, conservar `delivery` y `delivery-r3` originales. Crear ZIP con CRC y manifiesto `MANIFEST_SHA256.csv` verificado (SHA+bytes) con archivos sanitizados:
 
 ```text
-FINAL_REPORT.md                         # hechos, gates, causa, decisión y límites
-A2_R4_GATE_MATRIX.csv                   # status PASS/BLOCKED/NOT_RUN por puerta
-GRADLE_DSL_SINGLE_CHANGE.csv            # fichero relativo, PRE/POST SHA, 1 valor true/absent -> false, sin rutas privadas
-BUILD_AND_APK_R4.csv                    # versions, invocación única, exit, APK SHA si existe
-APK_SECURITY_SUMMARY.csv                # SOLO si hay APK validable
-NEXT_ANDROID_PHYSICAL_GATE.md           # SOLO si APK QA pasa estática
-BLOCKERS.md                             # SOLO si bloqueo
-WIP_AND_R3_GUARDS.csv                   # PRE/POST WIP e integridad ZIP R3, sin código privado
-MANIFEST_SHA256.csv                     # todos los archivos anteriores
+FINAL_REPORT.md               # decisiones, entorno, etapas, error nuevo o APK verificada, límites
+A2_R4_GATE_MATRIX.csv         # G0–G4 PASS/BLOCKED/NOT_RUN
+AGP_DSL_SINGLE_CHANGE.csv     # BEFORE/AFTER SHA, operación y archivo relativo (no fuente completo)
+BUILD_AND_APK_R4.csv          # invocación única, resultado; hash APK si existe
+APK_SECURITY_SUMMARY.csv      # solo si APK válida
+NEXT_ANDROID_PHYSICAL_GATE.md # solo si APK estática válida, 1 página
+BLOCKERS.md                  # solo si bloqueado
+WIP_AND_R3_GUARDS.csv         # PRE/POST WIP, R3 ZIP sin cambios
+MANIFEST_SHA256.csv          # hash y tamaño exactos de las otras entradas
 ```
 
-No incluir APK, keystore, tokens, `.env`, rutas/credenciales de otros proyectos, fuente Dart/Java, `gradle.properties` completo, binarios, caches, logs crudos o secretos. Originales en carpeta privada R4. Entregar solo `ZIP_PATH`, `ZIP_SHA256`, resultado y `NEXT_OWNER=CHATGPT_DIRECTOR`; **no subir archivos a GitHub ni publicar la APK**.
+No incluir APK, keys, raw logs, .env, datos reales, fuentes, propiedades completas, JAR, caches, rutas personales, tokens o secretos. Evidencias originales y APK en `private/r4` sin publicarlas ni subir a GitHub; el propietario recibe la ubicación privada, no el APK en ZIP. Solo documentación derivada de estado debe actualizar GitHub **por el Director después del ZIP**, no Codex. Si no hay APK, `A2_APK_STATIC=NOT_RUN`, no crear evidencia ficticia.
 
-Respuesta final breve:
+Formato obligatorio respuesta Codex:
 
 ```text
 TASK=JOR-A2-GRADLE-DEPS-APK-QA-20261122
-PROMPT_REVISION=A2-R4-20261122
+PROMPT_REVISION=A2-R4-V2-20261122
 RESULT=PASS_APK_QA_SCOPED|PARTIAL_WITH_GAPS|BLOCKED_ENV
 R3_EVIDENCE=REUSED_VERIFIED|MISMATCH
-AGP_DSL_CHANGE=APPLIED_PRIVATE_ONLY|BLOCKED|NOT_NEEDED
+AGP_DSL_CHANGE=TRUE_TO_FALSE|APPEND_ONE_PROPERTY|BLOCKED|NOT_RUN
 A2_BUILD=PASS_NEW_APK|BLOCKED_NEXT_CAUSE|BLOCKED_ENV|NOT_RUN
 A2_APK_STATIC=PASS_QA|BLOCKED_SECURITY|NOT_RUN
 APK_SHA256=<hash_or_NOT_BUILT>
@@ -133,4 +208,4 @@ ZIP_SHA256=<SHA256>
 NEXT_OWNER=CHATGPT_DIRECTOR
 ```
 
-**NO autoriza deploy, publicación, merge, cambios del SDK Flutter, versiones, ni modificación del WIP.** Si N7/N6/Docker están pendientes no bloquean esta prueba Android, pero tampoco certifican servidor. Tras ZIP R4, el Director revisa evidencia y decide el siguiente paso físico o causal. Arquitectura KISS, no auditorías repetidas, no perseguir la cola.
+**STOP terminal:** enviar el ZIP a ChatGPT Director para adjudicar y preparar una decisión final; jamás ejecutar A2-R4 y A2-R4-V2 en paralelo. PingPongLaw L1–L6 = KISS, controles de seguridad, pruebas focales, no confundir evidencia con producción. No merge/deploy.
