@@ -1,4 +1,6 @@
-# JORNATO — RECOVERY HANDOFF · N6 ACTIVO · 21-NOV-2026
+# JORNATO — RECOVERY HANDOFF · N6-R2 CONDICIONAL · 21-NOV-2026
+
+**REGLA DE PRECEDENCIA:** [prompt N6-R2 vigente](CODEX_LOTE_ACTUAL.md), mismo `JOR-N6-PHP-RUNTIME-CAUSE-ISOLATED-QA-20261121`. **Solo ejecutar si N6-R1 NO comenzó.** Si ya hay proceso/ZIP N6 o el estado es incierto, no arrancar R2 ni N7: adjudicar primero el N6 existente. [Auditoría focal 10 VERDUGO + 10 JUEZ N6-R2](JORNATO_N6_R2_AUDITORIA_10_VERDUGO_10_JUEZ_20261121.md). Original N6-R1 en historial de PR2 HEAD `d8ff01aff04689d4312e604f868bcd3d6b889ecc`.
 
 **PRIMERO LEER:** [continuidad](JORNATO_CONTINUIDAD.md), [orden única N6](CODEX_LOTE_ACTUAL.md), [dictamen N5](JORNATO_N5_DICTAMEN_Y_N6_20261121.md), [política Docker](JORNATO_DOCKER_AISLAMIENTO_PROYECTOS_20261121.md). Estos cuatro documentos representan el estado actual; NO reiniciar N5 ni repetir auditoría 10+10 de N5-R1. La orden N5 en histórico está supersedida por N6. Si ya hay ZIP N6, adjudicarlo en lugar de otro prompt.
 
@@ -12,8 +14,10 @@
 
 ## Ejecución pendiente única
 
-**CODEX LUNA N6** `JOR-N6-PHP-RUNTIME-CAUSE-ISOLATED-QA-20261121` debe: (1) custodiar WIP/copia N5 sin mutación, (2) inspeccionar localmente imágenes PHP/arquitectura/shell, máximo probes discriminantes **sin red**, (3) solo si PHP y extensiones/vendor pasan iniciar QA Laravel con un Compose N6 nuevo privado **sin bridge ni puertos**, auth de MariaDB por PDO y migraciones seguras, (4) E01–E08 sintéticos con kernel y DB reales; (5) un ZIP sanitario con pruebas de causa, aislamiento y salida, sin fuentes/secretos/dumps. Si no hay imagen compatible cacheada, detener con `BLOCKED_IMAGE` y requerimiento mínimo de imagen/permiso; no volver a auditar/repetir topología.
+**CODEX LUNA N6-R2 (si N6-R1 no comenzó)** `JOR-N6-PHP-RUNTIME-CAUSE-ISOLATED-QA-20261121` debe: (1) custodiar WIP/copia N5 sin mutación, (2) inspeccionar localmente imágenes PHP/arquitectura/shell, máximo probes discriminantes **sin red**, (3) solo si PHP y extensiones/vendor pasan iniciar QA Laravel con un Compose N6 nuevo privado **sin bridge ni puertos**, auth de MariaDB por PDO y migraciones seguras, (4) E01–E08 sintéticos con kernel y DB reales; (5) un ZIP sanitario con pruebas de causa, aislamiento y salida, sin fuentes/secretos/dumps. Si no hay imagen compatible cacheada, detener con `BLOCKED_IMAGE` y requerimiento mínimo de imagen/permiso; no volver a auditar/repetir topología.
 
 **RESTRICCIONES:** varios Codex y proyectos simultáneos; no PHP/DB host, no Docker global, no `prune`, no puertos/volúmenes/redes ajenos. No descargas/instalación, no modificar repo/PR1/PR3/main ni WIP, no usar teléfono/ADB/AVD, no publicar código/sesiones/PII. No activar B19/B20 sin OD02–OD04, no confundir `SERVER_STORED` con `RECOGNIZED` o `requestId` con histórico `requetId`. Backend E2E aún no acreditado, staging no autorizado, H9 NO_GO, release NO_GO.
 
-**DESPUÉS DE ZIP N6=CHATGPT_DIRECTOR**, adjudicar pruebas ejecutadas y decidir el siguiente cambio material hacia Android/staging y backup privado fuera de equipo. **NEXT_NOW=CODEX_LUNA_N6.**
+**DELTA R2:** sonda shell obligatoria con `--entrypoint /bin/sh`; imagen N5 por ID y máximo una alternativa local; preflight contexto+plataforma real; probe PHP separado; cero descargas y ningún runtime PHP/DB fuera de Compose propio. N5 Flutter continúa aprobado, no repetirlo.
+
+**DESPUÉS DE ZIP N6=CHATGPT_DIRECTOR**, adjudicar pruebas ejecutadas y decidir el siguiente cambio material hacia Android/staging y backup privado fuera de equipo. **NEXT_NOW=CODEX_LUNA_N6_R2_IF_N6_R1_NOT_STARTED; OTHERWISE=CHATGPT_DIRECTOR_REVIEW_EXISTING_N6.**
