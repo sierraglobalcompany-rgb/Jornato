@@ -1,17 +1,26 @@
-# JORNATO — CONTINUIDAD CANÓNICA · 22-NOV-2026 · A1-R2 CERRADO / A2 PREPARADO
+# JORNATO — CONTINUIDAD CANÓNICA · 22-NOV-2026 · A1 CERRADO / A2-R1 CONDICIONAL
 
-**ÚNICO TRABAJO SIGUIENTE PARA CODEX LUNA:** [CODEX_LOTE_ACTUAL.md](CODEX_LOTE_ACTUAL.md), `TASK=JOR-A2-GRADLE-DEPS-APK-QA-20261122`. **A1-R2 YA TERMINÓ**. No ejecutar ni pedir de nuevo la orden A1, no repetir N2–N7 ni volver a diagnosticar Docker. El propietario decide activar A2 **enviando el prompt Markdown a Codex**; hacerlo autoriza únicamente las descargas oficiales de dependencias Gradle de compilación contempladas en la orden. Si no acepta esa excepción, no activar A2 y mantener el bloqueo. [Dictamen A1 y decisión A2](JORNATO_A1_R2_DICTAMEN_Y_A2_20261122.md). [Handoff](JORNATO_RECOVERY_HANDOFF_ACTUAL.md).
+**ÚNICA ORDEN ENVIABLE, SOLO SI A2-V1 NO COMENZÓ:** [CODEX_LOTE_ACTUAL.md](CODEX_LOTE_ACTUAL.md), `TASK=JOR-A2-GRADLE-DEPS-APK-QA-20261122`, `PROMPT_REVISION=A2-R1-20261122`. **Si hay A2 en curso o ZIP, NO enviar A2-R1, no duplicar; recibir esa evidencia.** [Auditoría focal A2: 10 verdugo y 10 juez](JORNATO_A2_R1_AUDITORIA_10_VERDUGO_10_JUEZ_20261122.md). **A1-R2 YA TERMINÓ**. No ejecutar ni pedir de nuevo la orden A1, no repetir N2–N7 ni volver a diagnosticar Docker. El propietario decide activar A2 **enviando el prompt Markdown a Codex**; hacerlo autoriza únicamente las descargas oficiales de dependencias Gradle de compilación contempladas en la orden. Si no acepta esa excepción, no activar A2 y mantener el bloqueo. [Dictamen A1 y decisión A2](JORNATO_A1_R2_DICTAMEN_Y_A2_20261122.md). [Handoff](JORNATO_RECOVERY_HANDOFF_ACTUAL.md).
 
 ## Evidencias cerradas y fuente de verdad
 
 - **ZIP A1** inspeccionado directamente en ChatGPT: 9.828 B, SHA256 `C0087642ACED1BE983DC081A95A63B0B4829EE30414372B29835A4852D79555A`, 8 archivos CRC PASS, manifiesto 7/7 SHA+bytes PASS. Codex reportó `RESULT=PARTIAL_WITH_GAPS`, WIP no tocado, Docker no tocado, Android físico NOT_RUN, APK NOT_BUILT.
 - **A1 82/82 fuentes app**, hashes y bytes PRE/POST coinciden. N5 origen 232 rutas (82 app, 150 servidor) con paridad documentada. No hay copia fuente privada en GitHub público ni en ZIP de evidencia; vive en `D:\codex\_REPORTES\Jornato\JOR-A1-ANDROID-OFFLINE-APK-QA-CANDIDATE-20261121\private` o N5. **No reconstruir fuente desde PR1/main**, son skeleton antiguos.
 - **Flutter** N5 KioskScreen 9/9 + analyze sin errores; A1 Pub `--offline --enforce-lockfile` PASS, 79 versiones; `pubspec.lock` `F515D69563850E8893A17585D8BAB57A8E6484E18CE1FEF4BDDC6BB836F83B34`. N2 86 tests y N3 9+4 tests históricos: no repetir sin cambio de producto.
-- **Android build** A1 único `gradlew.bat --offline --no-daemon --console=plain :app:assembleB14qaDebug`, exit 1 durante setup del plugin Flutter por **22 artefactos Gradle** ausentes en cache privado, uno `org.gradle.kotlin:gradle-kotlin-dsl-plugins:6.4.2`, 21 archivos Kotlin 2.2.21 (variantes múltiples). No compiló app. Toolchain reportado: Gradle 9.3.1/JDK 21.0.12/SDK36/NDK28.2/CMake3.22.1, sin necesidad demostrada de upgrade. **No hay APK A1**.
+- **Android build** A1 único `gradlew.bat --offline --no-daemon --console=plain :app:assembleB14qaDebug`, exit 1 durante setup del plugin Flutter por **22 variantes de archivo Gradle (21 GAV únicos)** ausentes en cache privado, uno `org.gradle.kotlin:gradle-kotlin-dsl-plugins:6.4.2`, 21 archivos Kotlin 2.2.21 (variantes múltiples). No compiló app. Toolchain reportado: Gradle 9.3.1/JDK 21.0.12/SDK36/NDK28.2/CMake3.22.1, sin necesidad demostrada de upgrade. **No hay APK A1**.
 - **Seguridad APK:** fuente `src/b14qa/debug/AndroidManifest.xml` declara `usesCleartextTraffic=true`, **solo variante debug** confirmada; verificar merged manifest en APK nuevo, no aprobar release ni tráfico con datos reales sin evaluación.
 - **WIP privado** `D:\codex\Jornato`, HEAD `faf5fe283191f8b5a2724b397009512a2caec1b6`, rama `codex/jor-b08-h4-domain-20261025`, índice `25CC609803D7E68D5F3ECF428198B2432CF1EA37030546735DD3F03299D905E1`, 235 rutas (224 untracked, 11 modified) staged 0, intacto según Codex. OFF_DEVICE_BACKUP=NO.
 - **Servidor/infraestructura** N4/N5 Laravel QA E01–E08 bloqueadas, N6 PHP `exec format error`, N7 copias de binarios fallidas; no se ha autorizado investigar/alterar Docker Desktop compartido. La política [Docker exclusivo por proyecto](JORNATO_DOCKER_AISLAMIENTO_PROYECTOS_20261121.md) permanece; A2 no usa Docker. Sin servidor real no hay autorización de planes Pro/cloud ni release general.
 - **Android físico** C2 APK antiguo instaló pero VM Service bloqueó QA; no repetir C2 ni instalar A2 sin permiso. SQLCipher/Keystore/reinicio/corrupción/offline real no certificados, B19/B20 deny-all, OD02/03/04 pendientes. `SERVER_STORED != RECOGNIZED`; `requestId` vs `requetId` legado. No nómina ni acceso ajeno entre tenants.
+
+## Delta A2-R1 contra A2-V1 — correcciones, no nueva etapa
+
+- **No duplicación:** A2-R1 sustituye V1 solo antes del arranque, mismo TASK, sin reauditar A1; ante ejecución previa/ZIP se adjudica lo existente.
+- **Cache exacta:** 22 archivos faltantes de 21 GAV distintos, preservar classifier/metadata; no descargar JAR manualmente ni inventar hashes.
+- **Redirección oficial confirmada:** `plugins-artifacts.gradle.org` es host válido del Plugin Portal junto a `plugins.gradle.org`, Maven Central y Google Maven. **Otros dominios/redirects no se suponen oficiales.**
+- **No instalación indirecta:** en `candidate/android/gradle.properties` privado, `android.builder.sdkDownload=false` y `org.gradle.java.installations.auto-download=false`. Sin nuevas versiones de Gradle, Android SDK, JDK ni Gradle Wrapper.
+- **Seguridad de ejecución:** revisar `buildSrc`/included builds/init scripts, variables heredadas relevantes y ruta signing debug; la inspección de repositorios NO es un firewall. `NETWORK_SCOPE=POLICY_CONTROLLED_NOT_EGRESS_SANDBOXED` si compila online. Ninguna afirmación falsa de aislamiento absoluto.
+- **No retrabajo:** una compilación; un único reintento focal solo si falla por código real de la copia, nunca por red o cache. ZIP sanitario único.
 
 ## Nueva política A2 — solo compilación
 
@@ -23,4 +32,4 @@
 
 Repo `sierraglobalcompany-rgb/Jornato`. PR #2 documental exclusivamente, `main=1ee6aae821f8cf177cc64149081ad8847f7fec2e`, PR #1 Draft HEAD `faf5fe283191f8b5a2724b397009512a2caec1b6`, PR #3 Draft HEAD `104469b119752f395cf9881e732d582feab9db4e`. No merge, no deploy, no publicar WIP. ChatGPT director; Codex ejecutor. KISS, PingPongLaw L1–L6, un solo macrobloque, cero auditorías rituales, un ZIP con evidencia. `RELEASE=NO_GO`; Android físico, backup externo y QA server siguen pendientes.
 
-**NEXT_OWNER=CODEX_LUNA_A2 (AL ENVIARLE EL PROMPT); AFTER_ONE_ZIP=CHATGPT_DIRECTOR.**
+**NEXT_OWNER=CODEX_LUNA_A2_R1_SOLAMENTE_SI_A2_NO_INICIÓ; SI_YA_HAY_A2=CHATGPT_DIRECTOR_ADJUDICA_ZIP; RELEASE=NO_GO.**
