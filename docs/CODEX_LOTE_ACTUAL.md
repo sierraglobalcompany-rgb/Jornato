@@ -1,145 +1,121 @@
-# CODEX LUNA — JORNATO · A1-R2 · MACROBLOQUE ÚNICO: APK QA ANDROID REAL DESDE CANDIDATO N5
+# CODEX LUNA — JORNATO A2 · UN MACROBLOQUE PRODUCTIVO PARA DESBLOQUEAR GRADLE Y ENTREGAR APK QA
 
-**ESTA ES UNA ORDEN PRODUCTIVA, NO UNA AUDITORÍA DEL PROMPT.** ChatGPT Director define las decisiones, Codex Luna ejecuta sin improvisaciones. **MISMO `TASK` A1**, revisión correctiva del A1-R1 anterior. Reemplaza A1-R1 **SOLAMENTE SI A1 NO HA INICIADO Y NO EXISTE ZIP A1 FINAL**. Si A1-R1 está en marcha, pausado con trabajo/candidato propio o ya finalizó, **NO ejecutar A1-R2**, no crear otra sesión ni otro lote; terminar o entregar lo existente para adjudicación del Director. Si no puedes establecerlo, STOP `A1_ALREADY_IN_FLIGHT_OR_UNKNOWN`. No es A2.
+**ESTA ES LA ORDEN QUE SE EJECUTA, NO UNA INVITACIÓN A REAUDITAR.** ChatGPT Director decide el procedimiento; Codex Luna lo ejecuta fielmente en Windows 11. Fecha del corte: 22-11-2026, Colombia. **A1-R2 TERMINÓ** y fue adjudicado; A2 es una tarea sucesora con causa identificada, NO un reinicio de A1 ni continuación de N5–N7. Enviar este Markdown a Codex constituye la decisión del propietario de realizar la campaña A2, **incluida la autorización acotada de obtener dependencias de compilación oficiales e inmutables descrita abajo**. Si el propietario no desea esa autorización, NO enviar el prompt a Codex y mantener A2 inactivo. La app seguirá siendo *offline*; la red solo se admite en el **equipo de desarrollo** para resolver dependencias del build.
 
 ```text
-TASK=JOR-A1-ANDROID-OFFLINE-APK-QA-CANDIDATE-20261121
-PROMPT_REVISION=A1-R2-20261122
+TASK=JOR-A2-GRADLE-DEPS-APK-QA-20261122
+PROMPT_REVISION=A2-V1-20261122
 WIP_ROOT=D:\codex\Jornato
-N5_ROOT=D:\codex\_REPORTES\Jornato\JOR-N5-DOCKER-NONET-PUB-GATES-20261121
 A1_ROOT=D:\codex\_REPORTES\Jornato\JOR-A1-ANDROID-OFFLINE-APK-QA-CANDIDATE-20261121
+N5_ROOT=D:\codex\_REPORTES\Jornato\JOR-N5-DOCKER-NONET-PUB-GATES-20261121
+A2_ROOT=D:\codex\_REPORTES\Jornato\JOR-A2-GRADLE-DEPS-APK-QA-20261122
+A1_ZIP_SHA256=C0087642ACED1BE983DC081A95A63B0B4829EE30414372B29835A4852D79555A
 N5_ZIP_SHA256=162118EFD4260B97A425E969CB90C06C54A4CAA0003FEC82F2C68A2BD53E84CC
-N5_SOURCE=232_ROWS_82_APP_NON_SERVER_150_SERVER
+A1_SOURCE=82/82_PASS;A1_PUB=79/79_OFFLINE_LOCKED
+A1_BUILD=:app:assembleB14qaDebug_EXIT_1_MISSING_GRADLE_CACHE
+A1_MISSING=22_ARTIFACT_FILES;KOTLIN_2.2.21;GRADLE_KOTLIN_DSL_PLUGINS_6.4.2
 N5_PUB_LOCK_SHA256=F515D69563850E8893A17585D8BAB57A8E6484E18CE1FEF4BDDC6BB836F83B34
-N5_HOST=PUB_79_OF_79_OFFLINE_PASS;KIOSK_9_PASS;ANALYZE_0_ISSUES
-C2_APK_SHA256=BEEA46F75B08CFA440A980BCEE4CC12E2A6B4C7B37A9457B16240C5427157593
-C2_PACKAGE=com.sierraglobalcompany.jornato.b14qa
-C2_OLD_DEBUG_CERT_SHA256=5435A892A30B3E5387E9EF6272F3B1C073FF1A9FE19741F1D5060200F680B78E
-WIP_HEAD_REPORTED=faf5fe283191f8b5a2724b397009512a2caec1b6
-WIP_INDEX_REPORTED=25CC609803D7E68D5F3ECF428198B2432CF1EA37030546735DD3F03299D905E1
-ANDROID_PHYSICAL=NOT_AUTHORIZED
-DOCKER_PHP_DB=PAUSED_AND_NOT_AUTHORIZED
-RELEASE=NO_GO
+WIP_HEAD_REFERENCE=faf5fe283191f8b5a2724b397009512a2caec1b6
+WIP_INDEX_REFERENCE=25CC609803D7E68D5F3ECF428198B2432CF1EA37030546735DD3F03299D905E1
+BUILD_TIME_NETWORK=ALLOW_EXACT_OFFICIAL_DEPENDENCIES_ONLY
+RELEASE=NO_GO;ANDROID_PHYSICAL=NOT_RUN;DOCKER=NOT_TOUCHED
 NEXT_OWNER=CHATGPT_DIRECTOR
 ```
 
-## 0. Resultado exigido y límites irreversibles
+## 0. Objetivo, resultados válidos y prohibiciones
 
-**Entregar UNA de dos cosas útiles:** (A) APK QA **nuevo y verificable** construido con código N5 en laboratorio A1, con SHA/firmante/manifest documentados y el APK **solo en D: privado**; o (B) bloqueo causal exacto de Gradle/SDK/Flutter, con coordenada/version/archivo faltante y una instrucción de resolución, **sin segundos tanteos**. No se pide instalador release, AAB, Play Store, servidor, UAT, nueva función ni arquitectura.
+**Resultado principal:** desde las 82 fuentes certificadas en A1/N5, conseguir un **APK QA debug nuevo** de `:app:assembleB14qaDebug` con SHA256, firmante y manifiesto fusionado verificables. Si no es posible, entregar el **bloqueo causal final** y su remedio preciso, sin abrir otra auditoría y sin tanteos múltiples.
 
-- **No repetir** N2 86 tests, N3 9+4, N4 paridad original, N5 Flutter 9/9 ni N6/N7 imágenes PHP. Solo una ejecución de build A1 y, exclusivamente ante defecto de **código propio causalmente demostrado**, una corrección en copia privada y un reintento de la **misma variante**. Cualquier resultado es válido si está sustentado; no forzar verde.
-- **No** tocar Android físico, Xiaomi Mi A3, ADB/AVD/emulador, logcat, APK previamente instalado, VM Service, Android Studio GUI, Windows SDK global, Docker, PHP, DB, otros proyectos Codex, GitHub público o servicios globales. No `git add/commit/push/fetch/pull/reset/clean/stash/checkout/merge/rebase` en WIP. No descargar, instalar, actualizar o borrar SDK/JDK/Flutter/Gradle/paquetes: sin `sdkmanager`, `flutter precache`, Maven online, `--refresh-dependencies`, `flutter pub upgrade`, actualizaciones de AGP/Kotlin ni `gradle wrapper`.
-- Todas las fuentes, claves QA, artefactos y logs detallados permanecen en `A1_ROOT\private`. Se exige un **ZIP único de evidencia sanitizada**, sin APK ni fuentes, claves, reportes completos de signing ni datos privados. `OFF_DEVICE_BACKUP=NO`; una copia en D: no es respaldo externo. `B22=NOT_AUTHORIZED`, `H9_GLOBAL=NO_GO`, `RELEASE=NO_GO`.
-- PingPongLaw L1 KISS, L2 sin ruido, L3 causa raíz, L4 UX real, L5 evidencia independiente, L6 no pingpong. **No preparar otra auditoría**. Si un bloque se cierra, no lo repitas porque otro frente haya fallado.
+**Regla de no repetición:** N2 86 tests, N3 9+4, N4 232 rutas, N5 Flutter 9/9, N6–N7 PHP/Docker y A1 82/82/Pub PASS **SE REUTILIZAN**, no se reejecutan sobre WIP. En A2 solo se comparan hashes focales al copiar, la resolución Gradle y el APK. No repetir el build offline de A1 sobre su antigua caché. **A1 permanece cerrado**.
 
-## 1. Puerta A1-0 — no duplicar ni tocar WIP
+**No tocar**: PHP, MariaDB, Docker Desktop/engine, redes o volúmenes ajenos; otros proyectos Codex; el teléfono Xiaomi, ADB/AVD/emulador; claves release; bases de producción; GitHub/WIP Git (`add`, `commit`, `push`, `pull`, `reset`, `stash`, `clean`, `checkout`, `merge`); configuraciones globales de Windows; cachés Android/Gradle/Flutter compartidas (solo lectura si su identidad y permisos lo permiten). No publicar APK, fuentes ni reportes privados. No ejecutar `flutter build apk` como segunda ruta, ni `gradle build` genérico, ni `--refresh-dependencies`, `gradle wrapper`, `sdkmanager`, `flutter precache`, `flutter pub upgrade`, `apt`, `choco`, `winget`, cambios de versiones, repositorios nuevos, certificados ni proxies de sistema.
 
-1. Verifica **solo lectura** si existe ZIP A1, carpeta A1 ya trabajada, proceso Codex/Gradle/Flutter de A1 o evidencia de inicio. Si existe, **STOP**, entrega resultado a Director. No borrar, reusar ni sobrescribir carpeta A1 de otra ejecución. Esto tiene precedencia sobre el resto del Markdown.
-2. Toma baseline read-only del WIP: rama, HEAD, `git status --porcelain=v1 -uall`, `git diff --cached --quiet` y SHA del índice. Comparar con referencia anterior **solo para detectar delta**, nunca restaurar ni modificar. No confiar en un `git status` vacío como prueba de hash de fuentes untracked. Al final compara los mismos elementos; si un tercero editó el WIP, documentar sin atribuirlo a A1 ni corregirlo.
-3. Verifica ZIP N5 (`SHA-256` indicado), `FINAL_REPORT.md`, `CANDIDATE_DELTA_SUMMARY.csv`, los **232 paths** (82 no `server/`, 150 servidor) y la ubicación del candidato privado real, sin extraer ZIP de evidencia para sustituir fuente (ZIP N5 **no** contiene fuente). Si falta la copia original N5 o un archivo de aplicación, `BLOCKED_N5_SOURCE`; no reconstruirla de WIP/PR antiguo. Evitar path traversal, reparse points, symlinks, junctions y hardlinks; solo archivos ordinarios dentro de la raíz N5 autorizada.
-4. Crear una **única copia privada A1** de las 82 rutas no servidor, preservando rutas relativas y SHA256/tamaño por fichero. Sin `server/`, `vendor`, `.env`, bases, logs, keystores o archivos generados WIP. No reauditar 232 rutas del servidor. Reutiliza CSV N5 como oráculo de bytes y asegura 82/82 hashes en copia. El candidato N5 es **inmutable**; comprueba SHA focal PRE/POST y custodia de N5.
-5. Crea subdirectorios exclusivos `A1_ROOT\private\candidate`, `cache-gradle`, `pub-cache`, `android-user`, `temp`, `product`, `logs`. No crear otro runner ni clonar proyecto entero. No acceder a fuentes de otros proyectos.
+**Única excepción nueva respecto a A1:** se permite a **Gradle del proyecto QA** descargar artefactos y metadatos de compilación **solo en la caché privada A2**, desde repositorios HTTPS oficiales ya declarados en los archivos Gradle auténticos: `https://plugins.gradle.org/m2`, Maven Central `https://repo.maven.apache.org/maven2`, Google Maven `https://dl.google.com/dl/android/maven2` (redirigidos oficiales de esos mismos servicios, comprobados). No se permite URL HTTP, repositorios improvisados, mirrors de terceros, JitPack, SNAPSHOT, versiones dinámicas, credenciales personales, `--refresh-dependencies`, nuevos SDK/JDK, instalación de herramientas ni downloads de la aplicación. Si la configuración real requiere otro dominio, proxy o repositorio, **STOP `BLOCKED_REPOSITORY_POLICY`**: no modificar la política a ciegas. Si hay un redirect a dominio no reconocido, STOP. Las dependencias transitivas con versiones fijas que Gradle resuelva desde repositorios autorizados son admisibles; 22 es el **mínimo conocido de A1, no un límite falso del grafo completo**. Conservar registro de coordenadas, dominio e integridad SHA256, sin secretos ni URLs con tokens. Si solo hay paquetes ya disponibles, compilar `--offline`.
 
-## 2. Puerta A1-1 — preparar Flutter/Android/Gradle offline sin efectos globales
+## 1. Puerta única A2-0: impedir concurrencia y usar evidencia existente
 
-**Lee primero en la copia A1**: `pubspec.yaml`/lock, `lib/main.dart`, `android/settings.gradle.kts`, `android/app/build.gradle.kts`, `android/build.gradle.kts`, `android/gradle/wrapper/gradle-wrapper.properties`, manifests y signing config. No inferir flavors ni entrada Dart desde el nombre del APK C2. El candidato N5 contiene `android/gradlew.bat` y `android/gradle/wrapper/gradle-wrapper.jar` según el CSV: comprobarlo con hash, **no presupone runtime Gradle disponible**.
+1. Antes de toda escritura, inspeccionar la entrega `A2_ROOT/delivery`, procesos Codex/Gradle de este mismo `TASK` y si ya existe A2. Si A2 está en marcha, fue completada o su propiedad es indeterminada, **NO lanzar segunda ejecución**: reportar `A2_ALREADY_IN_FLIGHT_OR_FINISHED`. En cambio, A1 terminado **no bloquea A2**. Un solo Codex dueño de `D:\codex\Jornato`.
+2. Validar A1 ZIP mediante el SHA informado, CRC y `MANIFEST_SHA256.csv` si no hay verificación reciente confiable. Leer `FINAL_REPORT.md`, `BLOCKERS.md`, `ANDROID_OFFLINE_BUILD.csv`, `APP_SOURCE_PARITY.csv`, `WIP_AND_N5_GUARDS.csv`. No rehacer las pruebas A1. Verificar que el A1 reporta **22 artefactos JAR/metadata** (uno es el plugin Kotlin DSL 6.4.2 y los demás variantes de Kotlin 2.2.21) y build exit 1 al configurar el plugin Flutter, antes de compilar fuentes de app. No diagnosticar falla de producto por falta de caché.
+3. WIP read-only: capturar HEAD, rama, 235 entradas de status como referencia (no forzarlas), staged, SHA del índice y posibles procesos activos; comparar PRE/POST. Si hay otro Codex modificando Jornato al mismo tiempo, `BLOCKED_CONCURRENT_WIP`; no atribuir cambios a A2. No `git status` costoso repetido; dos lecturas PRE/POST son suficientes.
+4. **Fuente de A2:** reutilizar la copia privada A1 de 82 rutas de app como fuente INMUTABLE. Si no existe, reutilizar la copia N5 original ya certificada y el CSV 82/82 de A1 como oráculo. Jamás reconstruir desde `main`/PR antiguo ni copiar el WIP sin custodia. Crear en `A2_ROOT/private/candidate` una única copia ordinaria (sin symlinks/junctions/hardlinks), con paths relativos, hashes de app esperados; registrar 82/82 frente a A1/N5 sin reanalizar backend. No editar los originales. `pubspec.lock` debe conservar SHA `F515D695...34` completo indicado arriba.
+5. Preparar `private/{candidate,gradle-home,pub-cache,android-user,temp,logs,product,artifact-inventory}`. Proteger rutas y permisos: **solo D:\codex\_REPORTES\Jornato\JOR-A2-...** para modificaciones; nada bajo A1/N5/WIP o `%USERPROFILE%/.gradle` (excepto lectura de inventario), nada bajo otras carpetas de proyectos. Copia de cachés solo de A1/N5 autorizados; no clonar cachés de proyectos ajenos. No incluir cache/JAR en ZIP.
 
-### 2.1 Entorno de proceso aislado
+## 2. Puerta A2-1: precarga mínima y política de red con una sola decisión
 
-- Localiza **Flutter SDK 3.47.8 y Dart 3.13.7 realmente usados en N5**, artefactos Android del engine ya instalados, Java/JDK compatible con el Gradle/AGP real, Android SDK existente, platform/build-tools requeridos. Si falta algo, bloquear exactamente y **no iniciar un comando que pueda descargarlo**. Es una comprobación del host Windows, no Android nativo en dispositivo.
-- Escribe **solo en copia A1** `android/local.properties` con `flutter.sdk=<SDK real>` y `sdk.dir=<Android SDK real>`, usando el escape de rutas que exija Java Properties; si el plugin/Gradle necesita `flutter.versionCode`/`flutter.versionName`, derivarlos del `pubspec.yaml` o propiedades existentes, no inventar valores. Flutter Gradle Plugin puede exigir `flutter.sdk` al evaluar `settings.gradle.kts`; no comenzar Gradle antes de comprobarlo. No modificar `local.properties` del WIP ni del SDK.
-- Establece para **único proceso A1** `PUB_CACHE=A1_ROOT\private\pub-cache` (clon privado de los 79 paquetes/metadatos de N5 verificados; origen RO, sin symlinks, con presupuesto de espacio), `GRADLE_USER_HOME=A1_ROOT\private\cache-gradle`, `ANDROID_USER_HOME=A1_ROOT\private\android-user`, `TEMP` y `TMP=A1_ROOT\private\temp`, además de `JAVA_HOME`/SDK Flutter/Android apropiados. Restaurar entorno al finalizar. No `setx`, no modificar usuario Windows, PATH permanente ni `.gradle` de terceros.
-- **Clave debug:** verificar en `build.gradle.kts` la firma efectiva para la variante QA. El debug keystore predeterminado puede crearse en el home del usuario. Exigir que la creación/uso de una clave de QA se limite a `A1_ROOT\private\android-user` o a una configuración de signing temporal explícita dentro de la copia A1. Prohibido crear, sobrescribir o leer secretos de un keystore release/ajeno. Si no puede asegurarse la ruta de firma con la configuración existente, `BLOCKED_DEBUG_SIGNING_ISOLATION` antes del build. Una clave QA privada nueva puede no coincidir con la firma debug del APK C2 instalado; registrarlo como **incompatible para actualización**, sin intentar instalar.
-- No se permite que un Gradle `init.d`, `gradle.properties` o repositorio de un proyecto ajeno controle esta ejecución. No copiar credenciales ni archivos de configuración global. Código de terceros en plugins cacheados ejecutará tareas normales: limitar la copia, el entorno, las rutas y las escrituras; no declarar que `--offline` constituye sandbox de sistema operativo.
+1. Reutilizar resultados del preflight A1 sin re-ejecutar diagnósticos completos: Flutter SDK 3.47.8/Dart 3.13.7, JDK 21.0.12, Android SDK 36, NDK 28.2.13676358, CMake 3.22.1 y Gradle 9.3.1 **estaban disponibles**. Comprobar SOLO que siguen existiendo las rutas realmente utilizadas (lectura focal). Gradle Wrapper/JAR y la distribución 9.3.1 de A1 son fuentes autorizadas para clonar a `gradle-home` A2, sin usar el wrapper para descargar distribución. Si la distribución no puede trasladarse íntegra, STOP `BLOCKED_GRADLE_DISTRIBUTION`; no descargarla automáticamente.
+2. Copiar desde A1 **la caché de Gradle privada ya usada**, incluidos artefactos y metadatos compatibles, a `gradle-home` A2. Al trasladar `caches/modules-2`, preservar la estructura de directorios y metadatos; **no copiar `*.lock` ni `gc.properties`** (documentación oficial Gradle); no alterar la fuente. No copiar `init.d` desconocidos, tokens, gradle.properties con credenciales, daemon registry ni caches de otros proyectos. Se permite inspección puntual de caché estándar del host **solo para saber si existen esos 22 artefactos**, sin modificarla ni apropiarse de sus secretos; NO mezclar archivos JAR sueltos ni inventar metadata de resolución. Si existe una fuente completa y verificada en A1/Gradle cache propio de Jornato, preferir una copia autorizada con metadatos preservados y modo `--offline`.
+3. Lectura estática **focal** de `settings.gradle.kts`, `build.gradle.kts`, `gradle-wrapper.properties`, `gradle.properties` y el build incluido del SDK Flutter indicado por el proyecto: identificar repositorios oficiales efectivos y versiones fijas `6.4.2`, `2.2.21`, AGP real; **no cambiarlas**. Revisar si hay repositorios extra, credenciales/URLs secretos, HTTP, plugins de build remotos no autorizados, versiones dinámicas y tareas de descarga no Gradle. Ante duda material, `BLOCKED_REPOSITORY_POLICY` antes de ejecutar. No leer `.env` productivo.
+4. Preparar proceso A2 con `GRADLE_USER_HOME=.../private/gradle-home`, `PUB_CACHE=.../private/pub-cache`, `ANDROID_USER_HOME=.../private/android-user`, `TEMP/TMP=.../private/temp`, `JAVA_HOME` y SDK reales. Restaurar variables de proceso al terminar. Copiar los 79 hosted Pub/metadata aprobados de N5/A1 a Pub privado A2 y ejecutar `flutter pub get --offline --enforce-lockfile` **SOLO si hace falta nuevo package_config**. Nunca descargar dependencias Dart ni alterar lock. Crear `android/local.properties` en copia A2 a partir de rutas SDK existentes, con sintaxis Java Properties, sin editar WIP.
+5. Reutilizar signing QA debug **aislado** de A1 si ya existe un keystore propio verificable en su laboratorio sin modificarlo; alternativamente generar clave **nueva solo en `private/android-user` A2** si el build QA lo requiere y su configuración la permite. No usar claves reales/release ni generar claves globales. Registrar que certificado distinto al APK C2 previamente instalado impide actualización directa, sin instalarlo. Debug keystore y paths no van al ZIP.
+6. Determinar modo **una sola vez**, antes del build:
+   - `OFFLINE_COMPLETE`: el preflight demuestra resolución plena de las 22 coordenadas y metadatos en caché privada compatible; ejecutar única tarea Gradle `--offline`.
+   - `OFFICIAL_FETCH_NEEDED`: falta al menos un artefacto o metadata privado; dado que el propietario **autoriza estas descargas de build al entregar este prompt**, ejecutar **una sola tarea Gradle sin `--offline`** y dejar que Gradle resuelva las versiones existentes únicamente desde los repositorios oficiales listados, escribiendo exclusivamente en `private/gradle-home`. No iniciar primero un build offline sabiendo que faltan paquetes. No precalentar con un comando Gradle adicional.
+   - Si no puede garantizarse el dominio/repo, la integridad o la custodia, STOP antes del build `BLOCKED_REPOSITORY_POLICY` o `BLOCKED_NETWORK_AUTH`. No alterar Windows/firewall/proxy ni cambiar la versión para pasar.
 
-### 2.2 Gradle Wrapper + dependencias offline
+## 3. Puerta A2-2: una compilación, no otro ciclo de intentos
 
-1. Inspecciona `distributionUrl`, versión del wrapper, `distributionSha256Sum` **si existe**, Gradle/AGP/Kotlin y flavor real. Wrapper puede buscar el ZIP **antes** de procesar `--offline`; no ejecutarlo hasta acreditar la distribución **exacta ya instalada y completa**. Para el `GRADLE_USER_HOME` privado, reutilizar desde una fuente **global autorizada de solo lectura**, mediante **copia acotada** de la distribución exacta y de las dependencias Gradle necesarias con espacio libre suficiente, sin usar enlaces a caché viva, sin copiar `init.d`, credenciales, `gradle.properties` personal ni locks/GC del origen. Registrar origen **sanitizado**, hashes/versiones y límite de bytes. El destino es totalmente propio y escribible; el origen no se toca. No copiar gigantescas cachés de otros proyectos.
-2. Gradle guarda artefactos **y metadatos de resolución**: una carpeta JAR presente no prueba un conjunto de dependencias resuelto. No exigir un inventario imposible de todas las transitivas **antes del build**. Comprobar distribución, plugin de Flutter y mínimos conocidos; el **único build `--offline`** será la prueba concluyente de dependencias. Si falta una distribución del wrapper, `BLOCKED_GRADLE_DISTRIBUTION` (sin iniciar wrapper). Si falta la caché de plugin conocida, `BLOCKED_GRADLE_CACHE`. Si durante el build falla un artefacto transitorio, `BLOCKED_ANDROID_DEPENDENCY`, registrando `group:artifact:version` o ruta exacta; sin buscar otra variante ni descargar.
-3. `pubspec.lock` tiene que conservar SHA256 `F515D69563850E8893A17585D8BAB57A8E6484E18CE1FEF4BDDC6BB836F83B34`. Si falta package_config al copiar, ejecutar **una vez** `flutter pub get --offline --enforce-lockfile` solo en A1, **tras comprobar el SDK/cachés locales**. 79 versiones alojadas N5 y sus metadatos se COPIAN a `pub-cache` A1 desde el origen N5 sin mutarlo; verificar SHA/metadatos fuente y lock PRE/POST idénticos, y que package_config apunte al `pub-cache` privado y no a WIP/caché global. Si el clon exacto no es viable por espacio o integridad, `BLOCKED_PUB_OFFLINE` sin tocar el origen. Si hay falta o cambio de hash: `BLOCKED_PUB_OFFLINE`. No repetir `flutter analyze/test` de N5 si código no cambió.
+1. Confirmar variante desde el `android/app/build.gradle.kts` **copiado**: task exacta observada en A1 `:app:assembleB14qaDebug`. Si el código cambió de forma incompatible frente al snapshot A1, STOP y documentar; no inventar variante. `lib/main.dart` es entrada habitual, verificar target real. No tratar el harness `integration_test` como APK instalable.
+2. Ejecutar **UNA** vez el wrapper 9.3.1 ya presente en la copia A2, desde `candidate/android`, `--no-daemon --console=plain` y `--offline` solo si `OFFLINE_COMPLETE`; si requiere resolver las dependencias oficiales, omitir `--offline` y mantener la restricción de repositorios. **No** `--refresh-dependencies`, `flutter build apk` alternativo, `gradle build` general, segunda variante, tarea completa de tests, ni transformaciones de build scripts. Capturar stdout/stderr y hashes en archivos `private/logs`, no en ZIP. Usar contraseña/propiedades QA sintéticas, no globales.
+3. Durante el proceso observar de forma acotada los dominios autorizados y el crecimiento de `gradle-home`; abortar con bloqueo si aparece destino no autorizado, escritura fuera de A2 o instrucciones de instalar/actualizar herramientas. No declarar que sin `--offline` la red está físicamente aislada: es una autorización de confianza limitada, no un sandbox. Los scripts Gradle tienen capacidad de ejecutar código: la revisión estática y la fuente custodiada son obligatorias.
+4. Clasificar fin:
+   - `PASS_NEW_APK`: Gradle exit 0 y APK **creado durante A2** con ruta/certificado/manifest verificables;
+   - `BLOCKED_OFFICIAL_DEPENDENCY`: Maven/Gradle oficial no resuelve coordenada fija (HTTP status/URL **sin secreto** y artefacto específico), sin inventar actualización;
+   - `BLOCKED_NETWORK_POLICY`: repo/redirect prohibido o proxy no autorizado; STOP sin más intentos;
+   - `BLOCKED_ENV`: SDK/JDK/espacio/firma/paquete ausente;
+   - `FAIL_PRODUCT`: compilador demuestra error de fuente propia (ruta + línea). Se permite **máximo una corrección mínima de fuente en COPIA A2** y una nueva ejecución de **la misma tarea** SOLO por `FAIL_PRODUCT`, guardando diff y hash privado; nunca por ausencia de dependencia/entorno. No migrar fix al WIP sin dictamen del Director.
+5. Un APK no existe hasta verificar `:app:assembleB14qaDebug` exit 0 y salida nueva localizada en `candidate/build/app/outputs` o `candidate/android/app/build/outputs`. No usar el APK viejo C2. Copiar APK final solo a `A2_ROOT/private/product`, SHA256, tamaño, variante, fecha, package. No subir APK a GitHub ni al ZIP.
 
-## 3. Puerta A1-2 — UNA compilación y certificación QA estática
+## 4. Puerta A2-3: identidad, firma y seguridad QA, sin teléfono
 
-1. Selecciona **solo desde `android/app/build.gradle.kts` real**:
-   - Si `productFlavors` contiene exactamente `b14qa`, variante `b14qaDebug`, tarea `:app:assembleB14qaDebug`.
-   - Si NO hay flavors, variante `debug`, tarea `:app:assembleDebug`.
-   - Si hay otro flavor QA explícito y no `b14qa`, usar `:app:assemble<NombreExacto>Debug` derivado del código, registrar por qué; si hay dos candidatos o un flavor sin identidad QA clara, `BLOCKED_VARIANT_AMBIGUOUS`, no ejecutar un menú de builds.
-   - Comprobar target de `lib/main.dart` y `flutter.target` (si existe); **no compilar el harness `integration_test/kiosk_flow_test.dart` como si fuera app normal**. Verificar que package/applicationId y signing sean de QA. Si el build.gradle real fuerza firma release para debug, `BLOCKED_APK_SECURITY` hasta decisión del Director.
-2. Confirmar `android/local.properties` válido, distribución exacta Gradle privada, Java/SDK compatibles y firma debug aislada. Desde `A1_ROOT\private\candidate\android`, usar wrapper existente (único build) con parámetros equivalentes a:
+1. Sobre el **APK A2 real** usar SDK Android local `apksigner verify --verbose --print-certs` y `aapt dump badging` o `apkanalyzer manifest print`; registrar package/applicationId, versionCode, versionName, min/target SDK, Activity launcher, certificate digest, debug, ABI y checksum APK. Si faltan herramientas de lectura o APK inválido, no certificar `PASS_APK_STATIC`.
+2. Inspeccionar **manifiesto fusionado** y package final: componentes exportados/permisos, accidental inclusion de `.env`, secretos, tokens, key material, debug config y `android:usesCleartextTraffic`. A1 detectó `usesCleartextTraffic="true"` en **`src/b14qa/debug/AndroidManifest.xml` solamente**. Esto exige marcar `QA_CLEARTEXT_ALLOWED` si persiste en debug; **no bloquear arbitrariamente la construcción QA únicamente por una bandera debug**, pero NO aprobar distribución, uso de red con datos reales, pruebas remotas ni tratarla como configuración release. Si hay exposición material o secretos en APK, `BLOCKED_APK_SECURITY`. Si no existe APK, estos gates siguen `NOT_RUN` (no inventar manifiesto fusionado).
+3. Ninguna prueba Android física: no ADB/AVD/teléfono, reinstalación sobre C2 ni VM Service. Un APK QA firmado con nueva clave puede ser incompatible con C2 instalado; advertir sin modificarlo. Tampoco afirmar SQLCipher/Keystore, backup/restore o aislamiento tenant real por una compilación.
+4. Con APK validado, incluir **una página máxima** `NEXT_ANDROID_PHYSICAL_GATE.md` describiendo qué falta comprobar en un teléfono: compatibilidad de firma y paquete, arranque, entrada/pausa/reanudar/salida, rehidratación offline tras reinicio, kiosco sin persistencia de identidad temporal, integridad DB/SQLCipher, fallo cerrado de corrupción, GPS/selfie condicionados a política, respaldo/restauración y sin HTTP inseguro. Es plan, no prueba ejecutada. `RELEASE=NO_GO`.
 
-   ```powershell
-   # Entradas y rutas resueltas en el preflight, nunca placeholders al ejecutar.
-   .\gradlew.bat --offline --no-daemon --console=plain :app:assembleB14qaDebug
-   ```
+## 5. Evidencias sanitizadas — un ZIP, cierre sin perseguir la cola
 
-   Reemplazar tarea **antes** por la única variante real. Capturar exit code y stdout/stderr SOLO en `private/logs`; saneamiento antes de ZIP. No `--refresh-dependencies`, `gradle build` general, `flutter build apk` alternativo, `flutter run`, tarea de tests vecinos, segunda variante, ni reintentos por infraestructura. Si Gradle o plugin Flutter intenta descarga, **STOP** y clasificar entorno sin ejecutarla; un flag no garantiza cero red.
-3. Solo si falla **por código propio y causalmente identificado** (ruta/archivo/línea): hacer **máximo una corrección** en copia A1, mantener hash/diff PRE/POST privado y una única verificación focal, luego **un único reintento de la MISMA tarea** offline. Defecto de SDK, caché, distribución, Java, plugin Gradle, firma o entorno **no autoriza reintento**, actualización, parche de build config ni traslado de archivos de otros proyectos. No copiar fix al WIP.
-4. Localizar el **APK realmente nuevo** buscando outputs de la variante en copia A1: tanto `candidate/build/app/outputs/flutter-apk` como `candidate/build/app/outputs/apk` y ruta Gradle exacta. No adjudicar un APK del viejo C2 ni encontrado fuera de A1. Exigir construcción exit0, archivo no vacío, SHA256, tamaño, fecha posterior al build A1 y trazabilidad tarea→output→bytes; **una build exit0 sin APK no es PASS**. Guardar APK solo en `A1_ROOT\private\product` y registrar la ruta Windows para futura QA, jamás subirlo ni incluirlo en el ZIP público/chat.
-5. Verificar APK estáticamente con **herramientas SDK locales** (`apksigner verify --verbose --print-certs`, `aapt dump badging`/`apkanalyzer manifest print`, entradas ZIP y CRC). Registrar `applicationId/package`, `versionCode`, `versionName`, `minSdk`, `targetSdk`, `launcher Activity`, firma/cert digest, ABI y `debuggable` si puede comprobarse; no asumir que SHA distinto implica cambio funcional. Comparar **solo informativamente** la compatibilidad de certificado con C2 y paquete `com.sierraglobalcompany.jornato.b14qa`: si difiere, **NO ES ACTUALIZABLE DIRECTAMENTE SOBRE C2**, sin reinstalar. Si falta firmante/manifest legible, `APK_METADATA=BLOCKED_TOOLS|FAIL_SECURITY`, y **no** `PASS_APK_QA_SCOPED`.
-6. Privacidad y seguridad focal del APK **sin inventar QA Android**: revisar manifest final para componentes exportados/permisos/red inesperados y las rutas de recursos empaquetados para `.env`, credenciales, llaves o datos reales; no exportar contenidos sensibles. No borrar permisos necesarios de Pro sin contrato. No declarar `SQLCipher`, `Keystore`, `offline-físico` ni identidad kiosk como PASS por compilación estática. Si aparece un riesgo plausible, `BLOCKED_APK_SECURITY`, aunque APK firme correctamente.
-
-## 4. Puerta A1-3 — entrega sin teléfono y siguiente gate preciso
-
-Si existe un APK A1, preparar **máximo una página** de gate físico posterior, **pendiente de autorización específica**: comprobar paquete/firma/cambio con QA instalado en Mi A3 (sin reemplazo destructivo), arranque, flujo real entrada/pausa/reanudar/salida y turno nocturno, persistencia reinicio, identidad temporal kiosco, SQLite/SQLCipher/Keystore, corrupción fail-closed, respaldo/restauración cuando corresponda y ruta offline. El VM Service fue `BLOCKED` en C2; **no puede ser el único oráculo**. Esta página describe pruebas pendientes, NO ejecutadas. Sin APK nuevo, no crear plan extenso ni otra propuesta de pruebas.
-
-### Estados contractuales finales
-
-- `A1_SOURCE=PASS_82_OF_82|BLOCKED_N5_SOURCE|BLOCKED_COPY_INTEGRITY`.
-- `A1_PUB=REUSED_N5|PASS_OFFLINE_LOCKED|BLOCKED_PUB_OFFLINE|NOT_RUN`.
-- `A1_TOOLCHAIN=PASS_PREFLIGHT|BLOCKED_GRADLE_DISTRIBUTION|BLOCKED_GRADLE_CACHE|BLOCKED_ANDROID_SDK|BLOCKED_FLUTTER_SDK|BLOCKED_JDK|BLOCKED_DEBUG_SIGNING_ISOLATION|BLOCKED_VARIANT_AMBIGUOUS`.
-- `A1_BUILD=PASS_NEW_DEBUG_APK|BLOCKED_ENV|BLOCKED_DEPENDENCY|FAIL_PRODUCT|NOT_RUN`.
-- `A1_APK_METADATA=PASS_STATIC|BLOCKED_TOOLS|FAIL_SECURITY|NOT_RUN`.
-- `RESULT=PASS_APK_QA_SCOPED` **solo si** paridad A1 + fuente exacta + build nuevo + firma + manifest + custodia PASS. Otro caso: `PARTIAL_WITH_GAPS|BLOCKED_ENV|FAIL_PRODUCT`, con causa identificada.
-- `ANDROID_PHYSICAL=NOT_RUN`, `N5_FLUTTER=PASS_CANDIDATE_SCOPED_REUSED`, `DOCKER=NOT_TOUCHED`, `WIP_GUARDS=PASS_UNCHANGED|DELTA_UNEXPECTED`, `OFF_DEVICE_BACKUP=NO`, `RELEASE=NO_GO`.
-
-### Único ZIP sanitario
-
-`A1_ROOT\delivery\JOR-A1-ANDROID-OFFLINE-APK-QA-CANDIDATE-20261121-UNICO.zip`, **un solo archivo final**, contenido mínimo:
+En `A2_ROOT/delivery` crear exactamente **un ZIP**, con CRC y manifiesto SHA256+bytes verificados. Archivos relevantes, ninguno redundante:
 
 ```text
-FINAL_REPORT.md                # hechos, pasos omitidos, estado final y causa, nada sensible
-A1_GATE_MATRIX.csv             # puertas causales, PASS/BLOCKED y evidencia
-APP_SOURCE_PARITY.csv          # 82 rutas relativas/hash PRE/POST (sin código)
-ANDROID_OFFLINE_BUILD.csv      # variante/tarea/exits/SDK/JDK, hash del APK si existe
-APK_STATIC_METADATA.csv        # package, launcher, min/target, certificado público hash (si existe)
-WIP_AND_N5_GUARDS.csv          # HEAD/index/status, custodia fuentes N5
-BLOCKERS.md                    # solo si hay bloqueo
-NEXT_PHYSICAL_GATE.md          # solo si APK nuevo + metadata estática válidos
-MANIFEST_SHA256.csv            # hash y bytes de todos los demás miembros
+FINAL_REPORT.md
+A2_GATE_MATRIX.csv
+SOURCE_AND_WIP_GUARDS.csv
+GRADLE_DEPENDENCY_RESOLUTION.csv   # 22 artefactos A1 y todo nuevo descargado: coordenada, origen, SHA, modo, resultado
+ANDROID_BUILD_AND_APK.csv          # variante, Gradle/JDK/SDK, tarea, exit, APK SHA si existe
+APK_SECURITY_SUMMARY.csv           # solo si se construyó APK
+NEXT_ANDROID_PHYSICAL_GATE.md      # solo si APK estático válido
+BLOCKERS.md                        # solo si falla
+MANIFEST_SHA256.csv
 ```
 
-Validar ZIP CRC de todos los miembros, manifiesto SHA256/tamaño, paths relativos únicos, sin symlink, sin datos de otros proyectos. Excluir APK, código fuente, fuente de plugins, claves, dumps, cachés, logcat, rutas personales, `.env`, credenciales, logs crudos o secretos. Informes con rutas relativas, hashes, versiones y códigos de salida. Al terminar, comparar WIP HEAD/rama/staged/índice PRE/POST y N5 candidato fuentes focales; reportar deltas de terceros sin manipularlos. El APK y pruebas completas siguen en D: privada, **no hay respaldo fuera de equipo**.
+No adjuntar APK, código, JARs, caches, metadatos binarios, URLs con credenciales, `.env`, claves/debug.keystore, logs crudos, `local.properties` con paths, capturas, manifest completo, DB o datos reales. Si no hay APK, no generar archivos QA ficticios. Guardar originales privados en D: para reproducción, no crear backup externo ficticio. Manifest CRC/hash de cada entrada, filenames seguros, informe con rutas relativas/redactadas. Antes de terminar comprobar PRE/POST del WIP e índice, fuente A1/N5 intacta y que no hubo archivos A2 fuera de `A2_ROOT` (excepto uso normal de SDK/herramientas preexistentes, que no deben actualizarse). `DOCKER=NOT_TOUCHED`.
 
-Respuesta final Codex al Director **solo**:
+**Formato de respuesta Codex, sin prosa larga ni archivos dispersos:**
 
 ```text
-TASK=JOR-A1-ANDROID-OFFLINE-APK-QA-CANDIDATE-20261121
-PROMPT_REVISION=A1-R2-20261122
+TASK=JOR-A2-GRADLE-DEPS-APK-QA-20261122
 RESULT=PASS_APK_QA_SCOPED|PARTIAL_WITH_GAPS|BLOCKED_ENV|FAIL_PRODUCT
-A1_SOURCE=...
-A1_PUB=...
-A1_TOOLCHAIN=...
-A1_BUILD=...
-A1_APK_METADATA=...
-APK_SHA256=...             # si existe
-APK_PRIVATE_PATH=...       # si existe: ruta D: para futura QA, no adjuntar binario
+SOURCE=PASS_82_OF_82|BLOCKED
+GRADLE_DEPS=PASS_OFFLINE|PASS_OFFICIAL_FETCH|BLOCKED_REPOSITORY_POLICY|BLOCKED_NETWORK|BLOCKED_ENV
+A2_BUILD=PASS_NEW_APK|BLOCKED_DEPENDENCY|BLOCKED_ENV|FAIL_PRODUCT|NOT_RUN
+A2_APK_STATIC=PASS_QA|BLOCKED_APK_SECURITY|NOT_RUN
+A2_APK_SHA256=<SHA or NOT_BUILT>
+A2_APK_PRIVATE_PATH=<D: path or NOT_CREATED>
 ANDROID_PHYSICAL=NOT_RUN
+WIP_GUARDS=PASS_UNCHANGED|DELTA_UNEXPECTED
 DOCKER=NOT_TOUCHED
-WIP_GUARDS=...
 OFF_DEVICE_BACKUP=NO
 RELEASE=NO_GO
-ZIP_PATH=...
-ZIP_SHA256=...
+ZIP_PATH=<UNICO.zip>
+ZIP_SHA256=<SHA256>
 NEXT_OWNER=CHATGPT_DIRECTOR
 ```
 
-**Cierre:** no A2 automático, no auditoría ritual, no repetición de N2–N7. Si hay bloqueo ambiental, documentar una única causa y el recurso mínimo necesario; Director decidirá una sola autorización posterior. **AHORA SIGUE CODEX LUNA A1-R2 SOLO SI A1 NO EMPEZÓ; DESPUÉS SIGUE CHATGPT DIRECTOR.**
+**Después de un solo ZIP A2, el Director decide el siguiente hito Android; nunca volver a construir A1 ni repetir las 22 coordenadas salvo delta demostrado.** No liberar Jornada a producción, no tocar otros proyectos. PingPongLaw L1–L6: KISS, raíz demostrada, no pruebas rituales, no falsos PASS, evidencia única.
 
-## Referencias verificables — contextual, NO nuevas tareas
+## Fuentes técnicas externas (no mandatos)
 
-- Evidencia ZIP N5 (SHA256 indicado): `FINAL_REPORT.md`, `CANDIDATE_DELTA_SUMMARY.csv`; fuente N5 no adjunta en ZIP.
-- Evidencia ZIP C2 (`JOR-H9-C2-PHYSICAL-DART-V5-20261120-UNICO.zip`, SHA256 `711116067DDBF73E7CE4AD6A102D58E14AD5372D79A981F48978C54A76B35692`): instalación anterior C2/VM Service bloqueado; no es prueba de A1.
-- Flutter Gradle plugin requiere `flutter.sdk` en local.properties: https://docs.flutter.dev/release/breaking-changes/flutter-gradle-plugin-apply
-- Gradle Wrapper puede descargar antes de `--offline`: https://docs.gradle.org/current/userguide/gradle_wrapper.html
-- Gradle Dependency Caching, caché de metadatos + binarios: https://docs.gradle.org/current/userguide/dependency_caching.html
-- Android firma debug local y no publicable: https://developer.android.com/studio/publish/app-signing
+- Gradle dependency cache, metadata + artifacts, copia segura de modules-2 y resolución: https://docs.gradle.org/current/userguide/dependency_caching.html
+- Gradle CLI/offline: https://docs.gradle.org/current/userguide/command_line_interface.html
+- Android manifest merger: https://developer.android.com/build/manage-manifests
+- App signing: https://developer.android.com/studio/publish/app-signing
