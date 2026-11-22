@@ -1,28 +1,19 @@
-# JORNATO — RECOVERY HANDOFF · 21-NOV-2026 · N5-R1 CONDICIONAL
+# JORNATO — RECOVERY HANDOFF · N6 ACTIVO · 21-NOV-2026
 
-**LECTURA OBLIGATORIA AL RECUPERAR CHAT:** [continuidad canónica](JORNATO_CONTINUIDAD.md) → [única orden CODEX N5-R1](CODEX_LOTE_ACTUAL.md) → [auditoría 10 verdugo y 10 juez del DELTA N5](JORNATO_N5_R1_AUDITORIA_10_VERDUGO_10_JUEZ_20261121.md). **No repetir N2/N3/N4, ni ejecutar el borrador POST-N4.** Si N5 V1 ya ha comenzado/terminado, N5-R1 es solo una referencia de criterios: **NO relanzar**. Primero recibir y adjudicar el ZIP existente.
+**PRIMERO LEER:** [continuidad](JORNATO_CONTINUIDAD.md), [orden única N6](CODEX_LOTE_ACTUAL.md), [dictamen N5](JORNATO_N5_DICTAMEN_Y_N6_20261121.md), [política Docker](JORNATO_DOCKER_AISLAMIENTO_PROYECTOS_20261121.md). Estos cuatro documentos representan el estado actual; NO reiniciar N5 ni repetir auditoría 10+10 de N5-R1. La orden N5 en histórico está supersedida por N6. Si ya hay ZIP N6, adjudicarlo en lugar de otro prompt.
 
-## Producto, estado y roles
+## Qué funciona y qué NO
 
-Jornato: app Gratis Local offline Flutter/Dart; Pro con outbox/SQLCipher/Keystore; servidor Laravel/Sanctum/MariaDB, portal empleados y RR.HH. ChatGPT Director define contratos y gates; Codex Luna ejecuta en `D:\codex\Jornato` sobre Windows, **pero múltiples programas/instancias Codex coexisten en carpetas separadas**. PHP/DB **exclusivamente Docker Compose privado por proyecto** (sin compartir contenedores, redes, puertos, volúmenes o datos). Respeta ley KISS/PingPongLaw L1–L6, no parches, no nuevos servicios. Sin publish, merge ni deploy sin decisión dueño.
+- N5 ZIP adjunto y verificado: SHA256 `162118EFD4260B97A425E969CB90C06C54A4CAA0003FEC82F2C68A2BD53E84CC`, 24.069 B, 10 miembros CRC OK, 9/9 manifiesto SHA/bytes/CRC. N5 `PARTIAL_WITH_GAPS`.
+- Flutter host candidato `PASS_CANDIDATE_SCOPED`: Pub exacto offline 79/79 y lock sin cambios, análisis focal PASS, prueba KioskScreen 9/9 PASS. N2 86 PASS, N3 9+4 PASS históricos. Flutter NO se reejecuta salvo delta real; no hay Android aprobado.
+- 232 fuentes/candidato N5 con 150 backend, PHP ^8.3/Laravel 13.40.0, 109 pares vendor/lock reportados, disponibles solo en copia privada D:, no GitHub público. No recrear candidato ni suite masiva.
+- Docker IPAM ya **EVITADO** con N5: Compose DB none + PHP comparte namespace DB. Un `up` exit 0; cero redes N5, cero puertos host, dos contenedores y un volumen propio. PHP FALLÓ AL ARRANCAR CON `exec /usr/bin/sh: exec format error` exit255. El origen exacto NO está identificado, así que **diagnosticar imagen/arquitectura/entrypoint/shell** antes de tocar DB. MariaDB healthy fue ping sin autenticación: PDO/SQL/Artisan/migraciones 0, E01–E08 8 BLOCKED_ENV. Volumen N5 conservado, contenedores N5 detenidos según Codex; no tocar de otros proyectos.
+- WIP Windows según Codex: `D:\codex\Jornato` HEAD `faf5fe283191f8b5a2724b397009512a2caec1b6`, 235 status, staged0, index SHA `25CC609803D7E68D5F3ECF428198B2432CF1EA37030546735DD3F03299D905E1`; no cambio reportado. `OFF_DEVICE_BACKUP=NO`.
 
-## Verdad N4
+## Ejecución pendiente única
 
-- ZIP SHA256 `C5B1F0F344ED6E2B280FCFB92126664593715C24B0B27D29A5A0C4460898D1F8`, 21.966 B, 12 miembros CRC PASS y 11/11 hashes/tamaños correctos. N4 `PARTIAL_WITH_GAPS`, 232 fuentes paridad reportada, 150 de servidor, **no smoke Flutter**, **0 E2E PHP/SQL**.
-- Docker N4 bloqueado por IPAM al intentar una red nueva privada: cero red/contenedor/volumen N4 según Codex; sin prune ni uso de recursos ajenos. N5 propone una sola hipótesis alterna sin red bridge: db mode none + php mode service:db; el YAML fue validado sintácticamente en ChatGPT, **nunca se probó en Docker Desktop del propietario**.
-- Pub N4: 22 paquetes/sellos de 79 faltaban en cache por defecto; Flutter SDK 3.47.8/Dart 3.13.7 presentes. N2-R1 86 PASS y N3-R1 9+4 PASS históricos, no repetir sin delta de fuente.
-- Backend estático: PHP ^8.3, Laravel 13.40.0, Sanctum 4.3.3, PHPUnit 12.5.43, 11 migraciones, 34 declaraciones API, 109 vendor pares; ni PHP real ni DB QA iniciados. B21F-S3 anterior 158/2450 PASS scoped, no E2E actual.
-- WIP reportado HEAD `faf5fe283191f8b5a2724b397009512a2caec1b6`, rama `codex/jor-b08-h4-domain-20261025`, status 235, stage 0, index `25CC609803D7E68D5F3ECF428198B2432CF1EA37030546735DD3F03299D905E1` sin delta. No backup externo; código privado no está en GitHub público.
+**CODEX LUNA N6** `JOR-N6-PHP-RUNTIME-CAUSE-ISOLATED-QA-20261121` debe: (1) custodiar WIP/copia N5 sin mutación, (2) inspeccionar localmente imágenes PHP/arquitectura/shell, máximo probes discriminantes **sin red**, (3) solo si PHP y extensiones/vendor pasan iniciar QA Laravel con un Compose N6 nuevo privado **sin bridge ni puertos**, auth de MariaDB por PDO y migraciones seguras, (4) E01–E08 sintéticos con kernel y DB reales; (5) un ZIP sanitario con pruebas de causa, aislamiento y salida, sin fuentes/secretos/dumps. Si no hay imagen compatible cacheada, detener con `BLOCKED_IMAGE` y requerimiento mínimo de imagen/permiso; no volver a auditar/repetir topología.
 
-## Orden de ejecución única N5-R1
+**RESTRICCIONES:** varios Codex y proyectos simultáneos; no PHP/DB host, no Docker global, no `prune`, no puertos/volúmenes/redes ajenos. No descargas/instalación, no modificar repo/PR1/PR3/main ni WIP, no usar teléfono/ADB/AVD, no publicar código/sesiones/PII. No activar B19/B20 sin OD02–OD04, no confundir `SERVER_STORED` con `RECOGNIZED` o `requestId` con histórico `requetId`. Backend E2E aún no acreditado, staging no autorizado, H9 NO_GO, release NO_GO.
 
-1. **Primero** gate `N5_ALREADY_IN_FLIGHT_OR_FINISHED`; sin doble ejecución. Reusar N4 solo por lectura, crear copia N5 privada, no reconstruir 232 desde HEAD.
-2. Flutter: buscar únicamente caches existentes N2/N3 y origen real, validar integridad del lock SHA; `--offline --enforce-lockfile` y test KioskScreen del candidato únicamente si es seguro. Sin descargas ni lock distinto.
-3. Docker: solo DB none + PHP comparte namespace privado de DB, sin puerto/red host; un `up` como máximo tras config/labels/seguridad. Verificar extensiones PHP, PDO autenticado y DB QA vacía antes de migraciones. E01–E08 Laravel reales + persistencia, no inventar endpoints B19/B20 o contratos OD02/03/04.
-4. Entregar **un ZIP sanitizado** con matriz de gates, manifiesto SHA/CRC, evidencias sin secretos, y hashes WIP PRE/POST. Si Pub y/o Docker bloquean, continuar el otro carril independiente y reportar bloqueo causal. No reset, commits/push, Windows PHP/DB, prune, ADB, producción o staging.
-
-## Siguiente hito
-
-Al recibir ZIP N5, Director adjudica y sólo entonces define autorización mínima de descarga Pub si los 22 faltantes son reales, imagen PHP apta si carece extensiones, o resolución segura IPAM/aislamiento si sigue bloqueado. Tras host/QA, sigue custodia off-device y publicación privada autorizada del WIP, Android físico, Pro E2E/staging, UAT y GO. `OFF_DEVICE_BACKUP=NO`, `ANDROID_NATIVE=NOT_RUN`, `H9_GLOBAL=NO_GO`, `B22=NOT_AUTHORIZED`, `RELEASE=NO_GO`.
-
-**NEXT=CODEX_LUNA_IF_N5_NOT_RUNNING; OTHERWISE_FINISH_EXISTING_N5. AFTER_ZIP=CHATGPT_DIRECTOR.**
+**DESPUÉS DE ZIP N6=CHATGPT_DIRECTOR**, adjudicar pruebas ejecutadas y decidir el siguiente cambio material hacia Android/staging y backup privado fuera de equipo. **NEXT_NOW=CODEX_LUNA_N6.**
