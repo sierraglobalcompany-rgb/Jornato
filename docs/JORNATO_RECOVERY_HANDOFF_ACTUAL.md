@@ -1,17 +1,17 @@
-# JORNATO — RECOVERY HANDOFF · 22-NOV-2026 · A1-R2 CONDICIONAL
+# JORNATO — RECOVERY HANDOFF ACTUAL · A2 GRADLE / APK QA · 22-NOV-2026
 
-**Al recuperar otro chat, leer en este orden:** [continuidad canónica](JORNATO_CONTINUIDAD.md) → [único prompt Codex A1-R2](CODEX_LOTE_ACTUAL.md) → [auditoría 10+10 DELTA A1](JORNATO_A1_R2_AUDITORIA_10_VERDUGO_10_JUEZ_20261122.md). No reabrir N2–N7 ni sus auditorías. El usuario pidió optimizar A1 para producir APK QA offline de la app antes de volver a Docker.
+**Leer primero:** [continuidad canónica](JORNATO_CONTINUIDAD.md), [dictamen A1 verificado](JORNATO_A1_R2_DICTAMEN_Y_A2_20261122.md), [una sola orden CODEX A2](CODEX_LOTE_ACTUAL.md). **A1 cerró `PARTIAL_WITH_GAPS`; A2 es el siguiente bloque (NO A1-R3).** No volver a construir offline usando la misma caché incompleta. Si hay ZIP A2 posterior, verificarlo antes de planificar otra cosa.
 
-**Precedencia:** `TASK=JOR-A1-ANDROID-OFFLINE-APK-QA-CANDIDATE-20261121`, `PROMPT_REVISION=A1-R2-20261122`, **SOLO SI A1 NO HA COMENZADO**. Si A1-R1 ya inició, terminó o hay ZIP, A1-R2 NO SE EJECUTA; Director adjudica ZIP anterior. Un Codex a la vez en `D:\codex\Jornato`, jamás dos forks. No crear A2 automáticamente.
+## Hechos observados y límites
 
-**Pruebas que ya pasaron:** N5 Flutter Pub 79/79, lock SHA `F515D69563850E8893A17585D8BAB57A8E6484E18CE1FEF4BDDC6BB836F83B34`, analyze PASS, 9/9 KioskScreen host candidato; candidato CSV N5 232 fuentes 82 app y 150 servidor, ZIP N5 SHA `162118EFD4260B97A425E969CB90C06C54A4CAA0003FEC82F2C68A2BD53E84CC`. N2 86 y N3 9+4 ya hechos. Ninguno acredita Android nativo.
+A1 ZIP `JOR-A1-ANDROID-OFFLINE-APK-QA-CANDIDATE-20261121-UNICO.zip` SHA256 `C0087642ACED1BE983DC081A95A63B0B4829EE30414372B29835A4852D79555A`, 9828 bytes, 8 entradas CRC, 7/7 hashes correctos. Según CSV Codex: 82 rutas app paridad PRE/POST, Pub 79 con lock SHA `F515D69563850E8893A17585D8BAB57A8E6484E18CE1FEF4BDDC6BB836F83B34`, Gradle 9.3.1 + JDK21 + Android SDK 36 disponibles, único `:app:assembleB14qaDebug --offline` rc1 por 22 JAR Gradle (plugin DSL 6.4.2 y módulos Kotlin 2.2.21) en **caché privada**, antes de compilar app. No APK, no certificado, no merged manifest. Manifiesto fuente QA debug permite cleartext: no aprobar release por ello. WIP PRE/POST intacto (235 rutas, staged0, HEAD `faf5fe283191f8b5a2724b397009512a2caec1b6`). OFF_DEVICE_BACKUP=NO. Los fallos y PASS de runtime son reportados por Codex; ChatGPT verificó ZIP íntegro, no accedió a su Windows.
 
-**Android antiguo:** C2 APK debug SHA `BEEA46F75B08CFA440A980BCEE4CC12E2A6B4C7B37A9457B16240C5427157593`, paquete `.b14qa` instalado según Codex en Mi A3, VM Service BLOCKED y pruebas físicas pendientes. APK C2 no sustituye un build A1; no usar ni tocar teléfono/ADB/AVD en A1.
+## Único siguiente trabajo
 
-**N7 cerrado:** Docker PHP lectura/ejecución bloqueado; investigación Docker Desktop global RO preparada pero NO AUTORIZADA. No ejecutarla ni tocar PHP/BD/otros proyectos. `RELEASE=NO_GO`; Android físico y backup off-device pendientes.
+`TASK=JOR-A2-GRADLE-DEPS-APK-QA-20261122`: reutilizar A1/N5 privado, clonar a lab A2 con Gradle/Pub/signing privados, revisar repositorios fijos, una compilación de misma variante. Si los 22 paquetes ya están presentes en fuente autorizada, compilar `--offline`; si no, A2 ofrece **descarga puntual de dependencias de compilación fijadas desde repositorios oficiales HTTPS**, y solo si propietario **envía el nuevo prompt a Codex** aceptando esa excepción. No `--refresh-dependencies`, no upgrades, no acceso a otros proyectos, no Docker, no Android físico. APK si se obtiene en D: privado, ZIP único sanitario, WIP intacto; revisar paquetes de QA y bandera `usesCleartextTraffic` en merged manifest. Si falla repo, reportar bloqueo exacto sin nuevos ciclos.
 
-**Una orden A1 corregida:** copiar 82 archivos N5 desde origen privado existente y controlar hashes, preparar local.properties Flutter/SDK en copia, usar Pub/Gradle cachés exclusivas privadas, comprobar wrapper antes de `--offline`, controlar debug keystore sin tocar home usuario, decidir una variante QA real por build.gradle, ejecutar una build offline y a lo sumo un retry por fallo de código propio; verificar APK SHA/firma/manifest y dejar binario solo D:. Retorno = **UN ZIP sanitario** con informe, matrix, CSV hashes, no APK, fuentes o secretos, y mensaje corto `NEXT_OWNER=CHATGPT_DIRECTOR`.
+## Reglas de continuidad
 
-**Ramas GitHub:** PR #2 documental, main/PR #1/PR #3 de código intactos; no publicar WIP privado. Gobierno KISS PingPongLaw L1–L6. La instalación física, release signing, tenant/Pro, Keystore/SQLCipher y UAT son puertas posteriores distintas.
+No repetir N2/N3/N4/N5 host, N6/N7 Docker, A1 Pub/paridad ni 10+10 rituales. No Pro/cloud antes de servidor real. La app offline debe demostrar SQLCipher/Keystore/rehidratación/corrupción en dispositivo físico, aún no verificados. B19/B20 deny-all, OD02–OD04 owner pendientes, `requestId`/`requetId`, `SERVER_STORED != RECOGNIZED`. PingPongLaw L1–L6, KISS, no parches, no publishing WIP GitHub público. Docker Desktop storage diagnóstico previo **no autorizado/PAUSADO**; A2 no lo necesita.
 
-**NEXT_OWNER=CODEX_LUNA_IF_A1_NOT_STARTED; AFTER_ZIP=CHATGPT_DIRECTOR.**
+**NEXT=CODEX_LUNA_A2_DESPUÉS_DEL_ENVÍO_DEL_PROMPT; THEN=CHATGPT_DIRECTOR_ADJUDICAR_ZIP; RELEASE=NO_GO.**
