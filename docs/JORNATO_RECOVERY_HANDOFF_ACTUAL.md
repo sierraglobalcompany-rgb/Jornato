@@ -1,20 +1,17 @@
-# JORNATO — RECOVERY HANDOFF · A1 ANDROID OFFLINE QA, DOCKER PAUSADO
+# JORNATO — RECOVERY HANDOFF · 22-NOV-2026 · A1-R2 CONDICIONAL
 
-**PARA UN CHAT NUEVO: LEER PRIMERO** [Continuidad vigente](JORNATO_CONTINUIDAD.md) → [única orden A1](CODEX_LOTE_ACTUAL.md). Director ChatGPT; ejecutor Codex Luna. **NO relanzar A1 si se inició o ya entregó ZIP A1**, no reabrir N2–N7 ni volver a ejecutar la auditoría Docker. El propietario indicó «continúa» tras acordar priorizar la app offline y aplazar diagnóstico global Docker.
+**Al recuperar otro chat, leer en este orden:** [continuidad canónica](JORNATO_CONTINUIDAD.md) → [único prompt Codex A1-R2](CODEX_LOTE_ACTUAL.md) → [auditoría 10+10 DELTA A1](JORNATO_A1_R2_AUDITORIA_10_VERDUGO_10_JUEZ_20261122.md). No reabrir N2–N7 ni sus auditorías. El usuario pidió optimizar A1 para producir APK QA offline de la app antes de volver a Docker.
 
-## Qué está demostrado
+**Precedencia:** `TASK=JOR-A1-ANDROID-OFFLINE-APK-QA-CANDIDATE-20261121`, `PROMPT_REVISION=A1-R2-20261122`, **SOLO SI A1 NO HA COMENZADO**. Si A1-R1 ya inició, terminó o hay ZIP, A1-R2 NO SE EJECUTA; Director adjudica ZIP anterior. Un Codex a la vez en `D:\codex\Jornato`, jamás dos forks. No crear A2 automáticamente.
 
-- N5 Flutter candidate host PASS: Pub 79/79 offline, `kiosk_screen_actions_test.dart` 9 PASS, `flutter analyze` PASS; candidato privado N5 232 fuentes (82 app + 150 servidor) hashes N4/N5 sin delta reportado. ZIP N5 SHA256 `162118EFD4260B97A425E969CB90C06C54A4CAA0003FEC82F2C68A2BD53E84CC`.
-- C2 creó APK antiguo QA debug `app-b14qa-debug.apk`, SHA `BEEA46F75B08CFA440A980BCEE4CC12E2A6B4C7B37A9457B16240C5427157593`, package `.b14qa`, instalado en Xiaomi Mi A3; VM Service PID-only bloqueado, pruebas físicas críticas NOT_RUN. No reinstalar/sustituir ni usar ese APK como A1.
-- N7-R1 ZIP SHA `BFB06C090009B7EA7FDB886D52FDE86C09FA3F0E828755BCBF06D1435B14D1EB`: Docker PHP lectura/copia de imagen falló, causa subyacente no demostrada. [Borrador diagnóstico RO Docker](CODEX_JORNATO_DOCKER_DESKTOP_DIAGNOSTICO_RO_CONDICIONAL_20261121.md) sigue sin autorización y NO se ejecuta. Servidor Laravel E01–E08 bloqueado, no correrse en Windows.
-- WIP reportado D:\codex\Jornato HEAD `faf5fe...`, 235 rutas, index `25CC609803D7E68D5F3ECF428198B2432CF1EA37030546735DD3F03299D905E1` (ver continuidad por SHA exacto), sin backup fuera D:. No hay código avanzado en GitHub.
+**Pruebas que ya pasaron:** N5 Flutter Pub 79/79, lock SHA `F515D69563850E8893A17585D8BAB57A8E6484E18CE1FEF4BDDC6BB836F83B34`, analyze PASS, 9/9 KioskScreen host candidato; candidato CSV N5 232 fuentes 82 app y 150 servidor, ZIP N5 SHA `162118EFD4260B97A425E969CB90C06C54A4CAA0003FEC82F2C68A2BD53E84CC`. N2 86 y N3 9+4 ya hechos. Ninguno acredita Android nativo.
 
-## Único A1
+**Android antiguo:** C2 APK debug SHA `BEEA46F75B08CFA440A980BCEE4CC12E2A6B4C7B37A9457B16240C5427157593`, paquete `.b14qa` instalado según Codex en Mi A3, VM Service BLOCKED y pruebas físicas pendientes. APK C2 no sustituye un build A1; no usar ni tocar teléfono/ADB/AVD en A1.
 
-Generar **APK QA debug nuevo** desde copia aislada N5 app-only de 82 rutas, Gradle SDK y Pub **offline** preflight, una variante Android auténtica, máximo una reparación causal en copia, no WIP. Verificar SHA, firma debug y Android manifest estático. No device, ADB, emulador, install, Docker, PHP, DB, staging o releases. Mantener APK en `A1_ROOT/private/product`, enviar **UN ZIP único sanitario** con resultados y hashes, sin APK ni fuentes/secretos. Producto QA no equivale a release Android físico.
+**N7 cerrado:** Docker PHP lectura/ejecución bloqueado; investigación Docker Desktop global RO preparada pero NO AUTORIZADA. No ejecutarla ni tocar PHP/BD/otros proyectos. `RELEASE=NO_GO`; Android físico y backup off-device pendientes.
 
-Si faltan dependencias de Gradle/SDK, un informe preciso de bloqueo y ninguna descarga. Si hay APK, el Director decide más tarde una prueba física bajo autorización y un método que no dependa exclusivamente del VM Service C2. No pedir al propietario que realice pruebas técnicas repetitivas.
+**Una orden A1 corregida:** copiar 82 archivos N5 desde origen privado existente y controlar hashes, preparar local.properties Flutter/SDK en copia, usar Pub/Gradle cachés exclusivas privadas, comprobar wrapper antes de `--offline`, controlar debug keystore sin tocar home usuario, decidir una variante QA real por build.gradle, ejecutar una build offline y a lo sumo un retry por fallo de código propio; verificar APK SHA/firma/manifest y dejar binario solo D:. Retorno = **UN ZIP sanitario** con informe, matrix, CSV hashes, no APK, fuentes o secretos, y mensaje corto `NEXT_OWNER=CHATGPT_DIRECTOR`.
 
-**Estados finales de esta orden:** `ANDROID_PHYSICAL=NOT_RUN`, `OFF_DEVICE_BACKUP=NO`, `RELEASE=NO_GO`, `B22=NOT_AUTHORIZED`. GitHub PR #2 solo documental; main/PR1/PR3 sin tocar. PingPongLaw L1–L6, KISS, no parches ni doble ejecución.
+**Ramas GitHub:** PR #2 documental, main/PR #1/PR #3 de código intactos; no publicar WIP privado. Gobierno KISS PingPongLaw L1–L6. La instalación física, release signing, tenant/Pro, Keystore/SQLCipher y UAT son puertas posteriores distintas.
 
-**NEXT_OWNER=CODEX_LUNA_A1; AFTER_ZIP=CHATGPT_DIRECTOR.**
+**NEXT_OWNER=CODEX_LUNA_IF_A1_NOT_STARTED; AFTER_ZIP=CHATGPT_DIRECTOR.**
