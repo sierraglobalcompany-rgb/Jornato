@@ -1,21 +1,14 @@
-# JORNATO — RECOVERY HANDOFF VIGENTE · N7-R1 CONDICIONAL · 21-NOV-2026
+# JORNATO — RECOVERY HANDOFF · N7 COMPLETADO / AUTORIZACIÓN PENDIENTE
 
-**PARA RECUPERAR ESTE PROYECTO:** leer primero [continuidad canónica](JORNATO_CONTINUIDAD.md), [única orden CODEX](CODEX_LOTE_ACTUAL.md), [auditoría focal N7-R1](JORNATO_N7_R1_AUDITORIA_10_VERDUGO_10_JUEZ_20261121.md) y el [dictamen N6](JORNATO_N6_R2_DICTAMEN_Y_N7_20261121.md). N6-R2 terminó; **N7 aún no tiene ZIP reportado en este chat**. Si existe ZIP N7 posterior, SIEMPRE adjudicarlo primero y NO ejecutar otra N7-R1. Si N7 original ya comenzó, **NO sustituirlo ni enviar el nuevo prompt**.
+**Leer primero:** [Continuidad actual](JORNATO_CONTINUIDAD.md) → [dictamen N7 ZIP](JORNATO_N7_R1_DICTAMEN_PUERTA_AUTORIZACION_20261121.md) → [política Docker](JORNATO_DOCKER_AISLAMIENTO_PROYECTOS_20261121.md). **No hay orden Codex activa**: `CODEX_LOTE_ACTUAL.md` indica `WAIT_OWNER_APPROVAL`. El [único prompt de entorno](CODEX_JORNATO_DOCKER_DESKTOP_DIAGNOSTICO_RO_CONDICIONAL_20261121.md) tiene `ACTIVATED_BY_DIRECTOR=NO`, no se ejecuta salvo aprobación explícita del propietario.
 
-## Situación exacta
+## Estado factual y custodia
+N7 ZIP recibido, SHA256 `BFB06C090009B7EA7FDB886D52FDE86C09FA3F0E828755BCBF06D1435B14D1EB`, 5.851 bytes, 7 miembros, CRC PASS, manifiesto 6/6. Contenedor PHP83: `docker cp /bin/sh` rc1; PHP copy rc0 0 bytes; PHP84 `/bin/sh` rc1, PHP 21.784.600 bytes ELF estructural plausible. **No hay stderr detallado de `docker cp` ni código de imagen válido ejecutado: NO declarar corrupción de Docker**. N7 y WIP PRE/POST sin deltas según Codex. N6 PHP blocked; N5 Flutter candidato PASS host; Laravel E01–E08 y Android nativo NOT_RUN; respaldo off-device NO; RELEASE NO_GO.
 
-**PROYECTO:** Jornato Flutter offline Gratis Local, Pro SQLCipher/outbox y servidor Laravel 13.40.0/Sanctum/MariaDB. ChatGPT Director decide, Codex Luna ejecuta en `D:\codex\Jornato` sobre PC Windows con otros proyectos Codex simultáneos. PHP y BD solo Docker aislado por proyecto; no tocar redes, volúmenes, puertos ni imágenes de otros proyectos. KISS/PingPongLaw L1–L6.
+## Acción siguiente NO automática
+Solicitar al propietario una única autorización expresa para **diagnóstico administrado, solo lectura, de logs y metadatos Docker Desktop**, con protección de otros proyectos Codex. Primero mirar los stderr/comandos N7 propios si existen; luego logs filtrados por hora. **Prohibido** reset, prune, recargar imágenes, reiniciar WSL, copiar VHDX, `docker desktop diagnose` con posible recolección/upload, pruebas PHP, contenedores nuevos, acceso a DB reales. Solo después de evidencia nueva puede evaluarse reparación, con autorización distinta, respaldo previo y plan de impacto. No repetir pruebas o auditorías N2–N7.
 
-**Última entrega real:** ZIP N6 SHA256 `664724B357008753353065F804817A990CEDE6FE5E6B41BEE2A5AF6A327B5AF4`, 9 miembros CRC PASS, 8/8 hashes. Cuatro pruebas Docker ejecutaron shell/PHP en dos ImageIDs cacheados, todas FAIL antes de Laravel: 8.3 original `232331...` shell/php `exec format error`; 8.4 cacheada `b3e907...` shell `exec format error`, PHP `input/output error`. No se probó PHP, DB, migración, E01–E08. No hay prueba de causa raíz concreta de Docker; platform `linux/amd64` no alcanza. N6 WIP sin cambios, cero Docker N6 persistente.
+## Arquitectura y leyes
+Jornato Flutter Gratis Local offline y Pro SQLCipher/outbox; Laravel/Sanctum/MariaDB privado. Director cerebro, Codex ejecutor, Windows D:, Docker por proyecto, KISS y PingPongLaw L1–L6. GitHub PR2 documental público, main/PR1/PR3 no cambiar; WIP local no publicado. OD02/03/04 pendientes, B19/B20 deny-all; requestId/requetId y estados SERVER_STORED/RECOGNIZED sin mezclar.
 
-**PASS previos reutilizados:** candidato N5 Flutter Pub offline exacto, KioskScreen 9/9 host, N4 fuente completa privada de 232 (150 server) por evidencia del ejecutor; no repetir 86 host N2/9+4 N3/158 backend. `OFF_DEVICE_BACKUP=NO`; Android nativo NO_GO; no staging/release.
-
-## Orden única de ejecución
-
-Si nadie ha comenzado N7, **CODEX LUNA N7-R1** `JOR-N7-PHP-IMAGE-BYTES-ROOT-CAUSE-20261121` prepara un solo experimento sin ejecutar binarios: ID PHP 8.3 fijado, `docker create --pull never --network none` contenedor detenido con label propietario, `docker cp -L` para dos binarios, limpieza en `finally`, lector estático Python con chequeo estructural ELF, imagen 8.4 solo si cambia conclusión y un único ZIP sanitizado. El lector antiguo N7 tenía falso positivo reproducido con 64 bytes. El nuevo pasó 6/6 pruebas locales del Director; PowerShell y Docker reales en Windows **NOT_RUN** todavía.
-
-**ESTADOS N7:** `PASS_SCOPED_FORENSIC|PARTIAL_WITH_GAPS|BLOCKED`; si estructura ELF plausible => `RUNTIME_UNRESOLVED`, no verde. Una sola propuesta de reparación y permiso específico pendiente. Prohibido descargar, borrar imágenes, restart Docker/WSL, `prune`, cambiar IPAM, usar `docker run`/`exec`, migrar DB, publicar código o abrir otra campaña. Retornar un ZIP con hash, CRC, manifiesto y nada más.
-
-**GitHub:** PR #2 DRAFT DOCS contiene prompt y continuidad. PR #1/3 y main F0 intactos; WIP privado sigue en D:. Si el chat se cierra, **no repetir auditorías ni alterar `CODEX_LOTE_ACTUAL.md` salvo por nueva evidencia ZIP validada**.
-
-**NEXT_NOW=CODEX_LUNA_N7_R1_CONDICIONAL. AFTER_ZIP=CHATGPT_DIRECTOR_REPAIR_DECISION. RELEASE=NO_GO.**
+**NEXT_OWNER=CHATGPT_DIRECTOR_WAIT_OWNER_APPROVAL; CODEX=NO_ACTIVE_TASK.**
