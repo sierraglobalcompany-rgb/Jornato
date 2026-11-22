@@ -1,96 +1,156 @@
-# CODEX LUNA — JORNATO N6: DESBLOQUEO CAUSAL DEL RUNTIME PHP Y QA REAL DEL SERVIDOR
+# CODEX LUNA — JORNATO N6-R2 · MACROBLOQUE PRODUCTIVO ÚNICO: PHP EXEC FORMAT → QA LARAVEL AISLADA
 
-**ORDEN ÚNICA PRODUCTIVA. EJECUTAR SOLO SI N6 NO ESTÁ EN CURSO NI TIENE ZIP POSTERIOR.** Director: ChatGPT. Ejecutor: Codex Luna (Windows). Fecha: 21-nov-2026, Colombia. N5 se cerró `PARTIAL_WITH_GAPS` y **NO debe reejecutarse**. Este es un bloque NUEVO, no un segundo N5 ni una auditoría general. Mantener KISS/PingPongLaw L1–L6 (simplicidad, no repetir, causa raíz, UX real, evidencia independiente, evitar pingpong).
+> **INSTRUCCIÓN PARA CODEX LUNA. EJECUTA; NO REAUDITES ESTE PROMPT.** ChatGPT Director decidió todo el alcance. **R2 sustituye N6-R1 SOLO SI N6-R1 AÚN NO COMENZÓ.** Si N6-R1 ya inició, hay ZIP N6, archivos de una campaña N6 existente, bloqueo de proceso concurrente o el estado es indeterminado: **NO ejecutar R2, NO reiniciar N6, NO crear N7**, devolver `SUPERSEDED_OR_N6_IN_FLIGHT` y la ubicación/estado de la entrega existente a ChatGPT Director. **Mismo TASK de N6 original.** No constituye una segunda campaña sobre el mismo problema.
 
 ```text
 TASK=JOR-N6-PHP-RUNTIME-CAUSE-ISOLATED-QA-20261121
-PROMPT_REVISION=N6-R1-20261121
+PROMPT_REVISION=N6-R2-20261121
+PRECEDENCE=ONLY_IF_N6_R1_NOT_STARTED
 WIP_ROOT=D:\codex\Jornato
 N4_ROOT=D:\codex\_REPORTES\Jornato\JOR-N4-FULL-SOURCE-AND-SERVER-QA-20261121
 N5_ROOT=D:\codex\_REPORTES\Jornato\JOR-N5-DOCKER-NONET-PUB-GATES-20261121
 OUTPUT_ROOT=D:\codex\_REPORTES\Jornato\JOR-N6-PHP-RUNTIME-CAUSE-ISOLATED-QA-20261121
 N5_ZIP_SHA256=162118EFD4260B97A425E969CB90C06C54A4CAA0003FEC82F2C68A2BD53E84CC
-N5_FLUTTER=PASS_CANDIDATE_SCOPED
-N5_DOCKER_PRIVATE_NETNS=PASS_STRUCTURE_AND_ISOLATION;PHP=FAIL_RUNTIME_EXEC_FORMAT
-N5_DB_LIVENESS=HEALTHY_BUT_SQL_IDENTITY_NOT_VERIFIED
-N5_E2E=0_EXECUTED_8_BLOCKED_ENV
+N5_FLUTTER=PASS_CANDIDATE_SCOPED_ALREADY_DONE
+N5_DOCKER=2_PRIVATE_CONTAINERS;NO_NEW_NETWORK;NO_PUBLISHED_PORT;1_PRIVATE_VOLUME
+N5_PHP=EXIT_255_EXEC_/USR/BIN/SH_EXEC_FORMAT_ERROR
+N5_SQL_AUTH=NOT_RUN;N5_E2E=0_EXECUTED_8_BLOCKED_ENV
+N5_WIP_BRANCH=codex/jor-b08-h4-domain-20261025
 N5_WIP_HEAD=faf5fe283191f8b5a2724b397009512a2caec1b6
-N5_WIP_INDEX=25CC609803D7E68D5F3ECF428198B2432CF1EA37030546735DD3F03299D905E1
+N5_WIP_INDEX_SHA256=25CC609803D7E68D5F3ECF428198B2432CF1EA37030546735DD3F03299D905E1
 N5_WIP_STATUS=235;MODIFIED=11;UNTRACKED=224;STAGED=0
-SERVER_STAGING=NOT_AUTHORIZED
+OFF_DEVICE_BACKUP=NO
 RELEASE=NO_GO
 NEXT_OWNER=CHATGPT_DIRECTOR
 ```
 
-## 0. Qué está demostrado y qué NO debe repetirse
+## 0 — Mandato decidido y leyes de ejecución
 
-**FIRME N5:** ZIP N5 24.069 bytes, 10 miembros CRC correctos, 9/9 hashes+bytes+CRC del manifiesto válidos, informe `RESULT=PARTIAL_WITH_GAPS`. Candidato privado de 232 archivos y servidor de 150 archivos reportados con hashes; PHP Laravel 13.40.0 / PHP ^8.3 / Sanctum 4.3.3 / PHPUnit 12.5.43, 11 migraciones, 34 declaraciones API y 109 paquetes vendor/lock reportados. Flutter en la copia N5: `pub get --offline --enforce-lockfile` PASS con 79/79 metadatos, lock idéntico, analyze PASS y `KioskScreen` 9/9 PASS. **No volver a buscar los 22 paquetes, resolver Pub ni ejecutar Flutter salvo delta de código que invalide un test concreto.** N2 host 86 PASS y N3 host 9+4 PASS conservan alcance histórico. N4 paridad documentada: no repetir 232 hashes globales.
+**Meta productiva única:** demostrar la causa **observable** del error de ejecución PHP en imagen Docker sin red ni DB, usando al máximo **dos imágenes locales** y pocas sondas diferenciadoras; si y solo si PHP/extensiones/vendor realmente ejecutan, pasar EN ESTE MISMO BLOQUE a un laboratorio PHP+MariaDB nuevo, aislado y a los ocho oráculos E01–E08 con Laravel real. **N6 es diagnóstico+QA causal, NO nueva arquitectura.**
 
-**FIRME DOCKER:** N5 creó DOS contenedores privados (`db network_mode:none`, `php network_mode:service:db`), 0 redes nuevas, 0 puertos publicados, 1 volumen etiquetado; Compose `up` exit 0. MariaDB se declaró healthy por ping no autenticado; PHP salió 255 **antes de ejecutar PHP**: `exec /usr/bin/sh: exec format error`. No hubo PDO, PHP, Artisan, SQL, migraciones, E01–E08. Los IDs parciales N5 reportados son PHP `68a27835c845`, DB `387467db1762`; proyecto `jornato-n5-qa-211121`; volumen `jornato-n5-qa-211121_n5_data`. **Son pistas, NO autorización basada en IDs reutilizables**: verificar etiquetas, proyecto, volumen y estado actuales sin mutarlos. Ambos contenedores reportados detenidos y volumen preservado. No se demostró causa raíz del `exec format error`: podría ser imagen/plataforma/binario/entrypoint. No adjudicar PHP/Laravel como defectuoso sin prueba.
+**Evidencia previa cerrada — NO repetir:** ZIP N5 de 24.069 bytes, 10 miembros CRC PASS, 9/9 manifiesto válido (verificado por Director). En candidato privado N5: `flutter pub get --offline --enforce-lockfile`, Flutter analyze y **9/9 test `KioskScreen` PASS**; cache 79/79 consistente, lock sin cambios. Candidato app+server de N4/N5: 232 fuentes con paridad reportada, 150 `server/`, vendor 8.963 archivos y 109 versiones reportadas consistentes con composer.lock. Docker N5 creó **2 contenedores** con modos `db:none` y `php:service:db`, **0 redes nuevas, 0 puertos publicados** y volumen privado; `php` terminó `exec /usr/bin/sh: exec format error` antes de ejecutar runtime, DB solo liveness healthy, cero SQL autenticado, migraciones y E01–E08. WIP Windows inmutable según Codex; no backup externo. **El diagnóstico N6 debe buscar causa con evidencia real, no dar por demostrada arquitectura incorrecta o imagen corrupta.**
 
-**REGLA TRANSVERSAL DEL DUEÑO:** Windows comparte Docker entre varios Codex y proyectos. **TODO PHP/Artisan/PHPUnit/Composer y SQL deben correr solo en Docker exclusivo de Jornato.** Prohibido PHP/MariaDB host Windows; prohibido tocar contenedores/redes/volúmenes/puertos/credenciales de otros proyectos. No crear red bridge ni alterar IPAM, daemon, firewall, DNS, Docker Desktop, servicios host. No `prune`, `down -v` ajeno, host networking, redes externas ni puertos publicados. Sin red de salida/descargas, `docker pull`, `docker build`, apt, Composer install/update, Pub update. N6 nunca despliega ni toca Android/ADB/AVD.
+**PingPongLaw L1–L6:** L1 KISS/Ponytail, L2 cero revisiones/suites repetidas, L3 corregir causa raíz en propietario, L4 UX verdadera, L5 evidencias verificables y límite de alcance, L6 anti-pingpong. No segundo PHP, no segundo backend, no otro ORM, no reinstalación de SDK, no microservicios ni runners paralelos.
 
-**SEGURIDAD GIT:** WIP solo lectura, sin `git add/commit/merge/push/fetch/pull/reset/clean/stash/checkout`, ni GitHub código público. ZIP fuente/diffs/caches/DB/secretos nunca se entrega. `OFF_DEVICE_BACKUP=NO` (las copias en D: no equivalen a copia externa); no copiar datos laborales reales. Contratos: `requestId` y legado `requetId`, `SERVER_STORED != RECOGNIZED`, B19/B20 deny-all, OD02/OD03/OD04 no aprobados.
+**Prohibiciones permanentes:** nada de PHP/Artisan/PHPUnit/Composer o bases de datos **en Windows host**; todo PHP/DB únicamente en **Docker del proyecto Jornato**, aislado de todas las instancias Codex en curso. No parar, reiniciar, borrar, desconectar, inspeccionar secretos o cambiar el estado de contenedores, volúmenes, redes o puertos ajenos. No `docker system/network/volume prune`, no `docker network create`, no modificación Docker daemon/Desktop/IPAM, DNS/firewall, no host networking, puertos publicados, redes bridge/ajenas o Docker socket montado. No pulls, builds, apt, composer install/update, cargas/importaciones de imágenes, downloads ni fallback de versiones. No teléfono/ADB/AVD, APK, producción, staging ni despliegue. No activar B19/B20; `OD02/OD03/OD04` pendientes; preservar `requestId` y legado `requetId`, `SERVER_STORED != RECOGNIZED`.
 
-## 1. Preflight de una sola ejecución (sin mutaciones innecesarias)
+**Git y privacidad:** En `WIP_ROOT` nunca `git add`, commit, push, fetch, pull, checkout, reset, clean, stash, merge o rebase. No cambiar index/HEAD/branch; acceso **solo read-only**. No subir WIP al repo público (PR1/PR3 solo F0, PR2 solo docs). **Todos** los datos de QA son sintéticos A/B; jamás `.env` verdadero, fotos, trabajadores, claves, tokens reales, DB dump, vendor ni código fuente en el ZIP público de retorno. Privado en D: **NO es backup off-device**.
 
-1. **Prevenir duplicados.** Confirmar que N5 finalizó, validar ZIP N5 contra SHA indicado y localizar su `FINAL_REPORT.md` en la carpeta N5. Si hay ZIP N6, resultados N6 posteriores o agente sobre mismo WIP, `SUPERSEDED_OR_CONCURRENT` y STOP sin editar. No reabrir los lotes antiguos. Una sola carpeta de salida N6, separada del WIP; directorio `private` excluido de ZIP.
-2. Verificar solo `git rev-parse HEAD`, rama, staged/index SHA y `git status --porcelain -uall` WIP; reportar deltas reales, **no forzar** conteo pasado si cambia legítimamente. Si otro agente escribe WIP, `BLOCKED_CONCURRENT_WIP`. No rehash de las 232 fuentes por rutina; contrastar SHA de `server/composer.lock`, `server/composer.json`, rutas y migraciones **solo antes de usarlos** contra el candidato N5 documentado.
-3. Reutilizar **candidato privado N5 por lectura**, con `server/vendor` previamente cotejado (8.963 archivos/109 pares, según N5). Generar una copia privada N6 de los archivos usados por Laravel sin symlinks, `.git`, credenciales, `.env` real ni datos; comprobar paridad de esos archivos solamente. No modificar candidato N5 ni WIP. No extraer fuentes al ZIP público. Antes de montar, verificar la ruta real dentro de `OUTPUT_ROOT\private` y que no apunta a otro proyecto. No crear nuevo backend.
-4. Docker PRE: capturar listado **filtrado** de IDs/estados/puertos de contenedores ajenos, conteos de redes/volúmenes, proyecto/labels del N5 detenido y free RAM/disco estimados. No imprimir `docker inspect` completo (puede contener secretos) ni env. Si recursos de otros proyectos están cambiando concurrentemente, distinguir cambios externos de cambios propios; no intentar corregirlos. Nunca borrar N5 volumen para ganar espacio. Confirmar que no hay un N6 activo.
-5. Leer **sin arrancar contenedores**: `docker version`/`docker info` campos OS y arquitectura del daemon, `docker image inspect` (solo `Id`, `Os`, `Architecture`, `Variant`, `Config.Entrypoint`/`Cmd`, nombre/tag/digest) del PHP que falló, `docker container inspect` filtrado de configuración real del PHP N5 (image ID, entrypoint, command, mounts, network mode, exit code, labels) y de DB N5. Comparar plataforma real de engine vs imagen: no concluir «amd64 compatible» sin contraste. No consultar registry remoto. Si hay plataforma incompatible, **descartar esa imagen** sin nuevo contenedor y clasificar `BLOCKED_PHP_PLATFORM` salvo que exista una alternativa YA CACHEADA que coincida.
+## 1 — Gate de no duplicación y custodia (una sola vez)
 
-## 2. Diagnóstico focal del runtime PHP (antes de iniciar DB)
+1. **Antes de crear un solo archivo**, confirmar que N5 terminó, que el ZIP N5 conservado en D: coincide con `N5_ZIP_SHA256`, y si existe N6 actual o está en proceso. Revisar exclusivamente `OUTPUT_ROOT` esperado, `delivery` y tareas locales identificables N6 sin buscar por todo D:. Si N6-R1 ya comenzó/existe entregable o actividad concurrente, **PARAR** `SUPERSEDED_OR_N6_IN_FLIGHT`; no ejecutar N6-R2, no cambiar GitHub, no reutilizar la misma carpeta borrando artefactos. Si no hay evidencia de que N6-R1 no inició, `BLOCKED_N6_STATE_UNKNOWN`.
+2. Confirmar que `OUTPUT_ROOT` está fuera de WIP, en `D:` y no es junction/symlink a otro proyecto; crear `OUTPUT_ROOT\private` y `delivery` solo una vez tras el gate. `private` contiene evidencias brutas/env/código: jamás dentro del ZIP. Si ya existen rutas con archivos no creados por esta tarea, bloquear en lugar de sobreescribir.
+3. Capturar PRE/POST de **WIP solo lectura**: rama/HEAD, 235 status indicativos, staged=0, SHA del índice; no forzar conteos históricos si hubo cambios legítimos ajenos. Si detectas agente concurrente modificando WIP, `BLOCKED_CONCURRENT_WIP`, sin editar. No rehacer SHA de 232 fuentes ni repetir los 86 tests N2, 9+4 N3, 9 N5, 158/2450 PHPUnit históricos, ni auditorías 10+10.
+4. Reutilizar **en lectura** el candidato N5 y los resultados N4/N5 desde `N5_ROOT/private`/matrices existentes (resolver ruta real, no suponer nombre). El código Laravel solo puede ir en **UNA** copia N6 nueva dentro de `OUTPUT_ROOT\private\candidate_n6`. Incluir server + vendor que use Laravel real, sin copiar env/secrets/links; cotejar `server/composer.json` y `composer.lock` y hashes SOLO de archivos necesarios contra manifiesto reportado N5. No copiar los 232 de nuevo por ritual ni modificar N4/N5. Si no existe fuente o vendor suficiente, `BLOCKED_SOURCE_OR_VENDOR`, pero aún se permite diagnóstico de imagen sin app.
 
-1. Inventariar **solo imágenes PHP locales candidatas** con etiqueta/ID y plataforma apropiada, sin barrer archivos de otros proyectos. Elegir UNA imagen antes de ejecutar: preferir una ya disponible para Laravel con PHP >=8.3 y extensiones exigidas, priorizando una distinta de la imagen N5 que produjo `exec format error` si existe alternativa válida. Si solo existe la imagen fallida, se permite **un diagnóstico focal** sobre ella. **No descargar, reconstruir ni importar imagen**, ni mutar imágenes usadas por otros. No usar una versión PHP inferior para «hacer verde».
-2. Ejecutar **como máximo un probe de shell por imagen seleccionada** en un contenedor efímero propio: `docker run --rm --pull never --network none` con límite razonable de CPU/memoria/PIDs, sin mounts de proyecto, sin puertos, con entrada explícita `/bin/sh -c 'printf N6_SHELL_OK'`; registrar exit, stdout sanitizado y `docker inspect` de la imagen antes de probar. Si vuelve `exec format error`, como máximo **un probe diferenciador** de binario PHP directo (`--entrypoint php` y `-v`) sobre esa MISMA imagen para separar error de shell frente a fallo de ejecución general; **no insistir con otro `up`** ni cambiar redes. Si la imagen tiene arquitectura equivocada, detener antes del probe. Si el shell falla aunque PHP directo funcione: `BLOCKED_PHP_SHELL_IMAGE`; **no parchear saltándose un shell roto para intentar arrancar Laravel**. Si falla PHP directo: `BLOCKED_PHP_IMAGE_EXEC`. Si el error es de permisos/runtime Docker no demostrado, `BLOCKED_DOCKER_RUNTIME`. No atribuirlo a app.
-3. Si el shell pasa: **un probe de PHP y extensiones con esa misma imagen** en entorno `--network none`, sin PHP host Windows; imprimir solo `PHP_VERSION`, módulos disponibles/ausentes relevantes para el proyecto (incluidos `pdo_mysql`, `mbstring`, `dom`, `xml`, `openssl`, `tokenizer`, `fileinfo` y los exigidos realmente por composer.lock). No instalar extensiones ni ajustar `composer.lock`. Si faltan, clasificar `BLOCKED_PHP_EXTENSIONS` con la lista exacta y NO arrancar DB. Si vendor real no coincide con lock, `BLOCKED_VENDOR` sin Composer install. Si hay incompatibilidad de runtime, reportar la causa concreta sin nuevos intentos de red/imagen.
-4. **Puerta de arranque:** solamente si engine/plataforma/shell/PHP/extensiones/vendor son PASS y hay capacidad; entonces preparar UNA configuración Compose N6 en carpeta privada basada en la topología **que ya pasó aislamiento N5**, sin red, sin puerto y sin host networking. Si falla cualquier prueba, **terminar el carril servidor con informe útil** y no tocar MariaDB.
+## 2 — Diagnóstico mínimo del error PHP **sin iniciar MariaDB**
 
-## 3. Un solo ensayo completo del Laravel real (solo si la puerta PHP pasó)
+**Presupuesto total de imágenes:** máximo **DOS**: primero la **imagen PHP N5 identificada por IMAGE ID exacto** si su plataforma es compatible; únicamente si esa imagen queda descartada o falla y existe una alternativa local autorizable compatible, **UNA segunda imagen** seleccionada por lectura antes de ejecutarla. **No** iterar por catálogos de proyectos, probar muchas etiquetas ni cambiar versiones de Composer para obtener verde. Si la imagen N5 no existe, una sola alternativa. Nunca usar `latest`, ninguna descarga, ninguna imagen con procedencia incierta. Las capas de imagen en caché pueden ser de lectura compartida, pero **nunca** reutilizar contenedores, redes, volúmenes, datadirs o credenciales de otros programas.
 
-1. Nuevo `docker compose --project-name jornato-n6-qa-<sufijo>` **exclusivo N6**, dos servicios (`db`, `php`); DB `network_mode: none`; PHP `network_mode: service:db`; no bloques `networks`, `ports`, `external`, hostname de otros contenedores ni volúmenes de otros proyectos. PHP/DB vía `127.0.0.1` interno, **nunca** `0.0.0.0` host. Reusar idea de Compose N5, no su fallo de shell. Crear **volumen N6 NUEVO** con label Compose y fixtures sintéticos, sin conectarlo al volumen N5 ni a DB externa. Bind exclusivamente copia N6 privada, sin `.env` real. No nuevas arquitecturas ni Dockerfile.
-2. Crear secretos sintéticos QA únicos en archivo env privado fuera de WIP; nunca imprimir, registrar o adjuntar env ni JSON completo de `docker compose config`. Renderizar/validar solo campos estructurales y ownership de rutas/recursos, comprobar recursos externos BEFORE y publicar **solo métricas sanitizadas**. PHP `APP_ENV=testing`, `APP_DEBUG=false`, `APP_KEY` sintética de laboratorio, DB nuevo nombre específico N6, `DB_HOST=127.0.0.1`. No apuntar a prod ni a terceros. Comprobar que el container entrypoint elegido usa shell y binarios **ya validados** en probe.
-3. **Un** `docker compose up -d --pull never --no-build` únicamente tras preflight PASS. Controlar 0 nuevas redes, 0 puertos publicados, 2 contenedores y un volumen **propios**, etiquetas/IDs y red PHP `container:<DB_ID_N6>`; asegurar inventario externo inalterado. Si IPAM aparece otra vez, `BLOCKED_IPAM` STOP; sin variantes, prune ni Docker global. Si DB healthy por ping, marcar solo **LIVENESS**, nunca `SQL_AUTH_PASS`.
-4. **Antes de Artisan:** desde el PHP **del Compose N6**, usar PDO/MySQL contra `127.0.0.1:3306` con usuario/clave sintéticos, registrar únicamente evidencia sanitizada de `DATABASE()`, `CURRENT_USER()`, @@hostname y conteo de tablas **del schema QA N6**; verificar volumen N6/labels y cero tablas de aplicación antes de migración. Si no hay auth o schema propios, `BLOCKED_DB_IDENTITY`, ninguna migración. No consultar información de otro schema. Si necesita conexión de sistema, solo sobre esta base QA y como mínimo privilegio.
-5. Ejecutar migraciones Laravel ya existentes en PHP contenedor N6, **nunca `migrate:fresh`**; registrar tablas/índices/errores focales, no SQL dumps. Si aparece causa de producto, reparar **solo** copia N6 con hash PRE/POST y una prueba causal, no tocar WIP ni backend alternativo. Si aparece causa ambiental, detener ese subgate con `BLOCKED_ENV` sin parches.
-6. En el MISMO laboratorio aislado ejecutar **solo E01–E08 previamente definidos** si existen rutas/fixtures reales y contrato autorizado: E01 anónimo bloqueado, E02 tenant A→A permitido, E03 A→B lectura bloqueada, E04 A→B escritura bloqueada con DB inmutable, E05 token revocado, E06 requestId+payload duplicado efecto único, E07 requestId con distinto payload conflicto seguro, E08 `SERVER_STORED` ≠ `RECOGNIZED`. Comprobar estado DB antes/después de E04/E06/E07, kernel HTTP/DB real, no mocks ficticios. OD02/OD03/OD04 pendientes → `BLOCKED_CONTRACT`, sin inventar rutas ni abrir B19/B20. Sin prueba de identidad/alcance, no declarar PASS. No suite backend global 158/2450 nuevamente.
-7. Final: detener/limpiar únicamente **contenedores N6 propiedad comprobada**; conservar volumen N6 si hace falta reproducir, reportar nombre/ID y estado y política de custodia. **No** borrar ni iniciar N5/otros; no ejecutar prune. Verificar inventario externo AFTER con mismos IDs/estados/puertos cuando no haya actividad ajena concurrente. Si cambio externo no atribuible, reportar `EXTERNAL_CONCURRENCY_UNDETERMINED`, no adjudicar culpabilidad.
+### 2.1 Preflight Docker: cero cambios
 
-## 4. Salida única y criterios de decisión — no crear otra campaña de auditoría
+1. Identificar **el daemon de Docker correcto** antes de inspeccionar: contexto (`docker context show`), endpoint/tipo de motor sin divulgar credenciales, `docker version --format '{{.Server.Os}}/{{.Server.Arch}}'` y `docker info` con OS/arquitectura (campos filtrados). Registrar si `DOCKER_DEFAULT_PLATFORM` está definida (solo valor arquitectura). N5 reportó Linux/amd64 para imágenes, **no prueba plataforma real del daemon ni del binario**. Si parece remoto, ambiguo o corresponde a otro motor/proyecto, `BLOCKED_DOCKER_CONTEXT` sin sondas. Docker Desktop disponible NO equivale a contexto correcto.
+2. Verificar estado/IDs/puertos **solo inventario sanitario** de recursos ajenos PRE, sin `docker inspect` completo. Identificar contenedores N5 por labels Compose y **IMAGE ID del PHP que falló**, no por el ID corto del contenedor (solo pista N5 PHP `68a27835c845`, DB `387467db1762`). NO encender ni detener N5; preservar su volumen. Si faltan labels/ownership, no reutilizarlos, pero `docker image inspect` de ID explícito aún se permite si es de solo lectura y no hay dudas.
+3. Para imagen N5 original y, en su caso, una alternativa cached: ejecutar `docker image inspect --format` filtrando **ID, OS, Architecture, Variant, Entrypoint, Cmd, digest/tag**, y examinar compatibilidad con daemon/`DOCKER_DEFAULT_PLATFORM`. También anotar una posible inconsistencia entre entrypoint reportado y `exec /usr/bin/sh`. Si OS/arquitectura no corresponden, NO hacer probe sobre ella; `BLOCKED_PHP_PLATFORM` salvo una alternativa elegida. Una coincidencia de metadatos **no es PASS**.
+4. Confirmar cupo de CPU/RAM/disco de diagnóstico y que no haya ejecución N6 paralela. Usar `--network none`, sin mounts de proyecto, sin secretos, sin puertos ni volúmenes, sin privilegios, con `--rm`, límites CPU/memoria/PIDs y etiquetas exclusivas `com.sierraglobal.jornato.task=N6`. Comprobar residuos propios si un contenedor efímero falla, **sin tocar recursos ajenos**.
 
-Producir **exactamente UN ZIP sanitizado** bajo `OUTPUT_ROOT\delivery`, comprobado SHA256, CRC y manifiesto hash+bytes+CRC, sin fuentes, `.env`, tokens, dumps, scripts con secretos, repos/copias privadas ni logs crudos. **Todos** los insumos probatorios privados permanecen en D:, no equivalen a backup off-device. Archivos mínimos en ZIP:
+### 2.2 Sondas **separadas por binario**; no repetir la misma falla
+
+**Para cada imagen elegida (máximo dos imágenes, seleccionadas de antemano):** usar **IMAGE ID inmutable** obtenido de `docker image inspect`; no reutilizar un tag que otra instancia pueda cambiar. Codex rellenará `IMAGE_ID` a partir del preflight, no improvisará.
+
+**Sonda A — shell REAL, eludiendo el entrypoint original** (una vez por imagen, sin MariaDB):
+
+```powershell
+# Ejecutar desde PowerShell; antes de correr, sustituir IMAGE_ID/NAME por los datos reales.
+# --entrypoint es obligatorio: si se omite, se estaría probando además el wrapper de la imagen.
+docker run --rm --pull=never --network none --read-only --tmpfs /tmp:rw,nosuid,size=32m --cpus 0.5 --memory 256m --pids-limit 64 --name <N6_OWNED_PROBE_NAME> --label com.sierraglobal.jornato.task=N6 --entrypoint /bin/sh <IMAGE_ID> -c 'printf N6_SHELL_OK; command -v sleep >/dev/null'
+```
+
+**Aceptar A solo** con exit 0, cadena exacta `N6_SHELL_OK` y disponibilidad del `sleep` utilizado por el entrypoint de Compose; no permitir PASS cuando únicamente se imprimió la cadena pero el exit fue distinto de cero. Si A falla con `exec format error`, registrar imagen/daemon/plataforma/exit y ejecutar **solo UNA sonda B de PHP directo sobre esa MISMA imagen** para distinguir fallo de shell frente a fallo general de binarios. No volver a ejecutar A idéntica ni iniciar Compose/DB. Si A falla por otra causa, clasificarla según stderr; B solo si diferencia una hipótesis real. Si la imagen no tiene `/bin/sh`, registrar `BLOCKED_PHP_SHELL_IMAGE`, no inventar una ruta sin evidencia de su existencia.
+
+**Sonda B de discriminación** (solo si A falló, sobre la misma imagen, sin shell):
+
+```powershell
+docker run --rm --pull=never --network none --read-only --tmpfs /tmp:rw,nosuid,size=32m --cpus 0.5 --memory 256m --pids-limit 64 --name <N6_OWNED_PHP_DIAG_NAME> --label com.sierraglobal.jornato.task=N6 --entrypoint php <IMAGE_ID> -v
+```
+
+- A FAIL + B FAIL: `BLOCKED_PHP_IMAGE_EXEC` / `BLOCKED_PHP_PLATFORM` / `BLOCKED_DOCKER_RUNTIME` según evidencia; **no** atribuir «Laravel roto» ni arquitectura incompatible sin prueba.
+- A FAIL + B PASS: `BLOCKED_PHP_SHELL_IMAGE`; **no** usar el PHP directo como workaround para pasar Laravel/Artisan: el arranque N5 depende de shell y no se ha demostrado entorno completo.
+- A PASS: pasar a sonda C, **sin ejecutar B**; así se evita repetir PHP gratuitamente.
+
+**Sonda C — PHP versión + extensiones**, tras shell PASS (una vez por imagen, sin MariaDB). Se permite `docker run --entrypoint php ... -v` y `docker run --entrypoint php ... -m`, o una única invocación de un `/bin/sh` previamente validado que ejecute ambos comandos. Los módulos REQUERIDOS se deducen de `server/composer.json`/`composer.lock` **reales** y las funciones de base de datos usadas, no de una lista genérica impuesta. Como mínimo acreditar PHP >=8.3 según el proyecto y los módulos necesarios para Laravel + conexión MariaDB real (`pdo_mysql`, otros `ext-*` exigidos). Registrar `REQUIRED_PRESENT`, `REQUIRED_MISSING` y opcionales; si falta alguno requerido, `BLOCKED_PHP_EXTENSIONS`. No instalar módulos ni reconstruir imagen.
+
+**Salida de la selección:** la PRIMERA imagen compatible cuyo A y C pasan será la imagen aceptada. Si la original falla, probar como máximo una alternativa cached **preseleccionada** con ID y plataforma. Si no existe alternativa compatible, terminar con `BLOCKED_NO_COMPATIBLE_CACHED_IMAGE` y la decisión técnica mínima necesaria. Ninguna tercera imagen, ni quinto intento, ni «arreglos» Docker globales. No iniciar DB si no hay `PASS_IMAGE_SHELL_PHP_EXTENSIONS` y vendor/fuente de N6 verificados.
+
+**IMPORTANTE:** si antes del diagnóstico falla la identidad del daemon, ausencia del ID original o disponibilidad de imágenes y no existe alternativa segura, entregar informe causal. No leer ni parar recursos ajenos para descubrir alternativas.
+
+## 3 — Un único laboratorio Laravel+MariaDB N6 (SOLO tras PASS de PHP)
+
+### 3.1 Contrato de Docker sin IPAM ni interferencia
+
+1. Usar una **única definición Compose N6 propia** en `OUTPUT_ROOT\private\docker-qa\compose.yaml`, basada en la topología exitosa de N5. `--project-name jornato-n6-qa-<sufijo_unico>` sin colisiones. **Únicamente** dos servicios `db` (imagen MariaDB N5 cacheada por ID comprobado, `network_mode: none`) y `php` (**IMAGE ID pinneado que pasó A+C (si Compose admite el ID local; si no, usar el tag local confirmado y volver a comparar IMAGE ID antes de `up`, sin pull ni cambiar imagen)**, `network_mode: service:db`). PHP/DB comparten únicamente loopback en namespace privado por `127.0.0.1:3306`, no comparten volúmenes. No top-level `networks` de uso efectivo, redes externas/host/bridge, `ports`, extras, ni publicación de puertos. No crear ni usar redes de otro proyecto, ni intentar corregir IPAM.
+2. PHP bind mounts **solo** `OUTPUT_ROOT\private\candidate_n6` con fuentes de Jornato + vendor; jamás WIP/N5/otro proyecto. MaríaDB volumen **N6 nuevo**, labels Compose inequívocos; nunca reutilizar volumen N5. Archivo de secrets/env QA con contraseñas sintéticas y APP_KEY laboratorio solo en private, no copiar ni imprimir. El shell del servicio PHP apunta a la ruta real validada en A; no copiar el entrypoint PHP defectuoso de N5 si se demostró incompatible. No incorporar paquetes o scripts ajenos.
+3. Antes de `up` una sola vez: renderizar Compose en `private` (guardar JSON ahí, **no** en ZIP ni console), inspeccionar estructuralmente 2 servicios, image IDs correctos, `network_mode` exactos, sin redes/puertos, mounts únicamente N6, volumen QA nuevo, `pull_policy: never`, no build ni imagen remota, variables QA sintéticas. Si el render requiere `default` network para alguno de los servicios o la propiedad no se puede demostrar, STOP `BLOCKED_COMPOSE_NETWORK`.
+4. Ejecutar como máximo **UN** `docker compose --project-name <N6_NAME> --env-file <PRIVATE_ENV> -f <PRIVATE_COMPOSE> up -d --pull never --no-build`. Medir antes/después: cero redes nuevas, cero puertos publicados, dos contenedores propios, volumen nuevo N6, ningún cambio de recursos ajenos atribuible a N6. Si IPAM reaparece o se detecta interferencia, STOP inmediatamente, sin segunda variante/`prune`/Docker Desktop config. No usar `down -v` de recursos no inequívocamente N6.
+5. El `healthcheck` MariaDB únicamente valida **liveness**. **No** declararlo como SQL/PDO OK. Desde el contenedor PHP **N6** comprobar por PDO `127.0.0.1` autenticación con credencial QA exclusiva, `DATABASE()`, `CURRENT_USER()`, `@@hostname`, usuario/namespace/volumen N6 y **schema propio vacío antes de migración**; no consultar otras bases. Si no pasa: `BLOCKED_DB_IDENTITY` y **nunca** lanzar migraciones.
+
+### 3.2 Laravel real, sin inventar contratos
+
+6. Solo con PDO+DB QA limpios, invocar PHP/Artisan **desde contenedor PHP N6**, con `APP_ENV=testing`, APP_KEY QA, `APP_DEBUG=false`, y configuraciones sintéticas no heredadas del WIP/producción; confirmar la versión real Laravel 13.40.0 y dependencias del candidato N6. Ejecutar exclusivamente migraciones ya existentes en QA **nueva y exclusiva**, sin `migrate:fresh` sobre base compartida ni `composer install`, y registrar exits, tablas/índices sanitizados. Si falla extensión/vendor/boot, clasificar ambiente vs producto en raíz, no maquillar logs.
+7. Sin abrir puertos y solo si migraciones pasan, ejecutar con Kernel HTTP real y MariaDB real **hasta ocho** oráculos **ya definidos**: E01 anónimo → denegado; E02 token A→recurso A permitido; E03 token A→recurso B lectura denegada; E04 token A→recurso B escritura denegada **sin cambio DB**; E05 PAT revocado/vencido falla cerrado; E06 mismo `requestId`+payload → efecto persistido único; E07 mismo `requestId`+payload distinto → conflicto sin mutación; E08 `SERVER_STORED` ≠ `RECOGNIZED`. Fixtures exclusivamente dos tenants sintéticos A/B. Rutas, controladores, middleware, permisos y payloads **observados en fuente real**, nunca inventar endpoints ni activar contratos OD02/OD03/OD04 pendientes o B19/B20. Caso no autorizado/no soportado → `BLOCKED_CONTRACT`, no PASS por mock.
+8. Para E04/E06/E07, registrar conteos/identificadores sintéticos **antes y después** en la DB N6; medir persistencia y estados. Resultado máximo `PASS_E2E_SCOPED`; no convertirlo en aprobación Android, seguridad de dispositivos ni producción.
+9. Si un fallo se demuestra de **PRODUCTO**: realizar una sola corrección mínima en la **copia N6 privada**, con hash PRE/POST y test focal posterior (y vecino solo si cambia propietario compartido). No tocar WIP ni reejecutar la suite backend histórica 158/2450 sin delta del propietario. Etiquetar `FIX_ONLY_PRIVATE_N6_NOT_INTEGRATED`, no reclamar parche listo para release. Si fallo de entorno, cerrar subgate causal sin nueva infraestructura.
+10. Detener/limpiar únicamente **contenedores N6** por labels/IDs comprobados. Documentar el estado del volumen N6 propio (conservar para evidencia si corresponde), jamás borrar N5 o ajenos. Inventario externo PRE/POST; atribución precisa si otro Codex modificó sus propios recursos concurrentemente. No eliminar volumen DB sin evidencia de propiedad y plan de conservación. Si limpieza propia parcial, `CLEANUP_PARTIAL`, sin prune.
+
+## 4 — Entrega única, medible y sin documentos dispersos
+
+**Exigir exactamente UN ZIP** bajo `OUTPUT_ROOT\delivery` con manifiesto SHA256 + bytes + CRC verificado. En la respuesta de Codex fuera del ZIP solo dar ruta Windows y SHA256. No adjuntar un nuevo ZIP de fuentes, caches, DB, secretos, manifests completos con paths personales, inspect JSON ni logs crudos. Estructura de informe **máxima**:
 
 ```text
 FINAL_REPORT.md
-PHP_IMAGE_ROOT_CAUSE.md                 # evidencia y límite de hipótesis, NO adjudicación inventada
-DOCKER_IMAGE_RUNTIME_MATRIX.csv          # imagen/plataforma/shell/PHP/extensiones, una sola causa
-QA_ISOLATION_EVIDENCE.csv                # owned/external, BEFORE/AFTER, cero red/puertos
-SERVER_DB_MIGRATIONS.csv                 # auth real, esquema nuevo, migraciones, bloqueo
-SERVER_E2E_E01_E08.csv                   # 8 IDs, veredictos PASS/FAIL/BLOCKED
-WIP_GUARDS.csv                          # HEAD/index/status PRE/POST
+PHP_IMAGE_ROOT_CAUSE.md
+DOCKER_IMAGE_RUNTIME_MATRIX.csv
+QA_ISOLATION_EVIDENCE.csv
+SERVER_DB_MIGRATIONS.csv
+SERVER_E2E_E01_E08.csv
+WIP_GUARDS.csv
 N6_GATE_MATRIX.csv
 MANIFEST_SHA256.csv
 ```
 
-**Resultados admitidos y semántica:**
-- `N6_PHP_IMAGE=PASS|BLOCKED_PHP_PLATFORM|BLOCKED_PHP_SHELL_IMAGE|BLOCKED_PHP_IMAGE_EXEC|BLOCKED_DOCKER_RUNTIME|BLOCKED_NO_COMPATIBLE_CACHED_IMAGE|BLOCKED_PHP_EXTENSIONS|BLOCKED_VENDOR|NOT_RUN`.
-- `N6_DOCKER_ISOLATION=PASS_SCOPED|BLOCKED|NOT_RUN`, nunca heredar un PASS SQL de `healthy` MariaDB N5.
-- `N6_DB=PASS_QA_MIGRATIONS|BLOCKED_DB_IDENTITY|BLOCKED_ENV|FAIL_PRODUCT|NOT_RUN`.
-- `N6_E2E=0..8 PASS`, cada ID con evidencia kernel HTTP y DB o motivo explícito BLOCKED. `WIP_GUARDS=PASS_UNCHANGED|DELTA_UNEXPECTED|CONCURRENT`.
-- `N5_FLUTTER=PASS_CANDIDATE_SCOPED_REUSED` (NO reejecutar), `ANDROID_NATIVE=NOT_RUN`, `OFF_DEVICE_BACKUP=NO`, `SERVER_STAGING=NOT_AUTHORIZED`, `H9_GLOBAL=NO_GO`, `B22=NOT_AUTHORIZED`, `RELEASE=NO_GO`.
+El informe debe incluir **una fila por prueba efectivamente ejecutada**, comando sanitizado/exit y evidencia relevante, hash de la imagen/versión/OS/arch, contexto motor indicado genéricamente, módulo faltante exacto, y cuándo hubo una prueba bloqueada. **Los metadatos del host y del paquete no prueban las condiciones de producción**; escribirlo explícitamente. Todos los logs privados útiles permanecen solo en D:, `OFF_DEVICE_BACKUP=NO`.
 
-**Regla anti-pingpong:** si el PHP local no cumple, no hacer un quinto paquete documental ni reintentar el mismo arranque en variante. Entregar SHA/versión/plataforma/extensiones faltantes y permiso técnico mínimo que desbloquearía la siguiente etapa. Si el PHP funciona, avanzar en **el mismo N6** hasta migraciones/E2E; no detenerlo para pedir otra auditoría. El resultado puede ser `PARTIAL_WITH_GAPS`, pero debe estar causalmente acotado.
+**Clasificaciones obligatorias:**
 
-Mensaje final a Director, exactamente:
+```text
+N6_IMAGE_PREFLIGHT=PASS|BLOCKED_DOCKER_CONTEXT|BLOCKED_PHP_PLATFORM|BLOCKED_IMAGE_IDENTITY|BLOCKED_RESOURCE|NOT_RUN
+N6_PHP_IMAGE=PASS|BLOCKED_PHP_SHELL_IMAGE|BLOCKED_PHP_IMAGE_EXEC|BLOCKED_PHP_EXTENSIONS|BLOCKED_VENDOR|BLOCKED_NO_COMPATIBLE_CACHED_IMAGE|BLOCKED_DOCKER_RUNTIME|NOT_RUN
+N6_DOCKER_ISOLATION=PASS_SCOPED|BLOCKED_IPAM|BLOCKED_COMPOSE_NETWORK|BLOCKED_CROSS_PROJECT_DELTA|BLOCKED|NOT_RUN
+N6_DB=PASS_QA_MIGRATIONS|BLOCKED_DB_IDENTITY|BLOCKED_ENV|FAIL_PRODUCT|NOT_RUN
+N6_E2E=0..8_PASS + estados individuales E01..E08
+WIP_GUARDS=PASS_UNCHANGED|DELTA_UNEXPECTED|BLOCKED_CONCURRENT
+N5_FLUTTER=PASS_CANDIDATE_SCOPED_REUSED
+PRIVATE_FIX=NONE|FIX_ONLY_PRIVATE_N6_NOT_INTEGRATED
+ANDROID_NATIVE=NOT_RUN
+OFF_DEVICE_BACKUP=NO
+SERVER_STAGING=NOT_AUTHORIZED
+RELEASE=NO_GO
+```
+
+**Nunca** decir `PASS` al runtime si solo pasó `docker inspect` o `mariadb-admin ping`. Nunca declarar APK o servidor listo para lanzar en este bloque. Si solo se certifica la imagen, entregar ese avance y el bloqueo preciso del siguiente gate; **NO** hacer otra auditoría del prompt ni prometer trabajo futuro.
+
+**Mensaje final obligatorio de Codex a ChatGPT Director (fuera del único ZIP):**
 
 ```text
 TASK=JOR-N6-PHP-RUNTIME-CAUSE-ISOLATED-QA-20261121
+PROMPT_REVISION=N6-R2-20261121
 RESULT=PASS_SCOPED|PARTIAL_WITH_GAPS|BLOCKED
+N6_IMAGE_PREFLIGHT=...
 N6_PHP_IMAGE=...
 N6_DOCKER_ISOLATION=...
 N6_DB=...
 N6_E2E=.../8
+PRIVATE_FIX=...
 N5_FLUTTER=PASS_CANDIDATE_SCOPED_REUSED
 WIP_GUARDS=...
 RELEASE=NO_GO
@@ -99,4 +159,6 @@ ZIP_SHA256=...
 NEXT_OWNER=CHATGPT_DIRECTOR
 ```
 
-**Fuentes oficiales:** Docker image inspect https://docs.docker.com/reference/cli/docker/image/inspect/ ; Compose network_mode https://docs.docker.com/reference/compose-file/container-spec/ ; separación Compose https://docs.docker.com/compose/how-tos/networking/. Referencias informativas, **no** evidencia de runtime Jornato. **NEXT=CODEX_LUNA_N6; AFTER_ZIP=CHATGPT_DIRECTOR.**
+**Gobierno:** si N6-R1 ya está en ejecución, esto es solo un documento de referencia — no se manda ni se ejecuta N6-R2. Si N6-R2 procede, ejecutarlo completo una vez; enviar ZIP a ChatGPT Director. Antes de cualquier integración del candidato privado a un repositorio, exigir destino privado y examen de secretos y copia recuperable fuera de PC aprobada por dueño. **NO MERGE/DEPLOY/APK/GO en N6.**
+
+**Fuentes técnicas:** https://docs.docker.com/reference/cli/docker/container/run/ ; https://docs.docker.com/reference/cli/docker/image/inspect/ ; https://docs.docker.com/reference/cli/docker/version/ ; https://docs.docker.com/reference/compose-file/container-spec/ . No son evidencia de ejecución en Windows.
