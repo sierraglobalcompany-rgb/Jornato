@@ -1,19 +1,18 @@
-# JORNATO — HANDOFF DE RECUPERACIÓN · A2-R2 REANUDACIÓN ACTIVA · 22-NOV-2026
+# JORNATO — RECOVERY HANDOFF ACTUAL · A2-R3 CONDICIONAL · 22 NOV 2026
 
-**LEER PRIMERO:** [continuidad canónica](JORNATO_CONTINUIDAD.md) → [orden única A2-R2](CODEX_LOTE_ACTUAL.md). La auditoría A2-R1 10 verdugo+10 juez [ya está cerrada](JORNATO_A2_R1_AUDITORIA_10_VERDUGO_10_JUEZ_20261122.md); **NO repetirla**. Si llega ZIP A2-R2, el Director lo adjudica antes de preparar otro trabajo.
+**LECTURA OBLIGATORIA PARA CHAT NUEVO:** [continuidad canónica](JORNATO_CONTINUIDAD.md) → [orden CODEX activa solo condicional](CODEX_LOTE_ACTUAL.md) → [auditoría delta 10 Verdugo/10 Juez](JORNATO_A2_R3_AUDITORIA_DELTA_10_VERDUGO_10_JUEZ_20261122.md). **La primera pregunta NO es otra auditoría:** ¿A2-R2 ya empezó o entregó ZIP? Si sí, **NO enviar R3**; inspeccionar resultado R2 y avanzar. Si no, A2-R3 sustituye R2 manteniendo `TASK=JOR-A2-GRADLE-DEPS-APK-QA-20261122` y una sola compilación.
 
-## Resultado real recibido A2-R1
+## Evidencias irrepetibles
 
-ChatGPT verificó ZIP subido a la conversación `JOR-A2-GRADLE-DEPS-APK-QA-20261122-UNICO.zip`, 6283 B, SHA256 `C891EC71F5D30511065E0F902B1D97A19F5AA22F2D913FA48770E8D6328B6B24`, 7 miembros CRC PASS, manifiesto 6/6 PASS. Codex reporta `SOURCE=PASS_82_OF_82`, `PUB=PASS_OFFLINE_LOCKED`, caché Gradle A2 31.270 archivos cotejados, `A2_BUILD=NOT_RUN`, sin APK. Bloqueo **puramente de autorización del repositorio Flutter Maven** `storage.googleapis.com/download.flutter.io` agregado por `dev.flutter.flutter-gradle-plugin`; nunca se invocó Gradle. WIP PRE/POST intacto, Docker no tocado, Android físico NOT_RUN.
+- A2-R1 ZIP auditado SHA256 `C891EC71F5D30511065E0F902B1D97A19F5AA22F2D913FA48770E8D6328B6B24`, 7 archivos CRC PASS, manifiesto 6/6. Construcción **NOT_RUN**. Causa: `FlutterPlugin.kt` requiere `storage.googleapis.com/download.flutter.io`, no permitido por whitelist R1. El plugin lo añade, no hay que alterar scripts Gradle. A2-R1 reporte: fuentes 82/82, Pub offline SHA lock `F515D69563850E8893A17585D8BAB57A8E6484E18CE1FEF4BDDC6BB836F83B34`, 31.270 archivos de caché privada cotejados, WIP intacto. No se reejecutan.
+- A1 caché Gradle faltante 22 variantes/21 GAV; N5 Flutter 9/9 host PASS; Android APK nuevo NOT_BUILT, dispositivo físico NOT_RUN. Sin APK no hay manifiesto fusionado/certificado. SourceSet QA debug `usesCleartextTraffic=true`, no usar datos reales ni distribuir QA. Certificación Android SQLCipher/Keystore/corrupción/rehidratación pendiente.
+- WIP privado Windows `D:\codex\Jornato` HEAD `faf5fe283191f8b5a2724b397009512a2caec1b6`, 235 entradas, 0 staged, índice SHA `25CC609803D7E68D5F3ECF428198B2432CF1EA37030546735DD3F03299D905E1` según Codex. App candidata exclusivamente en D: A2/private; no backup externo, NO publicar WIP, ni Git en producto. Otros proyectos Codex en PC concurrente, no tocar Docker ni caches ajenas.
+- Laravel/servidor N4–N7 bloqueado por Docker PHP; no abrir diagnóstico global sin autorización. NO reejecutar N2/N3/N4/N5/N6/N7, A1 o A2-R1. E2E E01–E08 de backend no ejecutadas. B19/B20 deny-all, OD02/03/04 sin aprobar; `requestId`/legado `requetId` y `SERVER_STORED` ≠ `RECOGNIZED`.
 
-## Decisión única del Director
+## Una sola orden siguiente (si procede)
 
-Permitir en A2-R2 el origen HTTPS exacto `https://storage.googleapis.com/download.flutter.io/` o el prefijo derivado **estrictamente** del `engine.realm` local si no está vacío. Es parte de Flutter Engine, no permiso para otro contenido de Google Cloud Storage. Conservar los cuatro orígenes anteriores de dependencias oficiales Gradle: Plugin Portal, su redirect oficial, Maven Central, Google Maven. Sin nuevas versiones, SDK/JDK, proxies, mirrors, firewall, Docker, bases de datos, ni código WIP. El permiso se limita al proceso de compilación QA en caché privada A2, no al runtime de la app.
+**CODEX LUNA A2-R3:** reutilizar checkpoint R1 private, verificar que **R2 no comenzó**, inspeccionar solo URI del repo engine realm/variables, permitir Gradle oficial a rutas exactas HTTPS del plugin; cachés/signing/temp privadas. Ejecutar UNA `:app:assembleB14qaDebug` sin `--offline` (faltantes conocidos); otro intento exclusivamente por un error real de fuente propia con fix focal **en copia privada**. No agregar repos, ni descargar JDK/SDK, ni reinstalar Gradle, ni usar Android físico/Docker. Si construye APK nueva: `apksigner`, `aapt`/`apkanalyzer`, SHA256, merged manifest, `QA_DEBUG_CLEARTEXT`, un ZIP de evidencias sin APK. Si falla: causa exacta, no más reintentos. Un ZIP `delivery-r3/`, conservar ZIP `delivery/` R1. **RELEASE=NO_GO**.
 
-**IMPORTANTE:** A2-R1 **ya finalizó**, por lo que no aplicar la vieja regla A2-R1 «si existe ZIP A2, detener». La nueva A2-R2 es reanudación expresa de checkpoint, no una segunda compilación porque A2-R1 hizo **0 builds**. Guardar ZIP R1 sin alteración; usar el laboratorio A2 existente. Si hay ZIP/proceso A2-R2, no duplicar. Un build `:app:assembleB14qaDebug`; un ZIP nuevo en `delivery-r2`. Si Gradle encuentra algo fuera de whitelist, STOP; no improvisar otro host ni mutar build scripts.
+PR #2 `docs/pingponglaw-l1-l6-canon-84e961c` publica solo instrucción/auditoría/handoff; `main`, PR1 y PR3 sin cambios de código, sin merge. Leyes KISS/antirruido/causa raíz/UX/QA independiente/antipingpong. No pedir al usuario repetir estado disponible en ZIP.
 
-## Lo que NO está verde
-
-Sin APK Android actual, firma ni manifiesto fusionado. APK debug viejo C2 no demuestra QA del candidato. Android físico SQLCipher/Keystore/rehidratación/corrupción/GPS/selfie y backup externo no certificados. Servidor Laravel E01–E08 bloqueado por runtime PHP Docker compartido; diagnóstico global no autorizado. Producto sigue `RELEASE=NO_GO`, B19/B20 deny-all, OD02/03/04 pendientes, `requestId`/`requetId`, `SERVER_STORED != RECOGNIZED`. GitHub público PR #2 es documental y **no contiene el código privado avanzado**; main/PR1/PR3 sin cambios.
-
-**NEXT=CODEX_LUNA_A2_R2; AFTER_ZIP=CHATGPT_DIRECTOR.**
+**NEXT=CODEX_LUNA_A2_R3_CONDICIONAL; AFTER_NEW_ZIP=CHATGPT_DIRECTOR; IF_R2_ALREADY_STARTED=CHATGPT_DIRECTOR_ONLY.**
